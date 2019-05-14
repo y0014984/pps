@@ -9,27 +9,6 @@ Daten vergeben werden.
 
 Daten, die als Intervall erfasst werden
 ----------------------------------------
-- erledigt: Stance (stehen, knien, liegen)
-- erledigt: Bewegungsgeschwindigkeit (sprinten, laufen, gehen und stehen)
-- erledigt: Schaut auf Karte
-- erledigt: Schaut auf GPS
-- erledigt: Waffe gehoben/gesenkt
-- erledigt: Ist in Fahrzeug
-	- erledigt: Ist in Panzer
-	- erledigt: Ist in Auto
-	- erledigt: Ist in Truck
-	- erledigt: Ist in Heli
-	- erledigt: Ist in Flugzeug
-	- erledigt: Ist in Boot
-	- erledigt: Ist in Schiff
-	- erledigt: Ist in Quad
-	- erledigt: Ist auf Fahrersitz
-	- erledigt: Ist auf Beifahrersitz
-	- erledigt: Ist auf Schützensitz
-	- erledigt: Ist auf Passagiersitz
-	- erledigt: Fahrzeug steht
-	- erledigt: Fahrzeug fährt/fliegt
-
 - Steuert Drohne
 - Benutzt Mörser/statisches Geschütz/MG
 
@@ -48,49 +27,68 @@ Daten, die als Intervall erfasst werden
 
 Daten, die per Event-Trigger erfasst werden
 --------------------------------------------
-- erledigt: Tot
-- erledigt: Kill
-- erledigt: Suicide
-- erledigt: Teamkill
-- erledigt: Curator Interface/Zeus geöffnet
-- erledigt: Uhr geöffnet
-- erledigt: Compass geöffnet
-- erledigt: Inventar geöffnet
-- erledigt: Schuss abgefeuert
-- erledigt: Getroffen
-	- erledigt: Getroffen Feind
-	- erledigt: Getroffen Freund
 - Respawn
 - getötete Tiere
+- Anzahl JIP nach disconnect
+- Durchschnittlicher Ping
+- Benutzung Laser
+- Benutzung Fernglas
+- Benutzung NightVision
+- Benutzung HoldBreath
+- Benutzung Optics
+- Benutzung Handgun
+- Benutzung ReloadMagazine
+- Zielen
 - etc.
+
+Geschwindigkeiten bei 30 kg Gepäck
+-----------------------------------------
+Stehend gehen 5
+Stehend laufen 12
+Stehend sprinten 18
+
+geduckt gehen 4
+geduckt laufen 11.5
+geduckt sprinten 17
+
+liegend gehen 2.25
+liegend laufen 2.75
+liegend sprinten 4.8
 
 Anpassungen zum Release
 --------------------------
-- Umbau der Stanze und Bewegungsarten auf ein 100% System (Stehend-Stehend + Stehend-Laufend + knieend-laufend etc.)
-- Umbau der Fahrzeug-Sitzarten und Fahrzeug-Bewegungsarten
+- Umbau, dass die Interval Statisitken komplett von Unit übergeben werden
+- Unit Event Handler trennen nach AllUnits, AllAiUnits, AllPlayerUnits und dann in separate Funktionen
+- Illustration der Funktionen, EventHandler und Aufrufe
+- Umstellen, dass bei inidbi auch für isAdmin Boolean wie true und false funktionieren
+	- FUNKTIONIERT: isBoolean="true" in INIDBI2 wird zu
+- TFAR und ACE nicht bei den Addon Abhängigkeiten sondern prüfen ob geladen und dann verwenden
+	- Bei ACE geht wohl alles über Event Handler
+- Filter auf Lowercase für besseres Suchen
+- _timeInVehicleDriving _timeInVehicleStanding _timeInVehicleFlying
+- _timeLeanLeftStanding etc. (4x)
+- Beim Logging nur die playerUid und nicht den Namen nennen; Dann muss nicht immer der Name ermittelt werden
+- Anderes Tastaturkürzel hinterlegen, da ALT+P von TFAR verwendet wird; z.B. ALT+J
+- _trackValueVariable in _trackValueName umbenennen
+- PPS_fnc_openDialog umbenennen siehe Funktionen für die Buttons
+- _eventSection in _eventHandlerSection umbenennen
+- Variable in allen Track Variable Dingen in Key umbenennen ( z.B. _dbKey, _dbValue)
+- TrackValue in TrackStatistics umbenennen
 - genaueres trennen der Event Handler von Playern und von Units --> separate Funktionen
-- Über Spielerliste und Statistikliste jeweils ein Feld um die Listen zu Filtern
-- Server/DB-Status in Dialog einbauen (ist das Server Plugin erreichbar und hat der Server die INIDBI aktiviert)
 - Prüfen, wo CBA das Tastaturkürzel hinterlegt, damit ich das korrekte Setzen desselben prüfen kann
 - Das mit den Event Händlern wird vielleicht einfacher wenn ich im Namespace der Units die EH IDs speichere, dann kann ich diese selektiv wieder entfernen
-- Bei Spielerliste Vermerken wer online ist (darunter Zusammenfassung Alle, Online, Admins)
-- Kennzeichnung Statistiken mit ACE , TFAR und A3 etc. 
-- Spalten anpassen (links schmaler, rechts breiter)
-- Wenn Admin nicht eingeloggt dann Event Button und Feld ausblenden
-- Auf Tastendruck bei Statistiken dauerhaft über Hint den Wert einblenden der gerade ausgewählt ist über Erzeugung Event Handler 
-- Lokalisierung ermöglichen über Stringtable
-- MPKill parallel zu Kill aktivieren und Ergebnisse vergleichen
-- Ob TFAR und ACE geladen sind könnte eigene Statistik sein, dann dürfen die aber nicht zu den Abhängigkeiten gehören
-- INIDBI2 bei den Abhängigkeiten rausnehmen aber Serverseitig prüfen ob der Mod geladen ist. Falls nicht über Server/DB-Status warnen
-- Umstellen, dass bei inidbi auch für isAdmin Boolean wie true und false funktionieren
 
 Release 1.0
 -------------
 - PPS_AllowSendingData auf Default false setzen
 - Logging deaktivieren
-- Admin Debugginc Console deaktivieren
+- Admin Debugging Console deaktivieren
 - Dokumentation erstellen
 - Code Review: Redundanzen, unnötige Variablen, zu häufige Variablenerfassungen, Vereinheitlichung Variablennamen etc.
+- Final Build mit Binarize Option
+- welche Lizenz für den Content?
+- Logo überarbeiten in Hinblick auf PPE
+- Screenshots erstellen
 - bei GitHub veröffentlichen
 - im Steam Workshop veröffentlichen
 
@@ -108,9 +106,15 @@ Release v1.5
 - CSV Export Button
 - Statistische und grafische Auswertungen
 - Zeitliche Entwicklung über mehrere Events abbilden (pps-player-[playerUID]-[eventID].ini als Dateien anlegen)
+- Umstellen bei Interval Statistics, dass der Client an den Server bereits den Key und den Namen und den Typ übergibt (Dann sind die Funktionen auf Seiten des Servers deutlich schlanker)
+- Lokalisierung ermöglichen über Stringtable
 
 Probleme, Bugs
 -------------------
+- Slider in der Listbox unsichtbar aber existent
+- Die Tastaturkürzel Defines haben bei "KeyDown" nicht funktioniert
+- DB-Status nicht ganz korrekt, da unknown aus Template stehen bleibt (Anderer Servercode darf ohne DB nicht laufen) --> diag_log einbauen zum testen
+- Schließen des Fensters über STRG+P funktioniert nicht mehr; Das öffnen zum Teil erst beim zweitern Tastendruck
 - TESTEN: TFAR Lautstärke (Schreien, Normal und Flüstern trocken) (TF_max_voice_volume) --> GIBT ES NICHT
 - Kompass und Uhr funktionieren aktuell nur über Double Tap und dann wird auch 2x gewertet --> Umstellen
 - Killed nicht zuverlässig; Zu MPKilled wechseln?

@@ -16,10 +16,8 @@ class CfgPatches
 		requiredVersion = 1.92;
 		// Required addons, used for setting load order.
 		// When any of the addons is missing, pop-up warning will appear when launching the game.
-		requiredAddons[] = {"inidbi2", 
-		"cba_main", "cba_main_a3", "cba_events", "cba_common", "cba_xeh", "cba_settings", "cba_ui", "cba_keybinding", "cba_versioning", 
-		"ace_main", 
-		"tfar_core"};
+		requiredAddons[] = {"cba_main", "cba_main_a3", "cba_events", "cba_common", "cba_xeh", "cba_settings", "cba_ui", "cba_keybinding", "cba_versioning", 
+		"ace_main", "tfar_core"};
 		// List of objects (CfgVehicles classes) contained in the addon. Important also for Zeus content unlocking.
 		units[] = {};
 		// List of weapons (CfgWeapons classes) contained in the addon.
@@ -159,6 +157,15 @@ class CfgFunctions
 				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
 			};
 			class ppsDialogAdminButton
+			{
+				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
+				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
+				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
+				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
+				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
+				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
+			};
+			class ppsDialogTrackValueButton
 			{
 				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
 				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]

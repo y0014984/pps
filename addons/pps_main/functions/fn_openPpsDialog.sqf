@@ -1,20 +1,19 @@
 _playerUid = getPlayerUID player;
-_playerName = name player;
-_clientId = clientOwner;
 
-if (_playerUid != "_SP_PLAYER_" && hasInterface && getClientState == "BRIEFING READ") then
+if ((_playerUid != "_SP_PLAYER_") && (hasInterface) && (getClientState == "BRIEFING READ")) then
 {
 	if(dialog) then
 	{
-		closeDialog 1;
+		closeDialog 0;
 	}
 	else
 	{
 		if (PPS_AllowSendingData) then
 		{
-			_handle = createDialog "PPS_Main_Dialog";
+			_ok = createDialog "PPS_Main_Dialog";
+			if (!_ok) then {hint "createDialog failed"};
 
-			[_playerUid, _playerName, _clientId] call PPS_fnc_ppsDialogUpdate;
+			[] call PPS_fnc_ppsDialogUpdate;
 		};
 	};
 };

@@ -1,5 +1,9 @@
 if (isServer && isMultiplayer) then
 {
+	_serverStatus = "PPS_ServerStatus";
+	missionNamespace setVariable [_serverStatus, true, false];
+	publicVariable _serverStatus;
+	
 	_dbName = "pps-players";
 	_inidbi = ["new", _dbName] call OO_INIDBI;
 	
