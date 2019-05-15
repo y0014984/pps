@@ -11,11 +11,6 @@
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
         params ["_value"];
-		
-		_playerName = name player;
-		_playerUid = getPlayerUID player;
-		
-		diag_log format ["[%1] PPS Player changed Setting PPS_ValuesUpdateInterval to %4: %2 (%3)", serverTime, _playerName, _playerUid, _value];
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call cba_settings_fnc_init;
 
@@ -28,11 +23,6 @@
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
         params ["_value"];
-		
-		_playerName = name player;
-		_playerUid = getPlayerUID player;
-		
-		diag_log format ["[%1] PPS Player changed Setting PPS_AllowSendingData to %4: %2 (%3)", serverTime, _playerName, _playerUid, _value];
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call cba_settings_fnc_init;
 
@@ -49,11 +39,6 @@
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
         params ["_value"];
-		
-		_playerName = name player;
-		_playerUid = getPlayerUID player;
-		
-		diag_log format ["[%1] PPS Player changed Setting PPS_TimeZone to %4: %2 (%3)", serverTime, _playerName, _playerUid, _value];
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call cba_settings_fnc_init;
 
@@ -66,10 +51,5 @@
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
         params ["_value"];
-		
-		_playerName = name player;
-		_playerUid = getPlayerUID player;
-		
-		diag_log format ["[%1] PPS Player changed Setting PPS_SummerTime to %4: %2 (%3)", serverTime, _playerName, _playerUid, _value];
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call cba_settings_fnc_init;

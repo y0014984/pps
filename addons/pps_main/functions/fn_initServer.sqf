@@ -11,9 +11,8 @@ if (isServer && isMultiplayer) then
 	
 	{
 		[_x] call PPS_fnc_initServerEventHandler;
-		_playerName = ["read", [_x, "playerName", "<name not set>"]] call _inidbi;
 		_playerUid = ["read", [_x, "playerUid", "<id not set>"]] call _inidbi;
-		diag_log format ["[%1] DB PPS Player: %2 (%3)", serverTime, _playerName, _playerUid];
+		diag_log format ["[%1] DB PPS Player: (%2)", serverTime, _playerUid];
 	} forEach _sections;
 	
 	"ppsServerHelo" addPublicVariableEventHandler
@@ -23,7 +22,7 @@ if (isServer && isMultiplayer) then
 		_playerName = _broadcastVariableValue select 0;
 		_playerUid = _broadcastVariableValue select 1;
 		
-		diag_log format ["[%1] PPS Player send Helo to server: %2 (%3)", serverTime, _playerName, _playerUid];
+		diag_log format ["[%1] PPS Player send Helo to server: (%2)", serverTime, _playerUid];
 			
 		_dbName = "pps-players";
 		_inidbi = ["new", _dbName] call OO_INIDBI;
@@ -49,7 +48,7 @@ if (isServer && isMultiplayer) then
 			
 			[_playerUid] call PPS_fnc_initServerEventHandler;
 			
-			diag_log format ["[%1] New PPS Player added to DB: %2 (%3)", serverTime, _playerName, _playerUid];
+			diag_log format ["[%1] New PPS Player added to DB: (%2)", serverTime, _playerUid];
 		};
 	};
 };

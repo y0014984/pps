@@ -45,8 +45,12 @@ params ["_playerUid"];
 		}
 		else
 		{
-			"Persistent Player Statistics\nAdmin login denied. There ist another admin logged in." remoteExec ["hint", _clientId];
+			"Persistent Player Statistics\n\nAdmin login denied. There ist another admin logged in." remoteExec ["hint", _clientId];
 		};
+	}
+	else
+	{
+		"Persistent Player Statistics\n\nAdmin login denied. You have no admin permissions. Ask your server admin." remoteExec ["hint", _clientId];
 	};
 	
 	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", 0]] call _inidbi;
@@ -56,13 +60,8 @@ params ["_playerUid"];
 	_answer = _playerUid + "-answerSwitchAdmin";
 	missionNamespace setVariable [_answer, _result, false];
 	_clientId publicVariableClient _answer;
-
-	_dbName = "pps-player-" + _playerUid;
-	_inidbi = ["new", _dbName] call OO_INIDBI;		
-	_globalSection = "Global Informations";
-	_playerName = ["read", [_globalSection, "playerName", ""]] call _inidbi;
 	
-	diag_log format ["[%1] PPS Player Request Switch Admin Status: %2 %3 (%4)", serverTime, _isAdminLoggedIn, _playerName, _playerUid];
+	diag_log format ["[%1] PPS Player Request Switch Admin Status: set %2 (%3)", serverTime, _isAdminLoggedIn, _playerUid];
 };
 
 /* ================================================================================ */
@@ -73,7 +72,7 @@ params ["_playerUid"];
 
 	_playerUid = _broadcastVariableValue select 0;
 	_clientId = _broadcastVariableValue select 1;
-	_data = _broadcastVariableValue select 2;
+	_value = _broadcastVariableValue select 2;
 	
 	_dbName = "pps-players";
 	_inidbi = ["new", _dbName] call OO_INIDBI;
@@ -89,7 +88,7 @@ params ["_playerUid"];
 	else
 	{
 		["write", [_playerUid, "isTrackValueActive", 1]] call _inidbi;
-		["write", [_playerUid, "trackValueVariable", _data]] call _inidbi;
+		["write", [_playerUid, "trackValueVariable", _value]] call _inidbi;
 		["write", [_playerUid, "trackValueClientId", _clientId]] call _inidbi;
 	};
 
@@ -102,13 +101,8 @@ params ["_playerUid"];
 	_answer = _playerUid + "-answerSwitchTrackValue";
 	missionNamespace setVariable [_answer, _result, false];
 	_clientId publicVariableClient _answer;
-
-	_dbName = "pps-player-" + _playerUid;
-	_inidbi = ["new", _dbName] call OO_INIDBI;		
-	_globalSection = "Global Informations";
-	_playerName = ["read", [_globalSection, "playerName", ""]] call _inidbi;
 	
-	diag_log format ["[%1] PPS Player Request Switch Track Value: %2 %3 (%4)", serverTime, _data, _playerName, _playerUid];
+	diag_log format ["[%1] PPS Player Request Switch Track Value: value %2 (%3)", serverTime, _value, _playerUid];
 };
 
 /* ================================================================================ */
@@ -155,7 +149,7 @@ params ["_playerUid"];
 			["write", [_settingsSection, "eventId", _eventId]] call _inidbi;
 			["write", [_settingsSection, "nameEvent", _nameEvent]] call _inidbi;
 			["write", [_settingsSection, "startTimeEvent", _startTimeEvent]] call _inidbi;
-			format ["Persistent Player Statistics\nEvent started: %1", _nameEvent] remoteExec ["hint", -2];
+			format ["Persistent Player Statistics\n\nEvent started: %1", _nameEvent] remoteExec ["hint", -2];
 			
 			_allActivePlayers = allPlayers - entities "HeadlessClient_F";
 			_allActivePlayersIds = [];
@@ -182,7 +176,7 @@ params ["_playerUid"];
 			["write", [_settingsSection, "nameEvent", ""]] call _inidbi;
 			["write", [_settingsSection, "startTimeEvent", -1]] call _inidbi;
 			
-			format ["Persistent Player Statistics\nEvent stopped: %1", _nameEvent] remoteExec ["hint", -2];
+			format ["Persistent Player Statistics\n\nEvent stopped: %1", _nameEvent] remoteExec ["hint", -2];
 			
 			_dbName = "pps-events";
 			_inidbi = ["new", _dbName] call OO_INIDBI;
@@ -229,125 +223,21 @@ params ["_playerUid"];
 		_answer = _playerUid + "-answerSwitchEvent";
 		missionNamespace setVariable [_answer, _result, false];
 		_clientId publicVariableClient _answer;
-
-		_dbName = "pps-player-" + _playerUid;
-		_inidbi = ["new", _dbName] call OO_INIDBI;		
-		_globalSection = "Global Informations";
-		_playerName = ["read", [_globalSection, "playerName", ""]] call _inidbi;
 		
-		diag_log format ["[%1] PPS Player Request Switch Event Status: %2 %3 (%4)", serverTime, _isEvent, _playerName, _playerUid];
+		diag_log format ["[%1] PPS Player Request Switch Event Status: set %2 (%3)", serverTime, _isEvent, _playerUid];
 	};
 };
 
 /* ================================================================================ */
 
-(_playerUid + "-requestMissionDetails") addPublicVariableEventHandler
-{
-	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
-
-	_playerUid = _broadcastVariableValue select 0;
-	_clientId = _broadcastVariableValue select 1;
-	
-	_dbName = "pps-server-settings";
-	_inidbi = ["new", _dbName] call OO_INIDBI;	
-	_settingsSection = "Settings";
-	_isEvent = ["read", [_settingsSection, "isEvent", -1]] call _inidbi;
-	_nameEvent = ["read", [_settingsSection, "nameEvent", ""]] call _inidbi;
-	_startTimeEvent = ["read", [_settingsSection, "startTimeEvent", -1]] call _inidbi;
-	
-	_result = [_isEvent, _nameEvent, _startTimeEvent];
-	
-	_answer = _playerUid + "-answerMissionDetails";
-	missionNamespace setVariable [_answer, _result, false];
-	_clientId publicVariableClient _answer;
-
-	_dbName = "pps-player-" + _playerUid;
-	_inidbi = ["new", _dbName] call OO_INIDBI;		
-	_globalSection = "Global Informations";
-	_playerName = ["read", [_globalSection, "playerName", ""]] call _inidbi;
-	
-	diag_log format ["[%1] PPS Player Request Mission Details: %2 (%3)", serverTime, _playerName, _playerUid];
-};
-
-/* ================================================================================ */
-
-(_playerUid + "-requestPlayerEventsFiltered") addPublicVariableEventHandler
+(_playerUid + "-requestStatisticsFiltered") addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
 	
 	_playerUid = _broadcastVariableValue select 0;
 	_clientId = _broadcastVariableValue select 1;
 	_requestedPlayerUid = _broadcastVariableValue select 2;
-	_filter = _broadcastVariableValue select 3;
-
-	_dbName = "pps-players";
-	_inidbi = ["new", _dbName] call OO_INIDBI;
-	
-	_isAdmin = ["read", [_playerUid, "isAdmin", 0]] call _inidbi;
-	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", 0]] call _inidbi;
-	
-	if((_playerUid == _requestedPlayerUid) || (_isAdmin == 1)) then
-	{
-		_dbName = "pps-events";
-		_inidbi = ["new", _dbName] call OO_INIDBI;
-		
-		_sections = "getSections" call _inidbi;
-		
-		_tmpResult = [];	
-		{
-			_eventName = ["read", [_x, "eventName", ""]] call _inidbi;
-			_eventStartTime = ["read", [_x, "eventStartTime", ""]] call _inidbi;
-			_eventDuration = ["read", [_x, "eventDuration", ""]] call _inidbi;
-			_eventAllActivePlayerIds = ["read", [_x, "eventAllActivePlayerIds", ""]] call _inidbi;
-			
-			if ((_eventStartTime select 1) < 10) then {_eventStartTime set [1, format["0%1", _eventStartTime select 1]]};
-			if ((_eventStartTime select 2) < 10) then {_eventStartTime set [2, format["0%1", _eventStartTime select 2]]};
-			
-			if ((_eventAllActivePlayerIds find _requestedPlayerUid) > -1) then
-			{
-				_statisticsString = format ["PPS Event: %1 (%2-%3-%4 >> %5 min)", _eventName, (_eventStartTime select 0), (_eventStartTime select 1), (_eventStartTime select 2), _eventDuration];
-				_tmpResult = _tmpResult + [[_statisticsString, ""]];
-			};
-		} forEach _sections;
-
-		_result = [];	
-		if(_filter != "") then
-		{
-			{
-				if (((_x select 0) find _filter) > -1) then
-				{
-					_result = _result + [_x];
-				};
-			} forEach _tmpResult;
-		}
-		else
-		{
-			_result = _tmpResult;
-		};
-
-		_answer = _playerUid + "-answerPlayerEventsFiltered";
-		missionNamespace setVariable [_answer, _result, false];
-		_clientId publicVariableClient _answer;
-
-		_dbName = "pps-player-" + _requestedPlayerUid;
-		_inidbi = ["new", _dbName] call OO_INIDBI;		
-		_globalSection = "Global Informations";
-		_requestedPlayerName = ["read", [_globalSection, "playerName", ""]] call _inidbi;
-		
-		diag_log format ["[%1] PPS Player Request Events: %2 (%3)", serverTime, _requestedPlayerName, _requestedPlayerUid];
-	};
-};
-
-/* ================================================================================ */
-
-(_playerUid + "-requestPlayerStatisticsFiltered") addPublicVariableEventHandler
-{
-	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
-	
-	_playerUid = _broadcastVariableValue select 0;
-	_clientId = _broadcastVariableValue select 1;
-	_requestedPlayerUid = _broadcastVariableValue select 2;
-	_filter = _broadcastVariableValue select 3;
+	_filterStatistics = _broadcastVariableValue select 3;
 	
 	_dbName = "pps-players";
 	_inidbi = ["new", _dbName] call OO_INIDBI;
@@ -388,6 +278,8 @@ params ["_playerUid"];
 			[_eventHandlerSection, "countGearInterfaceOpened"], 
 			[_eventHandlerSection, "countCompassInterfaceOpened"], 
 			[_eventHandlerSection, "countWatchInterfaceOpened"], 
+			[_eventHandlerSection, "countBinocularUsed"], 
+			[_eventHandlerSection, "countOpticsUsed"], 
 			[_intervalStatisticsSection, "timeOnFoot"], 
 			[_intervalStatisticsSection, "timeStandNoSpeed"], 
 			[_intervalStatisticsSection, "timeCrouchNoSpeed"], 
@@ -436,6 +328,11 @@ params ["_playerUid"];
 			[_intervalStatisticsSection, "timeBoatPassenger"], 
 			[_intervalStatisticsSection, "timeMapVisible"], 
 			[_intervalStatisticsSection, "timeGpsVisible"], 
+			[_intervalStatisticsSection, "timeCompassVisible"], 
+			[_intervalStatisticsSection, "timeWatchVisible"], 
+			[_intervalStatisticsSection, "timeVisionModeDay"], 
+			[_intervalStatisticsSection, "timeVisionModeNight"], 
+			[_intervalStatisticsSection, "timeVisionModeThermal"], 
 			[_intervalStatisticsSection, "timeWeaponLowered"], 
 			[_intervalStatisticsSection, "timeAddonAceActive"], 
 			[_intervalStatisticsSection, "timeAddonTfarActive"]
@@ -491,45 +388,121 @@ params ["_playerUid"];
 				
 		} forEach _statisticsSectionsAndKeys;
 		
-		_result = [];	
-		if(_filter != "") then
+		_resultStatistics = [];	
+		if(_filterStatistics != "") then
 		{
 			{
-				if (((_x select 0) find _filter) > -1) then
+				if (((_x select 0) find _filterStatistics) > -1) then
 				{
-					_result = _result + [_x];
+					_resultStatistics = _resultStatistics + [_x];
 				};
 			} forEach _tmpResult;
 		}
 		else
 		{
-			_result = _tmpResult;
+			_resultStatistics = _tmpResult;
 		};
 
-		_answer = _playerUid + "-answerPlayerStatisticsFiltered";
-		missionNamespace setVariable [_answer, _result, false];
+		/* ---------------------------------------- */
+		
+		_dbName = "pps-events";
+		_inidbi = ["new", _dbName] call OO_INIDBI;
+		
+		_sections = "getSections" call _inidbi;
+		
+		_tmpResult = [];	
+		{
+			_eventName = ["read", [_x, "eventName", ""]] call _inidbi;
+			_eventStartTime = ["read", [_x, "eventStartTime", ""]] call _inidbi;
+			_eventDuration = ["read", [_x, "eventDuration", ""]] call _inidbi;
+			_eventAllActivePlayerIds = ["read", [_x, "eventAllActivePlayerIds", ""]] call _inidbi;
+			
+			if ((_eventStartTime select 1) < 10) then {_eventStartTime set [1, format["0%1", _eventStartTime select 1]]};
+			if ((_eventStartTime select 2) < 10) then {_eventStartTime set [2, format["0%1", _eventStartTime select 2]]};
+			
+			if ((_eventAllActivePlayerIds find _requestedPlayerUid) > -1) then
+			{
+				_statisticsString = format ["PPS Event: %1 (%2-%3-%4 >> %5 min)", _eventName, (_eventStartTime select 0), (_eventStartTime select 1), (_eventStartTime select 2), _eventDuration];
+				_tmpResult = _tmpResult + [[_statisticsString, ""]];
+			};
+		} forEach _sections;
+
+		_resultEvents = [];	
+		if(_filterStatistics != "") then
+		{
+			{
+				if (((_x select 0) find _filterStatistics) > -1) then
+				{
+					_resultEvents = _resultEvents + [_x];
+				};
+			} forEach _tmpResult;
+		}
+		else
+		{
+			_resultEvents = _tmpResult;
+		};
+		
+		/* ---------------------------------------- */
+
+
+		_answer = _playerUid + "-answerStatisticsFiltered";
+		missionNamespace setVariable [_answer, [_resultStatistics, _resultEvents], false];
 		_clientId publicVariableClient _answer;
 		
-		diag_log format ["[%1] PPS Player Request Statistics: %2 (%3)", serverTime, _requestedPlayerName, _requestedPlayerUid];
+		diag_log format ["[%1] PPS Player Request Statistics: (%2)", serverTime, _requestedPlayerUid];
 	};
 };
 
 /* ================================================================================ */
 
-(_playerUid + "-requestPlayerDetailsFiltered") addPublicVariableEventHandler
+(_playerUid + "-requestDialogUpdate") addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
 	
 	_playerUid = _broadcastVariableValue select 0;
 	_clientId = _broadcastVariableValue select 1;
-	_filter = _broadcastVariableValue select 2;
+	_filterPlayers = _broadcastVariableValue select 2;
 	
+	/* ---------------------------------------- */
+	
+	_addons = activatedAddons;
+	_isInidbi2Installed = false;
+	if ((_addons find "inidbi2") > -1) then {_isInidbi2Installed = true};
+
+	/* ---------------------------------------- */
+
 	_dbName = "pps-players";
 	_inidbi = ["new", _dbName] call OO_INIDBI;
 	
-	_isAdmin = ["read", [_playerUid, "isAdmin", 0]] call _inidbi;
-	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", 0]] call _inidbi;
+	_isAdmin = ["read", [_playerUid, "isAdmin", ""]] call _inidbi;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", ""]] call _inidbi;
+
+	/* ---------------------------------------- */
+
+	_countPlayersTotal = 0;
+	_countPlayersOnline = 0;
+	_countAdminsTotal = 0;
+	_countAdminsOnline = 0;
+
+	_sections = "getSections" call _inidbi;
+	_countPlayersTotal = count _sections;
 	
+	_allActivePlayers = allPlayers - entities "HeadlessClient_F";
+	_countPlayersOnline = count _allActivePlayers;
+	
+	{
+		_isAdmin = ["read", [_x, "isAdmin", 0]] call _inidbi;
+		if (_isAdmin == 1) then {_countAdminsTotal = _countAdminsTotal + 1};
+	} forEach _sections;
+	
+	{
+		_tmpPlayerUid = getPlayerUID _x;
+		_isAdmin = ["read", [_tmpPlayerUid, "isAdmin", 0]] call _inidbi;
+		if (_isAdmin == 1) then {_countAdminsOnline = _countAdminsOnline + 1};
+	} forEach _allActivePlayers;
+	
+	/* ---------------------------------------- */
+
 	_sections = [];
 	
 	if ((_isAdmin == 1) && (_isAdminLoggedIn == 1)) then
@@ -554,135 +527,47 @@ params ["_playerUid"];
 		_tmpResult = _tmpResult + [[_tmpPlayerName, _tmpPlayerUid, _tmpIsAdmin, _tmpIsAdminLoggedIn, _tmpPlayerIsTrackValueActive, _tmpPlayerTrackValueVariable]];
 	} forEach _sections;
 	
-	_result = [];
-	if(_filter != "") then
+	_filteredPlayers = [];
+	if(_filterPlayers != "") then
 	{
 		{
-			if (((_x select 0) find _filter) > -1) then
+			if (((_x select 0) find _filterPlayers) > -1) then
 			{
-				_result = _result + [_x];
+				_filteredPlayers = _filteredPlayers + [_x];
 			};
 		} forEach _tmpResult;
 	}
 	else
 	{
-		_result = _tmpResult;
+		_filteredPlayers = _tmpResult;
 	};
-	
-	_answer = _playerUid + "-answerPlayerDetailsFiltered";
-	missionNamespace setVariable [_answer, _result, false];
-	_clientId publicVariableClient _answer;
-	
-	_dbName = "pps-player-" + _playerUid;
-	_inidbi = ["new", _dbName] call OO_INIDBI;		
-	_globalSection = "Global Informations";
-	_playerName = ["read", [_globalSection, "playerName", ""]] call _inidbi;
-	
-	diag_log format ["[%1] PPS Player Request Player Details: %2 (%3)", serverTime, _playerName, _playerUid];
-};
 
-/* ================================================================================ */
+	/* ---------------------------------------- */
+	
+	_dbName = "pps-server-settings";
+	_inidbi = ["new", _dbName] call OO_INIDBI;	
+	_settingsSection = "Settings";
+	
+	_isEvent = ["read", [_settingsSection, "isEvent", -1]] call _inidbi;
+	_nameEvent = ["read", [_settingsSection, "nameEvent", ""]] call _inidbi;
+	_startTimeEvent = ["read", [_settingsSection, "startTimeEvent", -1]] call _inidbi;
 
-(_playerUid + "-requestServerAndDatabaseStatus") addPublicVariableEventHandler
-{
-	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
-	
-	_playerUid = _broadcastVariableValue select 0;
-	_clientId = _broadcastVariableValue select 1;
-	
-	_addons = activatedAddons;
-	_isInidbi2Installed = false;
-	if ((_addons find "inidbi2") > -1) then {_isInidbi2Installed = true};
+	/* ---------------------------------------- */
 
-	_result = [_playerUid, _clientId, _isInidbi2Installed];
+	_result =
+	[
+		_playerUid, _clientId, _isAdmin, _isAdminLoggedIn, 
+		_isInidbi2Installed, 
+		_countPlayersTotal, _countPlayersOnline, _countAdminsTotal, _countAdminsOnline, 
+		_isEvent, _nameEvent, _startTimeEvent,
+		_filteredPlayers
+	];
 	
-	_answer = _playerUid + "-answerServerAndDatabaseStatus";
+	_answer = _playerUid + "-answerDialogUpdate";
 	missionNamespace setVariable [_answer, _result, false];
 	_clientId publicVariableClient _answer;
 
-	_dbName = "pps-player-" + _playerUid;
-	_inidbi = ["new", _dbName] call OO_INIDBI;		
-	_globalSection = "Global Informations";
-	_playerName = ["read", [_globalSection, "playerName", ""]] call _inidbi;
-
-	diag_log format ["[%1] PPS Player Request Server And Database Status: %2 (%3)", serverTime, _playerName, _playerUid];
-};
-
-/* ================================================================================ */
-
-(_playerUid + "-requestPlayersAndAdminsCount") addPublicVariableEventHandler
-{
-	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
-	
-	_playerUid = _broadcastVariableValue select 0;
-	_clientId = _broadcastVariableValue select 1;
-	
-	_countPlayersTotal = 0;
-	_countPlayersOnline = 0;
-	_countAdminsTotal = 0;
-	_countAdminsOnline = 0;
-
-	_dbName = "pps-players";
-	_inidbi = ["new", _dbName] call OO_INIDBI;
-	
-	_sections = "getSections" call _inidbi;
-	_countPlayersTotal = count _sections;
-	
-	_allActivePlayers = allPlayers - entities "HeadlessClient_F";
-	_countPlayersOnline = count _allActivePlayers;
-	
-	{
-		_isAdmin = ["read", [_x, "isAdmin", 0]] call _inidbi;
-		if (_isAdmin == 1) then {_countAdminsTotal = _countAdminsTotal + 1};
-	} forEach _sections;
-	
-	{
-		_tmpPlayerUid = getPlayerUID _x;
-		_isAdmin = ["read", [_tmpPlayerUid, "isAdmin", 0]] call _inidbi;
-		if (_isAdmin == 1) then {_countAdminsOnline = _countAdminsOnline + 1};
-	} forEach _allActivePlayers;
-
-	_result = [_playerUid, _clientId, _countPlayersTotal, _countPlayersOnline, _countAdminsTotal, _countAdminsOnline];
-	
-	_answer = _playerUid + "-answerPlayersAndAdminsCount";
-	missionNamespace setVariable [_answer, _result, false];
-	_clientId publicVariableClient _answer;
-
-	_dbName = "pps-player-" + _playerUid;
-	_inidbi = ["new", _dbName] call OO_INIDBI;		
-	_globalSection = "Global Informations";
-	_playerName = ["read", [_globalSection, "playerName", ""]] call _inidbi;
-
-	diag_log format ["[%1] PPS Player Request Players And Admins Count: %2 (%3)", serverTime, _playerName, _playerUid];
-};
-
-/* ================================================================================ */
-
-(_playerUid + "-requestPlayerAdminStatus") addPublicVariableEventHandler
-{
-	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
-	
-	_playerUid = _broadcastVariableValue select 0;
-	_clientId = _broadcastVariableValue select 1;
-	
-	_dbName = "pps-players";
-	_inidbi = ["new", _dbName] call OO_INIDBI;
-	
-	_isAdmin = ["read", [_playerUid, "isAdmin", ""]] call _inidbi;
-	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", ""]] call _inidbi;
-	
-	_result = [_playerUid, _clientId, _isAdmin, _isAdminLoggedIn];
-	
-	_answer = _playerUid + "-answerPlayerAdminStatus";
-	missionNamespace setVariable [_answer, _result, false];
-	_clientId publicVariableClient _answer;
-
-	_dbName = "pps-player-" + _playerUid;
-	_inidbi = ["new", _dbName] call OO_INIDBI;		
-	_globalSection = "Global Informations";
-	_playerName = ["read", [_globalSection, "playerName", ""]] call _inidbi;
-
-	diag_log format ["[%1] PPS Player Request Player Admin Status: Is Admin %2 %3 (%4)", serverTime, _isAdmin, _playerName, _playerUid];
+	diag_log format ["[%1] PPS Player Request Dialog Update: (%2)", serverTime, _playerUid];
 };
 
 /* ================================================================================ */
@@ -706,7 +591,27 @@ params ["_playerUid"];
 		
 		_globalInformationsSection = "Global Informations";
 		_intervalStatisticsSection = "Interval Statistics";
-				
+		_eventHandlerSection = "Event Handler Statistics";
+
+		/*
+		if ((count _intervalStatistics) == 1) then
+		{
+			diag_log "Einzelwert";
+			diag_log count _intervalStatistics;
+			diag_log _intervalStatistics;
+			_key = (_intervalStatistics select 0) select 1;
+			_value = (_intervalStatistics select 0) select 2;
+			_str = format ["Key: %1\nValue: %2", _key, _value];
+			_str remoteExec ["hint"];
+		}
+		else
+		{
+			diag_log "Mehrfachwertwert";
+			diag_log count _intervalStatistics;
+			diag_log _intervalStatistics;
+		};
+		*/
+		
 		{
 			_section = _x select 0;
 			_key = _x select 1;
@@ -714,12 +619,11 @@ params ["_playerUid"];
 			_formatType = _x select 3;
 			_formatString = _x select 4;
 			
-			
 			if (_section == _globalInformationsSection) then
 			{
 				["write", [_section, _key, _value]] call _inidbi;
 			};
-			if (_section == _intervalStatisticsSection) then
+			if ((_section == _intervalStatisticsSection) || (_section == _eventHandlerSection)) then
 			{
 				_valueOld = ["read", [_section, _key, 0]] call _inidbi;
 				_value = _valueOld + _value;
@@ -746,17 +650,20 @@ params ["_playerUid"];
 		{
 			_dbName = "pps-player-" + _playerUid;
 			_inidbi = ["new", _dbName] call OO_INIDBI;
-			_intervalSection = "Interval Statistics";
 			
 			_trackValueValue = ["read", [_intervalStatisticsSection, _trackValueVariable, "not set"]] call _inidbi;
+			if ((str _trackValueValue) == (str "not set")) then
+			{
+				_trackValueValue = ["read", [_eventHandlerSection, _trackValueVariable, "not set"]] call _inidbi;
+			};
 			if ((str _trackValueValue) != (str "not set")) then
 			{
-				_trackValueString = format ["Variable: %1\nValue: %2", _trackValueVariable, _trackValueValue];
-				_trackValueString remoteExec ["hint", _trackValueClientId];			
+				_trackValueString = format ["Persistent Player Statistics\n\nVariable: %1\nValue: %2", _trackValueVariable, _trackValueValue];
+				_trackValueString remoteExec ["hint", _trackValueClientId];
 			};
 		};
 	
-		diag_log format ["[%1] PPS Player Updated Interval Data: (%2)", serverTime, _playerUid];
+		diag_log format ["[%1] PPS Player Updated Statistics: (%2)", serverTime, _playerUid];
 	};
 };
 

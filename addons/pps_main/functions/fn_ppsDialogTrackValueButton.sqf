@@ -19,7 +19,7 @@ _trackValueButtonText = ctrlText _trackValueButton;
 
 if ((_selectedIndex == -1) && (_trackValueButtonText == "Track Value On")) then
 {
-	hint "No value for tracking selected.";
+	hint "Persistent Player Statistics\n\nNo value for tracking selected.";
 }
 else
 {
