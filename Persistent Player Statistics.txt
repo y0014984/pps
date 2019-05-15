@@ -57,7 +57,9 @@ liegend sprinten 4.8
 
 Anpassungen zum Release
 --------------------------
-- Umbau, dass die Interval Statisitken komplett von Unit übergeben werden
+- TESTEN: Umbau, dass die Interval Statisitken komplett von Unit übergeben werden
+- TESTEN: Umbau, dass das Schreiben der Werte die gleiche Funktion für Interval Daten sowie auch Event Daten ist (Bei Event einfach [_data])
+- Umbenennen: 		_globalSection >> _globalInformationsSection und _intervalSection >> _intervalStatisticsSection
 - Unit Event Handler trennen nach AllUnits, AllAiUnits, AllPlayerUnits und dann in separate Funktionen
 - Illustration der Funktionen, EventHandler und Aufrufe
 - Umstellen, dass bei inidbi auch für isAdmin Boolean wie true und false funktionieren
@@ -77,6 +79,8 @@ Anpassungen zum Release
 - genaueres trennen der Event Handler von Playern und von Units --> separate Funktionen
 - Prüfen, wo CBA das Tastaturkürzel hinterlegt, damit ich das korrekte Setzen desselben prüfen kann
 - Das mit den Event Händlern wird vielleicht einfacher wenn ich im Namespace der Units die EH IDs speichere, dann kann ich diese selektiv wieder entfernen
+- Filtern des Playernamens nur über die "getSeperator" Funktion von INIDBI2, damit nur dieses Zeichen entfernt wird und durch ein leerzeichen ersetzt
+- Event Statistics, wenn sie leer sind, zu beginn auf 0 setzen beim player
 
 Release 1.0
 -------------

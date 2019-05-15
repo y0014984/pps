@@ -254,6 +254,7 @@ _answer addPublicVariableEventHandler
 	
 	_playersListBox = (findDisplay -1) displayCtrl 1500;
 	lbClear _playersListBox;
+	_playersListBox lbSetCurSel -1;
 	_detailsListBox = (findDisplay -1) displayCtrl 1501;
 	lbClear _detailsListBox;
 	_trackValueButton = (findDisplay -1) displayCtrl 1604;
@@ -300,11 +301,10 @@ _answer addPublicVariableEventHandler
 		_playersListBox lbSetData [_index, _dbPlayerUid];
 		if(_dbPlayerUid == _playerUid) then
 		{
-			_playersListBox lbSetColor [_index, [1, 0, 0, 1]];
+			_playersListBox lbSetColor [_index, [0.5, 0, 0, 1]];
+			_playersListBox lbSetCurSel _index;
 		};
 	} forEach _allPlayerDetails;
-	
-	_playersListBox lbSetCurSel -1;
 };
 
 /* ================================================================================ */

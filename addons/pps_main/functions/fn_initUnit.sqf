@@ -26,9 +26,11 @@ if (local _unit && isMultiplayer) then
 					_section = "Event Handler Statistics";
 					_key = "countPlayerDeaths";
 					_value = 1;
-								
-					_updatedData = [_playerUid, _section, _key, _value];
-					_update = _playerUid + "-updateEventHandlerValue";
+					_formatType = 0;
+					_formatString = "[A3] Count Player Deaths: %1";
+					
+					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+					_update = _playerUid + "-updateStatistics";
 					missionNamespace setVariable [_update, _updatedData, false];
 					publicVariableServer _update;
 				};
@@ -39,9 +41,11 @@ if (local _unit && isMultiplayer) then
 					_section = "Event Handler Statistics";
 					_key = "countPlayerKills";
 					_value = 1;
+					_formatType = 0;
+					_formatString = "[A3] Count Player Kills: %1";
 								
-					_updatedData = [_playerUid, _section, _key, _value];
-					_update = _playerUid + "-updateEventHandlerValue";
+					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+					_update = _playerUid + "-updateStatistics";
 					missionNamespace setVariable [_update, _updatedData, false];
 					publicVariableServer _update;				
 				};
@@ -52,9 +56,11 @@ if (local _unit && isMultiplayer) then
 					_section = "Event Handler Statistics";
 					_key = "countPlayerSuicides";
 					_value = 1;
+					_formatType = 0;
+					_formatString = "[A3] Count Player Suicides: %1";
 								
-					_updatedData = [_playerUid, _section, _key, _value];
-					_update = _playerUid + "-updateEventHandlerValue";
+					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+					_update = _playerUid + "-updateStatistics";
 					missionNamespace setVariable [_update, _updatedData, false];
 					publicVariableServer _update;				
 				};
@@ -65,9 +71,11 @@ if (local _unit && isMultiplayer) then
 					_section = "Event Handler Statistics";
 					_key = "countPlayerTeamKills";
 					_value = 1;
+					_formatType = 0;
+					_formatString = "[A3] Count Player Team Kills: %1";
 								
-					_updatedData = [_playerUid, _section, _key, _value];
-					_update = _playerUid + "-updateEventHandlerValue";
+					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+					_update = _playerUid + "-updateStatistics";
 					missionNamespace setVariable [_update, _updatedData, false];
 					publicVariableServer _update;
 				};
@@ -96,30 +104,39 @@ if (local _unit && isMultiplayer) then
 			{
 				if (((_ammo select 4) find "Grenade") > -1) then
 				{
-					_key = "countGrenadesHitEnemy";	
+					_key = "countGrenadesHitEnemy";
+					_formatString = "[A3] Count Grenades Hit Enemy: %2 (%3%1)";
+					_formatType = 4;
 				}
 				else
 				{
 					_key = "countProjectilesHitEnemy";		
+					_formatString = "[A3] Count Projectiles Hit Enemy: %2 (%3%1)";
+					_formatType = 2;
 				};
 			}
 			else
 			{
 				if (((_ammo select 4) find "Grenade") > -1) then
 				{
-					_key = "countGrenadesHitFriendly";		
+					_key = "countGrenadesHitFriendly";
+					_formatString = "[A3] Count Grenades Hit Friendly: %2 (%3%1)";
+					_formatType = 4;
 				}
 				else
 				{
-					_key = "countProjectilesHitFriendly";	
+					_key = "countProjectilesHitFriendly";
+					_formatString = "[A3] Count Projectiles Hit Friendly: %2 (%3%1)";
+					_formatType = 2;
 				};
 			};
 
 			hint format ["Key: %1", _key];
 			
 			_value = 1;
-			_updatedData = [_playerUid, _section, _key, _value];
-			_update = _playerUid + "-updateEventHandlerValue";
+
+			_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;			
 		};
@@ -133,29 +150,33 @@ if (local _unit && isMultiplayer) then
 		{
 			params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_vehicle"];
 			
+			//hint format ["Weapon: %1\nMuzzle: %2\nMode: %3\nAmmo: %4\nMagazine: %5", _weapon, _muzzle, _mode, _ammo, _magazine];
+			
 			_playerUid = getPlayerUID _unit;
 			_playerName = name _unit;
 			_section = "Event Handler Statistics";
 
 			_key = "";
+			_formatString = "";
 			if (_weapon == "Throw") then
 			{
-				if ((_muzzle find "Grenade") > -1) then {_key = "countGrenadesThrown";};
-				if ((_muzzle find "SmokeShell") > -1) then {_key = "countSmokeShellsThrown";};
-				if ((_muzzle find "Chemlight") > -1) then {_key = "countChemlightsThrown";};
-				if (_key == "") then {_key = "countUnknownThrown";};
+				if ((_muzzle find "Grenade") > -1) then {_key = "countGrenadesThrown"; _formatString = "[A3] Count Grenades Thrown: %1";};
+				if ((_muzzle find "SmokeShell") > -1) then {_key = "countSmokeShellsThrown"; _formatString = "[A3] Count Smoke Shells Thrown: %1";};
+				if ((_muzzle find "Chemlight") > -1) then {_key = "countChemlightsThrown"; _formatString = "[A3] Count Chemlights Thrown: %1";};
+				if (_key == "") then {_key = "countUnknownThrown"; _formatString = "[A3] Count Unknown Thrown: %1";};
 			}
 			else
 			{
-				_key = "countProjectilesFired";		
+				_key = "countProjectilesFired";
+				_formatString = "[A3] Count Projectiles Fired: %1";
 			};
 			
 			_value = 1;
+			_value = 1;
+			_formatType = 0;
 			
-			//hint format ["Weapon: %1\nMuzzle: %2\nMode: %3\nAmmo: %4\nMagazine: %5", _weapon, _muzzle, _mode, _ammo, _magazine];
-			
-			_updatedData = [_playerUid, _section, _key, _value];
-			_update = _playerUid + "-updateEventHandlerValue";
+			_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;			
 		}];
@@ -174,9 +195,11 @@ if (local _unit && isMultiplayer) then
 			{
 				_key = "countCuratorInterfaceOpened";
 				_value = 1;
-							
-				_updatedData = [_playerUid, _section, _key, _value];
-				_update = _playerUid + "-updateEventHandlerValue";
+				_formatType = 0;
+				_formatString = "[A3] Interface Zeus Opened: %1";
+			
+				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_update = _playerUid + "-updateStatistics";
 				missionNamespace setVariable [_update, _updatedData, false];
 				publicVariableServer _update;
 			};
@@ -185,31 +208,37 @@ if (local _unit && isMultiplayer) then
 			{
 				_key = "countGearInterfaceOpened";
 				_value = 1;
-							
-				_updatedData = [_playerUid, _section, _key, _value];
-				_update = _playerUid + "-updateEventHandlerValue";
+				_formatType = 0;
+				_formatString = "[A3] Interface Gear Opened: %1";
+			
+				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_update = _playerUid + "-updateStatistics";
 				missionNamespace setVariable [_update, _updatedData, false];
 				publicVariableServer _update;
 			};
 					
-			if (inputAction "CompassToggle" > 0) then 
+			if (inputAction "Compass" > 0) then 
 			{
 				_key = "countCompassInterfaceOpened";
 				_value = 1;
-							
-				_updatedData = [_playerUid, _section, _key, _value];
-				_update = _playerUid + "-updateEventHandlerValue";
+				_formatType = 0;
+				_formatString = "[A3] Interface Compass Opened: %1";
+			
+				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_update = _playerUid + "-updateStatistics";
 				missionNamespace setVariable [_update, _updatedData, false];
 				publicVariableServer _update;
 			};
 			
-			if (inputAction "WatchToggle" > 0) then 
+			if (inputAction "Watch" > 0) then 
 			{
 				_key = "countWatchInterfaceOpened";
 				_value = 1;
-							
-				_updatedData = [_playerUid, _section, _key, _value];
-				_update = _playerUid + "-updateEventHandlerValue";
+				_formatType = 0;
+				_formatString = "[A3] Interface Watch Opened: %1";
+			
+				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_update = _playerUid + "-updateStatistics";
 				missionNamespace setVariable [_update, _updatedData, false];
 				publicVariableServer _update;
 			};
@@ -370,28 +399,74 @@ if (_playerUid != "" && _playerUid != "_SP_PLAYER_" && hasInterface) then
 			if ((_addons find "ace_main") > -1) then {_timeAddonAceActive = PPS_ValuesUpdateInterval;};
 			if ((_addons find "tfar_core") > -1) then {_timeAddonTfarActive = PPS_ValuesUpdateInterval;};
 			
+			_filter = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÜüÖöÄä[]-_.:#*(){}%$§&<>+-,;'~?= ";
+			_playerName = [_playerName, _filter] call BIS_fnc_filterString;
+
+			_globalInformationsSection = "Global Informations";
+			_intervalStatisticsSection = "Interval Statistics";
+			
 			_updatedData = 
 			[
-				_playerName, _playerUid, 
-				_timeInEvent, 
-				_timeOnFoot, 
-				_timeStandNoSpeed, _timeCrouchNoSpeed, _timeProneNoSpeed, 
-				_timeStandLowSpeed, _timeCrouchLowSpeed, _timeProneLowSpeed, 
-				_timeStandMidSpeed, _timeCrouchMidSpeed, _timeProneMidSpeed, 
-				_timeStandHighSpeed, _timeCrouchHighSpeed, _timeProneHighSpeed, 
-				_timeInVehicle, 
-				_timeCarDriver, _timeCarGunner, _timeCarCommander, _timeCarPassenger, 
-				_timeTankDriver, _timeTankGunner, _timeTankCommander, _timeTankPassenger, 
-				_timeTruckDriver, _timeTruckGunner, _timeTruckCommander, _timeTruckPassenger, 
-				_timeMotorcycleDriver, _timeMotorcycleGunner, _timeMotorcycleCommander, _timeMotorcyclePassenger, 
-				_timeHelicopterDriver, _timeHelicopterGunner, _timeHelicopterCommander, _timeHelicopterPassenger, 
-				_timePlaneDriver, _timePlaneGunner, _timePlaneCommander, _timePlanePassenger, 
-				_timeShipDriver, _timeShipGunner, _timeShipCommander, _timeShipPassenger, 
-				_timeBoatDriver, _timeBoatGunner, _timeBoatCommander, _timeBoatPassenger, 
-				_timeMapVisible, _timeGpsVisible, _timeWeaponLowered,
-				_timeAddonAceActive, _timeAddonTfarActive
+				_playerUid,
+				[
+					[_globalInformationsSection, "playerName", _playerName, 0, "Player Name: %1"],  
+					[_globalInformationsSection, "playerUid", _playerUid, 0, "Player UID: %1"],  
+					[_intervalStatisticsSection, "timeInEvent", _timeInEvent, 3, "Time in Event: %1 hrs"],  
+					[_intervalStatisticsSection, "timeOnFoot", _timeOnFoot, 1, "[A3] Time On Foot: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeStandNoSpeed", _timeStandNoSpeed, 1, "[A3] Time Stand No Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeCrouchNoSpeed", _timeCrouchNoSpeed, 1, "[A3] Time Crouch No Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeProneNoSpeed", _timeProneNoSpeed, 1, "[A3] Time Prone No Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeStandLowSpeed", _timeStandLowSpeed, 1, "[A3] Time Stand Low Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeCrouchLowSpeed", _timeCrouchLowSpeed, 1, "[A3] Time Crouch Low Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeProneLowSpeed", _timeProneLowSpeed, 1, "[A3] Time Prone Low Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeStandMidSpeed", _timeStandMidSpeed, 1, "[A3] Time Stand Mid Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeCrouchMidSpeed", _timeCrouchMidSpeed, 1, "[A3] Time Crouch Mid Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeProneMidSpeed", _timeProneMidSpeed, 1, "[A3] Time Prone Mid Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeStandHighSpeed", _timeStandHighSpeed, 1, "[A3] Time Stand High Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeCrouchHighSpeed", _timeCrouchHighSpeed, 1, "[A3] Time Crouch High Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeProneHighSpeed", _timeProneHighSpeed, 1, "[A3] Time Prone High Speed: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeInVehicle", _timeInVehicle, 1, "[A3] Time In Vehicle: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeCarDriver", _timeCarDriver, 1, "[A3] Time Car Driver: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeCarGunner", _timeCarGunner, 1, "[A3] Time Car Gunner: %2 hrs (%3%1)"], 
+					[_intervalStatisticsSection, "timeCarCommander", _timeCarCommander, 1, "[A3] Time Car Commander: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeCarPassenger", _timeCarPassenger, 1, "[A3] Time Car Passenger: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeTankDriver", _timeTankDriver, 1, "[A3] Time Tank Driver: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeTankGunner", _timeTankGunner, 1, "[A3] Time Tank Gunner: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeTankCommander", _timeTankCommander, 1, "[A3] Time Tank Commander: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeTankPassenger", _timeTankPassenger, 1, "[A3] Time Tank Passenger: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeTruckDriver", _timeTruckDriver, 1, "[A3] Time Truck Driver: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeTruckGunner", _timeTruckGunner, 1, "[A3] Time Truck Gunner: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeTruckCommander", _timeTruckCommander, 1, "[A3] Time Truck Commander: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeTruckPassenger", _timeTruckPassenger, 1, "[A3] Time Truck Passenger: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeMotorcycleDriver", _timeMotorcycleDriver, 1, "[A3] Time Motorcycle Driver: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeMotorcycleGunner", _timeMotorcycleGunner, 1, "[A3] Time Motorcycle Gunner: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeMotorcycleCommander", _timeMotorcycleCommander, 1, "[A3] Time Motorcycle Commander: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeMotorcyclePassenger", _timeMotorcyclePassenger, 1, "[A3] Time Motorcycle Passenger: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeHelicopterDriver", _timeHelicopterDriver, 1, "[A3] Time Helicopter Driver: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeHelicopterGunner", _timeHelicopterGunner, 1, "[A3] Time Helicopter Gunner: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeHelicopterCommander", _timeHelicopterCommander, 1, "[A3] Time Helicopter Commander: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeHelicopterPassenger", _timeHelicopterPassenger, 1, "[A3] Time Helicopter Passenger: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timePlaneDriver", _timePlaneDriver, 1, "[A3] Time Plane Driver: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timePlaneGunner", _timePlaneGunner, 1, "[A3] Time Plane Gunner: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timePlaneCommander", _timePlaneCommander, 1, "[A3] Time Plane Commander: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timePlanePassenger", _timePlanePassenger, 1, "[A3] Time Plane Passenger: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeShipDriver", _timeShipDriver, 1, "[A3] Time Ship Driver: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeShipGunner", _timeShipGunner, 1, "[A3] Time Ship Gunner: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeShipCommander", _timeShipCommander, 1, "[A3] Time Ship Commander: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeShipPassenger", _timeShipPassenger, 1, "[A3] Time Ship Passenger: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeBoatDriver", _timeBoatDriver, 1, "[A3] Time Boat Driver: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeBoatGunner", _timeBoatGunner, 1, "[A3] Time Boat Gunner: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeBoatCommander", _timeBoatCommander, 1, "[A3] Time Boat Commander: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeBoatPassenger", _timeBoatPassenger, 1, "[A3] Time Boat Passenger: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeMapVisible", _timeMapVisible, 1, "[A3] Time Map Visible: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeGpsVisible", _timeGpsVisible, 1, "[A3] Time Gps Visible: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeWeaponLowered", _timeWeaponLowered, 1, "[A3] Time Weapon Lowered: %2 hrs (%3%1)"], 
+					[_intervalStatisticsSection, "timeAddonAceActive", _timeAddonAceActive, 1, "[ACE] Time Addon Ace Active: %2 hrs (%3%1)"],  
+					[_intervalStatisticsSection, "timeAddonTfarActive", _timeAddonTfarActive, 1, "[TFAR] Time Addon Tfar Active: %2 hrs (%3%1)"]
+				]
 			];
-			_update = _playerUid + "-updateIntervalValues";
+			
+			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;
 		};
