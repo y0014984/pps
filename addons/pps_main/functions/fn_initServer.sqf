@@ -38,13 +38,13 @@ if (isServer && isMultiplayer) then
 			
 			["write", [_playerUid, "playerName", _playerName]] call _inidbi;
 			["write", [_playerUid, "playerUid", _playerUid]] call _inidbi;
-			["write", [_playerUid, "isAdmin", 0]] call _inidbi;
-			["write", [_playerUid, "isAdminLoggedIn", 0]] call _inidbi;
+			["write", [_playerUid, "isAdmin", false]] call _inidbi;
+			["write", [_playerUid, "isAdminLoggedIn", false]] call _inidbi;
 			
 			_playerName = ["read", [_playerUid, "playerName", "<name not set>"]] call _inidbi;
 			_playerUid = ["read", [_playerUid, "playerUid", "<id not set>"]] call _inidbi;
-			_isAdmin = ["read", [_playerUid, "playerName", 0]] call _inidbi;
-			_isAdminLoggedIn = ["read", [_playerUid, "playerUid", 0]] call _inidbi;
+			_isAdmin = ["read", [_playerUid, "playerName", false]] call _inidbi;
+			_isAdminLoggedIn = ["read", [_playerUid, "playerUid", false]] call _inidbi;
 			
 			[_playerUid] call PPS_fnc_initServerEventHandler;
 			

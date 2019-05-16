@@ -10,8 +10,6 @@ if (PPS_AllowSendingData) then
 	ppsServerHelo = [_playerName, _playerUid];
 	publicVariableServer "ppsServerHelo";
 	
-	//waitUntil {sleep 1; getClientState == "BRIEFING READ";};
-
 	//hint "PPS_AllowSendingData enabled";
 
 	/* ---------------------------------------- */
@@ -59,19 +57,19 @@ if (PPS_AllowSendingData) then
 		//hint format ["Key Up Event\n\Key: %1", _key];
 		
 		_playerUid = getPlayerUID player;
-		_eventHandlerSection = "Event Handler Statistics";
+		_eventHandlerStatisticsSection = "Event Handler Statistics";
+		
+		_key = "";
+		_value = 0;
+		_formatType = 0;
+		_formatString = "";
 		
 		if (inputAction "CuratorInterface" > 0) then 
 		{
 			_key = "countCuratorInterfaceOpened";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Interface Zeus Opened: %1";
-		
-			_updatedData = [_playerUid, [[_eventHandlerSection, _key, _value, _formatType, _formatString]]];
-			_update = _playerUid + "-updateStatistics";
-			missionNamespace setVariable [_update, _updatedData, false];
-			publicVariableServer _update;
+			_formatString = "[A3] Count Interface Zeus Opened: %1";
 		};
 
 		if (inputAction "Gear" > 0) then 
@@ -79,12 +77,9 @@ if (PPS_AllowSendingData) then
 			_key = "countGearInterfaceOpened";
 			_value = 0.5;
 			_formatType = 0;
-			_formatString = "[A3] Interface Gear Opened: %1";
-		
-			_updatedData = [_playerUid, [[_eventHandlerSection, _key, _value, _formatType, _formatString]]];
-			_update = _playerUid + "-updateStatistics";
-			missionNamespace setVariable [_update, _updatedData, false];
-			publicVariableServer _update;
+			_formatString = "[A3] Count Interface Gear Opened: %1";
+			
+			//hint "Inventory opened";
 		};
 				
 		if (inputAction "Compass" > 0) then 
@@ -92,12 +87,7 @@ if (PPS_AllowSendingData) then
 			_key = "countCompassInterfaceOpened";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Interface Compass Opened: %1";
-		
-			_updatedData = [_playerUid, [[_eventHandlerSection, _key, _value, _formatType, _formatString]]];
-			_update = _playerUid + "-updateStatistics";
-			missionNamespace setVariable [_update, _updatedData, false];
-			publicVariableServer _update;
+			_formatString = "[A3] Count Interface Compass Opened: %1";
 		};
 		
 		if (inputAction "Watch" > 0) then 
@@ -105,36 +95,96 @@ if (PPS_AllowSendingData) then
 			_key = "countWatchInterfaceOpened";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Interface Watch Opened: %1";
-		
-			_updatedData = [_playerUid, [[_eventHandlerSection, _key, _value, _formatType, _formatString]]];
-			_update = _playerUid + "-updateStatistics";
-			missionNamespace setVariable [_update, _updatedData, false];
-			publicVariableServer _update;
+			_formatString = "[A3] Count Interface Watch Opened: %1";
 		};
-		
-		/* ---------- */
 		
 		if (inputAction "Binocular" > 0) then 
 		{
 			_key = "countBinocularUsed";
 			_value = 0.5;
 			_formatType = 0;
-			_formatString = "[A3] Binocular used: %1";
-		
-			_updatedData = [_playerUid, [[_eventHandlerSection, _key, _value, _formatType, _formatString]]];
-			_update = _playerUid + "-updateStatistics";
-			missionNamespace setVariable [_update, _updatedData, false];
-			publicVariableServer _update;
+			_formatString = "[A3] Count Binocular used: %1";
 		};
 		if (inputAction "Optics" > 0) then 
 		{
 			_key = "countOpticsUsed";
+			_value = 0.5;
+			_formatType = 0;
+			_formatString = "[A3] Count Optics used: %1";
+		};
+		if (inputAction "OpticsTemp" > 0) then 
+		{
+			_key = "countOpticsUsed";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Optics used: %1";
-		
-			_updatedData = [_playerUid, [[_eventHandlerSection, _key, _value, _formatType, _formatString]]];
+			_formatString = "[A3] Count Optics used: %1";
+		};
+		if (inputAction "EngineToggle" > 0) then 
+		{
+			_key = "countEngineToggle";
+			_value = 1;
+			_formatType = 0;
+			_formatString = "[A3] Count Engine Toggle: %1";
+		};
+		if (inputAction "ReloadMagazine" > 0) then 
+		{
+			_key = "countMagazineReloaded";
+			_value = 1;
+			_formatType = 0;
+			_formatString = "[A3] Count Magazine Reloaded: %1";
+		};
+		if (inputAction "holdBreath" > 0) then 
+		{
+			_key = "countBreathHolded";
+			_value = 1;
+			_formatType = 0;
+			_formatString = "[A3] Count Breath Holded: %1";
+		};
+		if (inputAction "ZoomTemp" > 0) then 
+		{
+			_key = "countZoomUsed";
+			_value = 1;
+			_formatType = 0;
+			_formatString = "[A3] Count Zoom Used: %1";
+		};
+		if (inputAction "LeanLeft" > 0) then 
+		{
+			_key = "countLeanLeft";
+			_value = 1;
+			_formatType = 0;
+			_formatString = "[A3] Count Lean Left: %1";
+		};
+		if (inputAction "LeanRight" > 0) then 
+		{
+			_key = "countLeanRight";
+			_value = 1;
+			_formatType = 0;
+			_formatString = "[A3] Count Lean Right: %1";
+		};
+		if (inputAction "Salute" > 0) then 
+		{
+			_key = "countSalute";
+			_value = 0.5;
+			_formatType = 0;
+			_formatString = "[A3] Count Salute: %1";
+		};
+		if (inputAction "SitDown" > 0) then 
+		{
+			_key = "countSitDown";
+			_value = 0.5;
+			_formatType = 0;
+			_formatString = "[A3] Count Sit Down: %1";
+		};
+		if (inputAction "GetOver" > 0) then 
+		{
+			_key = "countGetOver";
+			_value = 1;
+			_formatType = 0;
+			_formatString = "[A3] Count Get Over: %1";
+		};
+		if (_key != "") then
+		{
+			_updatedData = [_playerUid, [[_eventHandlerStatisticsSection, _key, _value, _formatType, _formatString]]];
 			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;
@@ -167,6 +217,10 @@ while {true} do
 		_timeProneHighSpeed = 0;
 		
 		_timeInVehicle = 0;
+		_timeInVehicleEngineOn = 0;
+		_timeInVehicleMoving = 0;
+		_timeInVehicleFlying = 0;
+		
 		_timeCarDriver = 0;
 		_timeCarGunner = 0;
 		_timeCarCommander = 0;
@@ -215,12 +269,13 @@ while {true} do
 		_timeAddonAceActive = 0;
 
 		_vehiclePlayer = vehicle player;
+		_speed = speed player;
+		
 		if (_vehiclePlayer == player) then 
 		{
 			_timeOnFoot = PPS_ValuesUpdateInterval;
 			
 			_stance = stance player;
-			_speed = speed player;
 			
 			switch (true) do
 			{
@@ -241,6 +296,10 @@ while {true} do
 		else
 		{
 			_timeInVehicle = PPS_ValuesUpdateInterval;
+			
+			if(isEngineOn _vehiclePlayer) then {_timeInVehicleEngineOn = PPS_ValuesUpdateInterval;};
+			if(_speed > 0) then {_timeInVehicleMoving = PPS_ValuesUpdateInterval;};
+			if(!isTouchingGround _vehiclePlayer) then {_timeInVehicleFlying = PPS_ValuesUpdateInterval;};
 			
 			switch (true) do
 			{
@@ -331,7 +390,10 @@ while {true} do
 				[_intervalStatisticsSection, "timeStandHighSpeed", _timeStandHighSpeed, 1, "[A3] Time Stand High Speed: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeCrouchHighSpeed", _timeCrouchHighSpeed, 1, "[A3] Time Crouch High Speed: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeProneHighSpeed", _timeProneHighSpeed, 1, "[A3] Time Prone High Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeInVehicle", _timeInVehicle, 1, "[A3] Time In Vehicle: %2 hrs (%3%1)"],  
+				[_intervalStatisticsSection, "timeInVehicle", _timeInVehicle, 1, "[A3] Time In Vehicle: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeInVehicleEngineOn", _timeInVehicleEngineOn, 1, "[A3] Time In Vehicle Engine On: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeInVehicleMoving", _timeInVehicleMoving, 1, "[A3] Time In Vehicle Moving: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeInVehicleFlying", _timeInVehicleFlying, 1, "[A3] Time In Vehicle Flying: %2 hrs (%3%1)"], 
 				[_intervalStatisticsSection, "timeCarDriver", _timeCarDriver, 1, "[A3] Time Car Driver: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeCarGunner", _timeCarGunner, 1, "[A3] Time Car Gunner: %2 hrs (%3%1)"], 
 				[_intervalStatisticsSection, "timeCarCommander", _timeCarCommander, 1, "[A3] Time Car Commander: %2 hrs (%3%1)"],  
@@ -368,7 +430,7 @@ while {true} do
 				[_intervalStatisticsSection, "timeGpsVisible", _timeGpsVisible, 1, "[A3] Time Gps Visible: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeCompassVisible", _timeCompassVisible, 1, "[A3] Time Compass Visible: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeWatchVisible", _timeWatchVisible, 1, "[A3] Time Watch Visible: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeVisionModeDay", _timeVisionModeDay, 1, "[A3] Time Vison Mode Day: %2 hrs (%3%1)"],  
+				[_intervalStatisticsSection, "timeVisionModeDay", _timeVisionModeDay, 1, "[A3] Time Vision Mode Day: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeVisionModeNight", _timeVisionModeNight, 1, "[A3] Time Vision Mode Night: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeVisionModeThermal", _timeVisionModeThermal, 1, "[A3] Time Vision Mode Thermal: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeWeaponLowered", _timeWeaponLowered, 1, "[A3] Time Weapon Lowered: %2 hrs (%3%1)"], 

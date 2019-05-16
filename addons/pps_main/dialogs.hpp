@@ -7,7 +7,7 @@ STRG + I für den Import aus dem Config File:
 
 class PPS_Main_Dialog
 {
-	idd = -1;
+	idd = 14984;
 	movingEnable = true;
 	enableSimulation = true;
 	class controls
@@ -24,7 +24,7 @@ class PPS_Main_Dialog
 			y = 0 * GUI_GRID_H + GUI_GRID_Y;
 			w = 40 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
-			colorBackground[] = {-1,0.5,-1,1};
+			colorBackground[] = {0,0.5,0,1};
 		};
 		class PPS_RscText_1001: PPS_RscText
 		{
@@ -54,7 +54,7 @@ class PPS_Main_Dialog
 			y = 4.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 14.5 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
-			colorBackground[] = {0,0,0,0.5};
+			colorBackground[] = {0,0.5,0,0.5};
 		};
 		class PPS_RscEdit_1401: PPS_RscEdit
 		{
@@ -64,7 +64,7 @@ class PPS_Main_Dialog
 			y = 4.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 25 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
-			colorBackground[] = {0,0,0,0.5};
+			colorBackground[] = {0,0.5,0,0.5};
 		};
 		class PPS_RscListbox_1500: PPS_RscListbox
 		{
@@ -74,7 +74,7 @@ class PPS_Main_Dialog
 			w = 14.5 * GUI_GRID_W;
 			h = 17.5 * GUI_GRID_H;
 		};
-		class PPS_RscText_1501: PPS_RscListbox
+		class PPS_RscListbox_1501: PPS_RscListbox
 		{
 			idc = 1501;
 			x = 15 * GUI_GRID_W + GUI_GRID_X;
@@ -111,19 +111,20 @@ class PPS_Main_Dialog
 			text = ""; //--- ToDo: Localize;
 			x = 13 * GUI_GRID_W + GUI_GRID_X;
 			y = 24 * GUI_GRID_H + GUI_GRID_Y;
-			w = 14 * GUI_GRID_W;
+			w = 12 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
+			colorBackground[] = {0,0.5,0,0.5};
 		};
 		class PPS_RscButton_1604: PPS_RscButton
 		{
 			idc = 1604;
-			text = "Track Value"; //--- ToDo: Localize;
-			x = 27.5 * GUI_GRID_W + GUI_GRID_X;
+			text = "Track Statistics"; //--- ToDo: Localize;
+			x = 25.5 * GUI_GRID_W + GUI_GRID_X;
 			y = 24 * GUI_GRID_H + GUI_GRID_Y;
-			w = 6 * GUI_GRID_W;
+			w = 8 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_ppsDialogTrackValueButton;";
+			action = "[] call PPS_fnc_ppsDialogTrackStatisticsButton;";
 		};
 		class PPS_RscButton_1601: PPS_RscButton
 		{

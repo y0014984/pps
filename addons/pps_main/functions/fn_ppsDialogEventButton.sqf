@@ -10,7 +10,7 @@ _answer addPublicVariableEventHandler
 	[] call PPS_fnc_ppsDialogUpdate;
 };
 
-_eventText = (findDisplay -1) displayCtrl 1603;
+_eventText = (findDisplay 14984) displayCtrl 1603;
 _nameEvent = ctrlText _eventText;
 
 if (_nameEvent == "") then

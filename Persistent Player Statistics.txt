@@ -25,14 +25,22 @@ Daten, die als Intervall erfasst werden
 - (ACE) Heilt einen Mitspieler
 - (ACE) Repariert ein Fahrzeug
 
+isIRLaserOn/isFlashlightOn (units)
+isLightOn/isCollisionLightOn/isLaserOn/isVehicleRadarOn/isVehicleSensorEnabled (vehicles)
+isBleeding/isBurning (units)
+isForcedWalk/isWalking (units)
+isOnRoad (units/vehicles?)
+isTouchingGround
+
 Daten, die per Event-Trigger erfasst werden
 --------------------------------------------
 - Respawn
 - getötete Tiere
 - Anzahl JIP nach disconnect
 - Durchschnittlicher Ping
-- Zielen
+- Laser benutzt
 - etc.
+- Interessante EventHandler (Engine, Respawn, PlayerDisconnected)
 
 Geschwindigkeiten bei 30 kg Gepäck
 -----------------------------------------
@@ -50,31 +58,24 @@ liegend sprinten 4.8
 
 Anpassungen zum Release
 --------------------------
-- TESTEN: Vision Modes, Watch/Compass by Time, Binocular, Optics (Unklar, was das macht)
-- Bei KEyUp hinzufügen: engineToggle reloadMagazine switchWeapon handgun holdBreath zoomTemp LeanLeft LeanRight Salute SitDown GetOver (Laser)
-- Umstellen, dass bei inidbi auch für isAdmin Boolean wie true und false funktionieren
-	- FUNKTIONIERT: isBoolean="true" in INIDBI2 wird zu
-- TFAR und ACE nicht bei den Addon Abhängigkeiten sondern prüfen ob geladen und dann verwenden
-	- Bei ACE geht wohl alles über Event Handler
-- Filter auf Lowercase für besseres Suchen
-- _timeInVehicleDriving _timeInVehicleStanding _timeInVehicleFlying
-- _timeLeanLeftStanding etc. (4x)
-- Beim Logging nur die playerUid und nicht den Namen nennen; Dann muss nicht immer der Name ermittelt werden
-- Anderes Tastaturkürzel hinterlegen, da ALT+P von TFAR verwendet wird; z.B. ALT+J
-- _trackValueVariable in _trackValueName umbenennen
-- PPS_fnc_openDialog umbenennen siehe Funktionen für die Buttons
-- _eventHandlerSection in _eventHandlerStatisticsSection umbenennen
-- Variable in allen Track Variable Dingen in Key umbenennen ( z.B. _dbKey, _dbValue)
-- TrackValue in TrackStatistics umbenennen
-- genaueres trennen der Event Handler von Playern und von Units --> separate Funktionen
-- Prüfen, wo CBA das Tastaturkürzel hinterlegt, damit ich das korrekte Setzen desselben prüfen kann
-- Das mit den Event Händlern wird vielleicht einfacher wenn ich im Namespace der Units die EH IDs speichere, dann kann ich diese selektiv wieder entfernen
+- Zusätzlich beim Schließen auch die Modifier abfragen
+- _eventText in _eventEditBox umbenennen
+- Der (Tracking Active) Hinweis kommt bei allen Usern in der Liste, nicht nur beim aktiven User
 - Filtern des Playernamens nur über die "getSeperator" Funktion von INIDBI2, damit nur dieses Zeichen entfernt wird und durch ein leerzeichen ersetzt
 - Event Statistics, wenn sie leer sind, zu beginn auf 0 setzen beim player
 - _dbName umstellen auf sprechende Namen; Vielleicht muss man das auch nicht andauert aufrufen sondern nur einmal initialisieren
+- Wenn Value Tracking aktiv ist dann den Eintrag hervorheben (Wie bei Admin Tracking dahinter schreiben und rot markieren)
+- Den roten Admin und den roten Tracking Wert evtl. ganz nach oben sortieren
+- Vielleicht zum schließen des Dialogs noch den EventHandler für den gleichen Key hinzufügen
+- Logging umbauen: Eigene Funktion [_string] PPS_fnc_log die dann die diag_log Funktion aufruft
+	- Wenn man dann das CBA_Setting für Logging einführt, kann man prüfen, ob das gesetzt ist und nur dann loggen
+- TFAR und ACE nicht bei den Addon Abhängigkeiten sondern prüfen ob geladen und dann verwenden
+	- Bei ACE geht wohl alles über Event Handler
+- Das CBA KEybind hat zwar einen Default-Wert, der wird aber nicht automatisch gesetzt. Wie machen das Andere.
 
 Release 1.0
 -------------
+- Test Keybind entfernen
 - PPS_AllowSendingData auf Default false setzen
 - Logging deaktivieren
 - Admin Debugging Console deaktivieren
@@ -103,15 +104,19 @@ Release v1.5
 - Zeitliche Entwicklung über mehrere Events abbilden (pps-player-[playerUID]-[eventID].ini als Dateien anlegen)
 - Umstellen bei Interval Statistics, dass der Client an den Server bereits den Key und den Namen und den Typ übergibt (Dann sind die Funktionen auf Seiten des Servers deutlich schlanker)
 - Lokalisierung ermöglichen über Stringtable
+- Testen ob man sich in Deckung befindet über die Frage ob Büsche oder harte Deckung in der Nähe sind (max 1m entfernt)
+- könnte als time-Wert verwendet werden "needReload" (0=leer und 1=voll)
+- Umsortieren: Player und Statistics (gehighlighted nach oben ???)
 
 Probleme, Bugs
 -------------------
+- zoomTemp funktioniert nur auf normaler Taste, aber nicht auf "Sek. Maustaste halten"
 - Slider in der Listbox unsichtbar aber existent
 - Die Tastaturkürzel Defines haben bei "KeyDown" nicht funktioniert
 - DB-Status nicht ganz korrekt, da unknown aus Template stehen bleibt (Anderer Servercode darf ohne DB nicht laufen) --> diag_log einbauen zum testen
-- Schließen des Fensters über STRG+P/J funktioniert nicht mehr; Das öffnen zum Teil erst beim zweitern Tastendruck
 - TESTEN: TFAR Lautstärke (Schreien, Normal und Flüstern trocken) (TF_max_voice_volume) --> GIBT ES NICHT
 - Boat, Truck und Motorcycle ohne passende Funktion/Fahrzeuge
 - Der Geschwindigkeitsmodus der Einheit lässt sich nur indirekt über die Geschwindigkeit ermitteln
 - Wenn in der Mission eingestellt ist, dass "respawnOnStart = 1;" dann löst das gleich zu Beginn quasi einen Suicide aus (Suicide +1, Kill +1, Death +1)
 - KeyUp Gear mit 0.5 funktioniert nur, wenn mit I wieder geschlossen wird, bei ESC bleibt 0.5 stehen
+- Was ist bei z.B. Engine Toggle, dass man auch durch vorwärts fahren oder Click Menü aktivieren kann (gilt auch für reload) --> geht nur auf dedizierter Taste

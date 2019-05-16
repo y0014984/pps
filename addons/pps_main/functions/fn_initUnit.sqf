@@ -97,6 +97,9 @@ if (local _unit && isMultiplayer) then
 		_section = "Event Handler Statistics";
 		
 		_key = "";
+		_value = 1;
+		_formatType = 0;
+		_formatString = "";
 		
 		if ((_shooterUid != "") && (_shooterUid != "_SP_PLAYER_")) then
 		{
@@ -105,14 +108,14 @@ if (local _unit && isMultiplayer) then
 				if (((_ammo select 4) find "Grenade") > -1) then
 				{
 					_key = "countGrenadesHitEnemy";
-					_formatString = "[A3] Count Grenades Hit Enemy: %2 (%3%1)";
 					_formatType = 4;
+					_formatString = "[A3] Count Grenades Hit Enemy: %2 (%3%1)";
 				}
 				else
 				{
-					_key = "countProjectilesHitEnemy";		
+					_key = "countProjectilesHitEnemy";	
+					_formatType = 2;					
 					_formatString = "[A3] Count Projectiles Hit Enemy: %2 (%3%1)";
-					_formatType = 2;
 				};
 			}
 			else
@@ -120,20 +123,18 @@ if (local _unit && isMultiplayer) then
 				if (((_ammo select 4) find "Grenade") > -1) then
 				{
 					_key = "countGrenadesHitFriendly";
-					_formatString = "[A3] Count Grenades Hit Friendly: %2 (%3%1)";
 					_formatType = 4;
+					_formatString = "[A3] Count Grenades Hit Friendly: %2 (%3%1)";
 				}
 				else
 				{
 					_key = "countProjectilesHitFriendly";
-					_formatString = "[A3] Count Projectiles Hit Friendly: %2 (%3%1)";
 					_formatType = 2;
+					_formatString = "[A3] Count Projectiles Hit Friendly: %2 (%3%1)";
 				};
 			};
 
 			//hint format ["Key: %1", _key];
-			
-			_value = 1;
 
 			_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
 			_update = _playerUid + "-updateStatistics";

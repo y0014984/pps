@@ -12,20 +12,19 @@ params ["_playerUid"];
 	_dbName = "pps-players";
 	_inidbi = ["new", _dbName] call OO_INIDBI;
 	
-	_isAdmin = ["read", [_playerUid, "isAdmin", 0]] call _inidbi;
-	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", 0]] call _inidbi;
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _inidbi;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _inidbi;
 	
-	if (_isAdmin == 1) then
+	if (_isAdmin) then
 	{
-
 		_sections = "getSections" call _inidbi;
 		
 		_isAnotherAdminLoggedIn = false;
 		{
 			scopeName "LoopAnotherAdminLoggedIn";
-			_tempIsAdminLoggedIn = ["read", [_x, "isAdminLoggedIn", 0]] call _inidbi;
+			_tempIsAdminLoggedIn = ["read", [_x, "isAdminLoggedIn", false]] call _inidbi;
 			_tempPlayerUid = ["read", [_x, "playerUid", 0]] call _inidbi;
-			if ((_tempIsAdminLoggedIn == 1) && (_tempPlayerUid != _playerUid)) then
+			if ((_tempIsAdminLoggedIn) && (_tempPlayerUid != _playerUid)) then
 			{
 				_isAnotherAdminLoggedIn = true;
 				breakOut "LoopAnotherAdminLoggedIn";
@@ -34,13 +33,13 @@ params ["_playerUid"];
 
 		if (!_isAnotherAdminLoggedIn) then
 		{
-			if (_isAdminLoggedIn == 0) then
+			if (_isAdminLoggedIn) then
 			{
-				["write", [_playerUid, "isAdminLoggedIn", 1]] call _inidbi;
+				["write", [_playerUid, "isAdminLoggedIn", false]] call _inidbi;
 			}
 			else
 			{
-				["write", [_playerUid, "isAdminLoggedIn", 0]] call _inidbi;
+				["write", [_playerUid, "isAdminLoggedIn", true]] call _inidbi;
 			};
 		}
 		else
@@ -53,7 +52,7 @@ params ["_playerUid"];
 		"Persistent Player Statistics\n\nAdmin login denied. You have no admin permissions. Ask your server admin." remoteExec ["hint", _clientId];
 	};
 	
-	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", 0]] call _inidbi;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _inidbi;
 	
 	_result = [_isAdmin, _isAdminLoggedIn];
 	
@@ -66,7 +65,7 @@ params ["_playerUid"];
 
 /* ================================================================================ */
 
-(_playerUid + "-requestSwitchTrackValue") addPublicVariableEventHandler
+(_playerUid + "-requestSwitchTrackStatistics") addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
 
@@ -77,32 +76,32 @@ params ["_playerUid"];
 	_dbName = "pps-players";
 	_inidbi = ["new", _dbName] call OO_INIDBI;
 	
-	_isTrackValueActive = ["read", [_playerUid, "isTrackValueActive", 0]] call _inidbi;
+	_isTrackStatisticsActive = ["read", [_playerUid, "isTrackStatisticsActive", false]] call _inidbi;
 	
-	if (_isTrackValueActive == 1) then
+	if (_isTrackStatisticsActive) then
 	{
-		["write", [_playerUid, "isTrackValueActive", 0]] call _inidbi;
-		["write", [_playerUid, "trackValueVariable", ""]] call _inidbi;
-		["write", [_playerUid, "trackValueClientId", ""]] call _inidbi;
+		["write", [_playerUid, "isTrackStatisticsActive", false]] call _inidbi;
+		["write", [_playerUid, "trackStatisticsKey", ""]] call _inidbi;
+		["write", [_playerUid, "trackStatisticsClientId", ""]] call _inidbi;
 	}
 	else
 	{
-		["write", [_playerUid, "isTrackValueActive", 1]] call _inidbi;
-		["write", [_playerUid, "trackValueVariable", _value]] call _inidbi;
-		["write", [_playerUid, "trackValueClientId", _clientId]] call _inidbi;
+		["write", [_playerUid, "isTrackStatisticsActive", true]] call _inidbi;
+		["write", [_playerUid, "trackStatisticsKey", _value]] call _inidbi;
+		["write", [_playerUid, "trackStatisticsClientId", _clientId]] call _inidbi;
 	};
 
-	_isTrackValueActive = ["read", [_playerUid, "isTrackValueActive", 0]] call _inidbi;
-	_trackValueVariable = ["read", [_playerUid, "trackValueVariable", ""]] call _inidbi;
-	_trackValueClientId = ["read", [_playerUid, "trackValueClientId", ""]] call _inidbi;
+	_isTrackStatisticsActive = ["read", [_playerUid, "isTrackStatisticsActive", false]] call _inidbi;
+	_trackStatisticsKey = ["read", [_playerUid, "trackStatisticsKey", ""]] call _inidbi;
+	_trackStatisticsClientId = ["read", [_playerUid, "trackStatisticsClientId", ""]] call _inidbi;
 
-	_result = [_isTrackValueActive, _trackValueVariable, _trackValueClientId];
+	_result = [_isTrackStatisticsActive, _trackStatisticsKey, _trackStatisticsClientId];
 	
-	_answer = _playerUid + "-answerSwitchTrackValue";
+	_answer = _playerUid + "-answerSwitchTrackStatistics";
 	missionNamespace setVariable [_answer, _result, false];
 	_clientId publicVariableClient _answer;
 	
-	diag_log format ["[%1] PPS Player Request Switch Track Value: value %2 (%3)", serverTime, _value, _playerUid];
+	diag_log format ["[%1] PPS Player Request Switch Track Statistics: value %2 (%3)", serverTime, _value, _playerUid];
 };
 
 /* ================================================================================ */
@@ -118,18 +117,18 @@ params ["_playerUid"];
 	_dbName = "pps-players";
 	_inidbi = ["new", _dbName] call OO_INIDBI;
 	
-	_isAdmin = ["read", [_playerUid, "isAdmin", 0]] call _inidbi;
-	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", 0]] call _inidbi;
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _inidbi;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _inidbi;
 	
-	if ((_isAdmin == 1) && (_isAdminLoggedIn == 1)) then
+	if (_isAdmin && _isAdminLoggedIn) then
 	{	
 		_dbName = "pps-server-settings";
 		_inidbi = ["new", _dbName] call OO_INIDBI;
 		_settingsSection = "Settings";
 		
-		_isEvent = ["read", [_settingsSection, "isEvent", ""]] call _inidbi;
+		_isEvent = ["read", [_settingsSection, "isEvent", false]] call _inidbi;
 		
-		if (_isEvent == 0) then
+		if (!_isEvent) then
 		{
 			_startTimeEvent = "getTimeStamp" call _inidbi;
 			
@@ -145,7 +144,7 @@ params ["_playerUid"];
 				};
 			} forEach _startTimeEvent;	
 			
-			["write", [_settingsSection, "isEvent", 1]] call _inidbi;
+			["write", [_settingsSection, "isEvent", true]] call _inidbi;
 			["write", [_settingsSection, "eventId", _eventId]] call _inidbi;
 			["write", [_settingsSection, "nameEvent", _nameEvent]] call _inidbi;
 			["write", [_settingsSection, "startTimeEvent", _startTimeEvent]] call _inidbi;
@@ -171,7 +170,7 @@ params ["_playerUid"];
 			_startTimeEvent = ["read", [_settingsSection, "startTimeEvent", [[0],[0],[0],[0],[0],[0]]]] call _inidbi;
 			_stopTimeEvent = "getTimeStamp" call _inidbi;
 			
-			["write", [_settingsSection, "isEvent", 0]] call _inidbi;
+			["write", [_settingsSection, "isEvent", false]] call _inidbi;
 			["write", [_settingsSection, "eventId", ""]] call _inidbi;
 			["write", [_settingsSection, "nameEvent", ""]] call _inidbi;
 			["write", [_settingsSection, "startTimeEvent", -1]] call _inidbi;
@@ -214,7 +213,7 @@ params ["_playerUid"];
 		_inidbi = ["new", _dbName] call OO_INIDBI;
 		_settingsSection = "Settings";
 		
-		_isEvent = ["read", [_settingsSection, "isEvent", -1]] call _inidbi;
+		_isEvent = ["read", [_settingsSection, "isEvent", false]] call _inidbi;
 		_nameEvent = ["read", [_settingsSection, "nameEvent", ""]] call _inidbi;
 		_startTimeEvent = ["read", [_settingsSection, "startTimeEvent", -1]] call _inidbi;
 		
@@ -242,17 +241,19 @@ params ["_playerUid"];
 	_dbName = "pps-players";
 	_inidbi = ["new", _dbName] call OO_INIDBI;
 	
-	_isAdmin = ["read", [_playerUid, "isAdmin", 0]] call _inidbi;
-	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", 0]] call _inidbi;
-	
-	if((_playerUid == _requestedPlayerUid) || (_isAdmin == 1)) then
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _inidbi;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _inidbi;
+	_isTrackStatisticsActive = ["read", [_playerUid, "isTrackStatisticsActive", false]] call _inidbi;
+	_trackStatisticsKey = ["read", [_playerUid, "trackStatisticsKey", ""]] call _inidbi;
+		
+	if((_playerUid == _requestedPlayerUid) || _isAdmin) then
 	{
 		_dbName = "pps-player-" + _requestedPlayerUid;
 		_inidbi = ["new", _dbName] call OO_INIDBI;
 		
 		_globalInformationsSection = "Global Informations";
 		_intervalStatisticsSection = "Interval Statistics";
-		_eventHandlerSection = "Event Handler Statistics";
+		_eventHandlerStatisticsSection = "Event Handler Statistics";
 		_eventsInformationsSection = "Events Informations";
 
 		_statisticsSectionsAndKeys =
@@ -261,25 +262,25 @@ params ["_playerUid"];
 			[_globalInformationsSection, "playerUid"], 
 			[_intervalStatisticsSection, "countUpdates"], 
 			[_intervalStatisticsSection, "timeInEvent"], 
-			[_eventHandlerSection, "countProjectilesFired"], 
-			[_eventHandlerSection, "countGrenadesThrown"], 
-			[_eventHandlerSection, "countSmokeShellsThrown"], 
-			[_eventHandlerSection, "countChemlightsThrown"], 
-			[_eventHandlerSection, "countUnknownThrown"], 
-			[_eventHandlerSection, "countProjectilesHitEnemy"], 
-			[_eventHandlerSection, "countProjectilesHitFriendly"], 
-			[_eventHandlerSection, "countGrenadesHitEnemy"], 
-			[_eventHandlerSection, "countGrenadesHitFriendly"], 
-			[_eventHandlerSection, "countPlayerDeaths"], 
-			[_eventHandlerSection, "countPlayerKills"], 
-			[_eventHandlerSection, "countPlayerSuicides"], 
-			[_eventHandlerSection, "countPlayerTeamKills"], 
-			[_eventHandlerSection, "countCuratorInterfaceOpened"], 
-			[_eventHandlerSection, "countGearInterfaceOpened"], 
-			[_eventHandlerSection, "countCompassInterfaceOpened"], 
-			[_eventHandlerSection, "countWatchInterfaceOpened"], 
-			[_eventHandlerSection, "countBinocularUsed"], 
-			[_eventHandlerSection, "countOpticsUsed"], 
+			[_eventHandlerStatisticsSection, "countProjectilesFired"], 
+			[_eventHandlerStatisticsSection, "countGrenadesThrown"], 
+			[_eventHandlerStatisticsSection, "countSmokeShellsThrown"], 
+			[_eventHandlerStatisticsSection, "countChemlightsThrown"], 
+			[_eventHandlerStatisticsSection, "countUnknownThrown"], 
+			[_eventHandlerStatisticsSection, "countProjectilesHitEnemy"], 
+			[_eventHandlerStatisticsSection, "countProjectilesHitFriendly"], 
+			[_eventHandlerStatisticsSection, "countGrenadesHitEnemy"], 
+			[_eventHandlerStatisticsSection, "countGrenadesHitFriendly"], 
+			[_eventHandlerStatisticsSection, "countPlayerDeaths"], 
+			[_eventHandlerStatisticsSection, "countPlayerKills"], 
+			[_eventHandlerStatisticsSection, "countPlayerSuicides"], 
+			[_eventHandlerStatisticsSection, "countPlayerTeamKills"], 
+			[_eventHandlerStatisticsSection, "countCuratorInterfaceOpened"], 
+			[_eventHandlerStatisticsSection, "countGearInterfaceOpened"], 
+			[_eventHandlerStatisticsSection, "countCompassInterfaceOpened"], 
+			[_eventHandlerStatisticsSection, "countWatchInterfaceOpened"], 
+			[_eventHandlerStatisticsSection, "countBinocularUsed"], 
+			[_eventHandlerStatisticsSection, "countOpticsUsed"], 
 			[_intervalStatisticsSection, "timeOnFoot"], 
 			[_intervalStatisticsSection, "timeStandNoSpeed"], 
 			[_intervalStatisticsSection, "timeCrouchNoSpeed"], 
@@ -294,6 +295,9 @@ params ["_playerUid"];
 			[_intervalStatisticsSection, "timeCrouchHighSpeed"], 
 			[_intervalStatisticsSection, "timeProneHighSpeed"], 
 			[_intervalStatisticsSection, "timeInVehicle"], 
+			[_intervalStatisticsSection, "timeInVehicleEngineOn"], 
+			[_intervalStatisticsSection, "timeInVehicleMoving"], 
+			[_intervalStatisticsSection, "timeInVehicleFlying"], 
 			[_intervalStatisticsSection, "timeCarDriver"], 
 			[_intervalStatisticsSection, "timeCarGunner"], 
 			[_intervalStatisticsSection, "timeCarCommander"],
@@ -334,13 +338,22 @@ params ["_playerUid"];
 			[_intervalStatisticsSection, "timeVisionModeNight"], 
 			[_intervalStatisticsSection, "timeVisionModeThermal"], 
 			[_intervalStatisticsSection, "timeWeaponLowered"], 
+			[_eventHandlerStatisticsSection, "countEngineToggle"], 
+			[_eventHandlerStatisticsSection, "countMagazineReloaded"], 
+			[_eventHandlerStatisticsSection, "countBreathHolded"], 
+			[_eventHandlerStatisticsSection, "countZoomUsed"], 
+			[_eventHandlerStatisticsSection, "countLeanLeft"], 
+			[_eventHandlerStatisticsSection, "countLeanRight"], 
+			[_eventHandlerStatisticsSection, "countSalute"], 
+			[_eventHandlerStatisticsSection, "countSitDown"], 
+			[_eventHandlerStatisticsSection, "countGetOver"], 
 			[_intervalStatisticsSection, "timeAddonAceActive"], 
 			[_intervalStatisticsSection, "timeAddonTfarActive"]
 		];
 		
 		_timeInEvent = ["read", [_intervalStatisticsSection, "timeInEvent", 0]] call _inidbi;
-		_countProjectilesFired = ["read", [_eventHandlerSection, "countProjectilesFired", 0]] call _inidbi;
-		_countGrenadesThrown = ["read", [_eventHandlerSection, "countGrenadesThrown", 0]] call _inidbi;
+		_countProjectilesFired = ["read", [_eventHandlerStatisticsSection, "countProjectilesFired", 0]] call _inidbi;
+		_countGrenadesThrown = ["read", [_eventHandlerStatisticsSection, "countGrenadesThrown", 0]] call _inidbi;
 		
 		_tmpResult = [];
 		{
@@ -392,7 +405,7 @@ params ["_playerUid"];
 		if(_filterStatistics != "") then
 		{
 			{
-				if (((_x select 0) find _filterStatistics) > -1) then
+				if (((toLower (_x select 0)) find (toLower _filterStatistics)) > -1) then
 				{
 					_resultStatistics = _resultStatistics + [_x];
 				};
@@ -431,7 +444,7 @@ params ["_playerUid"];
 		if(_filterStatistics != "") then
 		{
 			{
-				if (((_x select 0) find _filterStatistics) > -1) then
+				if (((toLower(_x select 0)) find (toLower _filterStatistics)) > -1) then
 				{
 					_resultEvents = _resultEvents + [_x];
 				};
@@ -441,12 +454,11 @@ params ["_playerUid"];
 		{
 			_resultEvents = _tmpResult;
 		};
-		
+
 		/* ---------------------------------------- */
 
-
 		_answer = _playerUid + "-answerStatisticsFiltered";
-		missionNamespace setVariable [_answer, [_resultStatistics, _resultEvents], false];
+		missionNamespace setVariable [_answer, [_resultStatistics, _resultEvents, _isTrackStatisticsActive, _trackStatisticsKey], false];
 		_clientId publicVariableClient _answer;
 		
 		diag_log format ["[%1] PPS Player Request Statistics: (%2)", serverTime, _requestedPlayerUid];
@@ -474,8 +486,8 @@ params ["_playerUid"];
 	_dbName = "pps-players";
 	_inidbi = ["new", _dbName] call OO_INIDBI;
 	
-	_isAdmin = ["read", [_playerUid, "isAdmin", ""]] call _inidbi;
-	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", ""]] call _inidbi;
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _inidbi;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _inidbi;
 
 	/* ---------------------------------------- */
 
@@ -491,21 +503,21 @@ params ["_playerUid"];
 	_countPlayersOnline = count _allActivePlayers;
 	
 	{
-		_isAdmin = ["read", [_x, "isAdmin", 0]] call _inidbi;
-		if (_isAdmin == 1) then {_countAdminsTotal = _countAdminsTotal + 1};
+		_isAdmin = ["read", [_x, "isAdmin", false]] call _inidbi;
+		if (_isAdmin) then {_countAdminsTotal = _countAdminsTotal + 1};
 	} forEach _sections;
 	
 	{
 		_tmpPlayerUid = getPlayerUID _x;
-		_isAdmin = ["read", [_tmpPlayerUid, "isAdmin", 0]] call _inidbi;
-		if (_isAdmin == 1) then {_countAdminsOnline = _countAdminsOnline + 1};
+		_isAdmin = ["read", [_tmpPlayerUid, "isAdmin", false]] call _inidbi;
+		if (_isAdmin) then {_countAdminsOnline = _countAdminsOnline + 1};
 	} forEach _allActivePlayers;
 	
 	/* ---------------------------------------- */
 
 	_sections = [];
 	
-	if ((_isAdmin == 1) && (_isAdminLoggedIn == 1)) then
+	if (_isAdmin && _isAdminLoggedIn) then
 	{
 		_sections = "getSections" call _inidbi;
 	}
@@ -518,20 +530,20 @@ params ["_playerUid"];
 	{
 		_tmpPlayerName = ["read", [_x, "playerName", ""]] call _inidbi;
 		_tmpPlayerUid = ["read", [_x, "playerUid", ""]] call _inidbi;
-		_tmpIsAdmin = ["read", [_x, "isAdmin", 0]] call _inidbi;
-		_tmpIsAdminLoggedIn = ["read", [_x, "isAdminLoggedIn", 0]] call _inidbi;
+		_tmpIsAdmin = ["read", [_x, "isAdmin", false]] call _inidbi;
+		_tmpIsAdminLoggedIn = ["read", [_x, "isAdminLoggedIn", false]] call _inidbi;
 		
-		_tmpPlayerIsTrackValueActive = ["read", [_x, "isTrackValueActive", 0]] call _inidbi;
-		_tmpPlayerTrackValueVariable = ["read", [_x, "trackValueVariable", ""]] call _inidbi;
+		_tmpPlayerIsTrackStatisticsActive = ["read", [_x, "isTrackStatisticsActive", false]] call _inidbi;
+		_tmpPlayerTrackStatisticsKey = ["read", [_x, "trackStatisticsKey", ""]] call _inidbi;
 		
-		_tmpResult = _tmpResult + [[_tmpPlayerName, _tmpPlayerUid, _tmpIsAdmin, _tmpIsAdminLoggedIn, _tmpPlayerIsTrackValueActive, _tmpPlayerTrackValueVariable]];
+		_tmpResult = _tmpResult + [[_tmpPlayerName, _tmpPlayerUid, _tmpIsAdmin, _tmpIsAdminLoggedIn, _tmpPlayerIsTrackStatisticsActive, _tmpPlayerTrackStatisticsKey]];
 	} forEach _sections;
 	
 	_filteredPlayers = [];
 	if(_filterPlayers != "") then
 	{
 		{
-			if (((_x select 0) find _filterPlayers) > -1) then
+			if (((toLower (_x select 0)) find (toLower _filterPlayers)) > -1) then
 			{
 				_filteredPlayers = _filteredPlayers + [_x];
 			};
@@ -548,7 +560,7 @@ params ["_playerUid"];
 	_inidbi = ["new", _dbName] call OO_INIDBI;	
 	_settingsSection = "Settings";
 	
-	_isEvent = ["read", [_settingsSection, "isEvent", -1]] call _inidbi;
+	_isEvent = ["read", [_settingsSection, "isEvent", false]] call _inidbi;
 	_nameEvent = ["read", [_settingsSection, "nameEvent", ""]] call _inidbi;
 	_startTimeEvent = ["read", [_settingsSection, "startTimeEvent", -1]] call _inidbi;
 
@@ -579,9 +591,9 @@ params ["_playerUid"];
 	_dbName = "pps-server-settings";
 	_inidbi = ["new", _dbName] call OO_INIDBI;		
 	_settingsSection = "Settings";			
-	_isEvent = ["read", [_settingsSection, "isEvent", ""]] call _inidbi;
+	_isEvent = ["read", [_settingsSection, "isEvent", false]] call _inidbi;
 	
-	if (_isEvent == 1) then
+	if (_isEvent) then
 	{
 		_playerUid = _broadcastVariableValue select 0;
 		_intervalStatistics = _broadcastVariableValue select 1;
@@ -591,7 +603,7 @@ params ["_playerUid"];
 		
 		_globalInformationsSection = "Global Informations";
 		_intervalStatisticsSection = "Interval Statistics";
-		_eventHandlerSection = "Event Handler Statistics";
+		_eventHandlerStatisticsSection = "Event Handler Statistics";
 
 		/*
 		if ((count _intervalStatistics) == 1) then
@@ -623,7 +635,7 @@ params ["_playerUid"];
 			{
 				["write", [_section, _key, _value]] call _inidbi;
 			};
-			if ((_section == _intervalStatisticsSection) || (_section == _eventHandlerSection)) then
+			if ((_section == _intervalStatisticsSection) || (_section == _eventHandlerStatisticsSection)) then
 			{
 				_valueOld = ["read", [_section, _key, 0]] call _inidbi;
 				_value = _valueOld + _value;
@@ -642,24 +654,24 @@ params ["_playerUid"];
 		_dbName = "pps-players";
 		_inidbi = ["new", _dbName] call OO_INIDBI;
 		
-		_isTrackValueActive = ["read", [_playerUid, "isTrackValueActive", 0]] call _inidbi;
-		_trackValueVariable = ["read", [_playerUid, "trackValueVariable", ""]] call _inidbi;
-		_trackValueClientId = ["read", [_playerUid, "trackValueClientId", ""]] call _inidbi;
+		_isTrackStatisticsActive = ["read", [_playerUid, "isTrackStatisticsActive", false]] call _inidbi;
+		_trackStatisticsKey = ["read", [_playerUid, "trackStatisticsKey", ""]] call _inidbi;
+		_trackStatisticsClientId = ["read", [_playerUid, "trackStatisticsClientId", ""]] call _inidbi;
 		
-		if (_isTrackValueActive == 1) then
+		if (_isTrackStatisticsActive) then
 		{
 			_dbName = "pps-player-" + _playerUid;
 			_inidbi = ["new", _dbName] call OO_INIDBI;
 			
-			_trackValueValue = ["read", [_intervalStatisticsSection, _trackValueVariable, "not set"]] call _inidbi;
-			if ((str _trackValueValue) == (str "not set")) then
+			_trackStatisticsValue = ["read", [_intervalStatisticsSection, _trackStatisticsKey, "not set"]] call _inidbi;
+			if ((str _trackStatisticsValue) == (str "not set")) then
 			{
-				_trackValueValue = ["read", [_eventHandlerSection, _trackValueVariable, "not set"]] call _inidbi;
+				_trackStatisticsValue = ["read", [_eventHandlerStatisticsSection, _trackStatisticsKey, "not set"]] call _inidbi;
 			};
-			if ((str _trackValueValue) != (str "not set")) then
+			if ((str _trackStatisticsValue) != (str "not set")) then
 			{
-				_trackValueString = format ["Persistent Player Statistics\n\nVariable: %1\nValue: %2", _trackValueVariable, _trackValueValue];
-				_trackValueString remoteExec ["hint", _trackValueClientId];
+				_trackStatisticsString = format ["Persistent Player Statistics\n\nKey: %1\nValue: %2", _trackStatisticsKey, _trackStatisticsValue];
+				_trackStatisticsString remoteExec ["hint", _trackStatisticsClientId];
 			};
 		};
 	

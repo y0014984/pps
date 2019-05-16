@@ -1,9 +1,3 @@
-// Keyboard DIK Codes
-
-#define DIK_P               0x19
-#define DIK_RETURN          0x1C    /* Enter on main keyboard */
-#define DIK_NUMPADENTER     0x9C    /* Enter on numeric keypad */
-
 // GridMakros: Export aus GUI Editor üder STRG+S und dann auswählen
 
 #define GUI_GRID_X	(0)

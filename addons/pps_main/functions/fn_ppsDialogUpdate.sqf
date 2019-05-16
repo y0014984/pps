@@ -4,7 +4,7 @@ _clientId = clientOwner;
 
 /* ================================================================================ */
 
-_playersListBox = (findDisplay -1) displayCtrl 1500;
+_playersListBox = (findDisplay 14984) displayCtrl 1500;
 _playersListBox ctrlAddEventHandler ["LBSelChanged",
 {
 	params ["_control", "_selectedIndex"];
@@ -17,7 +17,7 @@ _playersListBox ctrlAddEventHandler ["LBSelChanged",
 		_playerName = name player;
 		_clientId = clientOwner;
 		
-		_filterStatisticsEditBox = (findDisplay -1) displayCtrl 1401;
+		_filterStatisticsEditBox = (findDisplay 14984) displayCtrl 1401;
 		_filter = ctrlText _filterStatisticsEditBox;
 	
 		_request = _playerUid + "-requestStatisticsFiltered";
@@ -28,7 +28,7 @@ _playersListBox ctrlAddEventHandler ["LBSelChanged",
 
 /* ================================================================================ */
 
-_filterPlayersEditBox = (findDisplay -1) displayCtrl 1400;
+_filterPlayersEditBox = (findDisplay 14984) displayCtrl 1400;
 _filterPlayersEditBox ctrlAddEventHandler ["KeyUp",
 {
 	params ["_displayorcontrol", "_key", "_shift", "_ctrl", "_alt"];
@@ -38,7 +38,7 @@ _filterPlayersEditBox ctrlAddEventHandler ["KeyUp",
 		_playerUid = getPlayerUID player;
 		_clientId = clientOwner;
 		
-		_filterPlayersEditBox = (findDisplay -1) displayCtrl 1400;
+		_filterPlayersEditBox = (findDisplay 14984) displayCtrl 1400;
 		_filterPlayers = ctrlText _filterPlayersEditBox;
 
 		_request = _playerUid + "-requestDialogUpdate";
@@ -49,13 +49,13 @@ _filterPlayersEditBox ctrlAddEventHandler ["KeyUp",
 
 /* ================================================================================ */
 
-_filterStatisticsEditBox = (findDisplay -1) displayCtrl 1401;
+_filterStatisticsEditBox = (findDisplay 14984) displayCtrl 1401;
 _filterStatisticsEditBox ctrlAddEventHandler ["KeyUp",
 {
 	params ["_displayorcontrol", "_key", "_shift", "_ctrl", "_alt"];
 
-	_filterStatisticsEditBox = (findDisplay -1) displayCtrl 1401;
-	_playersListBox = (findDisplay -1) displayCtrl 1500;
+	_filterStatisticsEditBox = (findDisplay 14984) displayCtrl 1401;
+	_playersListBox = (findDisplay 14984) displayCtrl 1500;
 	
 	_selectedIndex = lbCurSel _playersListBox;
 	_data = _playersListBox lbData _selectedIndex;
@@ -81,12 +81,28 @@ _answer addPublicVariableEventHandler
 	
 	_playerStatistics = _broadcastVariableValue select 0;
 	_playerEvents = _broadcastVariableValue select 1;
-	
-	_detailsListBox = (findDisplay -1) displayCtrl 1501;
+	_isTrackStatisticsActive = _broadcastVariableValue select 2;
+	_trackStatisticsKey = _broadcastVariableValue select 3;
+
+	_detailsListBox = (findDisplay 14984) displayCtrl 1501;
 	lbClear _detailsListBox;
 	{
-		_index = _detailsListBox lbAdd (_x select 0);
-		_detailsListBox lbSetData [_index, (_x select 1)];
+		_text = _x select 0;
+		_key = _x select 1;
+		
+		if ((_isTrackStatisticsActive) && (_trackStatisticsKey == _key)) then
+		{
+			_index = _detailsListBox lbAdd (format ["%1 (Tracking active)", _text]);
+			_detailsListBox lbSetData [_index, _key];
+			
+			_detailsListBox lbSetColor [_index, [0.5, 0, 0, 1]];
+			_detailsListBox lbSetCurSel _index;
+		}
+		else
+		{
+			_index = _detailsListBox lbAdd _text;
+			_detailsListBox lbSetData [_index, _key];
+		};
 	} forEach _playerStatistics;
 
 	{
@@ -118,19 +134,19 @@ _answer addPublicVariableEventHandler
 	
 	_isServerReachable =  PPS_ServerStatus;
 
-	_headlineText = (findDisplay -1) displayCtrl 1000;
-	_serverAndDatabaseStatusText = (findDisplay -1) displayCtrl 1001;
-	_playersAndAdminsCountText = (findDisplay -1) displayCtrl 1002;
-	_playersListBox = (findDisplay -1) displayCtrl 1500;
+	_headlineText = (findDisplay 14984) displayCtrl 1000;
+	_serverAndDatabaseStatusText = (findDisplay 14984) displayCtrl 1001;
+	_playersAndAdminsCountText = (findDisplay 14984) displayCtrl 1002;
+	_playersListBox = (findDisplay 14984) displayCtrl 1500;
 	lbClear _playersListBox;
 	_playersListBox lbSetCurSel -1;
-	_detailsListBox = (findDisplay -1) displayCtrl 1501;
+	_detailsListBox = (findDisplay 14984) displayCtrl 1501;
 	lbClear _detailsListBox;
-	_adminButton = (findDisplay -1) displayCtrl 1600;
-	_eventButton = (findDisplay -1) displayCtrl 1602;
-	_eventText = (findDisplay -1) displayCtrl 1603;
+	_adminButton = (findDisplay 14984) displayCtrl 1600;
+	_eventButton = (findDisplay 14984) displayCtrl 1602;
+	_eventText = (findDisplay 14984) displayCtrl 1603;
 	_eventText ctrlSetText _nameEvent;
-	_trackValueButton = (findDisplay -1) displayCtrl 1604;
+	_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 	
 	if (_isInidbi2Installed) then {_isInidbi2Installed = "Online"} else {_isInidbi2Installed = "Offline"};
 	if (_isServerReachable) then {_isServerReachable = "Online"} else {_isServerReachable = "Offline"};
@@ -138,7 +154,7 @@ _answer addPublicVariableEventHandler
 	_serverAndDatabaseStatusText ctrlSetText format ["Server Status: %1 - Database Status: %2",_isServerReachable, _isInidbi2Installed];
 	_playersAndAdminsCountText ctrlSetText format ["Players Total: %1 - Players Online: %2 - Admins Total: %3 - Admins Online: %4",_countPlayersTotal , _countPlayersOnline, _countAdminsTotal, _countAdminsOnline];
 
-	if (_isAdminLoggedIn == 1) then
+	if (_isAdminLoggedIn) then
 	{
 		_adminButton ctrlSetText "Logout Admin";
 		_eventButton ctrlShow true;
@@ -153,7 +169,7 @@ _answer addPublicVariableEventHandler
 
 	_noEvent = "None";
 	
-	if (_isEvent == 1) then
+	if (_isEvent) then
 	{
 		{
 			if(_x < 10) then
@@ -190,10 +206,10 @@ _answer addPublicVariableEventHandler
 		_dbPlayerUid = _x select 1;
 		_dbPlayerIsAdmin = _x select 2;
 		_dbPlayerIsAdminLoggedIn = _x select 3;
-		_dbPlayerIsTrackValueActive = _x select 4;
-		_dbPlayerTrackValueVariable = _x select 5;
+		_dbPlayerIsTrackStatisticsActive = _x select 4;
+		_dbPlayerTrackStatisticsKey = _x select 5;
 		
-		if (_dbPlayerIsAdmin == 1) then
+		if (_dbPlayerIsAdmin) then
 		{
 			_dbPlayerIsAdmin = "Admin";
 		}
@@ -202,7 +218,7 @@ _answer addPublicVariableEventHandler
 			_dbPlayerIsAdmin = "Player";
 		};
 		
-		if (_dbPlayerIsAdminLoggedIn == 1) then
+		if (_dbPlayerIsAdminLoggedIn) then
 		{
 			_dbPlayerIsAdminLoggedIn = " Logged In";
 		}
@@ -211,13 +227,13 @@ _answer addPublicVariableEventHandler
 			_dbPlayerIsAdminLoggedIn = "";
 		};
 		
-		if ((_dbPlayerUid == _playerUid) && (_dbPlayerIsTrackValueActive == 1)) then
+		if ((_dbPlayerUid == _playerUid) && _dbPlayerIsTrackStatisticsActive) then
 		{
-			_trackValueButton ctrlSetText "Track Value Off";
+			_trackStatisticsButton ctrlSetText "Track Statistics Off";
 		}
 		else
 		{
-			_trackValueButton ctrlSetText "Track Value On";
+			_trackStatisticsButton ctrlSetText "Track Statistics On";
 		};
 		
 		_index = _playersListBox lbAdd format ["%1 (%2%3)",_dbPlayerName, _dbPlayerIsAdmin, _dbPlayerIsAdminLoggedIn];	
@@ -228,11 +244,13 @@ _answer addPublicVariableEventHandler
 			_playersListBox lbSetCurSel _index;
 		};
 	} forEach _allPlayerDetails;
+	
+	ctrlSetFocus _playersListBox;
 };
 
 /* ================================================================================ */
 
-_filterPlayersEditBox = (findDisplay -1) displayCtrl 1400;
+_filterPlayersEditBox = (findDisplay 14984) displayCtrl 1400;
 _filterPlayers = ctrlText _filterPlayersEditBox;
 
 _request = _playerUid + "-requestDialogUpdate";
