@@ -148,7 +148,7 @@ if (local _unit && isMultiplayer) then
 
 if (_playerUid != "" && hasInterface && isMultiplayer) then
 {
-	[] call PPS_fnc_initPlayerUnit;
+	[] call PPS_fnc_playerInit;
 	
 };
 

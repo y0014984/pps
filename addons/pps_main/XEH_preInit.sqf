@@ -53,3 +53,15 @@
         params ["_value"];
     } // function that will be executed once on mission start and every time the setting is changed.
 ] call cba_settings_fnc_init;
+
+[
+	"PPS_Logging",
+	"Checkbox",
+	["Logging", "Sollen zu Debugging-Zwecken Log-Einträge in die RPT-Dateien geschrieben werden? "],
+	"PPS Client Einstellungen",
+	true,
+    nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {  
+        params ["_value"];
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call cba_settings_fnc_init;

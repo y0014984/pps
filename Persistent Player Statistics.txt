@@ -7,41 +7,6 @@ Erfassen von Spielerstatisitiken in COOP MilSim-Missionen eines Servers, um die 
 ermitteln, über die Anzahl der Kills hinaus. So können im Clan z.B. Abzeichen oder Ränge auf Basis objektiver 
 Daten vergeben werden.
 
-Daten, die als Intervall erfasst werden
-----------------------------------------
-- Steuert Drohne
-- Benutzt Mörser/statisches Geschütz/MG
-
-- (TFAR) Hat Langfunke
-- (TFAR) Benutzt das Funkgerät
-- (TFAR) gesetzte LAufstärke (schreiben, normal, flüstern)
-
-- (ACE) Stamina
-- (ACE) Ist verletzt
-- (ACE) Ist Sanitäter
-- (ACE) Ist Arzt
-- (ACE) Ist Mechaniker
-- (ACE) Ist Instandhalter
-- (ACE) Heilt einen Mitspieler
-- (ACE) Repariert ein Fahrzeug
-
-isIRLaserOn/isFlashlightOn (units)
-isLightOn/isCollisionLightOn/isLaserOn/isVehicleRadarOn/isVehicleSensorEnabled (vehicles)
-isBleeding/isBurning (units)
-isForcedWalk/isWalking (units)
-isOnRoad (units/vehicles?)
-isTouchingGround
-
-Daten, die per Event-Trigger erfasst werden
---------------------------------------------
-- Respawn
-- getötete Tiere
-- Anzahl JIP nach disconnect
-- Durchschnittlicher Ping
-- Laser benutzt
-- etc.
-- Interessante EventHandler (Engine, Respawn, PlayerDisconnected)
-
 Geschwindigkeiten bei 30 kg Gepäck
 -----------------------------------------
 Stehend gehen 5
@@ -58,25 +23,34 @@ liegend sprinten 4.8
 
 Anpassungen zum Release
 --------------------------
-- Zusätzlich beim Schließen auch die Modifier abfragen
-- _eventText in _eventEditBox umbenennen
-- Der (Tracking Active) Hinweis kommt bei allen Usern in der Liste, nicht nur beim aktiven User
-- Filtern des Playernamens nur über die "getSeperator" Funktion von INIDBI2, damit nur dieses Zeichen entfernt wird und durch ein leerzeichen ersetzt
-- Event Statistics, wenn sie leer sind, zu beginn auf 0 setzen beim player
-- _dbName umstellen auf sprechende Namen; Vielleicht muss man das auch nicht andauert aufrufen sondern nur einmal initialisieren
-- Wenn Value Tracking aktiv ist dann den Eintrag hervorheben (Wie bei Admin Tracking dahinter schreiben und rot markieren)
-- Den roten Admin und den roten Tracking Wert evtl. ganz nach oben sortieren
-- Vielleicht zum schließen des Dialogs noch den EventHandler für den gleichen Key hinzufügen
-- Logging umbauen: Eigene Funktion [_string] PPS_fnc_log die dann die diag_log Funktion aufruft
-	- Wenn man dann das CBA_Setting für Logging einführt, kann man prüfen, ob das gesetzt ist und nur dann loggen
-- TFAR und ACE nicht bei den Addon Abhängigkeiten sondern prüfen ob geladen und dann verwenden
-	- Bei ACE geht wohl alles über Event Handler
-- Das CBA KEybind hat zwar einen Default-Wert, der wird aber nicht automatisch gesetzt. Wie machen das Andere.
+- Letzte Werte und Trigger, wie geplant:
+	- isIRLaserOn/isFlashlightOn (units)
+	- isLightOn/isCollisionLightOn/isLaserOn/isVehicleRadarOn/isVehicleSensorEnabled (vehicles)
+	- isBleeding/isBurning (units) (isBleeding scheint mit ACE nicht zu funktionieren)
+	- isForcedWalk/isWalking (units)
+	- Funktioniert: isOnRoad player (units/vehicles?)
+	- könnte als time-Wert verwendet werden "needReload" (0=leer und 1=voll)
+	- Count Respawn
+	- Count Killed Animals
+	- Count JIP (didJIP kann vermutlich nur für einen JIP genutzt werden)
+	- Durchschnittlicher Ping
+	- Interessante Event Handler (Engine, Respawn/MPRespawn)
+	- Interessante Mission Event Handler (Map, PlayerConnected, PlayerDisconnected, PlayerViewChanged)
+
+Testing
+------------
+- Prüfung: Komplett neue Spieler; Hier mal while Schleife wegen hinzufügen 
+- JIP testen; Der bekommt z.B. keine Events eingetragen
+- Logs auf Fehlermeldungen prüfen
+- Windows VM auf Mac einrichten (dann könnte ich zumindest die Arma Tools verwenden zum packen, vielleicht auch in Arma testen)
 
 Release 1.0
 -------------
+- Binarize für die PBO funktioniert gerade nicht (Pfade)
+- Version anpassen (mit 0.5.0 Beta starten oder so)
 - Test Keybind entfernen
 - PPS_AllowSendingData auf Default false setzen
+- PPS_Logging auf Default false setzen
 - Logging deaktivieren
 - Admin Debugging Console deaktivieren
 - Dokumentation erstellen
@@ -88,35 +62,45 @@ Release 1.0
 - bei GitHub veröffentlichen
 - im Steam Workshop veröffentlichen
 
-Testing
-------------
-- Prüfung: Komplett neue Spieler; Hier mal while Schleife wegen hinzufügen 
-- JIP testen; Der bekommt z.B. keine Events eingetragen
-- Logs auf Fehlermeldungen prüfen
-- Windows VM auf Mac einrichten (dann könnte ich zumindest die Arma Tools verwenden zum packen, vielleicht auch in Arma testen)
-
 Release v1.5
 -------------
+- Die Ace Event Handler für Cargo und Unconscious sind doch nicht Unit-Spezifisch, oder? Da muss man noch mal trennen, was wirklich eine Person ausgelöst hat
 - Erweiterbare Statistiken außerhalb des Mods durch benutzerdefinierte Funktion/EventHandler
-- Interface für Admin, um z.B. Ränge zu setzen oder Strafen zu verleihen
+- Interface für Admin, um z.B. Ränge zu setzen oder Strafen zu verleihen bzw. auch als Sani, Arzt oder Techniker, Wiederhersteller auszubilden
 - CSV Export Button
+- Bei Sani- und Machaniker: Die erfolgten Ausbildungen speichern; Dann werden sie als Sani/Machaniker hinterlegt; Wenn sie dann z.B. 10 Std. nicht mehr in der Rolle spielen wird der Wert entzogen
 - Statistische und grafische Auswertungen
 - Zeitliche Entwicklung über mehrere Events abbilden (pps-player-[playerUID]-[eventID].ini als Dateien anlegen)
 - Umstellen bei Interval Statistics, dass der Client an den Server bereits den Key und den Namen und den Typ übergibt (Dann sind die Funktionen auf Seiten des Servers deutlich schlanker)
 - Lokalisierung ermöglichen über Stringtable
 - Testen ob man sich in Deckung befindet über die Frage ob Büsche oder harte Deckung in der Nähe sind (max 1m entfernt)
-- könnte als time-Wert verwendet werden "needReload" (0=leer und 1=voll)
 - Umsortieren: Player und Statistics (gehighlighted nach oben ???)
+- Den roten Admin und den roten Tracking Wert evtl. ganz nach oben sortieren
+- Den roten Admin und den roten Tracking Wert evtl. nur den drangehängten Text einfärben und nicht die gesamte Zeile
+- Berücksichtigen bei Key Down Event Handler zum Schließen des Dialogs, dass es mehr als einen DIK-Code geben kann
+- Event Statistics, wenn sie leer sind, zu beginn auf 0 setzen beim player
+- Clan/Unit NAmen ermitteln und mit beim Player und beim Event speichern
+- Umbau der Event-Getriggerten Daten zu Time erfassten Daten über Speichern lokal Anfang und Ende und bei Ende dann Differenz speichern, dann zusätzlich die Häufigkeit speichern (Dann lässt sich Durchschnitt bilden)
+- Beim Logging ermöglichen, dass über CBA Settings gewählt wird zwischen systemChat/hint/rpt (Oder alle 3 gleichzeitig möglich machen)
+- Werte:
+	- Benutzt Drohne/Mörser/Geschütz/MG
+	- (ACE) Stamina
+	- (ACE) Ist verletzt
+	- (ACE) Ist Sanitäter
+	- (ACE) Ist Arzt
+	- (ACE) Ist Mechaniker
+	- (ACE) Ist Instandhalter
+	- (ACE) Heilt einen Mitspieler
+	- (ACE) Repariert ein Fahrzeug
 
 Probleme, Bugs
 -------------------
+- Das CBA KEybind hat zwar einen Default-Wert, der wird aber nicht automatisch gesetzt. Wie machen das Andere
 - zoomTemp funktioniert nur auf normaler Taste, aber nicht auf "Sek. Maustaste halten"
 - Slider in der Listbox unsichtbar aber existent
-- Die Tastaturkürzel Defines haben bei "KeyDown" nicht funktioniert
 - DB-Status nicht ganz korrekt, da unknown aus Template stehen bleibt (Anderer Servercode darf ohne DB nicht laufen) --> diag_log einbauen zum testen
-- TESTEN: TFAR Lautstärke (Schreien, Normal und Flüstern trocken) (TF_max_voice_volume) --> GIBT ES NICHT
 - Boat, Truck und Motorcycle ohne passende Funktion/Fahrzeuge
 - Der Geschwindigkeitsmodus der Einheit lässt sich nur indirekt über die Geschwindigkeit ermitteln
 - Wenn in der Mission eingestellt ist, dass "respawnOnStart = 1;" dann löst das gleich zu Beginn quasi einen Suicide aus (Suicide +1, Kill +1, Death +1)
-- KeyUp Gear mit 0.5 funktioniert nur, wenn mit I wieder geschlossen wird, bei ESC bleibt 0.5 stehen
+- KeyUp Gear mit 0.5 funktioniert nur, wenn mit I wieder geschlossen wird, bei ESC bleibt 0.5 stehen (Es gibt noch weitere Beispiele)
 - Was ist bei z.B. Engine Toggle, dass man auch durch vorwärts fahren oder Click Menü aktivieren kann (gilt auch für reload) --> geht nur auf dedizierter Taste

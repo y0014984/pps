@@ -1,4 +1,5 @@
-#include "\a3\editor_f\data\scripts\dikcodes.h"
+//#include "\a3\editor_f\data\scripts\dikcodes.h"
+//#include "dikcodes.h"
 
 #include "defines.hpp"
 #include "dialogs.hpp"
@@ -12,14 +13,13 @@ class CfgPatches
 		// Meta information for editor
 		name = "Persistent Player Statistics";
 		author = "y0014984";
-		url = "https://github.com/y0014984/PPS";
+		url = "https://github.com/y0014984/pps";
 
 		// Minimum compatible version. When the game's version is lower, pop-up warning will appear when launching the game.
 		requiredVersion = 1.92;
 		// Required addons, used for setting load order.
 		// When any of the addons is missing, pop-up warning will appear when launching the game.
-		requiredAddons[] = {"cba_main", "cba_main_a3", "cba_events", "cba_common", "cba_xeh", "cba_settings", "cba_ui", "cba_keybinding", "cba_versioning", 
-		"ace_main", "tfar_core"};
+		requiredAddons[] = {"cba_main", "cba_main_a3", "cba_events", "cba_common", "cba_xeh", "cba_settings", "cba_ui", "cba_keybinding", "cba_versioning"};
 		// List of objects (CfgVehicles classes) contained in the addon. Important also for Zeus content unlocking.
 		units[] = {};
 		// List of weapons (CfgWeapons classes) contained in the addon.
@@ -41,8 +41,8 @@ class CfgMods
 		picture = "A3\Ui_f\data\Logos\arma3_expansion_alpha_ca";
         hidePicture = "true";
         actionName = "Website";
-        action = "https://github.com/y0014984/PPS";
-        description = "https://github.com/y0014984/PPS";
+        action = "https://github.com/y0014984/pps";
+        description = "https://github.com/y0014984/pps";
     };
 };
 
@@ -94,115 +94,4 @@ class Extended_PreInit_EventHandlers
 	};
 };
 
-class CfgFunctions
-{
-	class PPS
-	{
-		tag = "PPS"; //Custom tag name
-		class ppsFunctions
-		{
-			requiredAddons[] = {}; //Optional requirements of CfgPatches classes. When some addons are missing, functions won't be compiled.
-			file = "y\pps\addons\pps_main\functions";
-
-			class initServer
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 1; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-			class initServerEventHandler
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-			class initUnitEventHandler
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 1; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-			class initUnit
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-			class initPlayerUnit
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-			class ppsDialogOpen
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-			class ppsDialogEventButton
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-			class ppsDialogAdminButton
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-			class ppsDialogTrackStatisticsButton
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-			class ppsDialogUpdate
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-			class ppsDialogAddKeyDownEventHandler
-			{
-				preInit = 0; //(formerly known as "forced") 1 to call the function upon mission start, before objects are initialized. Passed arguments are ["preInit"]
-				postInit = 0; //1 to call the function upon mission start, after objects are initialized. Passed arguments are ["postInit", didJIP]
-				preStart = 0; //1 to call the function upon game start, before title screen, but after all addons are loaded (config.cpp only)
-				ext = ".sqf"; //Set file type, can be ".sqf" or ".fsm" (meaning scripted FSM). Default is ".sqf".
-				headerType = -1; //Set function header type: -1 - no header; 0 - default header; 1 - system header.
-				//recompile = 1; //1 to recompile the function upon mission start (config.cpp only; functions in description.ext are compiled upon mission start already)
-			};
-		};
-	};
-};
+#include "CfgFunctions.hpp"

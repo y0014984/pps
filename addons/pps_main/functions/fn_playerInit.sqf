@@ -7,6 +7,9 @@ _playerName = name player;
 
 if (PPS_AllowSendingData) then
 {
+	_filter = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÜüÖöÄä[]-_.:#*(){}%$§&<>+-,;'~?= ";
+	_playerName = [_playerName, _filter] call BIS_fnc_filterString;
+	
 	ppsServerHelo = [_playerName, _playerUid];
 	publicVariableServer "ppsServerHelo";
 	
@@ -46,6 +49,172 @@ if (PPS_AllowSendingData) then
 		missionNamespace setVariable [_update, _updatedData, false];
 		publicVariableServer _update;			
 	}];
+
+	/* ---------------------------------------- */
+	
+	_addons = activatedAddons;
+	if ((_addons find "ace_main") > -1) then 
+	{
+		["ace_cargoLoaded", 
+			{
+				params ["_item", "_vehicle"];
+
+				_playerUid = getPlayerUID player;
+				_section = "Event Handler Statistics";
+
+				_key = "countAceCargoLoaded";
+				_value = 1;
+				_formatType = 0;
+				_formatString = "[ACE] Count Cargo Loaded: %1";		
+				
+				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_update = _playerUid + "-updateStatistics";
+				missionNamespace setVariable [_update, _updatedData, false];
+				publicVariableServer _update;	
+			}
+		] call CBA_fnc_addEventHandler;
+		
+		/* -------------------- */
+		
+		["ace_cargoUnloaded", 
+			{
+				params ["_item", "_vehicle"];
+
+				_playerUid = getPlayerUID player;
+				_section = "Event Handler Statistics";
+
+				_key = "countAceCargoUnloaded";
+				_value = 1;
+				_formatType = 0;
+				_formatString = "[ACE] Count Cargo Unloaded: %1";		
+				
+				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_update = _playerUid + "-updateStatistics";
+				missionNamespace setVariable [_update, _updatedData, false];
+				publicVariableServer _update;	
+			}
+		] call CBA_fnc_addEventHandler;
+		
+		/* -------------------- */
+		
+		["ace_interactMenuOpened", 
+			{
+				params ["_menuType"];
+
+				_playerUid = getPlayerUID player;
+				_section = "Event Handler Statistics";
+
+				_key = "countAceInteractMenuOpened";
+				_value = 1;
+				_formatType = 0;
+				_formatString = "[ACE] Count Interact Menu Opened: %1";		
+				
+				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_update = _playerUid + "-updateStatistics";
+				missionNamespace setVariable [_update, _updatedData, false];
+				publicVariableServer _update;	
+			}
+		] call CBA_fnc_addEventHandler;
+
+		/* -------------------- */
+
+		["ace_unconscious", 
+			{
+				params ["_unit", "_state"];
+
+				_playerUid = getPlayerUID player;
+				_unitUid = getPlayerUID _unit;
+				
+				if (_state && (_playerUid == _unitUid)) then
+				{
+					_section = "Event Handler Statistics";
+
+					_key = "countAceUnconscious";
+					_value = 1;
+					_formatType = 0;
+					_formatString = "[ACE] Count Unconscious: %1";		
+					
+					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+					_update = _playerUid + "-updateStatistics";
+					missionNamespace setVariable [_update, _updatedData, false];
+					publicVariableServer _update;
+				};
+			}
+		] call CBA_fnc_addEventHandler;
+	};
+	
+	/* ---------------------------------------- */
+	
+	try
+	{
+		if ((_addons find "tfar_core") > -1) then 
+		{
+			waitUntil {time > 15};
+			
+			_tfarOnSpeakEh = ["ppsIsSpeaking", "OnSpeak", 
+			{
+				params ["_unit", "_isSpeaking"];
+				
+				/*
+				hint format ["%1 is speaking %2", name _unit, _isSpeaking];
+				systemChat format ["%1 is speaking %2", name _unit, _isSpeaking];
+				[format ["%1 is speaking %2", name _unit, _isSpeaking]] call PPS_fnc_log;
+				*/
+				
+				if (_isSpeaking) then
+				{
+					_playerUid = getPlayerUID _unit;
+					
+					_section = "Event Handler Statistics";
+
+					_key = "countTfarIsSpeaking";
+					_value = 1;
+					_formatType = 0;
+					_formatString = "[TFAR] Count Is Speaking: %1";		
+					
+					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+					_update = _playerUid + "-updateStatistics";
+					missionNamespace setVariable [_update, _updatedData, false];
+					publicVariableServer _update;
+				}
+				
+			}, player] call TFAR_fnc_addEventHandler;
+			
+			/* -------------------- */
+			
+			_tfarOnTangetEh = ["ppsUsesRadio", "OnTangent", 
+			{
+				params ["_unit", "_radio", "_isSW", "_keyDown"];
+				
+				/*
+				hint format ["Unit: %1\nRadio: %2\nis SW: %3\nKey Down:%4", name _unit, _radio, _isSW, _keyDown];
+				systemChat format ["Unit: %1\nRadio: %2\nis SW: %3\nKey Down:%4", name _unit, _radio, _isSW, _keyDown];
+				[format ["Unit: %1\nRadio: %2\nis SW: %3\nKey Down:%4", name _unit, _radio, _isSW, _keyDown]] call PPS_fnc_log;
+				*/
+				
+				//_keyDown ist bei mir immer false, daher 0.5 bei _value
+				
+				_playerUid = getPlayerUID _unit;
+				
+				_section = "Event Handler Statistics";
+
+				_key = "countTfarUsesRadio";
+				_value = 0.5;
+				_formatType = 0;
+				_formatString = "[TFAR] Count UsesRadio: %1";		
+				
+				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_update = _playerUid + "-updateStatistics";
+				missionNamespace setVariable [_update, _updatedData, false];
+				publicVariableServer _update;
+					
+			}, player] call TFAR_fnc_addEventHandler;
+		};
+	}
+	catch
+	{
+		hint format ["Fehler: %1", str _exception];
+	};
 
 	/* ---------------------------------------- */
 	
@@ -265,8 +434,14 @@ while {true} do
 		
 		_timeWeaponLowered = 0;
 		
-		_timeAddonTfarActive = 0;
 		_timeAddonAceActive = 0;
+		_timeAddonTfarActive = 0;
+		_timeTfarHasLrRadio = 0;
+		_timeTfarHasSwRadio = 0;
+		_timeTfarIsSpeaking = 0;
+		_timeTfarSpeakVolumeNormal = 0;
+		_timeTfarSpeakVolumeYelling = 0;
+		_timeTfarSpeakVolumeWhispering = 0;
 
 		_vehiclePlayer = vehicle player;
 		_speed = speed player;
@@ -346,9 +521,9 @@ while {true} do
 		_currentVisionMode = currentVisionMode player;
 		switch (_currentVisionMode) do
 		{
-			case 0:{_timeVisionModeDay = PPS_ValuesUpdateInterval};
-			case 1:{_timeVisionModeNight = PPS_ValuesUpdateInterval};
-			case 2:{_timeVisionModeThermal = PPS_ValuesUpdateInterval};
+			case 0:{_timeVisionModeDay = PPS_ValuesUpdateInterval;};
+			case 1:{_timeVisionModeNight = PPS_ValuesUpdateInterval;};
+			case 2:{_timeVisionModeThermal = PPS_ValuesUpdateInterval;};
 		};
 		
 		if (weaponLowered player) then {_timeWeaponLowered = PPS_ValuesUpdateInterval;};
@@ -362,7 +537,27 @@ while {true} do
 		["curatoronly_air_f_beta_heli_attack_01","curatoronly_air_f_beta_heli_attack_02","curatoronly_air_f_gamma_uav_01","curatoronly_armor_f_amv","curatoronly_armor_f_beta_apc_tracked_02","curatoronly_armor_f_marid","curatoronly_armor_f_panther","curatoronly_armor_f_slammer","curatoronly_armor_f_t100k","curatoronly_boat_f_boat_armed_01","curatoronly_characters_f_blufor","curatoronly_characters_f_common","curatoronly_characters_f_opfor","curatoronly_modules_f_curator_animals","curatoronly_modules_f_curator_chemlights","curatoronly_modules_f_curator_effects","curatoronly_modules_f_curator_environment","curatoronly_modules_f_curator_flares","curatoronly_modules_f_curator_lightning","curatoronly_modules_f_curator_mines","curatoronly_modules_f_curator_objectives","curatoronly_modules_f_curator_ordnance","curatoronly_modules_f_curator_smokeshells","curatoronly_signs_f","curatoronly_soft_f_crusher_ugv","curatoronly_soft_f_mrap_01","curatoronly_soft_f_mrap_02","curatoronly_soft_f_quadbike","curatoronly_static_f_gamma","curatoronly_static_f_mortar_01","curatoronly_structures_f_civ_ancient","curatoronly_structures_f_civ_camping","curatoronly_structures_f_civ_garbage","curatoronly_structures_f_epa_civ_constructions","curatoronly_structures_f_epb_civ_dead","curatoronly_structures_f_ind_cargo","curatoronly_structures_f_ind_crane","curatoronly_structures_f_ind_reservoirtank","curatoronly_structures_f_ind_transmitter_tower","curatoronly_structures_f_items_vessels","curatoronly_structures_f_mil_bagbunker","curatoronly_structures_f_mil_bagfence","curatoronly_structures_f_mil_cargo","curatoronly_structures_f_mil_fortification","curatoronly_structures_f_mil_radar","curatoronly_structures_f_mil_shelters","curatoronly_structures_f_research","curatoronly_structures_f_walls","curatoronly_structures_f_wrecks","map_vr","3den","ace_optionsmenu","ace_winddeflection","core","a3data","tfar_intercomdummy","cba_common","cba_events","cba_hashes","cba_jam","cba_jr_prep","cba_keybinding","cba_modules","cba_music","cba_network","cba_settings","cba_statemachine","cba_strings","cba_vectors","cba_xeh","cba_extended_eventhandlers","cba_ee","extended_eventhandlers","cba_xeh_a3","cba_accessory","mrt_accfncs","cba_ai","cba_arrays","cba_diagnostic","cba_disposable","cba_help","cba_jr","asdg_jointmuzzles","asdg_jointrails","cba_optics","cba_ui","cba_ui_helper","cba_versioning","ace_main","ace_medical_blood","ace_modules","cba_main","cba_main_a3","ace_apl","ace_common","ace_cookoff","ace_disposable","ace_finger","ace_flashsuppressors","ace_fonts","ace_frag","ace_gforces","ace_goggles","ace_grenades","ace_hitreactions","ace_huntir","ace_huntir_sub","ace_interact_menu","ace_interaction","ace_inventory","ace_laser","ace_laserpointer","ace_logistics_uavbattery","ace_logistics_wirecutter","ace_magazinerepack","ace_map","ace_map_gestures","ace_maptools","ace_markers","ace_medical","ace_medical_ai","ace_medical_menu","ace_microdagr","ace_missileguidance","ace_missionmodules","ace_mk6mortar","ace_movement","ace_mx2a","ace_nametags","ace_nightvision","ace_nlaw","ace_noidle","ace_noradio","ace_norearm","ace_optics","ace_overheating","ace_overpressure","ace_parachute","ace_pylons","ace_quickmount","ace_realisticnames","ace_realisticweights","ace_rearm","ace_recoil","ace_refuel","ace_reload","ace_reloadlaunchers","ace_repair","ace_respawn","ace_safemode","ace_sandbag","ace_scopes","ace_slideshow","ace_smallarms","ace_spectator","ace_spottingscope","ace_switchunits","ace_tacticalladder","ace_tagging","ace_thermals","ace_trenches","ace_tripod","ace_ui","ace_vector","ace_vehiclelock","ace_vehicles","ace_viewdistance","ace_weaponselect","ace_weather","ace_yardage450","tfar_core","task_force_radio","task_force_radio_items","tfar_static_radios","pps_main","ace_advanced_fatigue","ace_advanced_throwing","ace_ai","ace_aircraft","ace_arsenal","ace_attach","ace_backpacks","ace_ballistics","ace_captives","ace_cargo","ace_chemlights","ace_concertina_wire","ace_dagr","ace_disarming","ace_dogtags","ace_dragging","ace_explosives","ace_fastroping","ace_fcs","ace_flashlights","ace_gestures","ace_gunbag","ace_hearing","ace_hellfire","ace_hot","ace_javelin","ace_kestrel4500","ace_maverick","ace_minedetector","ace_zeus","ace_zeus_captives","ace_zeus_medical","ace_zeus_cargo","ace_zeus_repair","ace_zeus_cargoandrepair","ace_zeus_fastroping","ace_zeus_pylons","ace_zeus_arsenal","tfar_ai_hearing","tfar_antennas","tfar_backpacks","tfar_handhelds","ace_advanced_ballistics","ace_atragmx","ace_rangecard"]
 		*/
 		if ((_addons find "ace_main") > -1) then {_timeAddonAceActive = PPS_ValuesUpdateInterval;};
-		if ((_addons find "tfar_core") > -1) then {_timeAddonTfarActive = PPS_ValuesUpdateInterval;};
+		if ((_addons find "tfar_core") > -1) then 
+		{
+			_timeAddonTfarActive = PPS_ValuesUpdateInterval;
+			try
+			{
+				_activeLrRadio = player call TFAR_fnc_backpackLR;
+				if (!isNil "_activeLrRadio") then {_timeTfarHasLrRadio = PPS_ValuesUpdateInterval;};
+				if (call TFAR_fnc_haveSWRadio) then {_timeTfarHasSwRadio = PPS_ValuesUpdateInterval;};
+				if (player call TFAR_fnc_isSpeaking) then {_timeTfarIsSpeaking = PPS_ValuesUpdateInterval;};
+				switch (TF_speak_volume_level) do
+				{
+					case "normal":{_timeTfarSpeakVolumeNormal = PPS_ValuesUpdateInterval;};
+					case "yelling":{_timeTfarSpeakVolumeYelling = PPS_ValuesUpdateInterval;};
+					case "whispering":{_timeTfarSpeakVolumeWhispering = PPS_ValuesUpdateInterval;};
+				};
+			}
+			catch
+			{
+				hint format ["Fehler: %1", str _exception];
+			};
+		};
 		
 		_filter = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÜüÖöÄä[]-_.:#*(){}%$§&<>+-,;'~?= ";
 		_playerName = [_playerName, _filter] call BIS_fnc_filterString;
@@ -435,7 +630,13 @@ while {true} do
 				[_intervalStatisticsSection, "timeVisionModeThermal", _timeVisionModeThermal, 1, "[A3] Time Vision Mode Thermal: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeWeaponLowered", _timeWeaponLowered, 1, "[A3] Time Weapon Lowered: %2 hrs (%3%1)"], 
 				[_intervalStatisticsSection, "timeAddonAceActive", _timeAddonAceActive, 1, "[ACE] Time Addon Ace Active: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeAddonTfarActive", _timeAddonTfarActive, 1, "[TFAR] Time Addon Tfar Active: %2 hrs (%3%1)"]
+				[_intervalStatisticsSection, "timeAddonTfarActive", _timeAddonTfarActive, 1, "[TFAR] Time Addon Tfar Active: %2 hrs (%3%1)"],
+				[_intervalStatisticsSection, "timeTfarHasLrRadio", _timeTfarHasLrRadio, 1, "[TFAR] Time Tfar Has LR Radio: %2 hrs (%3%1)"],
+				[_intervalStatisticsSection, "timeTfarHasSwRadio", _timeTfarHasSwRadio, 1, "[TFAR] Time Tfar Has SW Radio: %2 hrs (%3%1)"],
+				[_intervalStatisticsSection, "timeTfarIsSpeaking", _timeTfarIsSpeaking, 1, "[TFAR] Time Tfar Is Speaking: %2 hrs (%3%1)"],
+				[_intervalStatisticsSection, "timeTfarSpeakVolumeNormal", _timeTfarSpeakVolumeNormal, 1, "[TFAR] Time Tfar Speak Volume Normal: %2 hrs (%3%1)"],
+				[_intervalStatisticsSection, "timeTfarSpeakVolumeYelling", _timeTfarSpeakVolumeYelling, 1, "[TFAR] Time Tfar Speak Volume Yelling: %2 hrs (%3%1)"],
+				[_intervalStatisticsSection, "timeTfarSpeakVolumeWhispering", _timeTfarSpeakVolumeWhispering, 1, "[TFAR] Time Tfar Speak Volume Whispering: %2 hrs (%3%1)"]
 			]
 		];
 		

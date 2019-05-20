@@ -91,7 +91,7 @@ class PPS_Main_Dialog
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_ppsDialogAdminButton;";
+			action = "[] call PPS_fnc_dialogButtonAdminExec;";
 		};
 		class PPS_RscButton_1602: PPS_RscButton
 		{
@@ -102,7 +102,7 @@ class PPS_Main_Dialog
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_ppsDialogEventButton;";
+			action = "[] call PPS_fnc_dialogButtonEventExec;";
 		};
 		
 		class PPS_RscEdit_1603: PPS_RscEdit
@@ -124,7 +124,7 @@ class PPS_Main_Dialog
 			w = 8 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_ppsDialogTrackStatisticsButton;";
+			action = "[] call PPS_fnc_dialogButtonTrackStatisticsExec;";
 		};
 		class PPS_RscButton_1601: PPS_RscButton
 		{
@@ -135,7 +135,7 @@ class PPS_Main_Dialog
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_ppsDialogUpdate;";
+			action = "[] call PPS_fnc_dialogUpdate;";
 		};
 		////////////////////////////////////////////////////////
 		// GUI EDITOR OUTPUT END

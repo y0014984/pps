@@ -7,15 +7,15 @@ _answer addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
 
-	[] call PPS_fnc_ppsDialogUpdate;
+	[] call PPS_fnc_dialogUpdate;
 };
 
-_eventText = (findDisplay 14984) displayCtrl 1603;
-_nameEvent = ctrlText _eventText;
+_eventEditBox = (findDisplay 14984) displayCtrl 1603;
+_nameEvent = ctrlText _eventEditBox;
 
 if (_nameEvent == "") then
 {
-	hint "Persistent Player Statistics\n\Missing event name.";
+	hint "Persistent Player Statistics\n\nMissing event name.";
 }
 else
 {

@@ -4,7 +4,7 @@ if (hasInterface && isMultiplayer) then
 	{
 		_ppsDialog = (findDisplay 46) createDisplay "PPS_Main_Dialog";
 		
-		[_ppsDialog] call PPS_fnc_ppsDialogAddKeyDownEventHandler;
+		[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
 		
 		/* ---------------------------------------- */
 		
@@ -21,7 +21,7 @@ if (hasInterface && isMultiplayer) then
 			params ["_control"];
 			
 			_ppsDialog = (findDisplay 14984);
-			[_ppsDialog] call PPS_fnc_ppsDialogAddKeyDownEventHandler;
+			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
 		}];
 
 		/* ---------------------------------------- */
@@ -39,30 +39,30 @@ if (hasInterface && isMultiplayer) then
 			params ["_control"];
 			
 			_ppsDialog = (findDisplay 14984);
-			[_ppsDialog] call PPS_fnc_ppsDialogAddKeyDownEventHandler;
+			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
 		}];
 		
 		/* ---------------------------------------- */
 		
-		_eventText = _ppsDialog displayCtrl 1603;
-		_eventText ctrlAddEventHandler ["SetFocus",
+		_eventEditBox = _ppsDialog displayCtrl 1603;
+		_eventEditBox ctrlAddEventHandler ["SetFocus",
 		{
 			params ["_control"];
 			
 			_ppsDialog = (findDisplay 14984);
 			_ppsDialog displayRemoveAllEventHandlers "KeyUp";
 		}];
-		_eventText ctrlAddEventHandler ["KillFocus",
+		_eventEditBox ctrlAddEventHandler ["KillFocus",
 		{
 			params ["_control"];
 			
 			_ppsDialog = (findDisplay 14984);
-			[_ppsDialog] call PPS_fnc_ppsDialogAddKeyDownEventHandler;
+			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
 		}];
 		
 		/* ---------------------------------------- */
 		
-		[] call PPS_fnc_ppsDialogUpdate;
+		[] call PPS_fnc_dialogUpdate;
 	}
 	else
 	{

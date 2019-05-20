@@ -95,7 +95,7 @@ _answer addPublicVariableEventHandler
 			_index = _detailsListBox lbAdd (format ["%1 (Tracking active)", _text]);
 			_detailsListBox lbSetData [_index, _key];
 			
-			_detailsListBox lbSetColor [_index, [0.5, 0, 0, 1]];
+			_detailsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
 			_detailsListBox lbSetCurSel _index;
 		}
 		else
@@ -144,8 +144,8 @@ _answer addPublicVariableEventHandler
 	lbClear _detailsListBox;
 	_adminButton = (findDisplay 14984) displayCtrl 1600;
 	_eventButton = (findDisplay 14984) displayCtrl 1602;
-	_eventText = (findDisplay 14984) displayCtrl 1603;
-	_eventText ctrlSetText _nameEvent;
+	_eventEditBox = (findDisplay 14984) displayCtrl 1603;
+	_eventEditBox ctrlSetText _nameEvent;
 	_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 	
 	if (_isInidbi2Installed) then {_isInidbi2Installed = "Online"} else {_isInidbi2Installed = "Offline"};
@@ -158,13 +158,13 @@ _answer addPublicVariableEventHandler
 	{
 		_adminButton ctrlSetText "Logout Admin";
 		_eventButton ctrlShow true;
-		_eventText ctrlShow true;
+		_eventEditBox ctrlShow true;
 	}
 	else
 	{
 		_adminButton ctrlSetText "Login Admin";
 		_eventButton ctrlShow false;
-		_eventText ctrlShow false;
+		_eventEditBox ctrlShow false;
 	};
 
 	_noEvent = "None";
@@ -190,13 +190,13 @@ _answer addPublicVariableEventHandler
 		_timeZone = PPS_TimeZone;
 		if (PPS_SummerTime) then {_timeZone = _timeZone + 1;};
 		_eventButton ctrlSetText "Stop Event";
-		_headlineText ctrlSetBackgroundColor [0.5,-1,-1,1];
+		_headlineText ctrlSetBackgroundColor [0.5, 0, 0, 1];
 		_headlineText ctrlSetText format ["Persistent Player Statistics - Event in Progress: %1 (Start Time %2-%3-%4 %5:%6:%7 UTC+%8)", _nameEvent, _year, _month, _day, _hours, _minutes, _seconds, _timeZone];
 	}
 	else
 	{
 		_eventButton ctrlSetText "Start Event";
-		_headlineText ctrlSetBackgroundColor [-1,0.5,-1,1];
+		_headlineText ctrlSetBackgroundColor [0, 0.5, 0, 1];
 		_headlineText ctrlSetText format ["Persistent Player Statistics - Event in Progress: %1", _noEvent];
 	};		
 
@@ -240,7 +240,7 @@ _answer addPublicVariableEventHandler
 		_playersListBox lbSetData [_index, _dbPlayerUid];
 		if(_dbPlayerUid == _playerUid) then
 		{
-			_playersListBox lbSetColor [_index, [0.5, 0, 0, 1]];
+			_playersListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
 			_playersListBox lbSetCurSel _index;
 		};
 	} forEach _allPlayerDetails;

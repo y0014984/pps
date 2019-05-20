@@ -13,13 +13,13 @@ profileNamespace setVariable ["cba_keybinding_registry", []]; saveProfileNamespa
 	"ppsDialogOpen",
 	["PPS Menü öffnen", "Öffnet das PPS Menü und erlaubt Einsicht der Statisitik"],
 	{true;}, 
-	{_this call PPS_fnc_ppsDialogOpen;}, 
+	{_this call PPS_fnc_dialogOpen;}, 
 	[DIK_U, [false, false, false]]
 ] call CBA_fnc_addKeybind;
 
 /*
 _entry = ["PPS", "ppsDialogOpen"] call CBA_fnc_getKeybind; -->
-["PPS","ppsDialogOpen","PPS Menü öffnen",{true;},{_this call PPS_fnc_ppsDialogOpen;},[22,[false,false,false]],false,0,[[22,[false,false,false]]]]
+["PPS","ppsDialogOpen","PPS Menü öffnen",{true;},{_this call PPS_fnc_dialogOpen;},[22,[false,false,false]],false,0,[[22,[false,false,false]]]]
 
 if (!isNil "_entry") then {
     _modName     = _entry select 0; // Name of the registering mod ("your_mod")

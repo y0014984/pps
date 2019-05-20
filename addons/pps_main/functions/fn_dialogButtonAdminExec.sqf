@@ -7,7 +7,7 @@ _answer addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
 
-	[] call PPS_fnc_ppsDialogUpdate;
+	[] call PPS_fnc_dialogUpdate;
 };
 
 _request = _playerUid + "-requestSwitchAdmin";
