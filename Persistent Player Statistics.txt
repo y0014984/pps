@@ -24,7 +24,7 @@ liegend sprinten 4.8
 Anpassungen zum Release
 --------------------------
 - Letzte Werte und Trigger, wie geplant:
-	- [A3] isBleeding/isBurning player; (isBleeding scheint mit ACE nicht zu funktionieren)
+	- TESTEN: [A3] isBleeding/isBurning player; (isBleeding scheint mit ACE nicht zu funktionieren)
 	- [ACE] [player] call ace_medical_blood_fnc_isBleeding (BOOL)
 	- [ACE] [player] call ace_medical_treatment_fnc_isMedic (BOOL)
 	- damage player; //0=healthy 1=dead --> injuredNone injuredLow injuredMed injuredHigh injuredFull
