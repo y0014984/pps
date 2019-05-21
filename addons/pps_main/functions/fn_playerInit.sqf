@@ -423,6 +423,11 @@ while {true} do
 		_timeBoatCommander = 0;
 		_timeBoatPassenger = 0;
 		
+		_timeVehicleLightOn = 0;
+		_timeVehicleLaser = 0;
+		_timeVehicleCollisionLightOn = 0;
+		_timeVehicleRadarOn = 0;
+		
 		_timeMapVisible = 0;
 		_timeGpsVisible = 0;
 		_timeCompassVisible = 0;
@@ -433,6 +438,23 @@ while {true} do
 		_timeVisionModeThermal = 0;
 		
 		_timeWeaponLowered = 0;
+		_timeOnRoad = 0;
+		_timeIrLaserOn = 0;
+		_timeFlashlightOn = 0;
+		
+		_timeMagazineFull = 0;
+		_timeMagazineFillHigh = 0;
+		_timeMagazineFillMid = 0;
+		_timeMagazineFillLow = 0;
+		_timeMagazineEmpty = 0;
+		
+		_timeIsBleeding = 0;
+		_timeIsBurning = 0;
+		_timeInjuredNone = 0;
+		_timeInjuredLow = 0;
+		_timeInjuredMed = 0;
+		_timeInjuredHigh = 0;
+		_timeInjuredFull = 0;
 		
 		_timeAddonAceActive = 0;
 		_timeAddonTfarActive = 0;
@@ -466,6 +488,20 @@ while {true} do
 				case ((_speed >= 15) && (_stance == "STAND")):{_timeStandHighSpeed = PPS_ValuesUpdateInterval;};
 				case ((_speed >= 15) && (_stance == "CROUCH")):{_timeCrouchHighSpeed = PPS_ValuesUpdateInterval;};
 				case ((_speed >= 4.8) && (_stance == "PRONE")):{_timeProneHighSpeed = PPS_ValuesUpdateInterval;};
+			};
+			
+			if (weaponLowered player) then {_timeWeaponLowered = PPS_ValuesUpdateInterval;};
+			if (player isIRLaserOn (currentWeapon player)) then {_timeIrLaserOn = PPS_ValuesUpdateInterval;};
+			if (player isFlashlightOn (currentWeapon player)) then {_timeFlashlightOn = PPS_ValuesUpdateInterval;};
+			
+			_needReload = needReload player;
+			switch (true) do
+			{
+				case (_needReload == 0):{_timeMagazineFull = PPS_ValuesUpdateInterval};
+				case ((_needReload > 0) && (_needReload <= 0.33)):{_timeMagazineFillHigh = PPS_ValuesUpdateInterval};
+				case ((_needReload > 0.33) && (_needReload <= 0.66)):{_timeMagazineFillMid = PPS_ValuesUpdateInterval};
+				case ((_needReload > 0.66) && (_needReload < 1)):{_timeMagazineFillLow = PPS_ValuesUpdateInterval};
+				case (_needReload == 1):{_timeMagazineEmpty = PPS_ValuesUpdateInterval};
 			};
 		}
 		else
@@ -511,6 +547,11 @@ while {true} do
 				case ((_vehiclePlayer isKindOf "Boat") && ((commander _vehiclePlayer) == player)):{_timeBoatCommander = PPS_ValuesUpdateInterval};
 				case ((_vehiclePlayer isKindOf "Boat") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeBoatPassenger = PPS_ValuesUpdateInterval};
 			};
+			
+			if (isLightOn (vehicle player)) then {_timeVehicleLightOn = PPS_ValuesUpdateInterval;};
+			if (isLaserOn (vehicle player)) then {_timeVehicleLaser = PPS_ValuesUpdateInterval;};
+			if (isCollisionLightOn (vehicle player)) then {_timeVehicleCollisionLightOn = PPS_ValuesUpdateInterval;};
+			if (isVehicleRadarOn (vehicle player)) then {_timeVehicleRadarOn = PPS_ValuesUpdateInterval;};
 		};
 		
 		if (visibleMap) then {_timeMapVisible = PPS_ValuesUpdateInterval;};
@@ -526,8 +567,21 @@ while {true} do
 			case 2:{_timeVisionModeThermal = PPS_ValuesUpdateInterval;};
 		};
 		
-		if (weaponLowered player) then {_timeWeaponLowered = PPS_ValuesUpdateInterval;};
+		if (isOnRoad player) then {_timeOnRoad = PPS_ValuesUpdateInterval;};
 		
+		if (isBleeding player) then {_timeIsBleeding = PPS_ValuesUpdateInterval;};
+		if (isBurning player) then {_timeIsBurning = PPS_ValuesUpdateInterval;};
+		
+		_damage = damage player;
+		switch (true) do
+		{
+			case (_damage == 0):{_timeInjuredNone = PPS_ValuesUpdateInterval};
+			case ((_damage > 0) && (_damage <= 0.33)):{_timeInjuredLow = PPS_ValuesUpdateInterval};
+			case ((_damage > 0.33) && (_damage <= 0.66)):{_timeInjuredMed = PPS_ValuesUpdateInterval};
+			case ((_damage > 0.66) && (_damage < 1)):{_timeInjuredHigh = PPS_ValuesUpdateInterval};
+			case (_damage == 1):{_timeInjuredFull = PPS_ValuesUpdateInterval};
+		};
+	
 		_addons = activatedAddons;
 		/*
 		_addons = activatedAddons;
@@ -620,7 +674,11 @@ while {true} do
 				[_intervalStatisticsSection, "timeBoatDriver", _timeBoatDriver, 1, "[A3] Time Boat Driver: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeBoatGunner", _timeBoatGunner, 1, "[A3] Time Boat Gunner: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeBoatCommander", _timeBoatCommander, 1, "[A3] Time Boat Commander: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeBoatPassenger", _timeBoatPassenger, 1, "[A3] Time Boat Passenger: %2 hrs (%3%1)"],  
+				[_intervalStatisticsSection, "timeBoatPassenger", _timeBoatPassenger, 1, "[A3] Time Boat Passenger: %2 hrs (%3%1)"],
+				[_intervalStatisticsSection, "timeVehicleLightOn", _timeVehicleLightOn, 1, "[A3] Time Vehicle Light On: %2 hrs (%3%1)"],  
+				[_intervalStatisticsSection, "timeVehicleLaser", _timeVehicleLaser, 1, "[A3] Time Vehicle Laser On: %2 hrs (%3%1)"],  
+				[_intervalStatisticsSection, "timeVehicleCollisionLightOn", _timeVehicleCollisionLightOn, 1, "[A3] Time Vehicle Collision Light On: %2 hrs (%3%1)"],  
+				[_intervalStatisticsSection, "timeVehicleRadarOn", _timeVehicleRadarOn, 1, "[A3] Time Vehicle Radar On: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeMapVisible", _timeMapVisible, 1, "[A3] Time Map Visible: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeGpsVisible", _timeGpsVisible, 1, "[A3] Time Gps Visible: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeCompassVisible", _timeCompassVisible, 1, "[A3] Time Compass Visible: %2 hrs (%3%1)"],  
@@ -629,6 +687,21 @@ while {true} do
 				[_intervalStatisticsSection, "timeVisionModeNight", _timeVisionModeNight, 1, "[A3] Time Vision Mode Night: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeVisionModeThermal", _timeVisionModeThermal, 1, "[A3] Time Vision Mode Thermal: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeWeaponLowered", _timeWeaponLowered, 1, "[A3] Time Weapon Lowered: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeOnRoad", _timeOnRoad, 1, "[A3] Time On Road: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeIsBleeding", _timeIsBleeding, 1, "[A3] Time Is Bleeding: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeIsBurning", _timeIsBurning, 1, "[A3] Time Is Burning: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeInjuredNone", _timeInjuredNone, 1, "[A3] Time Injured None: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeInjuredLow", _timeInjuredLow, 1, "[A3] Time Infured Low: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeInjuredMed", _timeInjuredMed, 1, "[A3] Time Injured Med: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeInjuredHigh", _timeInjuredHigh, 1, "[A3] Time Injured High: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeInjuredFull", _timeInjuredFull, 1, "[A3] Time Injured Full: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeIrLaserOn", _timeIrLaserOn, 1, "[A3] Time IR Laser On: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeFlashlightOn", _timeFlashlightOn, 1, "[A3] Time Flashlight On: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeMagazineFull", _timeMagazineFull, 1, "[A3] Time Magazine Full: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeMagazineFillHigh", _timeMagazineFillHigh, 1, "[A3] Time Magazine Fill High: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeMagazineFillMid", _timeMagazineFillMid, 1, "[A3] Time Magazine Fill Med: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeMagazineFillLow", _timeMagazineFillLow, 1, "[A3] Time Magazine Fill Low: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeMagazineEmpty", _timeMagazineEmpty, 1, "[A3] Time Magazine Empty: %2 hrs (%3%1)"], 
 				[_intervalStatisticsSection, "timeAddonAceActive", _timeAddonAceActive, 1, "[ACE] Time Addon Ace Active: %2 hrs (%3%1)"],  
 				[_intervalStatisticsSection, "timeAddonTfarActive", _timeAddonTfarActive, 1, "[TFAR] Time Addon Tfar Active: %2 hrs (%3%1)"],
 				[_intervalStatisticsSection, "timeTfarHasLrRadio", _timeTfarHasLrRadio, 1, "[TFAR] Time Tfar Has LR Radio: %2 hrs (%3%1)"],
