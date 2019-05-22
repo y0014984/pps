@@ -1,7 +1,8 @@
 params ["_unit"];
 
+waitUntil {time > 15};
+
 _playerUid = getPlayerUID _unit;
-_playerName = name _unit;
 
 /* ================================================================================ */
 
@@ -83,6 +84,8 @@ if (local _unit && isMultiplayer) then
 		};
 	}];
 	
+	[format ["[%1] PPS Event Handler 'MPKilled' added to Unit: (%2)", serverTime, (getPlayerUID _unit)]] call PPS_fnc_log;
+	
 	/* ================================================================================ */
 	
 	_index = _unit addEventHandler ["HitPart",
@@ -92,16 +95,14 @@ if (local _unit && isMultiplayer) then
 		_targetUid = getPlayerUID _target;
 		_shooterUid = getPlayerUID _shooter;
 		
-		_playerUid = _shooterUid;
-		_playerName = name _shooter;
-		_section = "Event Handler Statistics";
+		hint format ["Target: %1\nShooter: %2\nAmmo: %3", _targetUid, _shooterUid, (_ammo select 4)];
 		
 		_key = "";
 		_value = 1;
 		_formatType = 0;
 		_formatString = "";
 		
-		if ((_shooterUid != "") && (_shooterUid != "_SP_PLAYER_")) then
+		if (_shooterUid != "") then
 		{
 			if ((side group _shooter) != (side group _target)) then
 			{
@@ -136,12 +137,61 @@ if (local _unit && isMultiplayer) then
 
 			//hint format ["Key: %1", _key];
 
+			_playerUid = _shooterUid;
+			_section = "Event Handler Statistics";
+
 			_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
 			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;			
 		};
+		
+		if (_targetUid != "") then
+		{
+			if ((side group _shooter) != (side group _target)) then
+			{
+				if (((_ammo select 4) find "Grenade") > -1) then
+				{
+					_key = "countGrenadesHitByEnemy";
+					_formatType = 4;
+					_formatString = "[A3] Count Grenades Hit By Enemy: %2 (%3%1)";
+				}
+				else
+				{
+					_key = "countProjectilesHitByEnemy";	
+					_formatType = 2;					
+					_formatString = "[A3] Count Projectiles Hit By Enemy: %2 (%3%1)";
+				};
+			}
+			else
+			{
+				if (((_ammo select 4) find "Grenade") > -1) then
+				{
+					_key = "countGrenadesHitByFriendly";
+					_formatType = 4;
+					_formatString = "[A3] Count Grenades Hit By Friendly: %2 (%3%1)";
+				}
+				else
+				{
+					_key = "countProjectilesHitByFriendly";
+					_formatType = 2;
+					_formatString = "[A3] Count Projectiles Hit By Friendly: %2 (%3%1)";
+				};
+			};
+
+			//hint format ["Key: %1", _key];
+
+			_playerUid = _targetUid;
+			_section = "Event Handler Statistics";
+
+			_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+			_update = _playerUid + "-updateStatistics";
+			missionNamespace setVariable [_update, _updatedData, false];
+			publicVariableServer _update;	
+		};
 	}];
+	
+	[format ["[%1] PPS Event Handler 'HitPart' added to Unit: (%2)", serverTime, (getPlayerUID _unit)]] call PPS_fnc_log;
 };
 
 /* ================================================================================ */

@@ -1,11 +1,9 @@
 #include "\a3\editor_f\data\scripts\dikcodes.h"
 
 /*
-
 Reset der Settings, falls vergurkt, in der Debug Console ausführen:
 profileNamespace setVariable ["cba_keybinding_registrynew", nil]; saveProfileNamespace;
 profileNamespace setVariable ["cba_keybinding_registry", []]; saveProfileNamespace;
-
 */
 
 [

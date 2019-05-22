@@ -1,0 +1,14 @@
+name = "Persistent Player Statistics v0.3.2";
+picture = "logo_pps_ca.paa";
+actionName = "Website";
+action = "https://github.com/y0014984/pps";
+description = "Bugtracker: https://github.com/y0014984/pps/issues<br />Documentation: https://github.com/y0014984/pps/wiki";
+logo = "logo_pps_ca.paa";
+logoOver = "logo_pps_ca.paa";
+tooltip = "Persistent Player Statistics";
+tooltipOwned = "Persistent Player Statistics tooltipOwned";
+overview = "Persistent Player Statistics collects and saves statistical player data on a multiplayer event basis. Some data tracks time like 'time in vehicle' an some data counts like 'count projectiles fired'.";
+author = "y0014984";
+overviewPicture = "logo_pps_ca.paa";
+overviewText = "Persistent Player Statistics overviewText";
+overviewFootnote = "<br /><br /><t color='#999999'>This content is under (APL-SA) License.<br />Press <t /><t color='#19d3ff'>Left Shift + P<t /><t color='#999999'> to open the store page for more information.<t />";

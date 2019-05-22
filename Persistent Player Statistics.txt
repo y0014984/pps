@@ -23,52 +23,38 @@ liegend sprinten 4.8
 
 Anpassungen zum Release
 --------------------------
-- Letzte Werte und Trigger, wie geplant:
-	- TESTEN: [A3] isBleeding/isBurning player; (isBleeding scheint mit ACE nicht zu funktionieren)
-	- [ACE] [player] call ace_medical_blood_fnc_isBleeding (BOOL)
-	- [ACE] [player] call ace_medical_treatment_fnc_isMedic (BOOL)
-	- damage player; //0=healthy 1=dead --> injuredNone injuredLow injuredMed injuredHigh injuredFull
-	- Hit auch wenn man selbst getroffen wurde
-	- Count Respawn
-	- Count Killed Animals
-	- Count JIP (didJIP kann vermutlich nur für einen JIP genutzt werden)
-	- Durchschnittlicher Ping
-	- Interessante Event Handler (Engine, Respawn/MPRespawn)
-	- Interessante Mission Event Handler (Map, PlayerConnected, PlayerDisconnected, PlayerViewChanged)
+- ...
 
-Testing
-------------
+Testing vor Release Allgemein
+-------------------------------
+- (Logging aktivieren und in config.cpp debugConsole aktivieren)
 - Prüfung: Komplett neue Spieler; Hier mal while Schleife wegen hinzufügen 
 - JIP testen; Der bekommt z.B. keine Events eingetragen
 - Logs auf Fehlermeldungen prüfen
 - Windows VM auf Mac einrichten (dann könnte ich zumindest die Arma Tools verwenden zum packen, vielleicht auch in Arma testen)
+- Jeden Wert testen
 
 Release v0.2.3
 -------------
-- Binarize für die PBO funktioniert gerade nicht (Pfade)
-- Version anpassen (mit 0.5.0 Beta starten oder so)
-- Test Keybind entfernen
-- PPS_AllowSendingData auf Default false setzen
-- PPS_Logging auf Default false setzen
-- Logging deaktivieren
-- Admin Debugging Console deaktivieren
+- ServerInit läuft gerade nicht wegen vermutlich INIDBI2 Prüfung oder der ppi Prüfungen
 - Dokumentation erstellen
 - Code Review: Redundanzen, unnötige Variablen, zu häufige Variablenerfassungen, Vereinheitlichung Variablennamen etc.
-- Final Build mit Binarize Option
 - welche Lizenz für den Content?
-- Logo überarbeiten in Hinblick auf PPE
+- Logo überarbeiten in Hinblick auf PPE (Diagramm Logo, weiße Schrift mit Schwarzem Rand)
 - Screenshots erstellen
 - bei GitHub veröffentlichen
 - im Steam Workshop veröffentlichen
 
 Release v0.4.2
 -------------
+- ACE und TFAR verstecken wenn nicht aktiviert bei den Statistiken (Sollen dann auch nicht über Interval Statistics gesendet werden)
 - Umbau der pps-player-uid Aufbaus
 	- sections sollten die einzelnen keys sein = _timeMapVisible
 	- Darunter finden sich dann immer gleich _key, _value, _type ("interval","event","meta"), _outputString, _outputType, _outputKey2, _outputKey3 etc.
 	- Dann benötigt der Server keine Info darüber, welche Werte es gibt und kann einfach mit getSections alles lesen
 	- Auch die Lokalisierung wird dann einfacher, wenn in der DB nur der _key für die stringtable vermerkt wird
-- Die Ace Event Handler für Cargo und Unconscious sind doch nicht Unit-Spezifisch, oder? Da muss man noch mal trennen, was wirklich eine Person ausgelöst hat
+- In alle Keys aufnehmen aus welchem Mod sie stammen oder als separate Angabe in den neuen Statistics Sections (A3, ACE, TFAR)
+Die Ace Event Handler für Cargo und Unconscious sind doch nicht Unit-Spezifisch, oder? Da muss man noch mal trennen, was wirklich eine Person ausgelöst hat
 - Erweiterbare Statistiken außerhalb des Mods durch benutzerdefinierte Funktion/EventHandler
 - Interface für Admin, um z.B. Ränge zu setzen oder Strafen zu verleihen bzw. auch als Sani, Arzt oder Techniker, Wiederhersteller auszubilden
 - CSV Export Button
@@ -84,10 +70,22 @@ Release v0.4.2
 - Berücksichtigen bei Key Down Event Handler zum Schließen des Dialogs, dass es mehr als einen DIK-Code geben kann
 - Event Statistics, wenn sie leer sind, zu beginn auf 0 setzen beim player
 - Clan/Unit NAmen ermitteln und mit beim Player und beim Event speichern
+- Im Log Dokumentieren, wann welche EventHandler geladen werden und in welcher MEnge
+- Evtl. aus CBA die Logging Funktionen nutzen
 - Umbau der Event-Getriggerten Daten zu Time erfassten Daten über Speichern lokal Anfang und Ende und bei Ende dann Differenz speichern, dann zusätzlich die Häufigkeit speichern (Dann lässt sich Durchschnitt bilden)
 - Beim Logging ermöglichen, dass über CBA Settings gewählt wird zwischen systemChat/hint/rpt (Oder alle 3 gleichzeitig möglich machen)
 - Werte:
-	- Benutzt Drohne/Mörser/Geschütz/MG
+	- [A3] Count Respawn
+	- [A3] Count Killed Animals
+	- [A3] Count JIP (didJIP kann vermutlich nur für einen JIP genutzt werden)
+	- [A3] Durchschnittlicher Ping
+	- [A3] Interessante Event Handler (Engine, Respawn/MPRespawn)
+	- [A3] Interessante Mission Event Handler (Map, PlayerConnected, PlayerDisconnected, PlayerViewChanged)
+	- [A3] Benutzt Drohne/Mörser/Geschütz/MG
+	- [A3] player getUnitTrait "audibleCoef";
+		Number audibleCoef - A lower value means the unit is harder to hear
+		Number camouflageCoef - A lower value means the unit is harder to spot
+		Number loadCoef - Equipment weight multiplier affecting fatigue and stamina
 	- [A3] Füllstand Tank, siehe Füllstand Magazin
 	- [A3] Beschädigungszustand Fahrzeug
 	- [A3] currentChannel (Global, side, etc.)
@@ -145,6 +143,9 @@ Release v1.0
 
 Probleme, Bugs
 -------------------
+- Binarize für die PBO funktioniert gerade nicht (Pfade)
+- Der "HitPart" EventHandler wird für alle Units, also auch für Player geladen, scheint aber nur für Nicht-player-units zu funktionieren; Läad man ihn später manuell über die Debug
+	Console für den player funktionierts, also ist das Problem beim Respawn zu suchen oder beim Zeitpunkt des Ladens (Vielleicht mal in den Respawn Event Handler packen oder so)
 - Das CBA KEybind hat zwar einen Default-Wert, der wird aber nicht automatisch gesetzt. Wie machen das Andere
 - zoomTemp funktioniert nur auf normaler Taste, aber nicht auf "Sek. Maustaste halten"
 - Slider in der Listbox unsichtbar aber existent

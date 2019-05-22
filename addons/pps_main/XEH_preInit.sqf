@@ -19,7 +19,7 @@
 	"Checkbox",
 	["Daten senden erlauben", "Nur wenn diese Einstellung aktiv ist werden Daten an den Server gesendet. "],
 	"PPS Client Einstellungen",
-	true,
+	false,
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
         params ["_value"];
@@ -59,7 +59,7 @@
 	"Checkbox",
 	["Logging", "Sollen zu Debugging-Zwecken Log-Einträge in die RPT-Dateien geschrieben werden? "],
 	"PPS Client Einstellungen",
-	true,
+	false,
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
         params ["_value"];

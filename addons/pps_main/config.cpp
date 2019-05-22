@@ -4,7 +4,7 @@
 #include "defines.hpp"
 #include "dialogs.hpp"
 
-enableDebugConsole = 1;
+enableDebugConsole = 0;
 
 class CfgPatches
 {
@@ -24,9 +24,9 @@ class CfgPatches
 		units[] = {};
 		// List of weapons (CfgWeapons classes) contained in the addon.
 		weapons[] = {};
-		version = 1.0.1;
-		versionStr = "1.0.1";
-		versionAr[] = {1,0,1};
+		version = 0.2.3;
+		versionStr = "0.2.3";
+		versionAr[] = {0,2,3};
 	};
 };
 

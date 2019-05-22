@@ -1,4 +1,8 @@
-if (isServer && isMultiplayer) then
+_activatedAddons = activatedAddons;
+_addonInidbi2Activated = false;
+if ((_activatedAddons find "inidbi2") > -1) then {_addonInidbi2Activated = true};
+
+if (isServer && isMultiplayer && _addonInidbi2Activated) then
 {
 	_serverStatus = "PPS_ServerStatus";
 	missionNamespace setVariable [_serverStatus, true, false];
@@ -7,14 +11,17 @@ if (isServer && isMultiplayer) then
 	_dbName = "pps-players";
 	_dbPlayers = ["new", _dbName] call OO_INIDBI;
 	
-	_sections = "getSections" call _dbPlayers;
-	
+	if ("exists" call _dbPlayers) then
 	{
-		[_x] call PPS_fnc_serverEventHandlerInit;
-		_playerUid = ["read", [_x, "playerUid", "<id not set>"]] call _dbPlayers;
-		[format ["[%1] DB PPS Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
-	} forEach _sections;
-	
+		_sections = "getSections" call _dbPlayers;
+		
+		{
+			[_x] call PPS_fnc_serverEventHandlerInit;
+			_playerUid = ["read", [_x, "playerUid", "<id not set>"]] call _dbPlayers;
+			[format ["[%1] DB PPS Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
+		} forEach _sections;
+	};	
+
 	"ppsServerHelo" addPublicVariableEventHandler
 	{
 		params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
@@ -26,8 +33,12 @@ if (isServer && isMultiplayer) then
 			
 		_dbName = "pps-players";
 		_dbPlayers = ["new", _dbName] call OO_INIDBI;
-		
-		_sections = "getSections" call _dbPlayers;
+
+		_sections = [];
+		if ("exists" call _dbPlayers) then
+		{
+			_sections = "getSections" call _dbPlayers;
+		};
 		
 		_result = _sections find _playerUid;
 		

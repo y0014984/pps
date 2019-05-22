@@ -49,7 +49,7 @@ if (PPS_AllowSendingData) then
 		missionNamespace setVariable [_update, _updatedData, false];
 		publicVariableServer _update;			
 	}];
-
+	
 	/* ---------------------------------------- */
 	
 	_addons = activatedAddons;
@@ -359,6 +359,8 @@ if (PPS_AllowSendingData) then
 			publicVariableServer _update;
 		};
 	}];
+	
+	/* ---------------------------------------- */
 };
 
 /* ================================================================================ */
@@ -456,7 +458,13 @@ while {true} do
 		_timeInjuredHigh = 0;
 		_timeInjuredFull = 0;
 		
+		_timeIsMedic = 0;
+		_timeIsEngineer = 0;
+		_timeIsExplosiveSpecialist = 0;
+		_timeIsUavHacker = 0;
+
 		_timeAddonAceActive = 0;
+		_timeAceIsBleeding = 0;
 		_timeAddonTfarActive = 0;
 		_timeTfarHasLrRadio = 0;
 		_timeTfarHasSwRadio = 0;
@@ -582,6 +590,11 @@ while {true} do
 			case (_damage == 1):{_timeInjuredFull = PPS_ValuesUpdateInterval};
 		};
 	
+		if (player getUnitTrait "Medic") then {_timeIsMedic = PPS_ValuesUpdateInterval;};
+		if (player getUnitTrait "Engineer") then {_timeIsEngineer = PPS_ValuesUpdateInterval;};
+		if (player getUnitTrait "ExplosiveSpecialist") then {_timeIsExplosiveSpecialist = PPS_ValuesUpdateInterval;};
+		if (player getUnitTrait "UAVHacker") then {_timeIsUavHacker = PPS_ValuesUpdateInterval;};
+		
 		_addons = activatedAddons;
 		/*
 		_addons = activatedAddons;
@@ -594,7 +607,7 @@ while {true} do
 		{
 			_timeAddonAceActive = PPS_ValuesUpdateInterval;
 			
-			if([player] call ace_medical_blood_fnc_isBleeding) then {_timeIsBleeding = PPS_ValuesUpdateInterval;};
+			if([player] call ace_medical_blood_fnc_isBleeding) then {_timeAceIsBleeding = PPS_ValuesUpdateInterval;};
 		};
 		if ((_addons find "tfar_core") > -1) then 
 		{
@@ -707,7 +720,12 @@ while {true} do
 				[_intervalStatisticsSection, "timeMagazineFillMid", _timeMagazineFillMid, 1, "[A3] Time Magazine Fill Med: %2 hrs (%3%1)"], 
 				[_intervalStatisticsSection, "timeMagazineFillLow", _timeMagazineFillLow, 1, "[A3] Time Magazine Fill Low: %2 hrs (%3%1)"], 
 				[_intervalStatisticsSection, "timeMagazineEmpty", _timeMagazineEmpty, 1, "[A3] Time Magazine Empty: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeAddonAceActive", _timeAddonAceActive, 1, "[ACE] Time Addon Ace Active: %2 hrs (%3%1)"],  
+				[_intervalStatisticsSection, "timeIsMedic", _timeIsMedic, 1, "[A3] Time Is Medic: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeIsEngineer", _timeIsEngineer, 1, "[A3] Time Is Engineer: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeIsExplosiveSpecialist", _timeIsExplosiveSpecialist, 1, "[A3] Time Is Explosive Specialist: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeIsUavHacker", _timeIsUavHacker, 1, "[A3] Time Is UAV Hacker: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeAddonAceActive", _timeAddonAceActive, 1, "[ACE] Time Addon Ace Active: %2 hrs (%3%1)"], 
+				[_intervalStatisticsSection, "timeAceIsBleeding", _timeAceIsBleeding, 1, "[ACE] Time Is Bleeding: %2 hrs (%3%1)"], 
 				[_intervalStatisticsSection, "timeAddonTfarActive", _timeAddonTfarActive, 1, "[TFAR] Time Addon Tfar Active: %2 hrs (%3%1)"],
 				[_intervalStatisticsSection, "timeTfarHasLrRadio", _timeTfarHasLrRadio, 1, "[TFAR] Time Tfar Has LR Radio: %2 hrs (%3%1)"],
 				[_intervalStatisticsSection, "timeTfarHasSwRadio", _timeTfarHasSwRadio, 1, "[TFAR] Time Tfar Has SW Radio: %2 hrs (%3%1)"],
