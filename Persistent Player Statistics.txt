@@ -32,16 +32,12 @@ Testing vor Release Allgemein
 - TEST: Editor Multiplayer/Host Multiplayer
 - TEST: JIP; Der bekommt z.B. keine Events eingetragen
 - PRÜFEN: Fehlermeldungen in Logs, Server und Client
-- TEST: separater Steam Benutzer auf Windows VM auf Mac
+- TEST: separater Steam Benutzer
 - TEST: Funktioniert die Erfassung jedes Wertes
 
 Release v0.2.3
 -------------
 - Dokumentation erstellen
-- welche Lizenz für den Content? --> APL-SA
-- Screenshots erstellen
-- bei GitHub veröffentlichen
-- im Steam Workshop veröffentlichen
 
 Release v0.4.2
 -------------
