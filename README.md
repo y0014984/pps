@@ -1,85 +1,43 @@
-=====================================
-[Addon name]
-Version:
-Release date: 
-Author(s): [Addon Team Name. For full details refer to Credits below]
-Multiplayer compatible: [Yes/No]
-=====================================
+<p align="center">
+    <img src="https://github.com/y0014984/pps/tree/master/logo/logo_pps_ca.jpg" width="512">
+</p>
 
-An unofficial addon for the PC game "Arma 2: Operation Arrowhead" by Bohemia Interactive.
+<p align="center">
+    <a href="https://github.com/y0014984/pps/releases/latest">
+        <img src="https://img.shields.io/badge/Version-0.2.3-blue.svg?style=flat-square" alt="PPS Version">
+    </a>
+    <a href="https://www.bistudio.com/community/licenses/arma-public-license-share-alike">
+        <img src="https://img.shields.io/badge/License-APL%20SA-red.svg?style=flat-square" alt="PPS License">
+    </a>
+</p>
 
+<p align="center">
+    <sup><strong>Requires the latest version of <a href="https://github.com/CBATeam/CBA_A3/releases">CBA A3</a> for server and client and <a href="https://github.com/code34/inidbi2">INIDBI2</a> for serverside only.<br/>
+    Use of <a href="https://github.com/acemod/ACE3/releases">ACE3</a> and <a href="https://github.com/michail-nikolaev/task-force-arma-3-radio/releases">TFAR</a> is optional. </strong></sup>
+</p>
 
-=====================================
-DESCRIPTION
-=====================================
+**PPS** my fist attempt of creating a mod for Arma 3. The main goal is to collect player statistics on client side and to send these statistics to the server side for persistent storage. The statistics are only collected in case of a running event, startet bei PPS admin in PPS interface, and if the Client activated sending data in addon settings. A normal player can only see his own statistics whereas the admin can see the statistics of all players.
 
-[Addon descriptive text]
+The project is entirely **open-source** and all contributions are welcome. Feel free to maintain your own custom version, so long as the changes you make are open to the public in accordance with the ([APL-SA](https://www.bistudio.com/community/licenses/arma-public-license-share-alike)).
 
+## Features
 
-=====================================
-REQUIREMENTS
-=====================================
+- Unified interface, for admins and players. Simply press `U` in game. It's a CBA Keybind, so you can change it.
+- CBA mod settings for server and client available.
+- Persistent data storage with serverside INIDBI2 mod.
+- Starting and stopping events for recording statistics.
+- Player must allow sending data in mod settings.
+- Statistics tracking for individual values, permanently showing as a hint.
 
-Arma 2 - version [1.XX] - Bohemia Interactive
-Arma 2: Operation Arrowhead - version [1.XX] - Bohemia Interactive
-British Armed Forces - version [1.XX] - Bohemia Interactive
-Private Military Contractors - version [1.XX] - Bohemia Interactive
-[Addon Name] - [Version] - [Author]
-[Addon Name] - [Version] - [Author]
+## Installation
 
- 
-=====================================
-INSTALLATION
-=====================================
+Download the latest version and unpack it in your Arma 3 installation folder.
+Simply launch Arma 3 with `-mod=@CBA_A3;@PPS` afterwards.
 
-Use of a mod folder is recommended (MODFOLDER in the following examples).
-Extract the supplied files into a folder such as "Arma2/MODFOLDER/Addons".
-Start the game using the -mod=MODFOLDER parameter.
-For more information, please refer to http://community.bistudio.com/wiki/Modfolders
+## Known Issues
 
+* There are a lot of known issues, to many to list here.
 
-=====================================
-TECHNICAL DETAILS
-=====================================
+## License
 
-[Class names, script syntax, etc]
- 
- 
-=====================================
-KNOWN ISSUES
-=====================================
-
-[Known issue description]
-
- 
-=====================================
-VERSION HISTORY
-=====================================
-
-[1.0 - Initial release]
- 
-
-=====================================
-LICENSE
-=====================================
-
-[Example License text follows:
-Copyright (c) 2012 by Addon Team Name authors. This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License.
-To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/3.0/ or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.] 
-
-
-=====================================
-CREDITS
-=====================================
- 
-[Example credit text follows:
-Addon Team Name authors are Joe Bloggs, Fred Bloggs and Joe Blow.
-This addon makes use of textures © 2010 John Smith, used under a Creative Commons Attribution-Noncommercial license: http://creativecommons.org/licenses/by-nc/3.0/.]
-
-
-=====================================
-CONTACT DETAILS
-=====================================
- 
-[Example credit text follows:
-Addon Team Name can be contacted at addon.team@email.net]
+PPS is licensed under the ([APL-SA](https://www.bistudio.com/community/licenses/arma-public-license-share-alike)).
