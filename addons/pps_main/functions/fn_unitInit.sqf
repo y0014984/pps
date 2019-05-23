@@ -99,7 +99,7 @@ if (isMultiplayer) then
 		_targetUid = getPlayerUID _target;
 		_shooterUid = getPlayerUID _shooter;
 		
-		hint format ["Target: %1\nShooter: %2\nAmmo: %3", _targetUid, _shooterUid, (_ammo select 4)];
+		//hint format ["Target: %1\nShooter: %2\nAmmo: %3", _targetUid, _shooterUid, (_ammo select 4)];
 		
 		_key = "";
 		_value = 1;

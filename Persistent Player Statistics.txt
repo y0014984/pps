@@ -38,8 +38,7 @@ Testing vor Release Allgemein
 Release v0.2.3
 -------------
 - Dokumentation erstellen
-- welche Lizenz für den Content?
-- Logo überarbeiten in Hinblick auf PPE (Diagramm Logo, weiße Schrift mit Schwarzem Rand)
+- welche Lizenz für den Content? --> APL-SA
 - Screenshots erstellen
 - bei GitHub veröffentlichen
 - im Steam Workshop veröffentlichen
