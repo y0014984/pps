@@ -22,7 +22,7 @@ The project is entirely **open-source** and all contributions are welcome. Feel 
 
 ## Features
 
-- Unified interface, for admins and players. Simply press `U` in game. It's a CBA keybind, so you can change it.
+- Unified interface, for admins and players. Simply press `U` in game. It's a CBA keybind.
 - CBA mod settings for server and client available.
 - Persistent data storage with serverside INIDBI2 mod.
 - Starting and stopping events for recording statistics.
