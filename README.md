@@ -31,8 +31,8 @@ The project is entirely **open-source** and all contributions are welcome. Feel 
 
 ## Installation
 
-Download the latest version and unpack it in your Arma 3 installation folder.
-Simply launch Arma 3 with `-mod=@CBA_A3;@PPS` afterwards.
+Download the latest versions of PPS, CBA_A3 and INIDBI2 and unpack them in your Arma 3 and Arma 3 server installation folders.
+Simply launch Arma 3 with `-mod=@CBA_A3;@PPS` and Arma 3 server mith `-mod=@CBA_A3;@PPS -servermod=@INIDBI2` afterwards.
 
 ## Known Issues
 
