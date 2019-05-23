@@ -159,10 +159,6 @@ Release v1.0
 
 Probleme, Bugs
 -------------------
-- Binarize für die PBO funktioniert gerade nicht (Pfade)
-- Der "HitPart" EventHandler wird für alle Units, also auch für Player geladen, scheint aber nur für Nicht-player-units zu funktionieren; Läad man ihn später manuell über die Debug
-	Console für den player funktionierts, also ist das Problem beim Respawn zu suchen oder beim Zeitpunkt des Ladens (Vielleicht mal in den Respawn Event Handler packen oder so)
-- Das CBA KEybind hat zwar einen Default-Wert, der wird aber nicht automatisch gesetzt. Wie machen das Andere
 - zoomTemp funktioniert nur auf normaler Taste, aber nicht auf "Sek. Maustaste halten"
 - Slider in der Listbox unsichtbar aber existent
 - DB-Status nicht ganz korrekt, da unknown aus Template stehen bleibt (Anderer Servercode darf ohne DB nicht laufen) --> diag_log einbauen zum testen
