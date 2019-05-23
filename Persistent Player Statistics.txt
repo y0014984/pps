@@ -159,9 +159,6 @@ Release v1.0
 
 Probleme, Bugs
 -------------------
-- Bug: Fenster erlaubt öffnen anderer Fenster im Hintergrund —> Zurück auf Dialog wechseln?
-- Bug: Slider falsche Darstellung
-- FUNKTIONIERT NICHT: MPHit für getroffen werden TEST: local Prüfung in MPHit nur vor aktivierung sondern innerhalb des Handlers
 - Binarize für die PBO funktioniert gerade nicht (Pfade)
 - Der "HitPart" EventHandler wird für alle Units, also auch für Player geladen, scheint aber nur für Nicht-player-units zu funktionieren; Läad man ihn später manuell über die Debug
 	Console für den player funktionierts, also ist das Problem beim Respawn zu suchen oder beim Zeitpunkt des Ladens (Vielleicht mal in den Respawn Event Handler packen oder so)
