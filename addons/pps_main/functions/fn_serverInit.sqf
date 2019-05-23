@@ -1,6 +1,13 @@
 _activatedAddons = activatedAddons;
 _addonInidbi2Activated = false;
-if ((_activatedAddons find "inidbi2") > -1) then {_addonInidbi2Activated = true};
+if ((_activatedAddons find "inidbi2") > -1) then
+{
+	_addonInidbi2Activated = true;
+}
+else
+{
+	[format ["[%1] PPS server mod INIDBI2 not activated. Server will not start.", serverTime]] call PPS_fnc_log;
+};
 
 if (isServer && isMultiplayer && _addonInidbi2Activated) then
 {

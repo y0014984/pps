@@ -28,17 +28,16 @@ Anpassungen zum Release
 Testing vor Release Allgemein
 -------------------------------
 - (Logging aktivieren und in config.cpp debugConsole aktivieren)
-- Prüfung: Komplett neue Spieler; Hier mal while Schleife wegen hinzufügen 
-- JIP testen; Der bekommt z.B. keine Events eingetragen
-- Logs auf Fehlermeldungen prüfen
-- Windows VM auf Mac einrichten (dann könnte ich zumindest die Arma Tools verwenden zum packen, vielleicht auch in Arma testen)
-- Jeden Wert testen
+- TEST: Komplett leere DB
+- TEST: Editor Multiplayer/Host Multiplayer
+- TEST: JIP; Der bekommt z.B. keine Events eingetragen
+- PRÜFEN: Fehlermeldungen in Logs, Server und Client
+- TEST: separater Steam Benutzer auf Windows VM auf Mac
+- TEST: Funktioniert die Erfassung jedes Wertes
 
 Release v0.2.3
 -------------
-- ServerInit läuft gerade nicht wegen vermutlich INIDBI2 Prüfung oder der ppi Prüfungen
 - Dokumentation erstellen
-- Code Review: Redundanzen, unnötige Variablen, zu häufige Variablenerfassungen, Vereinheitlichung Variablennamen etc.
 - welche Lizenz für den Content?
 - Logo überarbeiten in Hinblick auf PPE (Diagramm Logo, weiße Schrift mit Schwarzem Rand)
 - Screenshots erstellen
@@ -47,6 +46,11 @@ Release v0.2.3
 
 Release v0.4.2
 -------------
+- Code Review: Redundanzen, unnötige Variablen, zu häufige Variablenerfassungen, Vereinheitlichung Variablennamen etc.
+- Nicht alle Server-Client Kommunikation muss über Variablen-Handler laufen; Den Namen des Speilers zu holen kann auch eine einmal vom Client 
+	gesetzte, globale Variable sein, die nur bei Bedarf vom Server gelesen wird (Die die Frage nach dem Aufzeichnungsstatus oder so)
+- pps-server-settings.ini nicht nötig; man kann auch aus den Events lesen, welches Event aktiv ist --> Umbauen
+- Schon beim CBA Init Skript unterscheiden zwischen Server und Client
 - ACE und TFAR verstecken wenn nicht aktiviert bei den Statistiken (Sollen dann auch nicht über Interval Statistics gesendet werden)
 - Umbau der pps-player-uid Aufbaus
 	- sections sollten die einzelnen keys sein = _timeMapVisible
@@ -74,6 +78,23 @@ Die Ace Event Handler für Cargo und Unconscious sind doch nicht Unit-Spezifisch
 - Evtl. aus CBA die Logging Funktionen nutzen
 - Umbau der Event-Getriggerten Daten zu Time erfassten Daten über Speichern lokal Anfang und Ende und bei Ende dann Differenz speichern, dann zusätzlich die Häufigkeit speichern (Dann lässt sich Durchschnitt bilden)
 - Beim Logging ermöglichen, dass über CBA Settings gewählt wird zwischen systemChat/hint/rpt (Oder alle 3 gleichzeitig möglich machen)
+- Über Settings auswählbar machen, welche Statistiken erfasst werden
+- Knopf für Reset der Statistiken (Löschen der Player Datei und des Players Eintrags und auch aus Events)
+- Bei Events die Spieler rauslassen, die nicht aktiv Daten senden wollen (Anfrage an Client)
+- Beschädigte und Zerstörte Fahrzeuge Statistik
+- Spectator Statistik
+- Logo v2: Weiße Rahmen um Diagrammlinien
+- Github
+	- Version erstellen
+	- Wiki erstellen
+	- Projekt erstellen
+	- Issues und Feature Requests übernehmen
+- Bei Aktivierung Tracking schon 1x den Wert zeigen sonst bleibt erst mal der alte Wert stehen
+- Event Händler für Statistics: wenn Tracking schon an dann einfach anderes Tracking aktivieren ohne zu deaktivieren wenn man nicht aktive Statistik ausgewählt hat
+- Player Liste halbieren und darunter Events zeigen inkl. Filter
+- Events mit Datum beginnen lassen
+- Automatisches Beenden von abgestürzten Events über Heartbeat
+- Wiederaufnahmemöglichkeit von Events (Fortsetzen)
 - Werte:
 	- [A3] Count Respawn
 	- [A3] Count Killed Animals
@@ -143,6 +164,9 @@ Release v1.0
 
 Probleme, Bugs
 -------------------
+- Bug: Fenster erlaubt öffnen anderer Fenster im Hintergrund —> Zurück auf Dialog wechseln?
+- Bug: Slider falsche Darstellung
+- FUNKTIONIERT NICHT: MPHit für getroffen werden TEST: local Prüfung in MPHit nur vor aktivierung sondern innerhalb des Handlers
 - Binarize für die PBO funktioniert gerade nicht (Pfade)
 - Der "HitPart" EventHandler wird für alle Units, also auch für Player geladen, scheint aber nur für Nicht-player-units zu funktionieren; Läad man ihn später manuell über die Debug
 	Console für den player funktionierts, also ist das Problem beim Respawn zu suchen oder beim Zeitpunkt des Ladens (Vielleicht mal in den Respawn Event Handler packen oder so)

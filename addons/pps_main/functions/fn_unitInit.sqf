@@ -1,84 +1,87 @@
 params ["_unit"];
 
-waitUntil {time > 15};
+//waitUntil {time > 15};
 
 _playerUid = getPlayerUID _unit;
 
 /* ================================================================================ */
 
-if (local _unit && isMultiplayer) then
+if (isMultiplayer) then
 {
 	_index = _unit addMPEventHandler ["MPKilled",
 	{
 		params ["_unit", "_killer", "_instigator", "_useEffects"];
 
-		_unit removeAllEventHandlers "HitPart";
-		
-		_unitUid = getPlayerUID _unit;
-		_killerUid = getPlayerUID _killer;
-		
 		if (local _unit) then
 		{
-			if (getClientState == "BRIEFING READ") then
+			_unit removeAllEventHandlers "HitPart";
+			
+			_unitUid = getPlayerUID _unit;
+			_killerUid = getPlayerUID _killer;
+			
+			if (local _unit) then
 			{
-				if (_unitUid != "") then
+				if (getClientState == "BRIEFING READ") then
 				{
-					_playerUid = _unitUid;
-					_section = "Event Handler Statistics";
-					_key = "countPlayerDeaths";
-					_value = 1;
-					_formatType = 0;
-					_formatString = "[A3] Count Player Deaths: %1";
+					if (_unitUid != "") then
+					{
+						_playerUid = _unitUid;
+						_section = "Event Handler Statistics";
+						_key = "countPlayerDeaths";
+						_value = 1;
+						_formatType = 0;
+						_formatString = "[A3] Count Player Deaths: %1";
+						
+						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_update = _playerUid + "-updateStatistics";
+						missionNamespace setVariable [_update, _updatedData, false];
+						publicVariableServer _update;
+					};
 					
-					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
-					_update = _playerUid + "-updateStatistics";
-					missionNamespace setVariable [_update, _updatedData, false];
-					publicVariableServer _update;
-				};
-				
-				if (_killerUid != "") then
-				{
-					_playerUid = _killerUid;
-					_section = "Event Handler Statistics";
-					_key = "countPlayerKills";
-					_value = 1;
-					_formatType = 0;
-					_formatString = "[A3] Count Player Kills: %1";
-								
-					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
-					_update = _playerUid + "-updateStatistics";
-					missionNamespace setVariable [_update, _updatedData, false];
-					publicVariableServer _update;				
-				};
-				
-				if (_killerUid == _unitUid) then
-				{
-					_playerUid = _killerUid;
-					_section = "Event Handler Statistics";
-					_key = "countPlayerSuicides";
-					_value = 1;
-					_formatType = 0;
-					_formatString = "[A3] Count Player Suicides: %1";
-								
-					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
-					_update = _playerUid + "-updateStatistics";
-					missionNamespace setVariable [_update, _updatedData, false];
-					publicVariableServer _update;				
-				};
+					if (_killerUid != "") then
+					{
+						_playerUid = _killerUid;
+						_section = "Event Handler Statistics";
+						_key = "countPlayerKills";
+						_value = 1;
+						_formatType = 0;
+						_formatString = "[A3] Count Player Kills: %1";
+									
+						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_update = _playerUid + "-updateStatistics";
+						missionNamespace setVariable [_update, _updatedData, false];
+						publicVariableServer _update;				
+					};
+					
+					if (_killerUid == _unitUid) then
+					{
+						_playerUid = _killerUid;
+						_section = "Event Handler Statistics";
+						_key = "countPlayerSuicides";
+						_value = 1;
+						_formatType = 0;
+						_formatString = "[A3] Count Player Suicides: %1";
+									
+						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_update = _playerUid + "-updateStatistics";
+						missionNamespace setVariable [_update, _updatedData, false];
+						publicVariableServer _update;				
+					};
 
-				if (_killerUid != _unitUid && _killerUid != "" && ((side group _unit) == (side group _killer))) then
-				{
-					_playerUid = _killerUid;
-					_section = "Event Handler Statistics";
-					_key = "countPlayerTeamKills";
-					_value = 1;
-					_formatType = 0;
-					_formatString = "[A3] Count Player Team Kills: %1";
-								
-					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
-					_update = _playerUid + "-updateStatistics";
-					missionNamespace setVariable [_update, _updatedData, false];
-					publicVariableServer _update;
+					if (_killerUid != _unitUid && _killerUid != "" && ((side group _unit) == (side group _killer))) then
+					{
+						_playerUid = _killerUid;
+						_section = "Event Handler Statistics";
+						_key = "countPlayerTeamKills";
+						_value = 1;
+						_formatType = 0;
+						_formatString = "[A3] Count Player Team Kills: %1";
+									
+						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_update = _playerUid + "-updateStatistics";
+						missionNamespace setVariable [_update, _updatedData, false];
+						publicVariableServer _update;
+					};
 				};
 			};
 		};
@@ -91,7 +94,8 @@ if (local _unit && isMultiplayer) then
 	_index = _unit addEventHandler ["HitPart",
 	{
 		(_this select 0) params ["_target", "_shooter", "_projectile", "_position", "_velocity", "_selection", "_ammo", "_vector", "_radius", "_surfaceType", "_isDirect"];
-		
+
+
 		_targetUid = getPlayerUID _target;
 		_shooterUid = getPlayerUID _shooter;
 		
@@ -102,7 +106,7 @@ if (local _unit && isMultiplayer) then
 		_formatType = 0;
 		_formatString = "";
 		
-		if (_shooterUid != "") then
+		if ((local _shooter) && (_shooterUid != "")) then
 		{
 			if ((side group _shooter) != (side group _target)) then
 			{
@@ -146,7 +150,7 @@ if (local _unit && isMultiplayer) then
 			publicVariableServer _update;			
 		};
 		
-		if (_targetUid != "") then
+		if ((local _target) && (_targetUid != "")) then
 		{
 			if ((side group _shooter) != (side group _target)) then
 			{
