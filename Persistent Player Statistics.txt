@@ -3,16 +3,7 @@ Persistent Player Statistics von y0014984
 
 Release v0.4.2
 -------------
-- pps-server-settings.ini nicht nötig; man kann auch aus den Events lesen, welches Event aktiv ist --> Umbauen
-- Schon beim CBA Init Skript unterscheiden zwischen Server und Client
-- ACE und TFAR verstecken wenn nicht aktiviert bei den Statistiken (Sollen dann auch nicht über Interval Statistics gesendet werden)
-- Umbau der pps-player-uid Aufbaus
-	- sections sollten die einzelnen keys sein = _timeMapVisible
-	- Darunter finden sich dann immer gleich _key, _value, _type ("interval","event","meta"), _outputString, _outputType, _outputKey2, _outputKey3 etc.
-	- Dann benötigt der Server keine Info darüber, welche Werte es gibt und kann einfach mit getSections alles lesen
-	- Auch die Lokalisierung wird dann einfacher, wenn in der DB nur der _key für die stringtable vermerkt wird
-- In alle Keys aufnehmen aus welchem Mod sie stammen oder als separate Angabe in den neuen Statistics Sections (A3, ACE, TFAR)
-Die Ace Event Handler für Cargo und Unconscious sind doch nicht Unit-Spezifisch, oder? Da muss man noch mal trennen, was wirklich eine Person ausgelöst hat
+- Die Ace Event Handler für Cargo und Unconscious sind doch nicht Unit-Spezifisch, oder? Da muss man noch mal trennen, was wirklich eine Person ausgelöst hat
 - Erweiterbare Statistiken außerhalb des Mods durch benutzerdefinierte Funktion/EventHandler
 - Interface für Admin, um z.B. Ränge zu setzen oder Strafen zu verleihen bzw. auch als Sani, Arzt oder Techniker, Wiederhersteller auszubilden
 - CSV Export Button
