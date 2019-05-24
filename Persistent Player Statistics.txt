@@ -11,20 +11,6 @@ Anpassungen zum Release
 --------------------------
 - ...
 
-Testing vor Release Allgemein
--------------------------------
-- (Logging aktivieren und in config.cpp debugConsole aktivieren)
-- TEST: Komplett leere DB
-- TEST: Editor Multiplayer/Host Multiplayer
-- TEST: JIP; Der bekommt z.B. keine Events eingetragen
-- PRÜFEN: Fehlermeldungen in Logs, Server und Client
-- TEST: separater Steam Benutzer
-- TEST: Funktioniert die Erfassung jedes Wertes
-
-Release v0.2.3
--------------
-- Dokumentation erstellen
-
 Release v0.4.2
 -------------
 - Code Review: Redundanzen, unnötige Variablen, zu häufige Variablenerfassungen, Vereinheitlichung Variablennamen etc.
@@ -134,16 +120,3 @@ Die Ace Event Handler für Cargo und Unconscious sind doch nicht Unit-Spezifisch
 	- [player, "leftleg"] call ace_medical_treatment_fnc_hasTourniquetAppliedTo (BOOL)
 	- [player] call ace_medical_treatment_fnc_isInMedicalFacility (BOOL)
 	- [player] call ace_medical_treatment_fnc_isInMedicalVehicle (BOOL)
-
-Release v0.8.15
--------------
-...
-
-Release v1.0
--------------
-...
-
-Probleme, Bugs
--------------------
-- KeyUp Gear mit 0.5 funktioniert nur, wenn mit I wieder geschlossen wird, bei ESC bleibt 0.5 stehen (Es gibt noch weitere Beispiele)
-- Was ist bei z.B. Engine Toggle, dass man auch durch vorwärts fahren oder Click Menü aktivieren kann (gilt auch für reload) --> geht nur auf dedizierter Taste
