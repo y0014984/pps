@@ -7,20 +7,6 @@ Erfassen von Spielerstatisitiken in COOP MilSim-Missionen eines Servers, um die 
 ermitteln, über die Anzahl der Kills hinaus. So können im Clan z.B. Abzeichen oder Ränge auf Basis objektiver 
 Daten vergeben werden.
 
-Geschwindigkeiten bei 30 kg Gepäck
------------------------------------------
-Stehend gehen 5
-Stehend laufen 12
-Stehend sprinten 18
-
-geduckt gehen 4
-geduckt laufen 11.5
-geduckt sprinten 17
-
-liegend gehen 2.25
-liegend laufen 2.75
-liegend sprinten 4.8
-
 Anpassungen zum Release
 --------------------------
 - ...
@@ -159,8 +145,5 @@ Release v1.0
 
 Probleme, Bugs
 -------------------
-- Boat, Truck und Motorcycle ohne passende Funktion/Fahrzeuge
-- Der Geschwindigkeitsmodus der Einheit lässt sich nur indirekt über die Geschwindigkeit ermitteln
-- Wenn in der Mission eingestellt ist, dass "respawnOnStart = 1;" dann löst das gleich zu Beginn quasi einen Suicide aus (Suicide +1, Kill +1, Death +1)
 - KeyUp Gear mit 0.5 funktioniert nur, wenn mit I wieder geschlossen wird, bei ESC bleibt 0.5 stehen (Es gibt noch weitere Beispiele)
 - Was ist bei z.B. Engine Toggle, dass man auch durch vorwärts fahren oder Click Menü aktivieren kann (gilt auch für reload) --> geht nur auf dedizierter Taste
