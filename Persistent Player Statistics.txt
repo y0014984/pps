@@ -159,9 +159,6 @@ Release v1.0
 
 Probleme, Bugs
 -------------------
-- zoomTemp funktioniert nur auf normaler Taste, aber nicht auf "Sek. Maustaste halten"
-- Slider in der Listbox unsichtbar aber existent
-- DB-Status nicht ganz korrekt, da unknown aus Template stehen bleibt (Anderer Servercode darf ohne DB nicht laufen) --> diag_log einbauen zum testen
 - Boat, Truck und Motorcycle ohne passende Funktion/Fahrzeuge
 - Der Geschwindigkeitsmodus der Einheit lässt sich nur indirekt über die Geschwindigkeit ermitteln
 - Wenn in der Mission eingestellt ist, dass "respawnOnStart = 1;" dann löst das gleich zu Beginn quasi einen Suicide aus (Suicide +1, Kill +1, Death +1)
