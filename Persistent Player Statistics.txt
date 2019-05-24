@@ -3,13 +3,6 @@ Persistent Player Statistics von y0014984
 
 Release v0.4.2
 -------------
-- Interface für Admin, um z.B. Ränge zu setzen oder Strafen zu verleihen bzw. auch als Sani, Arzt oder Techniker, Wiederhersteller auszubilden
-- CSV Export Button
-- Bei Sani- und Machaniker: Die erfolgten Ausbildungen speichern; Dann werden sie als Sani/Machaniker hinterlegt; Wenn sie dann z.B. 10 Std. nicht mehr in der Rolle spielen wird der Wert entzogen
-- Statistische und grafische Auswertungen
-- Zeitliche Entwicklung über mehrere Events abbilden (pps-player-[playerUID]-[eventID].ini als Dateien anlegen)
-- Umstellen bei Interval Statistics, dass der Client an den Server bereits den Key und den Namen und den Typ übergibt (Dann sind die Funktionen auf Seiten des Servers deutlich schlanker)
-- Lokalisierung ermöglichen über Stringtable
 - Testen ob man sich in Deckung befindet über die Frage ob Büsche oder harte Deckung in der Nähe sind (max 1m entfernt)
 - Umsortieren: Player und Statistics (gehighlighted nach oben ???)
 - Den roten Admin und den roten Tracking Wert evtl. ganz nach oben sortieren
