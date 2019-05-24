@@ -3,11 +3,6 @@ Persistent Player Statistics von y0014984
 
 Release v0.4.2
 -------------
-- Testen ob man sich in Deckung befindet über die Frage ob Büsche oder harte Deckung in der Nähe sind (max 1m entfernt)
-- Umsortieren: Player und Statistics (gehighlighted nach oben ???)
-- Den roten Admin und den roten Tracking Wert evtl. ganz nach oben sortieren
-- Den roten Admin und den roten Tracking Wert evtl. nur den drangehängten Text einfärben und nicht die gesamte Zeile
-- Berücksichtigen bei Key Down Event Handler zum Schließen des Dialogs, dass es mehr als einen DIK-Code geben kann
 - Event Statistics, wenn sie leer sind, zu beginn auf 0 setzen beim player
 - Clan/Unit NAmen ermitteln und mit beim Player und beim Event speichern
 - Im Log Dokumentieren, wann welche EventHandler geladen werden und in welcher MEnge
