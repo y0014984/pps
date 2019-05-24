@@ -1,21 +1,8 @@
 Persistent Player Statistics von y0014984
 ============================================
 
-Ziel
------
-Erfassen von Spielerstatisitiken in COOP MilSim-Missionen eines Servers, um die Qualität des Spielers zu 
-ermitteln, über die Anzahl der Kills hinaus. So können im Clan z.B. Abzeichen oder Ränge auf Basis objektiver 
-Daten vergeben werden.
-
-Anpassungen zum Release
---------------------------
-- ...
-
 Release v0.4.2
 -------------
-- Code Review: Redundanzen, unnötige Variablen, zu häufige Variablenerfassungen, Vereinheitlichung Variablennamen etc.
-- Nicht alle Server-Client Kommunikation muss über Variablen-Handler laufen; Den Namen des Speilers zu holen kann auch eine einmal vom Client 
-	gesetzte, globale Variable sein, die nur bei Bedarf vom Server gelesen wird (Die die Frage nach dem Aufzeichnungsstatus oder so)
 - pps-server-settings.ini nicht nötig; man kann auch aus den Events lesen, welches Event aktiv ist --> Umbauen
 - Schon beim CBA Init Skript unterscheiden zwischen Server und Client
 - ACE und TFAR verstecken wenn nicht aktiviert bei den Statistiken (Sollen dann auch nicht über Interval Statistics gesendet werden)
