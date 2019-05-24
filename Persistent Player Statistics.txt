@@ -3,7 +3,6 @@ Persistent Player Statistics von y0014984
 
 Release v0.4.2
 -------------
-- Erweiterbare Statistiken außerhalb des Mods durch benutzerdefinierte Funktion/EventHandler
 - Interface für Admin, um z.B. Ränge zu setzen oder Strafen zu verleihen bzw. auch als Sani, Arzt oder Techniker, Wiederhersteller auszubilden
 - CSV Export Button
 - Bei Sani- und Machaniker: Die erfolgten Ausbildungen speichern; Dann werden sie als Sani/Machaniker hinterlegt; Wenn sie dann z.B. 10 Std. nicht mehr in der Rolle spielen wird der Wert entzogen
