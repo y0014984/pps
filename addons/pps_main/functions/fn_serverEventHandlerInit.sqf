@@ -112,7 +112,7 @@ params ["_playerUid"];
 
 	_playerUid = _broadcastVariableValue select 0;
 	_clientId = _broadcastVariableValue select 1;
-	_nameEvent = _broadcastVariableValue select 2;
+	_eventName = _broadcastVariableValue select 2;
 
 	_dbName = "pps-players";
 	_dbPlayers = ["new", _dbName] call OO_INIDBI;
@@ -121,19 +121,26 @@ params ["_playerUid"];
 	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _dbPlayers;
 	
 	if (_isAdmin && _isAdminLoggedIn) then
-	{	
-		_dbName = "pps-server-settings";
-		_dbServerSettings = ["new", _dbName] call OO_INIDBI;
-		_settingsSection = "Settings";
-		
+	{		
 		_dbName = "pps-events";
 		_dbEvents = ["new", _dbName] call OO_INIDBI;
 		
-		_isEvent = ["read", [_settingsSection, "isEvent", false]] call _dbServerSettings;
+		_events = "getSections" call _dbEvents;
+		_isEvent = false;
+		_eventStartTime = [0, 0, 0, 0, 0, 0];
+		_eventStopTime = [0, 0, 0, 0, 0, 0];
+		{
+			_eventStopTime = ["read", [_x, "eventStopTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+			if (_eventStopTime isEqualTo [0, 0, 0, 0, 0, 0]) exitWith
+			{
+				_isEvent = true;
+				_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+			}; 
+		} forEach _events;
 		
 		if (!_isEvent) then
 		{
-			_startTimeEvent = "getTimeStamp" call _dbServerSettings;
+			_eventStartTime = "getTimeStamp" call _dbEvents;
 			
 			_eventId = "";
 			{
@@ -145,14 +152,8 @@ params ["_playerUid"];
 				{
 					_eventId = _eventId + (str _x);
 				};
-			} forEach _startTimeEvent;	
-			
-			["write", [_settingsSection, "isEvent", true]] call _dbServerSettings;
-			["write", [_settingsSection, "eventId", _eventId]] call _dbServerSettings;
-			["write", [_settingsSection, "nameEvent", _nameEvent]] call _dbServerSettings;
-			["write", [_settingsSection, "startTimeEvent", _startTimeEvent]] call _dbServerSettings;
-			format ["Persistent Player Statistics\n\nEvent started: %1", _nameEvent] remoteExec ["hint", -2];
-			
+			} forEach _eventStartTime;	
+						
 			_allActivePlayers = allPlayers - entities "HeadlessClient_F";
 			_allActivePlayersIds = [];
 			{
@@ -161,22 +162,16 @@ params ["_playerUid"];
 			} forEach _allActivePlayers;
 					
 			["write", [_eventId, "eventId", _eventId]] call _dbEvents;
-			["write", [_eventId, "eventName", _nameEvent]] call _dbEvents;
+			["write", [_eventId, "eventName", _eventName]] call _dbEvents;
 			["write", [_eventId, "eventAllActivePlayerIds", _allActivePlayersIds]] call _dbEvents;
-			["write", [_eventId, "eventStartTime", _startTimeEvent]] call _dbEvents;
+			["write", [_eventId, "eventStartTime", _eventStartTime]] call _dbEvents;
+			
+			_isEvent = true;
+			
+			format ["Persistent Player Statistics\n\nEvent started: %1", _eventName] remoteExec ["hint", -2];
 		}
 		else
 		{
-			_startTimeEvent = ["read", [_settingsSection, "startTimeEvent", [[0],[0],[0],[0],[0],[0]]]] call _dbServerSettings;
-			_stopTimeEvent = "getTimeStamp" call _dbServerSettings;
-			
-			["write", [_settingsSection, "isEvent", false]] call _dbServerSettings;
-			["write", [_settingsSection, "eventId", ""]] call _dbServerSettings;
-			["write", [_settingsSection, "nameEvent", ""]] call _dbServerSettings;
-			["write", [_settingsSection, "startTimeEvent", -1]] call _dbServerSettings;
-			
-			format ["Persistent Player Statistics\n\nEvent stopped: %1", _nameEvent] remoteExec ["hint", -2];
-
 			_eventId = "";
 			{
 				if(_x < 10) then
@@ -187,30 +182,30 @@ params ["_playerUid"];
 				{
 					_eventId = _eventId + (str _x);
 				};
-			} forEach _startTimeEvent;
-			["write", [_eventId, "eventStopTime", _stopTimeEvent]] call _dbEvents;
+			} forEach _eventStartTime;
+			["write", [_eventId, "eventStopTime", _eventStopTime]] call _dbEvents;
 			
-			if ((_stopTimeEvent select 0) == (_startTimeEvent select 0)) then
+			if ((_eventStopTime select 0) == (_eventStartTime select 0)) then
 			{
-				_startTimeEvent set [5, "delete"];
-				_startTimeEvent = _startTimeEvent - ["delete"];
-				_stopTimeEvent set [5, "delete"];
-				_stopTimeEvent = _stopTimeEvent - ["delete"];
-				_eventDuration = (dateToNumber _stopTimeEvent) - (dateToNumber _startTimeEvent);
-				_eventDuration = numberToDate [_stopTimeEvent select 0, _eventDuration];
+				_eventStartTime set [5, "delete"];
+				_eventStartTime = _eventStartTime - ["delete"];
+				_eventStopTime set [5, "delete"];
+				_eventStopTime = _eventStopTime - ["delete"];
+				_eventDuration = (dateToNumber _eventStopTime) - (dateToNumber _eventStartTime);
+				_eventDuration = numberToDate [_eventStopTime select 0, _eventDuration];
 				if (((_eventDuration select 1) == 1) && ((_eventDuration select 2) == 1)) then
 				{
 					_eventDuration = ((_eventDuration select 3) * 60) + (_eventDuration select 4);
 					["write", [_eventId, "eventDuration", _eventDuration]] call _dbEvents;
 				};
 			};
+			
+			_isEvent = false;
+			
+			format ["Persistent Player Statistics\n\nEvent stopped: %1", _eventName] remoteExec ["hint", -2];
 		};
-
-		_isEvent = ["read", [_settingsSection, "isEvent", false]] call _dbServerSettings;
-		_nameEvent = ["read", [_settingsSection, "nameEvent", ""]] call _dbServerSettings;
-		_startTimeEvent = ["read", [_settingsSection, "startTimeEvent", -1]] call _dbServerSettings;
 		
-		_result = [_isEvent, _nameEvent, _startTimeEvent];
+		_result = [_isEvent, _eventName, _eventStartTime];
 		
 		_answer = _playerUid + "-answerSwitchEvent";
 		missionNamespace setVariable [_answer, _result, false];
@@ -590,14 +585,26 @@ params ["_playerUid"];
 	};
 
 	/* ---------------------------------------- */
+
+	_dbName = "pps-events";
+	_dbEvents = ["new", _dbName] call OO_INIDBI;
 	
-	_dbName = "pps-server-settings";
-	_dbServerSettings = ["new", _dbName] call OO_INIDBI;	
-	_settingsSection = "Settings";
-	
-	_isEvent = ["read", [_settingsSection, "isEvent", false]] call _dbServerSettings;
-	_nameEvent = ["read", [_settingsSection, "nameEvent", ""]] call _dbServerSettings;
-	_startTimeEvent = ["read", [_settingsSection, "startTimeEvent", -1]] call _dbServerSettings;
+	_events = "getSections" call _dbEvents;
+	_isEvent = false;
+	_eventName = "";
+	_eventStartTime = [0, 0, 0, 0, 0, 0];
+	_eventStopTime = [0, 0, 0, 0, 0, 0];
+	{
+		_eventStopTime = ["read", [_x, "eventStopTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+		if (_eventStopTime isEqualTo [0, 0, 0, 0, 0, 0]) exitWith
+		{
+			_isEvent = true;
+			_eventName = ["read", [_x, "eventName", ""]] call _dbEvents;
+			_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+			
+			hint format ["_isEvent: %1", _isEvent];
+		}; 
+	} forEach _events;
 
 	/* ---------------------------------------- */
 
@@ -606,7 +613,7 @@ params ["_playerUid"];
 		_playerUid, _clientId, _isAdmin, _isAdminLoggedIn, 
 		_isInidbi2Installed, 
 		_countPlayersTotal, _countPlayersOnline, _countAdminsTotal, _countAdminsOnline, 
-		_isEvent, _nameEvent, _startTimeEvent,
+		_isEvent, _eventName, _eventStartTime,
 		_filteredPlayers
 	];
 	
@@ -623,11 +630,20 @@ params ["_playerUid"];
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
 
-	_dbName = "pps-server-settings";
-	_dbServerSettings = ["new", _dbName] call OO_INIDBI;		
-	_settingsSection = "Settings";			
-	_isEvent = ["read", [_settingsSection, "isEvent", false]] call _dbServerSettings;
+	_dbName = "pps-events";
+	_dbEvents = ["new", _dbName] call OO_INIDBI;
 	
+	_events = "getSections" call _dbEvents;
+	_isEvent = false;
+	_eventStopTime = [0, 0, 0, 0, 0, 0];
+	{
+		_eventStopTime = ["read", [_x, "eventStopTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+		if (_eventStopTime isEqualTo [0, 0, 0, 0, 0, 0]) exitWith
+		{
+			_isEvent = true;
+		}; 
+	} forEach _events;
+
 	if (_isEvent) then
 	{
 		_playerUid = _broadcastVariableValue select 0;
