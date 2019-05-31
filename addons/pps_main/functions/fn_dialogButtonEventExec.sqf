@@ -11,15 +11,15 @@ _answer addPublicVariableEventHandler
 };
 
 _eventEditBox = (findDisplay 14984) displayCtrl 1603;
-_nameEvent = ctrlText _eventEditBox;
+_eventName = ctrlText _eventEditBox;
 
-if (_nameEvent == "") then
+if (_eventName == "") then
 {
 	hint "Persistent Player Statistics\n\nMissing event name.";
 }
 else
 {
 	_request = _playerUid + "-requestSwitchEvent";
-	missionNamespace setVariable [_request, [_playerUid, _clientId, _nameEvent], false];
+	missionNamespace setVariable [_request, [_playerUid, _clientId, _eventName], false];
 	publicVariableServer _request;
 };

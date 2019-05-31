@@ -128,8 +128,8 @@ _answer addPublicVariableEventHandler
 	_countAdminsTotal = _broadcastVariableValue select 7;
 	_countAdminsOnline = _broadcastVariableValue select 8;
 	_isEvent = _broadcastVariableValue select 9;
-	_nameEvent = _broadcastVariableValue select 10;
-	_startTimeEvent = _broadcastVariableValue select 11;
+	_eventName = _broadcastVariableValue select 10;
+	_eventStartTime = _broadcastVariableValue select 11;
 	_allPlayerDetails = _broadcastVariableValue select 12;
 	
 	_isServerReachable =  PPS_ServerStatus;
@@ -145,7 +145,7 @@ _answer addPublicVariableEventHandler
 	_adminButton = (findDisplay 14984) displayCtrl 1600;
 	_eventButton = (findDisplay 14984) displayCtrl 1602;
 	_eventEditBox = (findDisplay 14984) displayCtrl 1603;
-	_eventEditBox ctrlSetText _nameEvent;
+	_eventEditBox ctrlSetText _eventName;
 	_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 	
 	if (_isInidbi2Installed) then {_isInidbi2Installed = "Online"} else {_isInidbi2Installed = "Offline"};
@@ -174,24 +174,24 @@ _answer addPublicVariableEventHandler
 		{
 			if(_x < 10) then
 			{
-				_startTimeEvent set [_forEachIndex, format ["0%1", str _x]];
+				_eventStartTime set [_forEachIndex, format ["0%1", str _x]];
 			}
 			else
 			{
-				_startTimeEvent set [_forEachIndex, str _x];
+				_eventStartTime set [_forEachIndex, str _x];
 			};
-		} forEach _startTimeEvent;
-		_year = _startTimeEvent select 0;
-		_month = _startTimeEvent select 1;
-		_day = _startTimeEvent select 2;
-		_hours = _startTimeEvent select 3;
-		_minutes = _startTimeEvent select 4;
-		_seconds = _startTimeEvent select 5;
+		} forEach _eventStartTime;
+		_year = _eventStartTime select 0;
+		_month = _eventStartTime select 1;
+		_day = _eventStartTime select 2;
+		_hours = _eventStartTime select 3;
+		_minutes = _eventStartTime select 4;
+		_seconds = _eventStartTime select 5;
 		_timeZone = PPS_TimeZone;
 		if (PPS_SummerTime) then {_timeZone = _timeZone + 1;};
 		_eventButton ctrlSetText "Stop Event";
 		_headlineText ctrlSetBackgroundColor [0.5, 0, 0, 1];
-		_headlineText ctrlSetText format ["Persistent Player Statistics - Event in Progress: %1 (Start Time %2-%3-%4 %5:%6:%7 UTC+%8)", _nameEvent, _year, _month, _day, _hours, _minutes, _seconds, _timeZone];
+		_headlineText ctrlSetText format ["Persistent Player Statistics - Event in Progress: %1 (Start Time %2-%3-%4 %5:%6:%7 UTC+%8)", _eventName, _year, _month, _day, _hours, _minutes, _seconds, _timeZone];
 	}
 	else
 	{
