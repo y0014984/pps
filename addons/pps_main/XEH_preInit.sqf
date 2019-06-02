@@ -1,11 +1,15 @@
 [
-	"PPS_ValuesUpdateInterval",
+	"PPS_UpdateInterval",
 	"LIST",
-	["Aktualierungsintervall", "Die Dauer in Sekunden zwischen 2 Updates, die der Client an den Server sendet. "],
-	"PPS Client Einstellungen",
+	[localize "STR_PPS_Main_Settings_Update_Interval", localize "STR_PPS_Main_Settings_Update_Interval_Description"],
+	localize "STR_PPS_Main_Settings_Category_Client_Settings",
 	[
 		[5, 10, 15],
-		[["5 sec", "5 Sekunden"], ["10 sec", "10 Sekunden"], ["15 sec", "15 Sekunden"]], 
+		[
+			[localize "STR_PPS_Main_Settings_Update_Interval_Value_5_sec", localize "STR_PPS_Main_Settings_Update_Interval_Value_5_sec_long"], 
+			[localize "STR_PPS_Main_Settings_Update_Interval_Value_10_sec", localize "STR_PPS_Main_Settings_Update_Interval_Value_10_sec_long"], 
+			[localize "STR_PPS_Main_Settings_Update_Interval_Value_15_sec", localize "STR_PPS_Main_Settings_Update_Interval_Value_15_sec_long"] 
+		], 
 		0
 	],
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
@@ -17,8 +21,8 @@
 [
 	"PPS_AllowSendingData",
 	"Checkbox",
-	["Daten senden erlauben", "Nur wenn diese Einstellung aktiv ist werden Daten an den Server gesendet. "],
-	"PPS Client Einstellungen",
+	[localize "STR_PPS_Main_Settings_Allow_Sending_Data", localize "STR_PPS_Main_Settings_Allow_Sending_Data_Description"],
+	localize "STR_PPS_Main_Settings_Category_Client_Settings",
 	false,
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
@@ -29,8 +33,8 @@
 [
 	"PPS_TimeZone",
 	"LIST",
-	["Zeitzone", "Die Zeitzone, in der sie spielen. Hiervon hängen die Zeitangaben im PPS Menü ab. "],
-	"PPS Client Einstellungen",
+	[localize "STR_PPS_Main_Settings_Timezone", localize "STR_PPS_Main_Settings_Timezone_Description"],
+	localize "STR_PPS_Main_Settings_Category_Client_Settings",
 	[
 		[0, 1, 2],
 		[["UTC+0", "Großbritannien"], ["UTC+1", "Deutschland"], ["UTC+2", "Ukraine"]], 
@@ -45,8 +49,8 @@
 [
 	"PPS_SummerTime",
 	"Checkbox",
-	["Sommerzeit", "Befinden sie sich in einem Land mit Sommerzeit? "],
-	"PPS Client Einstellungen",
+	[localize "STR_PPS_Main_Settings_Daylight_Saving_Time", localize "STR_PPS_Main_Settings_Daylight_Saving_Time_Description"],
+	localize "STR_PPS_Main_Settings_Category_Client_Settings",
 	true,
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
@@ -57,8 +61,8 @@
 [
 	"PPS_ClientLogging",
 	"Checkbox",
-	["Logging", "Sollen zu Debugging-Zwecken Log-Einträge in die RPT-Dateien geschrieben werden? "],
-	"PPS Client Einstellungen",
+	[localize "STR_PPS_Main_Settings_Client_Logging", "STR_PPS_Main_Settings_Client_Logging_Description"],
+	localize "STR_PPS_Main_Settings_Category_Client_Settings",
 	false,
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
@@ -69,8 +73,8 @@
 [
 	"PPS_ServerLogging",
 	"Checkbox",
-	["Logging", "Sollen zu Debugging-Zwecken Log-Einträge in die RPT-Dateien geschrieben werden? "],
-	"PPS Server Einstellungen",
+	[localize "STR_PPS_Main_Settings_Server_Logging", "STR_PPS_Main_Settings_Server_Logging_Description"],
+	localize "STR_PPS_Main_Settings_Category_Server_Settings",
 	false,
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  

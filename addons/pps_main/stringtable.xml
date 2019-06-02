@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="Persistent Player Statistics">
+	<Package name="Main">
+		<Container name="General">
+			<Key ID="STR_PPS_Main_Missing_Stringtable_Key">
+				<English>Missing Stringtable Key</English>
+				<German>Fehlender Stringtable Schlüssel</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Online">
+				<English>Online</English>
+				<German>Online</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Offline">
+				<English>Offline</English>
+				<German>Offline</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Admin">
+				<English>Admin</English>
+				<German>Admin</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Player">
+				<English>Player</English>
+				<German>Spieler</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Logged_In">
+				<English>Logged In</English>
+				<German>eingeloggt</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Error">
+				<English>Error: %1</English>
+				<German>Fehler: %1</German>
+			</Key>
+		</Container>
+		<Container name="Dialog">
+			<Key ID="STR_PPS_Main_Dialog_Head">
+				<English>Persistent Player Statistics - Event in Progress: %1</English>
+				<German>Persistent Player Statistics - laufendes Event: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Head_Time">
+				<English>Persistent Player Statistics - Event in Progress: %1 (Start Time %2-%3-%4 %5:%6:%7 UTC+%8)</English>
+				<German>Persistent Player Statistics - laufendes Event: %1 (Startzeit %2-%3-%4 %5:%6:%7 UTC+%8)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_No_Event">
+				<English>None</English>
+				<German>keines</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Server_Status">
+				<English>Server Status: %1 - Database Status: %2</English>
+				<German>Server Status: %1 - Datenbank Status: %2</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Player_Status">
+				<English>Players Total: %1 - Players Online: %2 - Admins Total: %3 - Admins Online: %4</English>
+				<German>Spieler gesamt: %1 - Spieler online: %2 - Admins gesamt: %3 - Admins online: %4</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Admin">
+				<English>Admin</English>
+				<German>Admin</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Admin_Login">
+				<English>Login Admin</English>
+				<German>Admin einloggen</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Admin_Logout">
+				<English>Logout Admin</English>
+				<German>Admin ausloggen</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Event">
+				<English>Event</English>
+				<German>Event</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Event_Start">
+				<English>Start Event</English>
+				<German>Event starten</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Event_Stop">
+				<English>Stop Event</English>
+				<German>Event stoppen</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Track_Value">
+				<English>Track Value</English>
+				<German>Wert verfolgen</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Track_Value_On">
+				<English>Track Value On</English>
+				<German>Wert verfolgen</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Track_Value_Off">
+				<English>Track Value Off</English>
+				<German>Wert nicht verfolgen</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Update">
+				<English>Update</English>
+				<German>aktualisieren</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_List_Tracking_Active">
+				<English>%1 (Tracking active)</English>
+				<German>%1 (Verfolgung aktiv)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_List_Value_Not_Recorded">
+				<English>Value: %1 not recorded yet</English>
+				<German>Wert: %1 bisher nicht aufgezeichnet</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_List_Event">
+				<English>PPS Event: %1 (%2-%3-%4 >> %5 min)</English>
+				<German>PPS Event: %1 (%2-%3-%4 >> %5 min)</German>
+			</Key>
+		</Container>
+		<Container name="Keybinds">
+			<Key ID="STR_PPS_Main_Keybinds_Category">
+				<English>PPS</English>
+				<German>PPS</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Keybinds_Open_Dialog">
+				<English>open PPS menu</English>
+				<German>PPS Menü öffnen</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Keybinds_Open_Dialog_Description">
+				<English>opens the PPS menu and shows statistics</English>
+				<German>Öffnet das PPS Menü und zeigt Statistiken</German>
+			</Key>
+		</Container>
+		<Container name="Settings">
+			<Key ID="STR_PPS_Main_Settings_Category_Client_Settings">
+				<English>PPS client settings</English>
+				<German>PPS Client Einstellungen</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Category_Server_Settings">
+				<English>PPS server settings</English>
+				<German>PPS Server Einstellungen</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Update_Interval">
+				<English>Update Interval</English>
+				<German>Aktualierungsintervall</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Update_Interval_Description">
+				<English>The duration between 2 updates, the client is sending to server.</English>
+				<German>Die Dauer in Sekunden zwischen 2 Updates, die der Client an den Server sendet.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Update_Interval_Value_5_sec">
+				<English>5 sec</English>
+				<German>5s</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Update_Interval_Value_5_sec_long">
+				<English>5 seconds</English>
+				<German>5 Sekunden</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Update_Interval_Value_10_sec">
+				<English>10 sec</English>
+				<German>10s</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Update_Interval_Value_10_sec_long">
+				<English>10 seconds</English>
+				<German>10 Sekunden</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Update_Interval_Value_15_sec">
+				<English>15 sec</English>
+				<German>15s</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Update_Interval_Value_15_sec_long">
+				<English>15 seconds</English>
+				<German>15 Sekunden</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Allow_Sending_Data">
+				<English>allow sending data</English>
+				<German>Daten senden erlauben</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Allow_Sending_Data_Description">
+				<English>Data is only send to server if this option is checked.</English>
+				<German>Nur wenn diese Einstellung aktiv ist werden Daten an den Server gesendet.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Timezone">
+				<English>timezone</English>
+				<German>Zeitzone</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Timezone_Description">
+				<English>Your timezone. Times and durations in game depend on this value.</English>
+				<German>Die Zeitzone, in der sie spielen. Hiervon hängen die Zeitangaben im PPS Menü ab.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Daylight_Saving_Time">
+				<English>daylight saving time</English>
+				<German>Sommerzeit</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Daylight_Saving_Time_Description">
+				<English>Do you live in a country with saylight saving time?</English>
+				<German>Befinden sie sich in einem Land mit Sommerzeit?</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Client_Logging">
+				<English>logging</English>
+				<German>Logging</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Client_Logging_Description">
+				<English>For debugging purposes, should be log entries written to the rpt files?</English>
+				<German>Sollen zu Debugging-Zwecken Log-Einträge in die RPT-Dateien geschrieben werden?</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Server_Logging">
+				<English>logging</English>
+				<German>Logging</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Server_Logging_Description">
+				<English>For debugging purposes, should be log entries written to the rpt files?</English>
+				<German>Sollen zu Debugging-Zwecken Log-Einträge in die RPT-Dateien geschrieben werden?</German>
+			</Key>
+		</Container>
+		<Container name="Notifications">
+			<Key ID="STR_PPS_Main_Notifications_Missing_Event_Name">
+				<English>Persistent Player Statistics\n\nMissing event name.</English>
+				<German>Persistent Player Statistics\n\nEvent-Name fehlt.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_No_Tracking_Value_Selected">
+				<English>Persistent Player Statistics\n\nNo value for tracking selected.</English>
+				<German>Persistent Player Statistics\n\nKein Wert zur Verfolgung ausgewählt.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Sending_Data_Not_Allowed">
+				<English>Persistent Player Statistics\n\nSending data not allowed. See mod settings.</English>
+				<German>Persistent Player Statistics\n\nDas Senden von Daten ist deaktiviert. Schau in die Mod-Einstellungen.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Login_Denied_Too_Many_Admins">
+				<English>Persistent Player Statistics\n\nAdmin login denied. There ist another admin logged in.</English>
+				<German>Persistent Player Statistics\n\nAdmin Login verweigert. Es ist bereits ein Admin eingeloggt.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Login_Denied_Missing_Permission">
+				<English>Persistent Player Statistics\n\nAdmin login denied. You have no admin permissions. Ask your server admin.</English>
+				<German>Persistent Player Statistics\n\nAdmin Login verweigert. Du hast keine Admin-Berechtigung. Frag deinen Server-Administrator.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Event_Started">
+				<English>Persistent Player Statistics\n\nEvent started: %1</English>
+				<German>Persistent Player Statistics\n\nEvent wurde gestartet: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Event_Stopped">
+				<English>Persistent Player Statistics\n\nEvent stopped: %1</English>
+				<German>Persistent Player Statistics\n\nEvent wurde beendet: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Tracking">
+				<English>Persistent Player Statistics\n\nKey: %1\nValue: %2</English>
+				<German>Persistent Player Statistics\n\nSchlüssel: %1\nWert: %2</German>
+			</Key>
+		</Container>
+	</Package>
+</Project>

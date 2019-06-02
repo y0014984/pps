@@ -92,7 +92,7 @@ _answer addPublicVariableEventHandler
 		
 		if ((_isTrackStatisticsActive) && (_trackStatisticsKey == _key)) then
 		{
-			_index = _detailsListBox lbAdd (format ["%1 (Tracking active)", _text]);
+			_index = _detailsListBox lbAdd (format [localize "STR_PPS_Main_Dialog_List_Tracking_Active", _text]);
 			_detailsListBox lbSetData [_index, _key];
 			
 			_detailsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
@@ -148,26 +148,26 @@ _answer addPublicVariableEventHandler
 	_eventEditBox ctrlSetText _eventName;
 	_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 	
-	if (_isInidbi2Installed) then {_isInidbi2Installed = "Online"} else {_isInidbi2Installed = "Offline"};
-	if (_isServerReachable) then {_isServerReachable = "Online"} else {_isServerReachable = "Offline"};
+	if (_isInidbi2Installed) then {_isInidbi2Installed = localize "STR_PPS_Main_Online"} else {_isInidbi2Installed = localize "STR_PPS_Main_Offline"};
+	if (_isServerReachable) then {_isServerReachable = localize "STR_PPS_Main_Online"} else {_isServerReachable = localize "STR_PPS_Main_Offline"};
 	
-	_serverAndDatabaseStatusText ctrlSetText format ["Server Status: %1 - Database Status: %2",_isServerReachable, _isInidbi2Installed];
-	_playersAndAdminsCountText ctrlSetText format ["Players Total: %1 - Players Online: %2 - Admins Total: %3 - Admins Online: %4",_countPlayersTotal , _countPlayersOnline, _countAdminsTotal, _countAdminsOnline];
+	_serverAndDatabaseStatusText ctrlSetText format [localize "STR_PPS_Main_Dialog_Server_Status",_isServerReachable, _isInidbi2Installed];
+	_playersAndAdminsCountText ctrlSetText format [localize "STR_PPS_Main_Dialog_Player_Status",_countPlayersTotal , _countPlayersOnline, _countAdminsTotal, _countAdminsOnline];
 
 	if (_isAdminLoggedIn) then
 	{
-		_adminButton ctrlSetText "Logout Admin";
+		_adminButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Admin_Logout";
 		_eventButton ctrlShow true;
 		_eventEditBox ctrlShow true;
 	}
 	else
 	{
-		_adminButton ctrlSetText "Login Admin";
+		_adminButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Admin_Login";
 		_eventButton ctrlShow false;
 		_eventEditBox ctrlShow false;
 	};
 
-	_noEvent = "None";
+	_noEvent = localize "STR_PPS_Main_Dialog_No_Event";
 	
 	if (_isEvent) then
 	{
@@ -189,15 +189,15 @@ _answer addPublicVariableEventHandler
 		_seconds = _eventStartTime select 5;
 		_timeZone = PPS_TimeZone;
 		if (PPS_SummerTime) then {_timeZone = _timeZone + 1;};
-		_eventButton ctrlSetText "Stop Event";
+		_eventButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Event_Stop";
 		_headlineText ctrlSetBackgroundColor [0.5, 0, 0, 1];
-		_headlineText ctrlSetText format ["Persistent Player Statistics - Event in Progress: %1 (Start Time %2-%3-%4 %5:%6:%7 UTC+%8)", _eventName, _year, _month, _day, _hours, _minutes, _seconds, _timeZone];
+		_headlineText ctrlSetText format [localize "STR_PPS_Main_Dialog_Head_Time", _eventName, _year, _month, _day, _hours, _minutes, _seconds, _timeZone];
 	}
 	else
 	{
-		_eventButton ctrlSetText "Start Event";
+		_eventButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Event_Start";
 		_headlineText ctrlSetBackgroundColor [0, 0.5, 0, 1];
-		_headlineText ctrlSetText format ["Persistent Player Statistics - Event in Progress: %1", _noEvent];
+		_headlineText ctrlSetText format [localize "STR_PPS_Main_Dialog_Head", _noEvent];
 	};		
 
 	_allPlayerDetails sort true;
@@ -211,16 +211,16 @@ _answer addPublicVariableEventHandler
 		
 		if (_dbPlayerIsAdmin) then
 		{
-			_dbPlayerIsAdmin = "Admin";
+			_dbPlayerIsAdmin = localize "STR_PPS_Main_Admin";
 		}
 		else
 		{
-			_dbPlayerIsAdmin = "Player";
+			_dbPlayerIsAdmin = localize "STR_PPS_Main_Player";
 		};
 		
 		if (_dbPlayerIsAdminLoggedIn) then
 		{
-			_dbPlayerIsAdminLoggedIn = " Logged In";
+			_dbPlayerIsAdminLoggedIn = " " + (localize "STR_PPS_Main_Logged_In");
 		}
 		else
 		{
@@ -229,11 +229,11 @@ _answer addPublicVariableEventHandler
 		
 		if ((_dbPlayerUid == _playerUid) && _dbPlayerIsTrackStatisticsActive) then
 		{
-			_trackStatisticsButton ctrlSetText "Track Statistics Off";
+			_trackStatisticsButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Track_Value_Off";
 		}
 		else
 		{
-			_trackStatisticsButton ctrlSetText "Track Statistics On";
+			_trackStatisticsButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Track_Value_On";
 		};
 		
 		_index = _playersListBox lbAdd format ["%1 (%2%3)",_dbPlayerName, _dbPlayerIsAdmin, _dbPlayerIsAdminLoggedIn];	
