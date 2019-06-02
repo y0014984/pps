@@ -15,7 +15,7 @@ _eventName = ctrlText _eventEditBox;
 
 if (_eventName == "") then
 {
-	hint "Persistent Player Statistics\n\nMissing event name.";
+	hint localize "STR_PPS_Main_Notifications_Missing_Event_Name";
 }
 else
 {

@@ -66,6 +66,6 @@ if (hasInterface && isMultiplayer) then
 	}
 	else
 	{
-		hint "Persistent Player Statistics\nPPS_AllowSendingData disabled";
+		hint localize "STR_PPS_Main_Notifications_Sending_Data_Not_Allowed";
 	};
 };

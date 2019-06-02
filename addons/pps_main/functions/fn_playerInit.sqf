@@ -371,7 +371,7 @@ while {true} do
 	{
 		//hint format ["Speed: %1", speed player];
 		
-		_timeInEvent = PPS_ValuesUpdateInterval;
+		_timeInEvent = PPS_UpdateInterval;
 		
 		_timeOnFoot = 0;
 		_timeStandNoSpeed = 0;
@@ -478,122 +478,122 @@ while {true} do
 		
 		if (_vehiclePlayer == player) then 
 		{
-			_timeOnFoot = PPS_ValuesUpdateInterval;
+			_timeOnFoot = PPS_UpdateInterval;
 			
 			_stance = stance player;
 			
 			switch (true) do
 			{
-				case ((_speed == 0) && (_stance == "STAND")):{_timeStandNoSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed == 0) && (_stance == "CROUCH")):{_timeCrouchNoSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed == 0) && (_stance == "PRONE")):{_timeProneNoSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed > 0 && _speed < 8) && (_stance == "STAND")):{_timeStandLowSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed > 0 && _speed < 8) && (_stance == "CROUCH")):{_timeCrouchLowSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed > 0 && _speed < 2.5) && (_stance == "PRONE")):{_timeProneLowSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed >= 8 && _speed < 15) && (_stance == "STAND")):{_timeStandMidSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed >= 8 && _speed < 15) && (_stance == "CROUCH")):{_timeCrouchMidSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed >= 2.5 && _speed < 4.8) && (_stance == "PRONE")):{_timeProneMidSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed >= 15) && (_stance == "STAND")):{_timeStandHighSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed >= 15) && (_stance == "CROUCH")):{_timeCrouchHighSpeed = PPS_ValuesUpdateInterval;};
-				case ((_speed >= 4.8) && (_stance == "PRONE")):{_timeProneHighSpeed = PPS_ValuesUpdateInterval;};
+				case ((_speed == 0) && (_stance == "STAND")):{_timeStandNoSpeed = PPS_UpdateInterval;};
+				case ((_speed == 0) && (_stance == "CROUCH")):{_timeCrouchNoSpeed = PPS_UpdateInterval;};
+				case ((_speed == 0) && (_stance == "PRONE")):{_timeProneNoSpeed = PPS_UpdateInterval;};
+				case ((_speed > 0 && _speed < 8) && (_stance == "STAND")):{_timeStandLowSpeed = PPS_UpdateInterval;};
+				case ((_speed > 0 && _speed < 8) && (_stance == "CROUCH")):{_timeCrouchLowSpeed = PPS_UpdateInterval;};
+				case ((_speed > 0 && _speed < 2.5) && (_stance == "PRONE")):{_timeProneLowSpeed = PPS_UpdateInterval;};
+				case ((_speed >= 8 && _speed < 15) && (_stance == "STAND")):{_timeStandMidSpeed = PPS_UpdateInterval;};
+				case ((_speed >= 8 && _speed < 15) && (_stance == "CROUCH")):{_timeCrouchMidSpeed = PPS_UpdateInterval;};
+				case ((_speed >= 2.5 && _speed < 4.8) && (_stance == "PRONE")):{_timeProneMidSpeed = PPS_UpdateInterval;};
+				case ((_speed >= 15) && (_stance == "STAND")):{_timeStandHighSpeed = PPS_UpdateInterval;};
+				case ((_speed >= 15) && (_stance == "CROUCH")):{_timeCrouchHighSpeed = PPS_UpdateInterval;};
+				case ((_speed >= 4.8) && (_stance == "PRONE")):{_timeProneHighSpeed = PPS_UpdateInterval;};
 			};
 			
-			if (weaponLowered player) then {_timeWeaponLowered = PPS_ValuesUpdateInterval;};
-			if (player isIRLaserOn (currentWeapon player)) then {_timeIrLaserOn = PPS_ValuesUpdateInterval;};
-			if (player isFlashlightOn (currentWeapon player)) then {_timeFlashlightOn = PPS_ValuesUpdateInterval;};
+			if (weaponLowered player) then {_timeWeaponLowered = PPS_UpdateInterval;};
+			if (player isIRLaserOn (currentWeapon player)) then {_timeIrLaserOn = PPS_UpdateInterval;};
+			if (player isFlashlightOn (currentWeapon player)) then {_timeFlashlightOn = PPS_UpdateInterval;};
 			
 			_needReload = needReload player;
 			switch (true) do
 			{
-				case (_needReload == 0):{_timeMagazineFull = PPS_ValuesUpdateInterval};
-				case ((_needReload > 0) && (_needReload <= 0.33)):{_timeMagazineFillHigh = PPS_ValuesUpdateInterval};
-				case ((_needReload > 0.33) && (_needReload <= 0.66)):{_timeMagazineFillMid = PPS_ValuesUpdateInterval};
-				case ((_needReload > 0.66) && (_needReload < 1)):{_timeMagazineFillLow = PPS_ValuesUpdateInterval};
-				case (_needReload == 1):{_timeMagazineEmpty = PPS_ValuesUpdateInterval};
+				case (_needReload == 0):{_timeMagazineFull = PPS_UpdateInterval};
+				case ((_needReload > 0) && (_needReload <= 0.33)):{_timeMagazineFillHigh = PPS_UpdateInterval};
+				case ((_needReload > 0.33) && (_needReload <= 0.66)):{_timeMagazineFillMid = PPS_UpdateInterval};
+				case ((_needReload > 0.66) && (_needReload < 1)):{_timeMagazineFillLow = PPS_UpdateInterval};
+				case (_needReload == 1):{_timeMagazineEmpty = PPS_UpdateInterval};
 			};
 		}
 		else
 		{
-			_timeInVehicle = PPS_ValuesUpdateInterval;
+			_timeInVehicle = PPS_UpdateInterval;
 			
-			if(isEngineOn _vehiclePlayer) then {_timeInVehicleEngineOn = PPS_ValuesUpdateInterval;};
-			if(_speed > 0) then {_timeInVehicleMoving = PPS_ValuesUpdateInterval;};
-			if(!isTouchingGround _vehiclePlayer) then {_timeInVehicleFlying = PPS_ValuesUpdateInterval;};
+			if(isEngineOn _vehiclePlayer) then {_timeInVehicleEngineOn = PPS_UpdateInterval;};
+			if(_speed > 0) then {_timeInVehicleMoving = PPS_UpdateInterval;};
+			if(!isTouchingGround _vehiclePlayer) then {_timeInVehicleFlying = PPS_UpdateInterval;};
 			
 			switch (true) do
 			{
-				case ((_vehiclePlayer isKindOf "Car") && ((driver _vehiclePlayer) == player)):{_timeCarDriver = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Car") && ((gunner _vehiclePlayer) == player)):{_timeCarGunner = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Car") && ((commander _vehiclePlayer) == player)):{_timeCarCommander = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Car") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeCarPassenger = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Tank") && ((driver _vehiclePlayer) == player)):{_timeTankDriver = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Tank") && ((gunner _vehiclePlayer) == player)):{_timeTankGunner = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Tank") && ((commander _vehiclePlayer) == player)):{_timeTankCommander = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Tank") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeTankPassenger = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Truck") && ((driver _vehiclePlayer) == player)):{_timeTruckDriver = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Truck") && ((gunner _vehiclePlayer) == player)):{_timeTruckGunner = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Truck") && ((commander _vehiclePlayer) == player)):{_timeTruckCommander = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Truck") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeTruckPassenger = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Motorcycle") && ((driver _vehiclePlayer) == player)):{_timeMotorcycleDriver = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Motorcycle") && ((gunner _vehiclePlayer) == player)):{_timeMotorcycleGunner = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Motorcycle") && ((commander _vehiclePlayer) == player)):{_timeMotorcycleCommander = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Motorcycle") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeMotorcyclePassenger = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Helicopter") && ((driver _vehiclePlayer) == player)):{_timeHelicopterDriver = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Helicopter") && ((gunner _vehiclePlayer) == player)):{_timeHelicopterGunner = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Helicopter") && ((commander _vehiclePlayer) == player)):{_timeHelicopterCommander = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Helicopter") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeHelicopterPassenger = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Plane") && ((driver _vehiclePlayer) == player)):{_timePlaneDriver = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Plane") && ((gunner _vehiclePlayer) == player)):{_timePlaneGunner = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Plane") && ((commander _vehiclePlayer) == player)):{_timePlaneCommander = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Plane") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timePlanePassenger = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Ship") && ((driver _vehiclePlayer) == player)):{_timeShipDriver = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Ship") && ((gunner _vehiclePlayer) == player)):{_timeShipGunner = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Ship") && ((commander _vehiclePlayer) == player)):{_timeShipCommander = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Ship") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeShipPassenger = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Boat") && ((driver _vehiclePlayer) == player)):{_timeBoatDriver = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Boat") && ((gunner _vehiclePlayer) == player)):{_timeBoatGunner = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Boat") && ((commander _vehiclePlayer) == player)):{_timeBoatCommander = PPS_ValuesUpdateInterval};
-				case ((_vehiclePlayer isKindOf "Boat") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeBoatPassenger = PPS_ValuesUpdateInterval};
+				case ((_vehiclePlayer isKindOf "Car") && ((driver _vehiclePlayer) == player)):{_timeCarDriver = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Car") && ((gunner _vehiclePlayer) == player)):{_timeCarGunner = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Car") && ((commander _vehiclePlayer) == player)):{_timeCarCommander = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Car") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeCarPassenger = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Tank") && ((driver _vehiclePlayer) == player)):{_timeTankDriver = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Tank") && ((gunner _vehiclePlayer) == player)):{_timeTankGunner = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Tank") && ((commander _vehiclePlayer) == player)):{_timeTankCommander = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Tank") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeTankPassenger = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Truck") && ((driver _vehiclePlayer) == player)):{_timeTruckDriver = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Truck") && ((gunner _vehiclePlayer) == player)):{_timeTruckGunner = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Truck") && ((commander _vehiclePlayer) == player)):{_timeTruckCommander = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Truck") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeTruckPassenger = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Motorcycle") && ((driver _vehiclePlayer) == player)):{_timeMotorcycleDriver = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Motorcycle") && ((gunner _vehiclePlayer) == player)):{_timeMotorcycleGunner = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Motorcycle") && ((commander _vehiclePlayer) == player)):{_timeMotorcycleCommander = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Motorcycle") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeMotorcyclePassenger = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Helicopter") && ((driver _vehiclePlayer) == player)):{_timeHelicopterDriver = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Helicopter") && ((gunner _vehiclePlayer) == player)):{_timeHelicopterGunner = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Helicopter") && ((commander _vehiclePlayer) == player)):{_timeHelicopterCommander = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Helicopter") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeHelicopterPassenger = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Plane") && ((driver _vehiclePlayer) == player)):{_timePlaneDriver = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Plane") && ((gunner _vehiclePlayer) == player)):{_timePlaneGunner = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Plane") && ((commander _vehiclePlayer) == player)):{_timePlaneCommander = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Plane") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timePlanePassenger = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Ship") && ((driver _vehiclePlayer) == player)):{_timeShipDriver = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Ship") && ((gunner _vehiclePlayer) == player)):{_timeShipGunner = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Ship") && ((commander _vehiclePlayer) == player)):{_timeShipCommander = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Ship") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeShipPassenger = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Boat") && ((driver _vehiclePlayer) == player)):{_timeBoatDriver = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Boat") && ((gunner _vehiclePlayer) == player)):{_timeBoatGunner = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Boat") && ((commander _vehiclePlayer) == player)):{_timeBoatCommander = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Boat") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeBoatPassenger = PPS_UpdateInterval};
 			};
 			
-			if (isLightOn (vehicle player)) then {_timeVehicleLightOn = PPS_ValuesUpdateInterval;};
-			if (isLaserOn (vehicle player)) then {_timeVehicleLaser = PPS_ValuesUpdateInterval;};
-			if (isCollisionLightOn (vehicle player)) then {_timeVehicleCollisionLightOn = PPS_ValuesUpdateInterval;};
-			if (isVehicleRadarOn (vehicle player)) then {_timeVehicleRadarOn = PPS_ValuesUpdateInterval;};
+			if (isLightOn (vehicle player)) then {_timeVehicleLightOn = PPS_UpdateInterval;};
+			if (isLaserOn (vehicle player)) then {_timeVehicleLaser = PPS_UpdateInterval;};
+			if (isCollisionLightOn (vehicle player)) then {_timeVehicleCollisionLightOn = PPS_UpdateInterval;};
+			if (isVehicleRadarOn (vehicle player)) then {_timeVehicleRadarOn = PPS_UpdateInterval;};
 		};
 		
-		if (visibleMap) then {_timeMapVisible = PPS_ValuesUpdateInterval;};
-		if (visibleGPS) then {_timeGpsVisible = PPS_ValuesUpdateInterval;};
-		if (visibleCompass) then {_timeCompassVisible = PPS_ValuesUpdateInterval;};
-		if (visibleWatch) then {_timeWatchVisible = PPS_ValuesUpdateInterval;};
+		if (visibleMap) then {_timeMapVisible = PPS_UpdateInterval;};
+		if (visibleGPS) then {_timeGpsVisible = PPS_UpdateInterval;};
+		if (visibleCompass) then {_timeCompassVisible = PPS_UpdateInterval;};
+		if (visibleWatch) then {_timeWatchVisible = PPS_UpdateInterval;};
 		
 		_currentVisionMode = currentVisionMode player;
 		switch (_currentVisionMode) do
 		{
-			case 0:{_timeVisionModeDay = PPS_ValuesUpdateInterval;};
-			case 1:{_timeVisionModeNight = PPS_ValuesUpdateInterval;};
-			case 2:{_timeVisionModeThermal = PPS_ValuesUpdateInterval;};
+			case 0:{_timeVisionModeDay = PPS_UpdateInterval;};
+			case 1:{_timeVisionModeNight = PPS_UpdateInterval;};
+			case 2:{_timeVisionModeThermal = PPS_UpdateInterval;};
 		};
 		
-		if (isOnRoad player) then {_timeOnRoad = PPS_ValuesUpdateInterval;};
+		if (isOnRoad player) then {_timeOnRoad = PPS_UpdateInterval;};
 		
-		if (isBleeding player) then {_timeIsBleeding = PPS_ValuesUpdateInterval;};
-		if (isBurning player) then {_timeIsBurning = PPS_ValuesUpdateInterval;};
+		if (isBleeding player) then {_timeIsBleeding = PPS_UpdateInterval;};
+		if (isBurning player) then {_timeIsBurning = PPS_UpdateInterval;};
 		
 		_damage = damage player;
 		switch (true) do
 		{
-			case (_damage == 0):{_timeInjuredNone = PPS_ValuesUpdateInterval};
-			case ((_damage > 0) && (_damage <= 0.33)):{_timeInjuredLow = PPS_ValuesUpdateInterval};
-			case ((_damage > 0.33) && (_damage <= 0.66)):{_timeInjuredMed = PPS_ValuesUpdateInterval};
-			case ((_damage > 0.66) && (_damage < 1)):{_timeInjuredHigh = PPS_ValuesUpdateInterval};
-			case (_damage == 1):{_timeInjuredFull = PPS_ValuesUpdateInterval};
+			case (_damage == 0):{_timeInjuredNone = PPS_UpdateInterval};
+			case ((_damage > 0) && (_damage <= 0.33)):{_timeInjuredLow = PPS_UpdateInterval};
+			case ((_damage > 0.33) && (_damage <= 0.66)):{_timeInjuredMed = PPS_UpdateInterval};
+			case ((_damage > 0.66) && (_damage < 1)):{_timeInjuredHigh = PPS_UpdateInterval};
+			case (_damage == 1):{_timeInjuredFull = PPS_UpdateInterval};
 		};
 	
-		if (player getUnitTrait "Medic") then {_timeIsMedic = PPS_ValuesUpdateInterval;};
-		if (player getUnitTrait "Engineer") then {_timeIsEngineer = PPS_ValuesUpdateInterval;};
-		if (player getUnitTrait "ExplosiveSpecialist") then {_timeIsExplosiveSpecialist = PPS_ValuesUpdateInterval;};
-		if (player getUnitTrait "UAVHacker") then {_timeIsUavHacker = PPS_ValuesUpdateInterval;};
+		if (player getUnitTrait "Medic") then {_timeIsMedic = PPS_UpdateInterval;};
+		if (player getUnitTrait "Engineer") then {_timeIsEngineer = PPS_UpdateInterval;};
+		if (player getUnitTrait "ExplosiveSpecialist") then {_timeIsExplosiveSpecialist = PPS_UpdateInterval;};
+		if (player getUnitTrait "UAVHacker") then {_timeIsUavHacker = PPS_UpdateInterval;};
 		
 		_addons = activatedAddons;
 		/*
@@ -605,29 +605,29 @@ while {true} do
 		*/
 		if ((_addons find "ace_main") > -1) then
 		{
-			_timeAddonAceActive = PPS_ValuesUpdateInterval;
+			_timeAddonAceActive = PPS_UpdateInterval;
 			
-			if([player] call ace_medical_blood_fnc_isBleeding) then {_timeAceIsBleeding = PPS_ValuesUpdateInterval;};
+			if([player] call ace_medical_blood_fnc_isBleeding) then {_timeAceIsBleeding = PPS_UpdateInterval;};
 		};
 		if ((_addons find "tfar_core") > -1) then 
 		{
-			_timeAddonTfarActive = PPS_ValuesUpdateInterval;
+			_timeAddonTfarActive = PPS_UpdateInterval;
 			try
 			{
 				_activeLrRadio = player call TFAR_fnc_backpackLR;
-				if (!isNil "_activeLrRadio") then {_timeTfarHasLrRadio = PPS_ValuesUpdateInterval;};
-				if (call TFAR_fnc_haveSWRadio) then {_timeTfarHasSwRadio = PPS_ValuesUpdateInterval;};
-				if (player call TFAR_fnc_isSpeaking) then {_timeTfarIsSpeaking = PPS_ValuesUpdateInterval;};
+				if (!isNil "_activeLrRadio") then {_timeTfarHasLrRadio = PPS_UpdateInterval;};
+				if (call TFAR_fnc_haveSWRadio) then {_timeTfarHasSwRadio = PPS_UpdateInterval;};
+				if (player call TFAR_fnc_isSpeaking) then {_timeTfarIsSpeaking = PPS_UpdateInterval;};
 				switch (TF_speak_volume_level) do
 				{
-					case "normal":{_timeTfarSpeakVolumeNormal = PPS_ValuesUpdateInterval;};
-					case "yelling":{_timeTfarSpeakVolumeYelling = PPS_ValuesUpdateInterval;};
-					case "whispering":{_timeTfarSpeakVolumeWhispering = PPS_ValuesUpdateInterval;};
+					case "normal":{_timeTfarSpeakVolumeNormal = PPS_UpdateInterval;};
+					case "yelling":{_timeTfarSpeakVolumeYelling = PPS_UpdateInterval;};
+					case "whispering":{_timeTfarSpeakVolumeWhispering = PPS_UpdateInterval;};
 				};
 			}
 			catch
 			{
-				hint format ["Fehler: %1", str _exception];
+				hint format [localize "STR_PPS_Main_Error", str _exception];
 			};
 		};
 		
@@ -740,7 +740,7 @@ while {true} do
 		missionNamespace setVariable [_update, _updatedData, false];
 		publicVariableServer _update;
 	};
-	sleep PPS_ValuesUpdateInterval;
+	sleep PPS_UpdateInterval;
 };
 
 /* ================================================================================ */

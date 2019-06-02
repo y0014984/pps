@@ -34,7 +34,6 @@ class CfgMods
 {
     class PPS
 	{
-
         dir = "@PPS";
         name = "Persistent Player Statistics";
         hideName = "true";

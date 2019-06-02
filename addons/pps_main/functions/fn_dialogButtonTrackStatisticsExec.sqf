@@ -17,9 +17,9 @@ _data = _detailsListBox lbData _selectedIndex;
 _trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 _trackStatisticsButtonText = ctrlText _trackStatisticsButton;
 
-if ((_selectedIndex == -1) && (_trackStatisticsButtonText == "Track Statistics On")) then
+if ((_selectedIndex == -1) && (_trackStatisticsButtonText == localize "STR_PPS_Main_Dialog_Button_Track_Value_On")) then
 {
-	hint "Persistent Player Statistics\n\nNo statistics for tracking selected.";
+	hint localize "STR_PPS_Main_Notifications_No_Tracking_Value_Selected";
 }
 else
 {

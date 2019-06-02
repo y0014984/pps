@@ -7,9 +7,9 @@ profileNamespace setVariable ["cba_keybinding_registry", []]; saveProfileNamespa
 */
 
 [
-	"PPS",
+	localize "STR_PPS_Main_Keybinds_Category",
 	"ppsDialogOpen",
-	["PPS Menü öffnen", "Öffnet das PPS Menü und erlaubt Einsicht der Statisitik"],
+	[localize "STR_PPS_Main_Keybinds_Open_Dialog", localize "STR_PPS_Main_Keybinds_Open_Dialog_Description"],
 	{true;}, 
 	{_this call PPS_fnc_dialogOpen;}, 
 	[DIK_U, [false, false, false]]

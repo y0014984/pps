@@ -44,12 +44,12 @@ params ["_playerUid"];
 		}
 		else
 		{
-			"Persistent Player Statistics\n\nAdmin login denied. There ist another admin logged in." remoteExec ["hint", _clientId];
+			["STR_PPS_Main_Notifications_Login_Denied_Too_Many_Admins"] remoteExecCall ["PPS_fnc_hintLocalized", _clientId];
 		};
 	}
 	else
 	{
-		"Persistent Player Statistics\n\nAdmin login denied. You have no admin permissions. Ask your server admin." remoteExec ["hint", _clientId];
+		["STR_PPS_Main_Notifications_Login_Denied_Missing_Permission"] remoteExecCall ["PPS_fnc_hintLocalized", _clientId];
 	};
 	
 	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _dbPlayers;
@@ -168,10 +168,12 @@ params ["_playerUid"];
 			
 			_isEvent = true;
 			
-			format ["Persistent Player Statistics\n\nEvent started: %1", _eventName] remoteExec ["hint", -2];
+			["STR_PPS_Main_Notifications_Event_Started", _eventName] remoteExecCall ["PPS_fnc_hintLocalized"];
 		}
 		else
 		{
+			_eventStopTime = "getTimeStamp" call _dbEvents;
+			
 			_eventId = "";
 			{
 				if(_x < 10) then
@@ -202,10 +204,10 @@ params ["_playerUid"];
 			
 			_isEvent = false;
 			
-			format ["Persistent Player Statistics\n\nEvent stopped: %1", _eventName] remoteExec ["hint", -2];
+			["STR_PPS_Main_Notifications_Event_Stopped", _eventName] remoteExecCall ["PPS_fnc_hintLocalized"];
 		};
 		
-		_result = [_isEvent, _eventName, _eventStartTime];
+		_result = [_isEvent, _eventName, _eventStartTime, _eventStopTime];
 		
 		_answer = _playerUid + "-answerSwitchEvent";
 		missionNamespace setVariable [_answer, _result, false];
@@ -424,7 +426,7 @@ params ["_playerUid"];
 					};
 					case -1:
 					{
-						_tmpResult = _tmpResult + [[format ["Key: %1 not recorded yet", _key], _key]];
+						_tmpResult = _tmpResult + [[format [localize "STR_PPS_Main_Dialog_List_Value_Not_Recorded", _key], _key]];
 
 					};
 				};
@@ -465,7 +467,7 @@ params ["_playerUid"];
 			
 			if ((_eventAllActivePlayerIds find _requestedPlayerUid) > -1) then
 			{
-				_statisticsString = format ["PPS Event: %1 (%2-%3-%4 >> %5 min)", _eventName, (_eventStartTime select 0), (_eventStartTime select 1), (_eventStartTime select 2), _eventDuration];
+				_statisticsString = format [localize "STR_PPS_Main_Dialog_List_Event", _eventName, (_eventStartTime select 0), (_eventStartTime select 1), (_eventStartTime select 2), _eventDuration];
 				_tmpResult = _tmpResult + [[_statisticsString, ""]];
 			};
 		} forEach _sections;
@@ -602,7 +604,7 @@ params ["_playerUid"];
 			_eventName = ["read", [_x, "eventName", ""]] call _dbEvents;
 			_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
 			
-			hint format ["_isEvent: %1", _isEvent];
+			//hint format ["_isEvent: %1", _isEvent];
 		}; 
 	} forEach _events;
 
@@ -718,8 +720,7 @@ params ["_playerUid"];
 			};
 			if ((str _trackStatisticsValue) != (str "not set")) then
 			{
-				_trackStatisticsString = format ["Persistent Player Statistics\n\nKey: %1\nValue: %2", _trackStatisticsKey, _trackStatisticsValue];
-				_trackStatisticsString remoteExec ["hint", _trackStatisticsClientId];
+				["STR_PPS_Main_Notifications_Tracking", _trackStatisticsKey, _trackStatisticsValue] remoteExecCall ["PPS_fnc_hintLocalized", _trackStatisticsClientId];
 			};
 		};
 	
