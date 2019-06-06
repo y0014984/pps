@@ -17,7 +17,7 @@ params ["_playerUid"];
 	
 	if (_isAdmin) then
 	{
-		_sections = "getSections" call _dbPlayers;
+		_players = "getSections" call _dbPlayers;
 		
 		_isAnotherAdminLoggedIn = false;
 		{
@@ -29,7 +29,7 @@ params ["_playerUid"];
 				_isAnotherAdminLoggedIn = true;
 				breakOut "LoopAnotherAdminLoggedIn";
 			};
-		} forEach _sections;
+		} forEach _players;
 
 		if (!_isAnotherAdminLoggedIn) then
 		{
@@ -163,7 +163,7 @@ params ["_playerUid"];
 					
 			["write", [_eventId, "eventId", _eventId]] call _dbEvents;
 			["write", [_eventId, "eventName", _eventName]] call _dbEvents;
-			["write", [_eventId, "eventAllActivePlayerIds", _allActivePlayersIds]] call _dbEvents;
+			["write", [_eventId, "eventPlayerUids", _allActivePlayersIds]] call _dbEvents;
 			["write", [_eventId, "eventStartTime", _eventStartTime]] call _dbEvents;
 			
 			_isEvent = true;
@@ -226,7 +226,8 @@ params ["_playerUid"];
 	_playerUid = _broadcastVariableValue select 0;
 	_clientId = _broadcastVariableValue select 1;
 	_requestedPlayerUid = _broadcastVariableValue select 2;
-	_filterStatistics = _broadcastVariableValue select 3;
+	_requestedEventId = _broadcastVariableValue select 3;
+	_filterStatistics = _broadcastVariableValue select 4;
 	
 	_dbName = "pps-players";
 	_dbPlayers = ["new", _dbName] call OO_INIDBI;
@@ -449,48 +450,9 @@ params ["_playerUid"];
 		};
 
 		/* ---------------------------------------- */
-		
-		_dbName = "pps-events";
-		_dbEvents = ["new", _dbName] call OO_INIDBI;
-		
-		_sections = "getSections" call _dbEvents;
-		
-		_tmpResult = [];	
-		{
-			_eventName = ["read", [_x, "eventName", ""]] call _dbEvents;
-			_eventStartTime = ["read", [_x, "eventStartTime", ""]] call _dbEvents;
-			_eventDuration = ["read", [_x, "eventDuration", ""]] call _dbEvents;
-			_eventAllActivePlayerIds = ["read", [_x, "eventAllActivePlayerIds", ""]] call _dbEvents;
-			
-			if ((_eventStartTime select 1) < 10) then {_eventStartTime set [1, format["0%1", _eventStartTime select 1]]};
-			if ((_eventStartTime select 2) < 10) then {_eventStartTime set [2, format["0%1", _eventStartTime select 2]]};
-			
-			if ((_eventAllActivePlayerIds find _requestedPlayerUid) > -1) then
-			{
-				_statisticsString = format [localize "STR_PPS_Main_Dialog_List_Event", _eventName, (_eventStartTime select 0), (_eventStartTime select 1), (_eventStartTime select 2), _eventDuration];
-				_tmpResult = _tmpResult + [[_statisticsString, ""]];
-			};
-		} forEach _sections;
-
-		_resultEvents = [];	
-		if(_filterStatistics != "") then
-		{
-			{
-				if (((toLower(_x select 0)) find (toLower _filterStatistics)) > -1) then
-				{
-					_resultEvents = _resultEvents + [_x];
-				};
-			} forEach _tmpResult;
-		}
-		else
-		{
-			_resultEvents = _tmpResult;
-		};
-
-		/* ---------------------------------------- */
 
 		_answer = _playerUid + "-answerStatisticsFiltered";
-		missionNamespace setVariable [_answer, [_resultStatistics, _resultEvents, _isTrackStatisticsActive, _trackStatisticsKey], false];
+		missionNamespace setVariable [_answer, [_resultStatistics, _isTrackStatisticsActive, _trackStatisticsKey], false];
 		_clientId publicVariableClient _answer;
 		
 		[format ["[%1] PPS Player Request Statistics: (%2)", serverTime, _requestedPlayerUid]] call PPS_fnc_log;
@@ -506,6 +468,7 @@ params ["_playerUid"];
 	_playerUid = _broadcastVariableValue select 0;
 	_clientId = _broadcastVariableValue select 1;
 	_filterPlayers = _broadcastVariableValue select 2;
+	_filterEvents = _broadcastVariableValue select 3;
 	
 	/* ---------------------------------------- */
 	
@@ -527,17 +490,9 @@ params ["_playerUid"];
 	_countPlayersOnline = 0;
 	_countAdminsTotal = 0;
 	_countAdminsOnline = 0;
-
-	_sections = "getSections" call _dbPlayers;
-	_countPlayersTotal = count _sections;
 	
 	_allActivePlayers = allPlayers - entities "HeadlessClient_F";
 	_countPlayersOnline = count _allActivePlayers;
-	
-	{
-		_isAdmin = ["read", [_x, "isAdmin", false]] call _dbPlayers;
-		if (_isAdmin) then {_countAdminsTotal = _countAdminsTotal + 1};
-	} forEach _sections;
 	
 	{
 		_tmpPlayerUid = getPlayerUID _x;
@@ -547,29 +502,28 @@ params ["_playerUid"];
 	
 	/* ---------------------------------------- */
 
-	_sections = [];
+	_players = [];
 	
-	if (_isAdmin && _isAdminLoggedIn) then
-	{
-		_sections = "getSections" call _dbPlayers;
-	}
-	else
-	{
-		_sections = [_playerUid];
-	};
+	_players = "getSections" call _dbPlayers;
+	_countPlayersTotal = count _players;
+	
+	if (!_isAdmin && !_isAdminLoggedIn) then {_players = [_playerUid];};
 	
 	_tmpResult = [];
 	{
+		
+	
 		_tmpPlayerName = ["read", [_x, "playerName", ""]] call _dbPlayers;
 		_tmpPlayerUid = ["read", [_x, "playerUid", ""]] call _dbPlayers;
 		_tmpIsAdmin = ["read", [_x, "isAdmin", false]] call _dbPlayers;
+		if (_tmpIsAdmin) then {_countAdminsTotal = _countAdminsTotal + 1};
 		_tmpIsAdminLoggedIn = ["read", [_x, "isAdminLoggedIn", false]] call _dbPlayers;
 		
 		_tmpPlayerIsTrackStatisticsActive = ["read", [_x, "isTrackStatisticsActive", false]] call _dbPlayers;
 		_tmpPlayerTrackStatisticsKey = ["read", [_x, "trackStatisticsKey", ""]] call _dbPlayers;
 		
 		_tmpResult = _tmpResult + [[_tmpPlayerName, _tmpPlayerUid, _tmpIsAdmin, _tmpIsAdminLoggedIn, _tmpPlayerIsTrackStatisticsActive, _tmpPlayerTrackStatisticsKey]];
-	} forEach _sections;
+	} forEach _players;
 	
 	_filteredPlayers = [];
 	if(_filterPlayers != "") then
@@ -588,21 +542,33 @@ params ["_playerUid"];
 
 	/* ---------------------------------------- */
 
+	_filteredEvents = [];
 	_dbName = "pps-events";
 	_dbEvents = ["new", _dbName] call OO_INIDBI;
 	
 	_events = "getSections" call _dbEvents;
 	_isEvent = false;
-	_eventName = "";
-	_eventStartTime = [0, 0, 0, 0, 0, 0];
+	_activeEventName = "";
+	_activeEventStartTime = [0, 0, 0, 0, 0, 0];
 	_eventStopTime = [0, 0, 0, 0, 0, 0];
 	{
+		_eventName = ["read", [_x, "eventName", ""]] call _dbEvents;
+		_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+		
+		_eventPlayerUids = ["read", [_x, "eventPlayerUids", 0]] call _dbEvents;
+		if (((_eventPlayerUids find _playerUid) > -1) && ((((toLower _eventName) find (toLower _filterEvents)) > -1) || (_filterEvents == ""))) then
+		{
+			_eventId = ["read", [_x, "eventId", 0]] call _dbEvents;
+			_eventDuration = ["read", [_x, "eventDuration", 0]] call _dbEvents;
+			_filteredEvents = _filteredEvents + [[_eventId, _eventName, _eventDuration, _eventStartTime]];
+		};
+		
 		_eventStopTime = ["read", [_x, "eventStopTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
-		if (_eventStopTime isEqualTo [0, 0, 0, 0, 0, 0]) exitWith
+		if (_eventStopTime isEqualTo [0, 0, 0, 0, 0, 0]) then
 		{
 			_isEvent = true;
-			_eventName = ["read", [_x, "eventName", ""]] call _dbEvents;
-			_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+			_activeEventName = _eventName;
+			_activeEventStartTime = _eventStartTime;
 			
 			//hint format ["_isEvent: %1", _isEvent];
 		}; 
@@ -615,8 +581,9 @@ params ["_playerUid"];
 		_playerUid, _clientId, _isAdmin, _isAdminLoggedIn, 
 		_isInidbi2Installed, 
 		_countPlayersTotal, _countPlayersOnline, _countAdminsTotal, _countAdminsOnline, 
-		_isEvent, _eventName, _eventStartTime,
-		_filteredPlayers
+		_isEvent, _activeEventName, _activeEventStartTime,
+		_filteredPlayers,
+		_filteredEvents
 	];
 	
 	_answer = _playerUid + "-answerDialogUpdate";

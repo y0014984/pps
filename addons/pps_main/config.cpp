@@ -2,7 +2,7 @@
 //#include "dikcodes.h"
 
 #include "defines.hpp"
-#include "dialogs.hpp"
+#include "dialog.hpp"
 
 enableDebugConsole = 0;
 

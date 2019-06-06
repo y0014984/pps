@@ -10,9 +10,9 @@ _answer addPublicVariableEventHandler
 	[] call PPS_fnc_dialogUpdate;
 };
 
-_detailsListBox = (findDisplay 14984) displayCtrl 1501;
-_selectedIndex = lbCurSel _detailsListBox;
-_data = _detailsListBox lbData _selectedIndex;
+_statisticsListBox = (findDisplay 14984) displayCtrl 1502;
+_selectedIndex = lbCurSel _statisticsListBox;
+_data = _statisticsListBox lbData _selectedIndex;
 
 _trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 _trackStatisticsButtonText = ctrlText _trackStatisticsButton;
