@@ -23,10 +23,28 @@ if (hasInterface && isMultiplayer) then
 			_ppsDialog = (findDisplay 14984);
 			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
 		}];
+		
+		/* ---------------------------------------- */
+		
+		_filterEventsEditBox = _ppsDialog displayCtrl 1401;
+		_filterEventsEditBox ctrlAddEventHandler ["SetFocus",
+		{
+			params ["_control"];
+			
+			_ppsDialog = (findDisplay 14984);
+			_ppsDialog displayRemoveAllEventHandlers "KeyUp";
+		}];
+		_filterEventsEditBox ctrlAddEventHandler ["KillFocus",
+		{
+			params ["_control"];
+			
+			_ppsDialog = (findDisplay 14984);
+			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
+		}];
 
 		/* ---------------------------------------- */
 		
-		_filterStatisticsEditBox = _ppsDialog displayCtrl 1401;
+		_filterStatisticsEditBox = _ppsDialog displayCtrl 1402;
 		_filterStatisticsEditBox ctrlAddEventHandler ["SetFocus",
 		{
 			params ["_control"];

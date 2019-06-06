@@ -65,6 +65,16 @@ class PPS_Main_Dialog
 		{
 			idc = 1401;
 			text = "";
+			x = 0 * GUI_GRID_W + GUI_GRID_X;
+			y = 15.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 14.5 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			colorBackground[] = {0,0.5,0,0.5};
+		};
+		class PPS_RscEdit_1402: RscEdit
+		{
+			idc = 1402;
+			text = "";
 			x = 15 * GUI_GRID_W + GUI_GRID_X;
 			y = 4.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 25 * GUI_GRID_W;
@@ -77,11 +87,19 @@ class PPS_Main_Dialog
 			x = 0 * GUI_GRID_W + GUI_GRID_X;
 			y = 6 * GUI_GRID_H + GUI_GRID_Y;
 			w = 14.5 * GUI_GRID_W;
-			h = 17.5 * GUI_GRID_H;
+			h = 9 * GUI_GRID_H;
 		};
 		class PPS_RscListbox_1501: RscListbox
 		{
 			idc = 1501;
+			x = 0 * GUI_GRID_W + GUI_GRID_X;
+			y = 17 * GUI_GRID_H + GUI_GRID_Y;
+			w = 14.5 * GUI_GRID_W;
+			h = 6.5 * GUI_GRID_H;
+		};
+		class PPS_RscListbox_1502: RscListbox
+		{
+			idc = 1502;
 			x = 15 * GUI_GRID_W + GUI_GRID_X;
 			y = 6 * GUI_GRID_H + GUI_GRID_Y;
 			w = 25 * GUI_GRID_W;

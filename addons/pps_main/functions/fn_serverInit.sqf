@@ -20,13 +20,13 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 	
 	if ("exists" call _dbPlayers) then
 	{
-		_sections = "getSections" call _dbPlayers;
+		_players = "getSections" call _dbPlayers;
 		
 		{
 			[_x] call PPS_fnc_serverEventHandlerInit;
 			_playerUid = ["read", [_x, "playerUid", "<id not set>"]] call _dbPlayers;
 			[format ["[%1] DB PPS Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
-		} forEach _sections;
+		} forEach _players;
 	};	
 
 	"ppsServerHelo" addPublicVariableEventHandler
@@ -41,13 +41,13 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 		_dbName = "pps-players";
 		_dbPlayers = ["new", _dbName] call OO_INIDBI;
 
-		_sections = [];
+		_players = [];
 		if ("exists" call _dbPlayers) then
 		{
-			_sections = "getSections" call _dbPlayers;
+			_players = "getSections" call _dbPlayers;
 		};
 		
-		_result = _sections find _playerUid;
+		_result = _players find _playerUid;
 		
 		if (_result == -1) then
 		{
