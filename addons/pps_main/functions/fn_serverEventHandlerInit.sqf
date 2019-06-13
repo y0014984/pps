@@ -275,40 +275,40 @@ params ["_playerUid"];
 				_type = ["read", [_x, "type", ""]] call _dbStatistics;
 				_formatType = ["read", [_x, "formatType", -1]] call _dbStatistics;
 				_formatString = ["read", [_x, "formatString", ""]] call _dbStatistics;
+				_source = ["read", [_x, "source", ""]] call _dbStatistics;
 				
 					switch (_formatType) do
 					{
 						case 0:
 						{
-							_tmpResult = _tmpResult + [[format [_formatString, _value], _x]];
+							_tmpResult = _tmpResult + [[_formatString, _x, _source, _value, "", ""]];
 						};
 						case 1:
 						{
 							_roundValue = parseNumber ((_value / 3600) toFixed 2);
 							_roundValuePercent = parseNumber ((100 / _timeInEvent * _value) toFixed 2);
-							_tmpResult = _tmpResult + [[format [_formatString, "%", str _roundValue, str _roundValuePercent], _x]];
+							_tmpResult = _tmpResult + [[_formatString, _x, _source, "%", str _roundValue, str _roundValuePercent]];
 						};
 						case 2:
 						{
 							_roundValuePercent = parseNumber ((100 / _countProjectilesFired * _value) toFixed 2);
-							_tmpResult = _tmpResult + [[format [_formatString, "%", _value, _roundValuePercent], _x]];
+							_tmpResult = _tmpResult + [[_formatString, _x, _source, "%", _value, _roundValuePercent]];
 
 						};
 						case 3:
 						{
 							_roundValue = parseNumber ((_value / 3600) toFixed 2);
-							_tmpResult = _tmpResult + [[format [_formatString, str _roundValue], _x]];
+							_tmpResult = _tmpResult + [[_formatString, _x, _source, str _roundValue, "", ""]];
 						};
 						case 4:
 						{
 							_roundValuePercent = parseNumber ((100 / _countGrenadesThrown * _value) toFixed 2);
-							_tmpResult = _tmpResult + [[format [_formatString, "%", _value, _roundValuePercent], _x]];
+							_tmpResult = _tmpResult + [[_formatString, _x, _source, "%", _value, _roundValuePercent]];
 
 						};
 						case -1:
 						{
-							_tmpResult = _tmpResult + [[format [localize "STR_PPS_Main_Dialog_List_Value_Not_Recorded", _key], _key]];
-
+							_tmpResult = _tmpResult + [[localize "STR_PPS_Main_Dialog_List_Value_Not_Recorded", _x, _source, _value, "", ""]];
 						};
 					};
 					

@@ -129,41 +129,6 @@ _filterStatisticsEditBox ctrlAddEventHandler ["KeyUp",
 
 /* ================================================================================ */
 
-_answer = _playerUid + "-answerStatisticsFiltered";
-_answer addPublicVariableEventHandler
-{
-	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
-	
-	_playerStatistics = _broadcastVariableValue select 0;
-	_isTrackStatisticsActive = _broadcastVariableValue select 1;
-	_trackStatisticsKey = _broadcastVariableValue select 2;
-
-	_statisticsListBox = (findDisplay 14984) displayCtrl 1502;
-	lbClear _statisticsListBox;
-	_statisticsListBox lbSetCurSel -1;
-	
-	{
-		_text = _x select 0;
-		_key = _x select 1;
-		
-		if ((_isTrackStatisticsActive) && (_trackStatisticsKey == _key)) then
-		{
-			_index = _statisticsListBox lbAdd (format [localize "STR_PPS_Main_Dialog_List_Tracking_Active", _text]);
-			_statisticsListBox lbSetData [_index, _key];
-			
-			_statisticsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
-			_statisticsListBox lbSetCurSel _index;
-		}
-		else
-		{
-			_index = _statisticsListBox lbAdd _text;
-			_statisticsListBox lbSetData [_index, _key];
-		};
-	} forEach _playerStatistics;
-};
-
-/* ================================================================================ */
-
 _answer = _playerUid + "-answerDialogUpdate";
 _answer addPublicVariableEventHandler
 {
@@ -350,11 +315,49 @@ _answer addPublicVariableEventHandler
 
 /* ================================================================================ */
 
+_answer = _playerUid + "-answerStatisticsFiltered";
+_answer addPublicVariableEventHandler
+{
+	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
+	
+	_playerStatistics = _broadcastVariableValue select 0;
+	_isTrackStatisticsActive = _broadcastVariableValue select 1;
+	_trackStatisticsKey = _broadcastVariableValue select 2;
+
+	_statisticsListBox = (findDisplay 14984) displayCtrl 1502;
+	lbClear _statisticsListBox;
+	_statisticsListBox lbSetCurSel -1;
+	
+	{
+		_formatString = _x select 0;
+		_key = _x select 1;
+		_source = _x select 2;
+		_valueOne = _x select 3;
+		_valueTwo = _x select 4;
+		_valueThree = _x select 5;
+		
+		_statisticsText = (format ["[%1]", _source]) + " " + (format [(localize _formatString), _valueOne, _valueTwo, _valueThree]);
+		
+		if ((_isTrackStatisticsActive) && (_trackStatisticsKey == _key)) then
+		{
+			_index = _statisticsListBox lbAdd (format [localize "STR_PPS_Main_Dialog_List_Tracking_Active", _statisticsText]);
+			_statisticsListBox lbSetData [_index, _key];
+			
+			_statisticsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
+			_statisticsListBox lbSetCurSel _index;
+		}
+		else
+		{
+			_index = _statisticsListBox lbAdd _statisticsText;
+			_statisticsListBox lbSetData [_index, _key];
+		};
+	} forEach _playerStatistics;
+};
+
+/* ================================================================================ */
+
 _filterPlayersEditBox = (findDisplay 14984) displayCtrl 1400;
 _filterPlayers = ctrlText _filterPlayersEditBox;
-
-_filterEventsEditBox = (findDisplay 14984) displayCtrl 1401;
-_filterEvents = ctrlText _filterEventsEditBox;
 
 _request = _playerUid + "-requestDialogUpdate";
 missionNamespace setVariable [_request, [_playerUid, _clientId, _filterPlayers], false];
