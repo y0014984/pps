@@ -31,15 +31,15 @@ if (PPS_AllowSendingData) then
 		_formatString = "";
 		if (_weapon == "Throw") then
 		{
-			if ((_muzzle find "Grenade") > -1) then {_key = "countGrenadesThrown"; _formatString = "[A3] Count Grenades Thrown: %1";};
-			if ((_muzzle find "SmokeShell") > -1) then {_key = "countSmokeShellsThrown"; _formatString = "[A3] Count Smoke Shells Thrown: %1";};
-			if ((_muzzle find "Chemlight") > -1) then {_key = "countChemlightsThrown"; _formatString = "[A3] Count Chemlights Thrown: %1";};
-			if (_key == "") then {_key = "countUnknownThrown"; _formatString = "[A3] Count Unknown Thrown: %1";};
+			if ((_muzzle find "Grenade") > -1) then {_key = "countGrenadesThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Grenades_Thrown";};
+			if ((_muzzle find "SmokeShell") > -1) then {_key = "countSmokeShellsThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Smoke_Shells_Thrown";};
+			if ((_muzzle find "Chemlight") > -1) then {_key = "countChemlightsThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Chemlights_Thrown";};
+			if (_key == "") then {_key = "countUnknownThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Unknown_Thrown";};
 		}
 		else
 		{
 			_key = "countProjectilesFired";
-			_formatString = "[A3] Count Projectiles Fired: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Projectiles_Fired";
 		};
 		
 		_value = 1;
@@ -67,7 +67,7 @@ if (PPS_AllowSendingData) then
 				_key = "countAceCargoLoaded";
 				_value = 1;
 				_formatType = 0;
-				_formatString = "[ACE] Count Cargo Loaded: %1";		
+				_formatString = "STR_PPS_Main_Statistics_Count_Cargo_Loaded";		
 				
 				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 				_update = _playerUid + "-updateStatistics";
@@ -89,7 +89,7 @@ if (PPS_AllowSendingData) then
 				_key = "countAceCargoUnloaded";
 				_value = 1;
 				_formatType = 0;
-				_formatString = "[ACE] Count Cargo Unloaded: %1";		
+				_formatString = "STR_PPS_Main_Statistics_Count_Cargo_Unloaded";		
 				
 				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 				_update = _playerUid + "-updateStatistics";
@@ -111,7 +111,7 @@ if (PPS_AllowSendingData) then
 				_key = "countAceInteractMenuOpened";
 				_value = 1;
 				_formatType = 0;
-				_formatString = "[ACE] Count Interact Menu Opened: %1";		
+				_formatString = "STR_PPS_Main_Statistics_Count_Interact_Menu_Opened";		
 				
 				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 				_update = _playerUid + "-updateStatistics";
@@ -137,7 +137,7 @@ if (PPS_AllowSendingData) then
 					_key = "countAceUnconscious";
 					_value = 1;
 					_formatType = 0;
-					_formatString = "[ACE] Count Unconscious: %1";		
+					_formatString = "STR_PPS_Main_Statistics_Count_Unconscious";		
 					
 					_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 					_update = _playerUid + "-updateStatistics";
@@ -176,7 +176,7 @@ if (PPS_AllowSendingData) then
 					_key = "countTfarIsSpeaking";
 					_value = 1;
 					_formatType = 0;
-					_formatString = "[TFAR] Count Is Speaking: %1";		
+					_formatString = "STR_PPS_Main_Statistics_Count_Is_Speaking";
 					
 					_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 					_update = _playerUid + "-updateStatistics";
@@ -208,7 +208,7 @@ if (PPS_AllowSendingData) then
 				_key = "countTfarUsesRadio";
 				_value = 0.5;
 				_formatType = 0;
-				_formatString = "[TFAR] Count UsesRadio: %1";		
+				_formatString = "STR_PPS_Main_Statistics_Count_Uses_Radio";	
 				
 				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 				_update = _playerUid + "-updateStatistics";
@@ -246,7 +246,7 @@ if (PPS_AllowSendingData) then
 			_key = "countCuratorInterfaceOpened";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Interface Zeus Opened: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Zeus_Opened";
 		};
 
 		if (inputAction "Gear" > 0) then 
@@ -254,7 +254,7 @@ if (PPS_AllowSendingData) then
 			_key = "countGearInterfaceOpened";
 			_value = 0.5;
 			_formatType = 0;
-			_formatString = "[A3] Count Interface Gear Opened: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Gear_Opened";
 			
 			//hint "Inventory opened";
 		};
@@ -264,7 +264,7 @@ if (PPS_AllowSendingData) then
 			_key = "countCompassInterfaceOpened";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Interface Compass Opened: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Compass_Opened";
 		};
 		
 		if (inputAction "Watch" > 0) then 
@@ -272,7 +272,7 @@ if (PPS_AllowSendingData) then
 			_key = "countWatchInterfaceOpened";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Interface Watch Opened: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Watch_Opened";
 		};
 		
 		if (inputAction "Binocular" > 0) then 
@@ -280,84 +280,84 @@ if (PPS_AllowSendingData) then
 			_key = "countBinocularUsed";
 			_value = 0.5;
 			_formatType = 0;
-			_formatString = "[A3] Count Binocular used: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Binocular_Used";
 		};
 		if (inputAction "Optics" > 0) then 
 		{
 			_key = "countOpticsUsed";
 			_value = 0.5;
 			_formatType = 0;
-			_formatString = "[A3] Count Optics used: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Optics_Used";
 		};
 		if (inputAction "OpticsTemp" > 0) then 
 		{
 			_key = "countOpticsUsed";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Optics used: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Optics_Used";
 		};
 		if (inputAction "EngineToggle" > 0) then 
 		{
 			_key = "countEngineToggle";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Engine Toggle: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Engine_Toggle";
 		};
 		if (inputAction "ReloadMagazine" > 0) then 
 		{
 			_key = "countMagazineReloaded";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Magazine Reloaded: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Magazine_Reloaded";
 		};
 		if (inputAction "holdBreath" > 0) then 
 		{
 			_key = "countBreathHolded";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Breath Holded: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Breath_Holded";
 		};
 		if (inputAction "ZoomTemp" > 0) then 
 		{
 			_key = "countZoomUsed";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Zoom Used: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Zoom_Used";
 		};
 		if (inputAction "LeanLeft" > 0) then 
 		{
 			_key = "countLeanLeft";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Lean Left: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Lean_Left";
 		};
 		if (inputAction "LeanRight" > 0) then 
 		{
 			_key = "countLeanRight";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Lean Right: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Lean_Right";
 		};
 		if (inputAction "Salute" > 0) then 
 		{
 			_key = "countSalute";
 			_value = 0.5;
 			_formatType = 0;
-			_formatString = "[A3] Count Salute: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Salute";
 		};
 		if (inputAction "SitDown" > 0) then 
 		{
 			_key = "countSitDown";
 			_value = 0.5;
 			_formatType = 0;
-			_formatString = "[A3] Count Sit Down: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Sit_Down";
 		};
 		if (inputAction "GetOver" > 0) then 
 		{
 			_key = "countGetOver";
 			_value = 1;
 			_formatType = 0;
-			_formatString = "[A3] Count Get Over: %1";
+			_formatString = "STR_PPS_Main_Statistics_Count_Get_Over";
 		};
 		if (_key != "") then
 		{
@@ -646,96 +646,96 @@ while {true} do
 		[
 			_playerUid,
 			[
-				["timeInEvent", _timeInEvent, 1, 3, "Time in Event: %1 hrs", "A3"],  
-				["timeOnFoot", _timeOnFoot, 1, 1, "[A3] Time On Foot: %2 hrs (%3%1)", "A3"],  
-				["timeStandNoSpeed", _timeStandNoSpeed, 1, 1, "[A3] Time Stand No Speed: %2 hrs (%3%1)", "A3"],  
-				["timeCrouchNoSpeed", _timeCrouchNoSpeed, 1, 1, "[A3] Time Crouch No Speed: %2 hrs (%3%1)", "A3"],  
-				["timeProneNoSpeed", _timeProneNoSpeed, 1, 1, "[A3] Time Prone No Speed: %2 hrs (%3%1)", "A3"],  
-				["timeStandLowSpeed", _timeStandLowSpeed, 1, 1, "[A3] Time Stand Low Speed: %2 hrs (%3%1)", "A3"],  
-				["timeCrouchLowSpeed", _timeCrouchLowSpeed, 1, 1, "[A3] Time Crouch Low Speed: %2 hrs (%3%1)", "A3"],  
-				["timeProneLowSpeed", _timeProneLowSpeed, 1, 1, "[A3] Time Prone Low Speed: %2 hrs (%3%1)", "A3"],  
-				["timeStandMidSpeed", _timeStandMidSpeed, 1, 1, "[A3] Time Stand Mid Speed: %2 hrs (%3%1)", "A3"],  
-				["timeCrouchMidSpeed", _timeCrouchMidSpeed, 1, 1, "[A3] Time Crouch Mid Speed: %2 hrs (%3%1)", "A3"],  
-				["timeProneMidSpeed", _timeProneMidSpeed, 1, 1, "[A3] Time Prone Mid Speed: %2 hrs (%3%1)", "A3"],  
-				["timeStandHighSpeed", _timeStandHighSpeed, 1, 1, "[A3] Time Stand High Speed: %2 hrs (%3%1)", "A3"],  
-				["timeCrouchHighSpeed", _timeCrouchHighSpeed, 1, 1, "[A3] Time Crouch High Speed: %2 hrs (%3%1)", "A3"],  
-				["timeProneHighSpeed", _timeProneHighSpeed, 1, 1, "[A3] Time Prone High Speed: %2 hrs (%3%1)", "A3"],  
-				["timeInVehicle", _timeInVehicle, 1, 1, "[A3] Time In Vehicle: %2 hrs (%3%1)", "A3"], 
-				["timeInVehicleEngineOn", _timeInVehicleEngineOn, 1, 1, "[A3] Time In Vehicle Engine On: %2 hrs (%3%1)", "A3"], 
-				["timeInVehicleMoving", _timeInVehicleMoving, 1, 1, "[A3] Time In Vehicle Moving: %2 hrs (%3%1)", "A3"], 
-				["timeInVehicleFlying", _timeInVehicleFlying, 1, 1, "[A3] Time In Vehicle Flying: %2 hrs (%3%1)", "A3"], 
-				["timeCarDriver", _timeCarDriver, 1, 1, "[A3] Time Car Driver: %2 hrs (%3%1)", "A3"],  
-				["timeCarGunner", _timeCarGunner, 1, 1, "[A3] Time Car Gunner: %2 hrs (%3%1)", "A3"], 
-				["timeCarCommander", _timeCarCommander, 1, 1, "[A3] Time Car Commander: %2 hrs (%3%1)", "A3"],  
-				["timeCarPassenger", _timeCarPassenger, 1, 1, "[A3] Time Car Passenger: %2 hrs (%3%1)", "A3"],  
-				["timeTankDriver", _timeTankDriver, 1, 1, "[A3] Time Tank Driver: %2 hrs (%3%1)", "A3"],  
-				["timeTankGunner", _timeTankGunner, 1, 1, "[A3] Time Tank Gunner: %2 hrs (%3%1)", "A3"],  
-				["timeTankCommander", _timeTankCommander, 1, 1, "[A3] Time Tank Commander: %2 hrs (%3%1)", "A3"],  
-				["timeTankPassenger", _timeTankPassenger, 1, 1, "[A3] Time Tank Passenger: %2 hrs (%3%1)", "A3"],  
-				["timeTruckDriver", _timeTruckDriver, 1, 1, "[A3] Time Truck Driver: %2 hrs (%3%1)", "A3"],  
-				["timeTruckGunner", _timeTruckGunner, 1, 1, "[A3] Time Truck Gunner: %2 hrs (%3%1)", "A3"],  
-				["timeTruckCommander", _timeTruckCommander, 1, 1, "[A3] Time Truck Commander: %2 hrs (%3%1)", "A3"],  
-				["timeTruckPassenger", _timeTruckPassenger, 1, 1, "[A3] Time Truck Passenger: %2 hrs (%3%1)", "A3"],  
-				["timeMotorcycleDriver", _timeMotorcycleDriver, 1, 1, "[A3] Time Motorcycle Driver: %2 hrs (%3%1)", "A3"],  
-				["timeMotorcycleGunner", _timeMotorcycleGunner, 1, 1, "[A3] Time Motorcycle Gunner: %2 hrs (%3%1)", "A3"],  
-				["timeMotorcycleCommander", _timeMotorcycleCommander, 1, 1, "[A3] Time Motorcycle Commander: %2 hrs (%3%1)", "A3"],  
-				["timeMotorcyclePassenger", _timeMotorcyclePassenger, 1, 1, "[A3] Time Motorcycle Passenger: %2 hrs (%3%1)", "A3"],  
-				["timeHelicopterDriver", _timeHelicopterDriver, 1, 1, "[A3] Time Helicopter Driver: %2 hrs (%3%1)", "A3"],  
-				["timeHelicopterGunner", _timeHelicopterGunner, 1, 1, "[A3] Time Helicopter Gunner: %2 hrs (%3%1)", "A3"],  
-				["timeHelicopterCommander", _timeHelicopterCommander, 1, 1, "[A3] Time Helicopter Commander: %2 hrs (%3%1)", "A3"],  
-				["timeHelicopterPassenger", _timeHelicopterPassenger, 1, 1, "[A3] Time Helicopter Passenger: %2 hrs (%3%1)", "A3"],  
-				["timePlaneDriver", _timePlaneDriver, 1, 1, "[A3] Time Plane Driver: %2 hrs (%3%1)", "A3"],  
-				["timePlaneGunner", _timePlaneGunner, 1, 1, "[A3] Time Plane Gunner: %2 hrs (%3%1)", "A3"],  
-				["timePlaneCommander", _timePlaneCommander, 1, 1, "[A3] Time Plane Commander: %2 hrs (%3%1)", "A3"],  
-				["timePlanePassenger", _timePlanePassenger, 1, 1, "[A3] Time Plane Passenger: %2 hrs (%3%1)", "A3"],  
-				["timeShipDriver", _timeShipDriver, 1, 1, "[A3] Time Ship Driver: %2 hrs (%3%1)", "A3"],  
-				["timeShipGunner", _timeShipGunner, 1, 1, "[A3] Time Ship Gunner: %2 hrs (%3%1)", "A3"],  
-				["timeShipCommander", _timeShipCommander, 1, 1, "[A3] Time Ship Commander: %2 hrs (%3%1)", "A3"],  
-				["timeShipPassenger", _timeShipPassenger, 1, 1, "[A3] Time Ship Passenger: %2 hrs (%3%1)", "A3"],  
-				["timeBoatDriver", _timeBoatDriver, 1, 1, "[A3] Time Boat Driver: %2 hrs (%3%1)", "A3"],  
-				["timeBoatGunner", _timeBoatGunner, 1, 1, "[A3] Time Boat Gunner: %2 hrs (%3%1)", "A3"],  
-				["timeBoatCommander", _timeBoatCommander, 1, 1, "[A3] Time Boat Commander: %2 hrs (%3%1)", "A3"],  
-				["timeBoatPassenger", _timeBoatPassenger, 1, 1, "[A3] Time Boat Passenger: %2 hrs (%3%1)", "A3"],
-				["timeVehicleLightOn", _timeVehicleLightOn, 1, 1, "[A3] Time Vehicle Light On: %2 hrs (%3%1)", "A3"],  
-				["timeVehicleLaser", _timeVehicleLaser, 1, 1, "[A3] Time Vehicle Laser On: %2 hrs (%3%1)", "A3"],  
-				["timeVehicleCollisionLightOn", _timeVehicleCollisionLightOn, 1, 1, "[A3] Time Vehicle Collision Light On: %2 hrs (%3%1)", "A3"],  
-				["timeVehicleRadarOn", _timeVehicleRadarOn, 1, 1, "[A3] Time Vehicle Radar On: %2 hrs (%3%1)", "A3"],  
-				["timeMapVisible", _timeMapVisible, 1, 1, "[A3] Time Map Visible: %2 hrs (%3%1)", "A3"],  
-				["timeGpsVisible", _timeGpsVisible, 1, 1, "[A3] Time Gps Visible: %2 hrs (%3%1)", "A3"],  
-				["timeCompassVisible", _timeCompassVisible, 1, 1, "[A3] Time Compass Visible: %2 hrs (%3%1)", "A3"],  
-				["timeWatchVisible", _timeWatchVisible, 1, 1, "[A3] Time Watch Visible: %2 hrs (%3%1)", "A3"],  
-				["timeVisionModeDay", _timeVisionModeDay, 1, 1, "[A3] Time Vision Mode Day: %2 hrs (%3%1)", "A3"],  
-				["timeVisionModeNight", _timeVisionModeNight, 1, 1, "[A3] Time Vision Mode Night: %2 hrs (%3%1)", "A3"],  
-				["timeVisionModeThermal", _timeVisionModeThermal, 1, 1, "[A3] Time Vision Mode Thermal: %2 hrs (%3%1)", "A3"],  
-				["timeWeaponLowered", _timeWeaponLowered, 1, 1, "[A3] Time Weapon Lowered: %2 hrs (%3%1)", "A3"], 
-				["timeOnRoad", _timeOnRoad, 1, 1, "[A3] Time On Road: %2 hrs (%3%1)", "A3"], 
-				["timeIsBleeding", _timeIsBleeding, 1, 1, "[A3] Time Is Bleeding: %2 hrs (%3%1)", "A3"], 
-				["timeIsBurning", _timeIsBurning, 1, 1, "[A3] Time Is Burning: %2 hrs (%3%1)", "A3"], 
-				["timeInjuredNone", _timeInjuredNone, 1, 1, "[A3] Time Injured None: %2 hrs (%3%1)", "A3"], 
-				["timeInjuredLow", _timeInjuredLow, 1, 1, "[A3] Time Infured Low: %2 hrs (%3%1)", "A3"], 
-				["timeInjuredMed", _timeInjuredMed, 1, 1, "[A3] Time Injured Med: %2 hrs (%3%1)", "A3"], 
-				["timeInjuredHigh", _timeInjuredHigh, 1, 1, "[A3] Time Injured High: %2 hrs (%3%1)", "A3"], 
-				["timeInjuredFull", _timeInjuredFull, 1, 1, "[A3] Time Injured Full: %2 hrs (%3%1)", "A3"], 
-				["timeIrLaserOn", _timeIrLaserOn, 1, 1, "[A3] Time IR Laser On: %2 hrs (%3%1)", "A3"], 
-				["timeFlashlightOn", _timeFlashlightOn, 1, 1, "[A3] Time Flashlight On: %2 hrs (%3%1)", "A3"], 
-				["timeMagazineFull", _timeMagazineFull, 1, 1, "[A3] Time Magazine Full: %2 hrs (%3%1)", "A3"], 
-				["timeMagazineFillHigh", _timeMagazineFillHigh, 1, 1, "[A3] Time Magazine Fill High: %2 hrs (%3%1)", "A3"], 
-				["timeMagazineFillMid", _timeMagazineFillMid, 1, 1, "[A3] Time Magazine Fill Med: %2 hrs (%3%1)", "A3"], 
-				["timeMagazineFillLow", _timeMagazineFillLow, 1, 1, "[A3] Time Magazine Fill Low: %2 hrs (%3%1)", "A3"], 
-				["timeMagazineEmpty", _timeMagazineEmpty, 1, 1, "[A3] Time Magazine Empty: %2 hrs (%3%1)", "A3"], 
-				["timeIsMedic", _timeIsMedic, 1, 1, "[A3] Time Is Medic: %2 hrs (%3%1)", "A3"], 
-				["timeIsEngineer", _timeIsEngineer, 1, 1, "[A3] Time Is Engineer: %2 hrs (%3%1)", "A3"], 
-				["timeIsExplosiveSpecialist", _timeIsExplosiveSpecialist, 1, 1, "[A3] Time Is Explosive Specialist: %2 hrs (%3%1)", "A3"], 
-				["timeIsUavHacker", _timeIsUavHacker, 1, 1, "[A3] Time Is UAV Hacker: %2 hrs (%3%1)", "A3"], 
-				["timeAddonAceActive", _timeAddonAceActive, 1, 1, "[ACE] Time Addon Ace Active: %2 hrs (%3%1)", "A3"], 
-				["timeAceIsBleeding", _timeAceIsBleeding, 1, 1, "[ACE] Time Is Bleeding: %2 hrs (%3%1)", "ACE"], 
-				["timeAddonTfarActive", _timeAddonTfarActive, 1, 1, "[TFAR] Time Addon Tfar Active: %2 hrs (%3%1)", "A3"],
-				["timeTfarHasLrRadio", _timeTfarHasLrRadio, 1, 1, "[TFAR] Time Tfar Has LR Radio: %2 hrs (%3%1)", "TFAR"],
-				["timeTfarHasSwRadio", _timeTfarHasSwRadio, 1, 1, "[TFAR] Time Tfar Has SW Radio: %2 hrs (%3%1)", "TFAR"],
-				["timeTfarIsSpeaking", _timeTfarIsSpeaking, 1, 1, "[TFAR] Time Tfar Is Speaking: %2 hrs (%3%1)", "TFAR"],
-				["timeTfarSpeakVolumeNormal", _timeTfarSpeakVolumeNormal, 1, 1, "[TFAR] Time Tfar Speak Volume Normal: %2 hrs (%3%1)", "TFAR"],
-				["timeTfarSpeakVolumeYelling", _timeTfarSpeakVolumeYelling, 1, 1, "[TFAR] Time Tfar Speak Volume Yelling: %2 hrs (%3%1)", "TFAR"],
-				["timeTfarSpeakVolumeWhispering", _timeTfarSpeakVolumeWhispering, 1, 1, "[TFAR] Time Tfar Speak Volume Whispering: %2 hrs (%3%1)", "TFAR"]
+				["timeInEvent", _timeInEvent, 1, 3, "STR_PPS_Main_Statistics_Time_In_Event", "A3"],  
+				["timeOnFoot", _timeOnFoot, 1, 1, "STR_PPS_Main_Statistics_Time_On_Foot", "A3"],  
+				["timeStandNoSpeed", _timeStandNoSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Stand_No_Speed", "A3"],  
+				["timeCrouchNoSpeed", _timeCrouchNoSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Crouch_No_Speed", "A3"],  
+				["timeProneNoSpeed", _timeProneNoSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Prone_No_Speed", "A3"],  
+				["timeStandLowSpeed", _timeStandLowSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Stand_Low_Speed", "A3"],  
+				["timeCrouchLowSpeed", _timeCrouchLowSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Crouch_Low_Speed", "A3"],  
+				["timeProneLowSpeed", _timeProneLowSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Prone_Low_Speed", "A3"],  
+				["timeStandMidSpeed", _timeStandMidSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Stand_Mid_Speed", "A3"],  
+				["timeCrouchMidSpeed", _timeCrouchMidSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Crouch_Mid_Speed", "A3"],  
+				["timeProneMidSpeed", _timeProneMidSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Prone_Mid_Speed", "A3"],  
+				["timeStandHighSpeed", _timeStandHighSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Stand_High_Speed", "A3"],  
+				["timeCrouchHighSpeed", _timeCrouchHighSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Crouch_High_Speed", "A3"],  
+				["timeProneHighSpeed", _timeProneHighSpeed, 1, 1, "STR_PPS_Main_Statistics_Time_Prone_High_Speed", "A3"],  
+				["timeInVehicle", _timeInVehicle, 1, 1, "STR_PPS_Main_Statistics_Time_In_Vehicle", "A3"], 
+				["timeInVehicleEngineOn", _timeInVehicleEngineOn, 1, 1, "STR_PPS_Main_Statistics_Time_In_Vehicle_Engine_On", "A3"], 
+				["timeInVehicleMoving", _timeInVehicleMoving, 1, 1, "STR_PPS_Main_Statistics_Time_In_Vehicle_Moving", "A3"], 
+				["timeInVehicleFlying", _timeInVehicleFlying, 1, 1, "STR_PPS_Main_Statistics_Time_In_Vehicle_Flying", "A3"], 
+				["timeCarDriver", _timeCarDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Car_Driver", "A3"],  
+				["timeCarGunner", _timeCarGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Car_Gunner", "A3"], 
+				["timeCarCommander", _timeCarCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Car_Commander", "A3"],  
+				["timeCarPassenger", _timeCarPassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Car_Passenger", "A3"],  
+				["timeTankDriver", _timeTankDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Tank_Driver", "A3"],  
+				["timeTankGunner", _timeTankGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Tank_Gunner", "A3"],  
+				["timeTankCommander", _timeTankCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Tank_Commander", "A3"],  
+				["timeTankPassenger", _timeTankPassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Tank_Passenger", "A3"],  
+				["timeTruckDriver", _timeTruckDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Truck_Driver", "A3"],  
+				["timeTruckGunner", _timeTruckGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Truck_Gunner", "A3"],  
+				["timeTruckCommander", _timeTruckCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Truck_Commander", "A3"],  
+				["timeTruckPassenger", _timeTruckPassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Truck_Passenger", "A3"],  
+				["timeMotorcycleDriver", _timeMotorcycleDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Motorcycle_Driver", "A3"],  
+				["timeMotorcycleGunner", _timeMotorcycleGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Motorcycle_Gunner", "A3"],  
+				["timeMotorcycleCommander", _timeMotorcycleCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Motorcycle_Commander", "A3"],  
+				["timeMotorcyclePassenger", _timeMotorcyclePassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Motorcycle_Passenger", "A3"],  
+				["timeHelicopterDriver", _timeHelicopterDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Helicopter_Driver", "A3"],  
+				["timeHelicopterGunner", _timeHelicopterGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Helicopter_Gunner", "A3"],  
+				["timeHelicopterCommander", _timeHelicopterCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Helicopter_Commander", "A3"],  
+				["timeHelicopterPassenger", _timeHelicopterPassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Helicopter_Passenger", "A3"],  
+				["timePlaneDriver", _timePlaneDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Plane_Driver", "A3"],  
+				["timePlaneGunner", _timePlaneGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Plane_Gunner", "A3"],  
+				["timePlaneCommander", _timePlaneCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Plane_Commander", "A3"],  
+				["timePlanePassenger", _timePlanePassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Plane_Passenger", "A3"],  
+				["timeShipDriver", _timeShipDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Ship_Driver", "A3"],  
+				["timeShipGunner", _timeShipGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Ship_Gunner", "A3"],  
+				["timeShipCommander", _timeShipCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Ship_Commander", "A3"],  
+				["timeShipPassenger", _timeShipPassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Ship_Passenger", "A3"],  
+				["timeBoatDriver", _timeBoatDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Boat_Driver", "A3"],  
+				["timeBoatGunner", _timeBoatGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Boat_Gunner", "A3"],  
+				["timeBoatCommander", _timeBoatCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Boat_Commander", "A3"],  
+				["timeBoatPassenger", _timeBoatPassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Boat_Passenger", "A3"],
+				["timeVehicleLightOn", _timeVehicleLightOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Light_On", "A3"],  
+				["timeVehicleLaser", _timeVehicleLaser, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Laser_On", "A3"],  
+				["timeVehicleCollisionLightOn", _timeVehicleCollisionLightOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Collision_Light_On", "A3"],  
+				["timeVehicleRadarOn", _timeVehicleRadarOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Radar_On", "A3"],  
+				["timeMapVisible", _timeMapVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Map_Visible", "A3"],  
+				["timeGpsVisible", _timeGpsVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Gps_Visible", "A3"],  
+				["timeCompassVisible", _timeCompassVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Compass_Visible", "A3"],  
+				["timeWatchVisible", _timeWatchVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Watch_Visible", "A3"],  
+				["timeVisionModeDay", _timeVisionModeDay, 1, 1, "STR_PPS_Main_Statistics_Time_Vision_Mode_Day", "A3"],  
+				["timeVisionModeNight", _timeVisionModeNight, 1, 1, "STR_PPS_Main_Statistics_Time_Vision_Mode_Night", "A3"],  
+				["timeVisionModeThermal", _timeVisionModeThermal, 1, 1, "STR_PPS_Main_Statistics_Time_Vision_Mode_Thermal", "A3"],  
+				["timeWeaponLowered", _timeWeaponLowered, 1, 1, "STR_PPS_Main_Statistics_Time_Weapon_Lowered", "A3"], 
+				["timeOnRoad", _timeOnRoad, 1, 1, "STR_PPS_Main_Statistics_Time_On_Road", "A3"], 
+				["timeIsBleeding", _timeIsBleeding, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Bleeding", "A3"], 
+				["timeIsBurning", _timeIsBurning, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Burning", "A3"], 
+				["timeInjuredNone", _timeInjuredNone, 1, 1, "STR_PPS_Main_Statistics_Time_Injured_None", "A3"], 
+				["timeInjuredLow", _timeInjuredLow, 1, 1, "STR_PPS_Main_Statistics_Time_Injured_Low", "A3"], 
+				["timeInjuredMed", _timeInjuredMed, 1, 1, "STR_PPS_Main_Statistics_Time_Injured_Med", "A3"], 
+				["timeInjuredHigh", _timeInjuredHigh, 1, 1, "STR_PPS_Main_Statistics_Time_Injured_High", "A3"], 
+				["timeInjuredFull", _timeInjuredFull, 1, 1, "STR_PPS_Main_Statistics_Time_Injured_Full", "A3"], 
+				["timeIrLaserOn", _timeIrLaserOn, 1, 1, "STR_PPS_Main_Statistics_Time_Ir_Laser_On", "A3"], 
+				["timeFlashlightOn", _timeFlashlightOn, 1, 1, "STR_PPS_Main_Statistics_Time_Flashlight_On", "A3"], 
+				["timeMagazineFull", _timeMagazineFull, 1, 1, "STR_PPS_Main_Statistics_Time_Magazine_Full", "A3"], 
+				["timeMagazineFillHigh", _timeMagazineFillHigh, 1, 1, "STR_PPS_Main_Statistics_Time_Magazine_Fill_High", "A3"], 
+				["timeMagazineFillMid", _timeMagazineFillMid, 1, 1, "STR_PPS_Main_Statistics_Time_Magazine_Fill_Med", "A3"], 
+				["timeMagazineFillLow", _timeMagazineFillLow, 1, 1, "STR_PPS_Main_Statistics_Time_Magazine_Fill_Low", "A3"], 
+				["timeMagazineEmpty", _timeMagazineEmpty, 1, 1, "STR_PPS_Main_Statistics_Time_Magazine_Empty", "A3"], 
+				["timeIsMedic", _timeIsMedic, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Medic", "A3"], 
+				["timeIsEngineer", _timeIsEngineer, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Engineer", "A3"], 
+				["timeIsExplosiveSpecialist", _timeIsExplosiveSpecialist, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Explosive_Specialist", "A3"], 
+				["timeIsUavHacker", _timeIsUavHacker, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Uav_Hacker", "A3"], 
+				["timeAddonAceActive", _timeAddonAceActive, 1, 1, "STR_PPS_Main_Statistics_Time_Addon_Ace_Active", "A3"], 
+				["timeAceIsBleeding", _timeAceIsBleeding, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Bleeding_Ace", "ACE"], 
+				["timeAddonTfarActive", _timeAddonTfarActive, 1, 1, "STR_PPS_Main_Statistics_Time_Addon_Tfar_Active", "A3"],
+				["timeTfarHasLrRadio", _timeTfarHasLrRadio, 1, 1, "STR_PPS_Main_Statistics_Time_Has_Lr_Radio", "TFAR"],
+				["timeTfarHasSwRadio", _timeTfarHasSwRadio, 1, 1, "STR_PPS_Main_Statistics_Time_Has_Sw_Radio", "TFAR"],
+				["timeTfarIsSpeaking", _timeTfarIsSpeaking, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Speaking", "TFAR"],
+				["timeTfarSpeakVolumeNormal", _timeTfarSpeakVolumeNormal, 1, 1, "STR_PPS_Main_Statistics_Time_Speak_Volume_Normal", "TFAR"],
+				["timeTfarSpeakVolumeYelling", _timeTfarSpeakVolumeYelling, 1, 1, "STR_PPS_Main_Statistics_Time_Speak_Volume_Yelling", "TFAR"],
+				["timeTfarSpeakVolumeWhispering", _timeTfarSpeakVolumeWhispering, 1, 1, "STR_PPS_Main_Statistics_Time_Speak_Volume_Whispering", "TFAR"]
 			]
 		];
 		

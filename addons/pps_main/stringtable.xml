@@ -235,5 +235,471 @@
 				<German>Persistent Player Statistics\n\nSchlüssel: %1\nWert: %2</German>
 			</Key>
 		</Container>
+		<Container name="Statistics">
+			<Key ID="STR_PPS_Main_Statistics_Time_In_Event">
+				<English>Time in Event: %1 hrs</English>
+				<German>Zeit im Event: %1 Std.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_On_Foot">
+				<English>Time On Foot: %2 hrs (%3%1)</English>
+				<German>Zeit zu Fuß: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Stand_No_Speed">
+				<English>Time Stand No Speed: %2 hrs (%3%1)</English>
+				<German>Zeit stehend, regungslos: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Crouch_No_Speed">
+				<English>Time Crouch No Speed: %2 hrs (%3%1)</English>
+				<German>Zeit hockend, regungslos: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Prone_No_Speed">
+				<English>Time Prone No Speed: %2 hrs (%3%1)</English>
+				<German>Zeit liegend, regungslos: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Stand_Low_Speed">
+				<English>Time Stand Low Speed: %2 hrs (%3%1)</English>
+				<German>Zeit stehend, langsame Geschwindigkeit: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Crouch_Low_Speed">
+				<English>Time Crouch Low Speed: %2 hrs (%3%1)</English>
+				<German>Zeit hockend, langsame Geschwindigkeit: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Prone_Low_Speed">
+				<English>Time Prone Low Speed: %2 hrs (%3%1)</English>
+				<German>Zeit liegend, langsame Geschwindkeit: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Stand_Mid_Speed">
+				<English>Time Stand Mid Speed: %2 hrs (%3%1)</English>
+				<German>Zeit stehend, mittlere Geschwindigkeit: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Crouch_Mid_Speed">
+				<English>Time Crouch Mid Speed: %2 hrs (%3%1)</English>
+				<German>Zeit hockend, mittlere Geschwindigkeit: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Prone_Mid_Speed">
+				<English>Time Prone Mid Speed: %2 hrs (%3%1)</English>
+				<German>Zeit liegend, mittlere Geschwindigkeit: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Stand_High_Speed">
+				<English>Time Stand High Speed: %2 hrs (%3%1)</English>
+				<German>Zeit stehend, hohe Geschwindigkeit: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Crouch_High_Speed">
+				<English>Time Crouch High Speed: %2 hrs (%3%1)</English>
+				<German>Zeit hockend, hohe Geschwindigkeit: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Prone_High_Speed">
+				<English>Time Prone High Speed: %2 hrs (%3%1)</English>
+				<German>Zeit liegend, hohe Geschwindigkeit: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_In_Vehicle">
+				<English>Time In Vehicle: %2 hrs (%3%1)</English>
+				<German>Zeit in Fahrzeug: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_In_Vehicle_Engine_On">
+				<English>Time In Vehicle Engine On: %2 hrs (%3%1)</English>
+				<German>Zeit in Fahrzeug, laufender Motor: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_In_Vehicle_Moving">
+				<English>Time In Vehicle Moving: %2 hrs (%3%1)</English>
+				<German>Zeit in Fahrzeug, fahrend: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_In_Vehicle_Flying">
+				<English>Time In Vehicle Flying: %2 hrs (%3%1)</English>
+				<German>Zeit in Fahrzeug, fliegend: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Car_Driver">
+				<English>Time Car Driver: %2 hrs (%3%1)</English>
+				<German>Zeit in Auto als Fahrer: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Car_Gunner">
+				<English>Time Car Gunner: %2 hrs (%3%1)</English>
+				<German>Zeit in Auto als Schütze: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Car_Commander">
+				<English>Time Car Commander: %2 hrs (%3%1)</English>
+				<German>Zeit in Auto als Kommandeur: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Car_Passenger">
+				<English>Time Car Passenger: %2 hrs (%3%1)</English>
+				<German>Zeit in Auto als Passagier: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Tank_Driver">
+				<English>Time Tank Driver: %2 hrs (%3%1)</English>
+				<German>Zeit in Panzer als Fahrer: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Tank_Gunner">
+				<English>Time Tank Gunner: %2 hrs (%3%1)</English>
+				<German>Zeit in Panzer als Schütze: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Tank_Commander">
+				<English>Time Tank Commander: %2 hrs (%3%1)</English>
+				<German>Zeit in Panzer als Kommandeur: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Tank_Passenger">
+				<English>Time Tank Passenger: %2 hrs (%3%1)</English>
+				<German>Zeit in Panzer als Passagier: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Truck_Driver">
+				<English>Time Truck Driver: %2 hrs (%3%1)</English>
+				<German>Zeit in LKW als Fahrer: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Truck_Gunner">
+				<English>Time Truck Gunner: %2 hrs (%3%1)</English>
+				<German>Zeit in LKW als Schütze: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Truck_Commander">
+				<English>Time Truck Commander: %2 hrs (%3%1)</English>
+				<German>Zeit in LKW als Kommandeur: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Truck_Passenger">
+				<English>Time Truck Passenger: %2 hrs (%3%1)</English>
+				<German>Zeit in LKW als Passagier: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Motorcycle_Driver">
+				<English>Time Motorcycle Driver: %2 hrs (%3%1)</English>
+				<German>Zeit in Motorrad als Fahrer: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Motorcycle_Gunner">
+				<English>Time Motorcycle Gunner: %2 hrs (%3%1)</English>
+				<German>Zeit in Motorrad als Schütze: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Motorcycle_Commander">
+				<English>Time Motorcycle Commander: %2 hrs (%3%1)</English>
+				<German>Zeit in Motorrad als Kommandeur: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Motorcycle_Passenger">
+				<English>Time Motorcycle Passenger: %2 hrs (%3%1)</English>
+				<German>Zeit in Motorrad als Passagier: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Helicopter_Driver">
+				<English>Time Helicopter Driver: %2 hrs (%3%1)</English>
+				<German>Zeit in Helikopter als Fahrer: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Helicopter_Gunner">
+				<English>Time Helicopter Gunner: %2 hrs (%3%1)</English>
+				<German>Zeit in Helikopter als Schütze: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Helicopter_Commander">
+				<English>Time Helicopter Commander: %2 hrs (%3%1)</English>
+				<German>Zeit in Helikopter als Kommandeur: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Helicopter_Passenger">
+				<English>Time Helicopter Passenger: %2 hrs (%3%1)</English>
+				<German>Zeit in Helikopter als Passagier: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Plane_Driver">
+				<English>Time Plane Driver: %2 hrs (%3%1)</English>
+				<German>Zeit in Flugzeug als Fahrer: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Plane_Gunner">
+				<English>Time Plane Gunner: %2 hrs (%3%1)</English>
+				<German>Zeit in Flugzeug als Schütze: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Plane_Commander">
+				<English>Time Plane Commander: %2 hrs (%3%1)</English>
+				<German>Zeit in Flugzeug als Kommandeur: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Plane_Passenger">
+				<English>Time Plane Passenger: %2 hrs (%3%1)</English>
+				<German>Zeit in Flugzeug als Passagier: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Ship_Driver">
+				<English>Time Ship Driver: %2 hrs (%3%1)</English>
+				<German>Zeit in Schiff als Fahrer: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Ship_Gunner">
+				<English>Time Ship Gunner: %2 hrs (%3%1)</English>
+				<German>Zeit in Schiff als Schütze: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Ship_Commander">
+				<English>Time Ship Commander: %2 hrs (%3%1)</English>
+				<German>Zeit in Schiff als Kommandeur: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Ship_Passenger">
+				<English>Time Ship Passenger: %2 hrs (%3%1)</English>
+				<German>Zeit in Schiff als Passagier: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Boat_Driver">
+				<English>Time Boat Driver: %2 hrs (%3%1)</English>
+				<German>Zeit in Boot als Fahrer: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Boat_Gunner">
+				<English>Time Boat Gunner: %2 hrs (%3%1)</English>
+				<German>Zeit in Boot als Schütze: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Boat_Commander">
+				<English>Time Boat Commander: %2 hrs (%3%1)</English>
+				<German>Zeit in Boot als Kommandeur: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Boat_Passenger">
+				<English>Time Boat Passenger: %2 hrs (%3%1)</English>
+				<German>Zeit in Boot als Passagier: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Vehicle_Light_On">
+				<English>Time Vehicle Light On: %2 hrs (%3%1)</English>
+				<German>Zeit in Fahrzeug mit Scheinwerfern an: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Vehicle_Laser_On">
+				<English>Time Vehicle Laser On: %2 hrs (%3%1)</English>
+				<German>Zeit in Fahrzeug mit aktivem Laser: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Vehicle_Collision_Light_On">
+				<English>Time Vehicle Collision Light On: %2 hrs (%3%1)</English>
+				<German>Zeit in Fahrzeug mit Kollisionslichern an: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Vehicle_Radar_On">
+				<English>Time Vehicle Radar On: %2 hrs (%3%1)</English>
+				<German>Zeit in Fahrzeug mit aktivem Radar: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Map_Visible">
+				<English>Time Map Visible: %2 hrs (%3%1)</English>
+				<German>Zeit in Kartenansicht: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Gps_Visible">
+				<English>Time GPS Visible: %2 hrs (%3%1)</English>
+				<German>Zeit, GPS sichtbar: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Compass_Visible">
+				<English>Time Compass Visible: %2 hrs (%3%1)</English>
+				<German>Zeit, Kompass sichtbar: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Watch_Visible">
+				<English>Time Watch Visible: %2 hrs (%3%1)</English>
+				<German>Zeit, Uhr sichtbar: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Vision_Mode_Day">
+				<English>Time Vision Mode Day: %2 hrs (%3%1)</English>
+				<German>Zeit mit Normalsicht: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Vision_Mode_Night">
+				<English>Time Vision Mode Night: %2 hrs (%3%1)</English>
+				<German>Zeit mit Nachtsicht: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Vision_Mode_Thermal">
+				<English>Time Vision Mode Thermal: %2 hrs (%3%1)</English>
+				<German>Zeit mit Thermalsicht: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Weapon_Lowered">
+				<English>Time Weapon Lowered: %2 hrs (%3%1)</English>
+				<German>Zeit mit gesenkter Waffe: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_On_Road">
+				<English>Time On Road: %2 hrs (%3%1)</English>
+				<German>Zeit auf Straße: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Is_Bleeding">
+				<English>Time Is Bleeding: %2 hrs (%3%1)</English>
+				<German>Zeit, blutend: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Is_Burning">
+				<English>Time Is Burning: %2 hrs (%3%1)</English>
+				<German>Zeit, brennend: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Injured_None">
+				<English>Time Injured None: %2 hrs (%3%1)</English>
+				<German>Zeit, keine Verletzung: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Injured_Low">
+				<English>Time Injured Low: %2 hrs (%3%1)</English>
+				<German>Zeit, geringe Veletzung: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Injured_Med">
+				<English>Time Injured Med: %2 hrs (%3%1)</English>
+				<German>Zeit, mittlere Verletzung: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Injured_High">
+				<English>Time Injured High: %2 hrs (%3%1)</English>
+				<German>Zeit, starke Verletzung: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Injured_Full">
+				<English>Time Injured Full: %2 hrs (%3%1)</English>
+				<German>Zeit, totale Verletzung: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Ir_Laser_On">
+				<English>Time IR Laser On: %2 hrs (%3%1)</English>
+				<German>Zeit mit aktivem IR Laser: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Flashlight_On">
+				<English>Time Flashlight On: %2 hrs (%3%1)</English>
+				<German>Zeit mit aktiver Taschenlampe: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Magazine_Full">
+				<English>Time Magazine Full: %2 hrs (%3%1)</English>
+				<German>Zeit mit vollem Magazin: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Magazine_Fill_High">
+				<English>Time Magazine Fill High: %2 hrs (%3%1)</English>
+				<German>Zeit mit fast vollem Magazin: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Magazine_Fill_Med">
+				<English>Time Magazine Fill Med: %2 hrs (%3%1)</English>
+				<German>Zeit mit halbvollem Magazin: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Magazine_Fill_Low">
+				<English>Time Magazine Fill Low: %2 hrs (%3%1)</English>
+				<German>Zeit mit fast leerem Magazin: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Magazine_Empty">
+				<English>Time Magazine Empty: %2 hrs (%3%1)</English>
+				<German>Zeit mit leerem Magazin: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Is_Medic">
+				<English>Time Is Medic: %2 hrs (%3%1)</English>
+				<German>Zeit als Sanitäter: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Is_Engineer">
+				<English>Time Is Engineer: %2 hrs (%3%1)</English>
+				<German>Zeit als Mechaniker: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Is_Explosive_Specialist">
+				<English>Time Is Explosive Specialist: %2 hrs (%3%1)</English>
+				<German>Zeit als Sprengstoffmeister: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Is_Uav_Hacker">
+				<English>Time Is UAV Hacker: %2 hrs (%3%1)</English>
+				<German>Zeit als Drohnenpilot: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Addon_Ace_Active">
+				<English>Time Addon ACE Active: %2 hrs (%3%1)</English>
+				<German>Zeit mit geladenem Mod ACE: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Addon_Tfar_Active">
+				<English>Time Addon TFAR Active: %2 hrs (%3%1)</English>
+				<German>Zeit mit geladenem Mod TFAR: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Is_Bleeding_Ace">
+				<English>Time Is Bleeding: %2 hrs (%3%1)</English>
+				<German>Zeit, blutend: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Has_Lr_Radio">
+				<English>Time Has LR Radio: %2 hrs (%3%1)</English>
+				<German>Zeit mit Langfunkgerät: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Has_Sw_Radio">
+				<English>Time Has SW Radio: %2 hrs (%3%1)</English>
+				<German>Zeit mit Kurzfunkgerät: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Is_Speaking">
+				<English>Time Is Speaking: %2 hrs (%3%1)</English>
+				<German>Zeit, sprechend: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Speak_Volume_Normal">
+				<English>Time Speak Volume Normal: %2 hrs (%3%1)</English>
+				<German>Zeit, Lautstärke Sprache normal: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Speak_Volume_Yelling">
+				<English>Time Speak Volume Yelling: %2 hrs (%3%1)</English>
+				<German>Zeit, Lautstärke Sprache rufend: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Speak_Volume_Whispering">
+				<English>Time Speak Volume Whispering: %2 hrs (%3%1)</English>
+				<German>Zeit, Lautstärke Sprache flüsternd: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Grenades_Thrown">
+				<English>Count Grenades Thrown: %1</English>
+				<German>Anzahl geworfener Granaten: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Smoke_Shells_Thrown">
+				<English>Count Smoke Shells Thrown: %1</English>
+				<German>Anzahl geworfener Rauchgranaten: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Chemlights_Thrown">
+				<English>Count Chemlights Thrown: %1</English>
+				<German>Anzahl geworfener Knicklichter: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Unknown_Thrown">
+				<English>Count Unknown Thrown: %1</English>
+				<German>Anzahl geworfener, unbekannter Gegenstände: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Projectiles_Fired">
+				<English>Count Projectiles Fired: %1</English>
+				<German>Anzahl abgefeuerter Projektile: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Cargo_Loaded">
+				<English>Count Cargo Loaded: %1</English>
+				<German>Anzahl, Ladung eingeladen: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Cargo_Unloaded">
+				<English>Count Cargo Unloaded: %1</English>
+				<German>Anzahl, Ladung ausgeladen: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Interact_Menu_Opened">
+				<English>Count Interact Menu Opened: %1</English>
+				<German>Anzahl, Interaktionsmenü geöffnet: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Unconscious">
+				<English>Count Unconscious: %1</English>
+				<German>Anzahl Bewußtlosigkeit: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Is_Speaking">
+				<English>Count Is Speaking: %1</English>
+				<German>Anzahl, spricht: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Uses_Radio">
+				<English>Count Uses Radio: %1</English>
+				<German>Anzahl, benutzt Funkgerät: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Interface_Zeus_Opened">
+				<English>Count Interface Zeus Opened: %1</English>
+				<German>Anzahl, Zeus Interface geöffnet: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Interface_Gear_Opened">
+				<English>Count Interface Gear Opened: %1</English>
+				<German>Anzahl, Inventar geöffnet: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Interface_Compass_Opened">
+				<English>Count Interface Compass Opened: %1</English>
+				<German>Anzahl, Kompass geöffnet: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Interface_Watch_Opened">
+				<English>Count Interface Watch Opened: %1</English>
+				<German>Anzahl, Uhr geöffnet: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Binocular_Used">
+				<English>Count Binocular used: %1</English>
+				<German>Anzahl, Ferngläser benutzt: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Optics_Used">
+				<English>Count Optics used: %1</English>
+				<German>Anzahl, Visier benutzt: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Engine_Toggle">
+				<English>Count Engine Toggle: %1</English>
+				<German>Anzahl, Motorumschaltung: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Magazine_Reloaded">
+				<English>Count Magazine Reloaded: %1</English>
+				<German>Anzahl, Magazin nachgeladen: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Breath_Holded">
+				<English>Count Breath Holded: %1</English>
+				<German>Anzahl, Atem angehalten: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Zoom_Used">
+				<English>Count Zoom Used: %1</English>
+				<German>Anzahl, Zoom benutzt: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Lean_Left">
+				<English>Count Lean Left: %1</English>
+				<German>Anzahl, nach links gelehnt: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Lean_Right">
+				<English>Count Lean Right: %1</English>
+				<German>Anzahl, nach rechts gelehnt: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Salute">
+				<English>Count Salute: %1</English>
+				<German>Anzahl, salutiert: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Sit_Down">
+				<English>Count Sit Down: %1</English>
+				<German>Anzahl, hingesetzt: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Get_Over">
+				<English>Count Get Over: %1</English>
+				<German>Anzahl, überstiegen: %1</German>
+			</Key>
+		</Container>
 	</Package>
 </Project>
