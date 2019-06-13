@@ -24,7 +24,8 @@ if (PPS_AllowSendingData) then
 		//hint format ["Weapon: %1\nMuzzle: %2\nMode: %3\nAmmo: %4\nMagazine: %5", _weapon, _muzzle, _mode, _ammo, _magazine];
 		
 		_playerUid = getPlayerUID player;
-		_section = "Event Handler Statistics";
+		_source = "A3";
+		_type = 2;
 
 		_key = "";
 		_formatString = "";
@@ -44,7 +45,7 @@ if (PPS_AllowSendingData) then
 		_value = 1;
 		_formatType = 0;
 		
-		_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+		_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 		_update = _playerUid + "-updateStatistics";
 		missionNamespace setVariable [_update, _updatedData, false];
 		publicVariableServer _update;			
@@ -60,14 +61,15 @@ if (PPS_AllowSendingData) then
 				params ["_item", "_vehicle"];
 
 				_playerUid = getPlayerUID player;
-				_section = "Event Handler Statistics";
+				_source = "ACE";
+				_type = 2;
 
 				_key = "countAceCargoLoaded";
 				_value = 1;
 				_formatType = 0;
 				_formatString = "[ACE] Count Cargo Loaded: %1";		
 				
-				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 				_update = _playerUid + "-updateStatistics";
 				missionNamespace setVariable [_update, _updatedData, false];
 				publicVariableServer _update;	
@@ -81,14 +83,15 @@ if (PPS_AllowSendingData) then
 				params ["_item", "_vehicle"];
 
 				_playerUid = getPlayerUID player;
-				_section = "Event Handler Statistics";
+				_source = "ACE";
+				_type = 2;
 
 				_key = "countAceCargoUnloaded";
 				_value = 1;
 				_formatType = 0;
 				_formatString = "[ACE] Count Cargo Unloaded: %1";		
 				
-				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 				_update = _playerUid + "-updateStatistics";
 				missionNamespace setVariable [_update, _updatedData, false];
 				publicVariableServer _update;	
@@ -102,14 +105,15 @@ if (PPS_AllowSendingData) then
 				params ["_menuType"];
 
 				_playerUid = getPlayerUID player;
-				_section = "Event Handler Statistics";
+				_source = "ACE";
+				_type = 2;
 
 				_key = "countAceInteractMenuOpened";
 				_value = 1;
 				_formatType = 0;
 				_formatString = "[ACE] Count Interact Menu Opened: %1";		
 				
-				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 				_update = _playerUid + "-updateStatistics";
 				missionNamespace setVariable [_update, _updatedData, false];
 				publicVariableServer _update;	
@@ -127,14 +131,15 @@ if (PPS_AllowSendingData) then
 				
 				if (_state && (_playerUid == _unitUid)) then
 				{
-					_section = "Event Handler Statistics";
+					_source = "ACE";
+					_type = 2;
 
 					_key = "countAceUnconscious";
 					_value = 1;
 					_formatType = 0;
 					_formatString = "[ACE] Count Unconscious: %1";		
 					
-					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+					_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 					_update = _playerUid + "-updateStatistics";
 					missionNamespace setVariable [_update, _updatedData, false];
 					publicVariableServer _update;
@@ -165,14 +170,15 @@ if (PPS_AllowSendingData) then
 				{
 					_playerUid = getPlayerUID _unit;
 					
-					_section = "Event Handler Statistics";
+					_source = "TFAR";
+					_type = 2;
 
 					_key = "countTfarIsSpeaking";
 					_value = 1;
 					_formatType = 0;
 					_formatString = "[TFAR] Count Is Speaking: %1";		
 					
-					_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+					_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 					_update = _playerUid + "-updateStatistics";
 					missionNamespace setVariable [_update, _updatedData, false];
 					publicVariableServer _update;
@@ -196,14 +202,15 @@ if (PPS_AllowSendingData) then
 				
 				_playerUid = getPlayerUID _unit;
 				
-				_section = "Event Handler Statistics";
+				_source = "TFAR";
+				_type = 2;
 
 				_key = "countTfarUsesRadio";
 				_value = 0.5;
 				_formatType = 0;
 				_formatString = "[TFAR] Count UsesRadio: %1";		
 				
-				_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 				_update = _playerUid + "-updateStatistics";
 				missionNamespace setVariable [_update, _updatedData, false];
 				publicVariableServer _update;
@@ -226,7 +233,8 @@ if (PPS_AllowSendingData) then
 		//hint format ["Key Up Event\n\Key: %1", _key];
 		
 		_playerUid = getPlayerUID player;
-		_eventHandlerStatisticsSection = "Event Handler Statistics";
+		_source = "A3";
+		_type = 2;
 		
 		_key = "";
 		_value = 0;
@@ -353,7 +361,7 @@ if (PPS_AllowSendingData) then
 		};
 		if (_key != "") then
 		{
-			_updatedData = [_playerUid, [[_eventHandlerStatisticsSection, _key, _value, _formatType, _formatString]]];
+			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;
@@ -633,106 +641,101 @@ while {true} do
 		
 		_filter = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÜüÖöÄä[]-_.:#*(){}%$§&<>+-,;'~?= ";
 		_playerName = [_playerName, _filter] call BIS_fnc_filterString;
-
-		_globalInformationsSection = "Global Informations";
-		_intervalStatisticsSection = "Interval Statistics";
 		
 		_updatedData = 
 		[
 			_playerUid,
 			[
-				[_globalInformationsSection, "playerName", _playerName, 0, "Player Name: %1"],  
-				[_globalInformationsSection, "playerUid", _playerUid, 0, "Player UID: %1"],  
-				[_intervalStatisticsSection, "timeInEvent", _timeInEvent, 3, "Time in Event: %1 hrs"],  
-				[_intervalStatisticsSection, "timeOnFoot", _timeOnFoot, 1, "[A3] Time On Foot: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeStandNoSpeed", _timeStandNoSpeed, 1, "[A3] Time Stand No Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeCrouchNoSpeed", _timeCrouchNoSpeed, 1, "[A3] Time Crouch No Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeProneNoSpeed", _timeProneNoSpeed, 1, "[A3] Time Prone No Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeStandLowSpeed", _timeStandLowSpeed, 1, "[A3] Time Stand Low Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeCrouchLowSpeed", _timeCrouchLowSpeed, 1, "[A3] Time Crouch Low Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeProneLowSpeed", _timeProneLowSpeed, 1, "[A3] Time Prone Low Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeStandMidSpeed", _timeStandMidSpeed, 1, "[A3] Time Stand Mid Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeCrouchMidSpeed", _timeCrouchMidSpeed, 1, "[A3] Time Crouch Mid Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeProneMidSpeed", _timeProneMidSpeed, 1, "[A3] Time Prone Mid Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeStandHighSpeed", _timeStandHighSpeed, 1, "[A3] Time Stand High Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeCrouchHighSpeed", _timeCrouchHighSpeed, 1, "[A3] Time Crouch High Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeProneHighSpeed", _timeProneHighSpeed, 1, "[A3] Time Prone High Speed: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeInVehicle", _timeInVehicle, 1, "[A3] Time In Vehicle: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeInVehicleEngineOn", _timeInVehicleEngineOn, 1, "[A3] Time In Vehicle Engine On: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeInVehicleMoving", _timeInVehicleMoving, 1, "[A3] Time In Vehicle Moving: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeInVehicleFlying", _timeInVehicleFlying, 1, "[A3] Time In Vehicle Flying: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeCarDriver", _timeCarDriver, 1, "[A3] Time Car Driver: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeCarGunner", _timeCarGunner, 1, "[A3] Time Car Gunner: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeCarCommander", _timeCarCommander, 1, "[A3] Time Car Commander: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeCarPassenger", _timeCarPassenger, 1, "[A3] Time Car Passenger: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeTankDriver", _timeTankDriver, 1, "[A3] Time Tank Driver: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeTankGunner", _timeTankGunner, 1, "[A3] Time Tank Gunner: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeTankCommander", _timeTankCommander, 1, "[A3] Time Tank Commander: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeTankPassenger", _timeTankPassenger, 1, "[A3] Time Tank Passenger: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeTruckDriver", _timeTruckDriver, 1, "[A3] Time Truck Driver: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeTruckGunner", _timeTruckGunner, 1, "[A3] Time Truck Gunner: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeTruckCommander", _timeTruckCommander, 1, "[A3] Time Truck Commander: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeTruckPassenger", _timeTruckPassenger, 1, "[A3] Time Truck Passenger: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeMotorcycleDriver", _timeMotorcycleDriver, 1, "[A3] Time Motorcycle Driver: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeMotorcycleGunner", _timeMotorcycleGunner, 1, "[A3] Time Motorcycle Gunner: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeMotorcycleCommander", _timeMotorcycleCommander, 1, "[A3] Time Motorcycle Commander: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeMotorcyclePassenger", _timeMotorcyclePassenger, 1, "[A3] Time Motorcycle Passenger: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeHelicopterDriver", _timeHelicopterDriver, 1, "[A3] Time Helicopter Driver: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeHelicopterGunner", _timeHelicopterGunner, 1, "[A3] Time Helicopter Gunner: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeHelicopterCommander", _timeHelicopterCommander, 1, "[A3] Time Helicopter Commander: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeHelicopterPassenger", _timeHelicopterPassenger, 1, "[A3] Time Helicopter Passenger: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timePlaneDriver", _timePlaneDriver, 1, "[A3] Time Plane Driver: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timePlaneGunner", _timePlaneGunner, 1, "[A3] Time Plane Gunner: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timePlaneCommander", _timePlaneCommander, 1, "[A3] Time Plane Commander: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timePlanePassenger", _timePlanePassenger, 1, "[A3] Time Plane Passenger: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeShipDriver", _timeShipDriver, 1, "[A3] Time Ship Driver: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeShipGunner", _timeShipGunner, 1, "[A3] Time Ship Gunner: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeShipCommander", _timeShipCommander, 1, "[A3] Time Ship Commander: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeShipPassenger", _timeShipPassenger, 1, "[A3] Time Ship Passenger: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeBoatDriver", _timeBoatDriver, 1, "[A3] Time Boat Driver: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeBoatGunner", _timeBoatGunner, 1, "[A3] Time Boat Gunner: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeBoatCommander", _timeBoatCommander, 1, "[A3] Time Boat Commander: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeBoatPassenger", _timeBoatPassenger, 1, "[A3] Time Boat Passenger: %2 hrs (%3%1)"],
-				[_intervalStatisticsSection, "timeVehicleLightOn", _timeVehicleLightOn, 1, "[A3] Time Vehicle Light On: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeVehicleLaser", _timeVehicleLaser, 1, "[A3] Time Vehicle Laser On: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeVehicleCollisionLightOn", _timeVehicleCollisionLightOn, 1, "[A3] Time Vehicle Collision Light On: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeVehicleRadarOn", _timeVehicleRadarOn, 1, "[A3] Time Vehicle Radar On: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeMapVisible", _timeMapVisible, 1, "[A3] Time Map Visible: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeGpsVisible", _timeGpsVisible, 1, "[A3] Time Gps Visible: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeCompassVisible", _timeCompassVisible, 1, "[A3] Time Compass Visible: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeWatchVisible", _timeWatchVisible, 1, "[A3] Time Watch Visible: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeVisionModeDay", _timeVisionModeDay, 1, "[A3] Time Vision Mode Day: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeVisionModeNight", _timeVisionModeNight, 1, "[A3] Time Vision Mode Night: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeVisionModeThermal", _timeVisionModeThermal, 1, "[A3] Time Vision Mode Thermal: %2 hrs (%3%1)"],  
-				[_intervalStatisticsSection, "timeWeaponLowered", _timeWeaponLowered, 1, "[A3] Time Weapon Lowered: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeOnRoad", _timeOnRoad, 1, "[A3] Time On Road: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeIsBleeding", _timeIsBleeding, 1, "[A3] Time Is Bleeding: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeIsBurning", _timeIsBurning, 1, "[A3] Time Is Burning: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeInjuredNone", _timeInjuredNone, 1, "[A3] Time Injured None: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeInjuredLow", _timeInjuredLow, 1, "[A3] Time Infured Low: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeInjuredMed", _timeInjuredMed, 1, "[A3] Time Injured Med: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeInjuredHigh", _timeInjuredHigh, 1, "[A3] Time Injured High: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeInjuredFull", _timeInjuredFull, 1, "[A3] Time Injured Full: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeIrLaserOn", _timeIrLaserOn, 1, "[A3] Time IR Laser On: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeFlashlightOn", _timeFlashlightOn, 1, "[A3] Time Flashlight On: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeMagazineFull", _timeMagazineFull, 1, "[A3] Time Magazine Full: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeMagazineFillHigh", _timeMagazineFillHigh, 1, "[A3] Time Magazine Fill High: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeMagazineFillMid", _timeMagazineFillMid, 1, "[A3] Time Magazine Fill Med: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeMagazineFillLow", _timeMagazineFillLow, 1, "[A3] Time Magazine Fill Low: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeMagazineEmpty", _timeMagazineEmpty, 1, "[A3] Time Magazine Empty: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeIsMedic", _timeIsMedic, 1, "[A3] Time Is Medic: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeIsEngineer", _timeIsEngineer, 1, "[A3] Time Is Engineer: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeIsExplosiveSpecialist", _timeIsExplosiveSpecialist, 1, "[A3] Time Is Explosive Specialist: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeIsUavHacker", _timeIsUavHacker, 1, "[A3] Time Is UAV Hacker: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeAddonAceActive", _timeAddonAceActive, 1, "[ACE] Time Addon Ace Active: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeAceIsBleeding", _timeAceIsBleeding, 1, "[ACE] Time Is Bleeding: %2 hrs (%3%1)"], 
-				[_intervalStatisticsSection, "timeAddonTfarActive", _timeAddonTfarActive, 1, "[TFAR] Time Addon Tfar Active: %2 hrs (%3%1)"],
-				[_intervalStatisticsSection, "timeTfarHasLrRadio", _timeTfarHasLrRadio, 1, "[TFAR] Time Tfar Has LR Radio: %2 hrs (%3%1)"],
-				[_intervalStatisticsSection, "timeTfarHasSwRadio", _timeTfarHasSwRadio, 1, "[TFAR] Time Tfar Has SW Radio: %2 hrs (%3%1)"],
-				[_intervalStatisticsSection, "timeTfarIsSpeaking", _timeTfarIsSpeaking, 1, "[TFAR] Time Tfar Is Speaking: %2 hrs (%3%1)"],
-				[_intervalStatisticsSection, "timeTfarSpeakVolumeNormal", _timeTfarSpeakVolumeNormal, 1, "[TFAR] Time Tfar Speak Volume Normal: %2 hrs (%3%1)"],
-				[_intervalStatisticsSection, "timeTfarSpeakVolumeYelling", _timeTfarSpeakVolumeYelling, 1, "[TFAR] Time Tfar Speak Volume Yelling: %2 hrs (%3%1)"],
-				[_intervalStatisticsSection, "timeTfarSpeakVolumeWhispering", _timeTfarSpeakVolumeWhispering, 1, "[TFAR] Time Tfar Speak Volume Whispering: %2 hrs (%3%1)"]
+				["timeInEvent", _timeInEvent, 1, 3, "Time in Event: %1 hrs", "A3"],  
+				["timeOnFoot", _timeOnFoot, 1, 1, "[A3] Time On Foot: %2 hrs (%3%1)", "A3"],  
+				["timeStandNoSpeed", _timeStandNoSpeed, 1, 1, "[A3] Time Stand No Speed: %2 hrs (%3%1)", "A3"],  
+				["timeCrouchNoSpeed", _timeCrouchNoSpeed, 1, 1, "[A3] Time Crouch No Speed: %2 hrs (%3%1)", "A3"],  
+				["timeProneNoSpeed", _timeProneNoSpeed, 1, 1, "[A3] Time Prone No Speed: %2 hrs (%3%1)", "A3"],  
+				["timeStandLowSpeed", _timeStandLowSpeed, 1, 1, "[A3] Time Stand Low Speed: %2 hrs (%3%1)", "A3"],  
+				["timeCrouchLowSpeed", _timeCrouchLowSpeed, 1, 1, "[A3] Time Crouch Low Speed: %2 hrs (%3%1)", "A3"],  
+				["timeProneLowSpeed", _timeProneLowSpeed, 1, 1, "[A3] Time Prone Low Speed: %2 hrs (%3%1)", "A3"],  
+				["timeStandMidSpeed", _timeStandMidSpeed, 1, 1, "[A3] Time Stand Mid Speed: %2 hrs (%3%1)", "A3"],  
+				["timeCrouchMidSpeed", _timeCrouchMidSpeed, 1, 1, "[A3] Time Crouch Mid Speed: %2 hrs (%3%1)", "A3"],  
+				["timeProneMidSpeed", _timeProneMidSpeed, 1, 1, "[A3] Time Prone Mid Speed: %2 hrs (%3%1)", "A3"],  
+				["timeStandHighSpeed", _timeStandHighSpeed, 1, 1, "[A3] Time Stand High Speed: %2 hrs (%3%1)", "A3"],  
+				["timeCrouchHighSpeed", _timeCrouchHighSpeed, 1, 1, "[A3] Time Crouch High Speed: %2 hrs (%3%1)", "A3"],  
+				["timeProneHighSpeed", _timeProneHighSpeed, 1, 1, "[A3] Time Prone High Speed: %2 hrs (%3%1)", "A3"],  
+				["timeInVehicle", _timeInVehicle, 1, 1, "[A3] Time In Vehicle: %2 hrs (%3%1)", "A3"], 
+				["timeInVehicleEngineOn", _timeInVehicleEngineOn, 1, 1, "[A3] Time In Vehicle Engine On: %2 hrs (%3%1)", "A3"], 
+				["timeInVehicleMoving", _timeInVehicleMoving, 1, 1, "[A3] Time In Vehicle Moving: %2 hrs (%3%1)", "A3"], 
+				["timeInVehicleFlying", _timeInVehicleFlying, 1, 1, "[A3] Time In Vehicle Flying: %2 hrs (%3%1)", "A3"], 
+				["timeCarDriver", _timeCarDriver, 1, 1, "[A3] Time Car Driver: %2 hrs (%3%1)", "A3"],  
+				["timeCarGunner", _timeCarGunner, 1, 1, "[A3] Time Car Gunner: %2 hrs (%3%1)", "A3"], 
+				["timeCarCommander", _timeCarCommander, 1, 1, "[A3] Time Car Commander: %2 hrs (%3%1)", "A3"],  
+				["timeCarPassenger", _timeCarPassenger, 1, 1, "[A3] Time Car Passenger: %2 hrs (%3%1)", "A3"],  
+				["timeTankDriver", _timeTankDriver, 1, 1, "[A3] Time Tank Driver: %2 hrs (%3%1)", "A3"],  
+				["timeTankGunner", _timeTankGunner, 1, 1, "[A3] Time Tank Gunner: %2 hrs (%3%1)", "A3"],  
+				["timeTankCommander", _timeTankCommander, 1, 1, "[A3] Time Tank Commander: %2 hrs (%3%1)", "A3"],  
+				["timeTankPassenger", _timeTankPassenger, 1, 1, "[A3] Time Tank Passenger: %2 hrs (%3%1)", "A3"],  
+				["timeTruckDriver", _timeTruckDriver, 1, 1, "[A3] Time Truck Driver: %2 hrs (%3%1)", "A3"],  
+				["timeTruckGunner", _timeTruckGunner, 1, 1, "[A3] Time Truck Gunner: %2 hrs (%3%1)", "A3"],  
+				["timeTruckCommander", _timeTruckCommander, 1, 1, "[A3] Time Truck Commander: %2 hrs (%3%1)", "A3"],  
+				["timeTruckPassenger", _timeTruckPassenger, 1, 1, "[A3] Time Truck Passenger: %2 hrs (%3%1)", "A3"],  
+				["timeMotorcycleDriver", _timeMotorcycleDriver, 1, 1, "[A3] Time Motorcycle Driver: %2 hrs (%3%1)", "A3"],  
+				["timeMotorcycleGunner", _timeMotorcycleGunner, 1, 1, "[A3] Time Motorcycle Gunner: %2 hrs (%3%1)", "A3"],  
+				["timeMotorcycleCommander", _timeMotorcycleCommander, 1, 1, "[A3] Time Motorcycle Commander: %2 hrs (%3%1)", "A3"],  
+				["timeMotorcyclePassenger", _timeMotorcyclePassenger, 1, 1, "[A3] Time Motorcycle Passenger: %2 hrs (%3%1)", "A3"],  
+				["timeHelicopterDriver", _timeHelicopterDriver, 1, 1, "[A3] Time Helicopter Driver: %2 hrs (%3%1)", "A3"],  
+				["timeHelicopterGunner", _timeHelicopterGunner, 1, 1, "[A3] Time Helicopter Gunner: %2 hrs (%3%1)", "A3"],  
+				["timeHelicopterCommander", _timeHelicopterCommander, 1, 1, "[A3] Time Helicopter Commander: %2 hrs (%3%1)", "A3"],  
+				["timeHelicopterPassenger", _timeHelicopterPassenger, 1, 1, "[A3] Time Helicopter Passenger: %2 hrs (%3%1)", "A3"],  
+				["timePlaneDriver", _timePlaneDriver, 1, 1, "[A3] Time Plane Driver: %2 hrs (%3%1)", "A3"],  
+				["timePlaneGunner", _timePlaneGunner, 1, 1, "[A3] Time Plane Gunner: %2 hrs (%3%1)", "A3"],  
+				["timePlaneCommander", _timePlaneCommander, 1, 1, "[A3] Time Plane Commander: %2 hrs (%3%1)", "A3"],  
+				["timePlanePassenger", _timePlanePassenger, 1, 1, "[A3] Time Plane Passenger: %2 hrs (%3%1)", "A3"],  
+				["timeShipDriver", _timeShipDriver, 1, 1, "[A3] Time Ship Driver: %2 hrs (%3%1)", "A3"],  
+				["timeShipGunner", _timeShipGunner, 1, 1, "[A3] Time Ship Gunner: %2 hrs (%3%1)", "A3"],  
+				["timeShipCommander", _timeShipCommander, 1, 1, "[A3] Time Ship Commander: %2 hrs (%3%1)", "A3"],  
+				["timeShipPassenger", _timeShipPassenger, 1, 1, "[A3] Time Ship Passenger: %2 hrs (%3%1)", "A3"],  
+				["timeBoatDriver", _timeBoatDriver, 1, 1, "[A3] Time Boat Driver: %2 hrs (%3%1)", "A3"],  
+				["timeBoatGunner", _timeBoatGunner, 1, 1, "[A3] Time Boat Gunner: %2 hrs (%3%1)", "A3"],  
+				["timeBoatCommander", _timeBoatCommander, 1, 1, "[A3] Time Boat Commander: %2 hrs (%3%1)", "A3"],  
+				["timeBoatPassenger", _timeBoatPassenger, 1, 1, "[A3] Time Boat Passenger: %2 hrs (%3%1)", "A3"],
+				["timeVehicleLightOn", _timeVehicleLightOn, 1, 1, "[A3] Time Vehicle Light On: %2 hrs (%3%1)", "A3"],  
+				["timeVehicleLaser", _timeVehicleLaser, 1, 1, "[A3] Time Vehicle Laser On: %2 hrs (%3%1)", "A3"],  
+				["timeVehicleCollisionLightOn", _timeVehicleCollisionLightOn, 1, 1, "[A3] Time Vehicle Collision Light On: %2 hrs (%3%1)", "A3"],  
+				["timeVehicleRadarOn", _timeVehicleRadarOn, 1, 1, "[A3] Time Vehicle Radar On: %2 hrs (%3%1)", "A3"],  
+				["timeMapVisible", _timeMapVisible, 1, 1, "[A3] Time Map Visible: %2 hrs (%3%1)", "A3"],  
+				["timeGpsVisible", _timeGpsVisible, 1, 1, "[A3] Time Gps Visible: %2 hrs (%3%1)", "A3"],  
+				["timeCompassVisible", _timeCompassVisible, 1, 1, "[A3] Time Compass Visible: %2 hrs (%3%1)", "A3"],  
+				["timeWatchVisible", _timeWatchVisible, 1, 1, "[A3] Time Watch Visible: %2 hrs (%3%1)", "A3"],  
+				["timeVisionModeDay", _timeVisionModeDay, 1, 1, "[A3] Time Vision Mode Day: %2 hrs (%3%1)", "A3"],  
+				["timeVisionModeNight", _timeVisionModeNight, 1, 1, "[A3] Time Vision Mode Night: %2 hrs (%3%1)", "A3"],  
+				["timeVisionModeThermal", _timeVisionModeThermal, 1, 1, "[A3] Time Vision Mode Thermal: %2 hrs (%3%1)", "A3"],  
+				["timeWeaponLowered", _timeWeaponLowered, 1, 1, "[A3] Time Weapon Lowered: %2 hrs (%3%1)", "A3"], 
+				["timeOnRoad", _timeOnRoad, 1, 1, "[A3] Time On Road: %2 hrs (%3%1)", "A3"], 
+				["timeIsBleeding", _timeIsBleeding, 1, 1, "[A3] Time Is Bleeding: %2 hrs (%3%1)", "A3"], 
+				["timeIsBurning", _timeIsBurning, 1, 1, "[A3] Time Is Burning: %2 hrs (%3%1)", "A3"], 
+				["timeInjuredNone", _timeInjuredNone, 1, 1, "[A3] Time Injured None: %2 hrs (%3%1)", "A3"], 
+				["timeInjuredLow", _timeInjuredLow, 1, 1, "[A3] Time Infured Low: %2 hrs (%3%1)", "A3"], 
+				["timeInjuredMed", _timeInjuredMed, 1, 1, "[A3] Time Injured Med: %2 hrs (%3%1)", "A3"], 
+				["timeInjuredHigh", _timeInjuredHigh, 1, 1, "[A3] Time Injured High: %2 hrs (%3%1)", "A3"], 
+				["timeInjuredFull", _timeInjuredFull, 1, 1, "[A3] Time Injured Full: %2 hrs (%3%1)", "A3"], 
+				["timeIrLaserOn", _timeIrLaserOn, 1, 1, "[A3] Time IR Laser On: %2 hrs (%3%1)", "A3"], 
+				["timeFlashlightOn", _timeFlashlightOn, 1, 1, "[A3] Time Flashlight On: %2 hrs (%3%1)", "A3"], 
+				["timeMagazineFull", _timeMagazineFull, 1, 1, "[A3] Time Magazine Full: %2 hrs (%3%1)", "A3"], 
+				["timeMagazineFillHigh", _timeMagazineFillHigh, 1, 1, "[A3] Time Magazine Fill High: %2 hrs (%3%1)", "A3"], 
+				["timeMagazineFillMid", _timeMagazineFillMid, 1, 1, "[A3] Time Magazine Fill Med: %2 hrs (%3%1)", "A3"], 
+				["timeMagazineFillLow", _timeMagazineFillLow, 1, 1, "[A3] Time Magazine Fill Low: %2 hrs (%3%1)", "A3"], 
+				["timeMagazineEmpty", _timeMagazineEmpty, 1, 1, "[A3] Time Magazine Empty: %2 hrs (%3%1)", "A3"], 
+				["timeIsMedic", _timeIsMedic, 1, 1, "[A3] Time Is Medic: %2 hrs (%3%1)", "A3"], 
+				["timeIsEngineer", _timeIsEngineer, 1, 1, "[A3] Time Is Engineer: %2 hrs (%3%1)", "A3"], 
+				["timeIsExplosiveSpecialist", _timeIsExplosiveSpecialist, 1, 1, "[A3] Time Is Explosive Specialist: %2 hrs (%3%1)", "A3"], 
+				["timeIsUavHacker", _timeIsUavHacker, 1, 1, "[A3] Time Is UAV Hacker: %2 hrs (%3%1)", "A3"], 
+				["timeAddonAceActive", _timeAddonAceActive, 1, 1, "[ACE] Time Addon Ace Active: %2 hrs (%3%1)", "A3"], 
+				["timeAceIsBleeding", _timeAceIsBleeding, 1, 1, "[ACE] Time Is Bleeding: %2 hrs (%3%1)", "ACE"], 
+				["timeAddonTfarActive", _timeAddonTfarActive, 1, 1, "[TFAR] Time Addon Tfar Active: %2 hrs (%3%1)", "A3"],
+				["timeTfarHasLrRadio", _timeTfarHasLrRadio, 1, 1, "[TFAR] Time Tfar Has LR Radio: %2 hrs (%3%1)", "TFAR"],
+				["timeTfarHasSwRadio", _timeTfarHasSwRadio, 1, 1, "[TFAR] Time Tfar Has SW Radio: %2 hrs (%3%1)", "TFAR"],
+				["timeTfarIsSpeaking", _timeTfarIsSpeaking, 1, 1, "[TFAR] Time Tfar Is Speaking: %2 hrs (%3%1)", "TFAR"],
+				["timeTfarSpeakVolumeNormal", _timeTfarSpeakVolumeNormal, 1, 1, "[TFAR] Time Tfar Speak Volume Normal: %2 hrs (%3%1)", "TFAR"],
+				["timeTfarSpeakVolumeYelling", _timeTfarSpeakVolumeYelling, 1, 1, "[TFAR] Time Tfar Speak Volume Yelling: %2 hrs (%3%1)", "TFAR"],
+				["timeTfarSpeakVolumeWhispering", _timeTfarSpeakVolumeWhispering, 1, 1, "[TFAR] Time Tfar Speak Volume Whispering: %2 hrs (%3%1)", "TFAR"]
 			]
 		];
 		

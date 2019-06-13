@@ -11,6 +11,8 @@ else
 
 if (isServer && isMultiplayer && _addonInidbi2Activated) then
 {
+	/* ---------------------------------------- */
+	
 	_serverStatus = "PPS_ServerStatus";
 	missionNamespace setVariable [_serverStatus, true, false];
 	publicVariable _serverStatus;
@@ -28,6 +30,8 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 			[format ["[%1] DB PPS Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
 		} forEach _players;
 	};	
+
+	/* ---------------------------------------- */
 
 	"ppsServerHelo" addPublicVariableEventHandler
 	{
@@ -66,4 +70,53 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 			[format ["[%1] New PPS Player added to DB: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
 		};
 	};
+	
+	/* ---------------------------------------- */
+
+	_dbName = "pps-events";
+	_dbEvents = ["new", _dbName] call OO_INIDBI;
+	
+	_isEvent = false;
+	_eventName = "";
+	_eventStartTime = [0, 0, 0, 0, 0, 0];
+	_eventStopTime = [0, 0, 0, 0, 0, 0];
+	
+	if ("exists" call _dbEvents) then
+	{
+		_events = "getSections" call _dbEvents;
+		{
+			_eventStopTime = ["read", [_x, "eventStopTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+			if (_eventStopTime isEqualTo [0, 0, 0, 0, 0, 0]) exitWith
+			{
+				_isEvent = true;
+				_eventName = ["read", [_x, "eventName", ""]] call _dbEvents;
+				_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+			}; 
+		} forEach _events;
+	};
+
+	_eventId = "";
+	{
+		if(_x < 10) then
+		{
+			_eventId = _eventId + format ["0%1", str _x];
+		}
+		else
+		{
+			_eventId = _eventId + (str _x);
+		};
+	} forEach _eventStartTime;
+	
+	PPS_isEvent = _isEvent;
+	publicVariable "PPS_isEvent";
+	PPS_eventName = _eventName;
+	publicVariable "PPS_eventName";
+	PPS_eventId = _eventId;
+	publicVariable "PPS_eventId";
+	PPS_eventStartTime = +_eventStartTime;
+	publicVariable "PPS_eventStartTime";
+	PPS_eventStopTime = +_eventStopTime;
+	publicVariable "PPS_eventStopTime";
+	
+	/* ---------------------------------------- */
 };
