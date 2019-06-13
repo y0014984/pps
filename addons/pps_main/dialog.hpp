@@ -160,6 +160,17 @@ class PPS_Main_Dialog
 			
 			action = "[] call PPS_fnc_dialogUpdate;";
 		};
+		class PPS_RscButton_1605: RscButton
+		{
+			idc = 1601;
+			text = $STR_PPS_Main_Dialog_Button_Export;
+			x = 34 * GUI_GRID_W + GUI_GRID_X;
+			y = 26 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			
+			action = "[] call PPS_fnc_dialogButtonExportExec;";
+		};
 		////////////////////////////////////////////////////////
 		// GUI EDITOR OUTPUT END
 		////////////////////////////////////////////////////////

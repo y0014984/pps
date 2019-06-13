@@ -236,6 +236,77 @@ params ["_playerUid"];
 
 /* ================================================================================ */
 
+(_playerUid + "-requestExportStatistics") addPublicVariableEventHandler
+{
+	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
+	
+	_playerUid = _broadcastVariableValue select 0;
+	_clientId = _broadcastVariableValue select 1;
+
+	_tab = "	";
+	_crlf = "
+";
+	_result = "Player" + _tab + "Event" + _tab + "Statistics Key" + _tab + "Statistics Value" + _crlf;;
+	
+	_dbName = "pps-players";
+	_dbPlayers = ["new", _dbName] call OO_INIDBI;
+	
+	_players = "getSections" call _dbPlayers;
+	{
+		_currentPlayer = _x;
+		
+		_playerName = ["read", [_currentPlayer, "playerName", 0]] call _dbPlayers;
+		
+		_dbName = "pps-events";
+		_dbEvents = ["new", _dbName] call OO_INIDBI;
+		
+		if ("exists" call _dbEvents) then
+		{
+			_events = "getSections" call _dbEvents;
+			{
+				_currentEvent = _x;
+				
+				_eventPlayerUids = ["read", [_x, "eventPlayerUids", 0]] call _dbEvents;
+				
+				_eventId = ["read", [_currentEvent, "eventId", 0]] call _dbEvents;
+				_eventName = ["read", [_currentEvent, "eventName", ""]] call _dbEvents;
+				_eventDuration = ["read", [_currentEvent, "eventDuration", 0]] call _dbEvents;
+				_eventStartTime = ["read", [_currentEvent, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+				
+				if ((_eventPlayerUids find _currentPlayer) > -1) then
+				{
+					_dbName = "pps-statistics-" + _currentPlayer + "-" + _eventId;
+					_dbStatistics = ["new", _dbName] call OO_INIDBI;
+					
+					if ("exists" call _dbStatistics) then
+					{
+						_statistics = "getSections" call _dbStatistics;
+						{
+							_currentStatistics = _x;
+							
+							_key = ["read", [_currentStatistics, "key", ""]] call _dbStatistics;
+							_value = ["read", [_currentStatistics, "value", ""]] call _dbStatistics;
+							
+							_result = _result + _playerName + _tab + _eventName + _tab + _key + _tab + (str _value) + _crlf;
+								
+						} forEach _statistics;
+					};
+				};
+			} forEach _events;
+		};
+	} forEach _players;
+
+	/* ---------------------------------------- */
+
+	_answer = _playerUid + "-answerExportStatistics";
+	missionNamespace setVariable [_answer, _result, false];
+	_clientId publicVariableClient _answer;
+			
+	[format ["[%1] PPS Player Request Export Statistics: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
+};
+
+/* ================================================================================ */
+
 (_playerUid + "-requestStatisticsFiltered") addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
