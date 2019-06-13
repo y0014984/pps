@@ -125,18 +125,23 @@ params ["_playerUid"];
 		_dbName = "pps-events";
 		_dbEvents = ["new", _dbName] call OO_INIDBI;
 		
-		_events = "getSections" call _dbEvents;
 		_isEvent = false;
+		_eventId = "";
 		_eventStartTime = [0, 0, 0, 0, 0, 0];
 		_eventStopTime = [0, 0, 0, 0, 0, 0];
+		
+		if ("exists" call _dbEvents) then
 		{
-			_eventStopTime = ["read", [_x, "eventStopTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
-			if (_eventStopTime isEqualTo [0, 0, 0, 0, 0, 0]) exitWith
+			_events = "getSections" call _dbEvents;
 			{
-				_isEvent = true;
-				_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
-			}; 
-		} forEach _events;
+				_eventStopTime = ["read", [_x, "eventStopTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+				if (_eventStopTime isEqualTo [0, 0, 0, 0, 0, 0]) exitWith
+				{
+					_isEvent = true;
+					_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+				}; 
+			} forEach _events;
+		};
 		
 		if (!_isEvent) then
 		{
@@ -174,7 +179,6 @@ params ["_playerUid"];
 		{
 			_eventStopTime = "getTimeStamp" call _dbEvents;
 			
-			_eventId = "";
 			{
 				if(_x < 10) then
 				{
@@ -189,12 +193,14 @@ params ["_playerUid"];
 			
 			if ((_eventStopTime select 0) == (_eventStartTime select 0)) then
 			{
-				_eventStartTime set [5, "delete"];
-				_eventStartTime = _eventStartTime - ["delete"];
-				_eventStopTime set [5, "delete"];
-				_eventStopTime = _eventStopTime - ["delete"];
-				_eventDuration = (dateToNumber _eventStopTime) - (dateToNumber _eventStartTime);
-				_eventDuration = numberToDate [_eventStopTime select 0, _eventDuration];
+				_tmpEventStartTime = +_eventStartTime;
+				_tmpEventStartTime set [5, "delete"];
+				_tmpEventStartTime = _tmpEventStartTime - ["delete"];
+				_tmpEventStopTime = +_eventStopTime;
+				_tmpEventStopTime set [5, "delete"];
+				_tmpEventStopTime = _tmpEventStopTime - ["delete"];
+				_eventDuration = (dateToNumber _tmpEventStopTime) - (dateToNumber _tmpEventStartTime);
+				_eventDuration = numberToDate [_tmpEventStopTime select 0, _eventDuration];
 				if (((_eventDuration select 1) == 1) && ((_eventDuration select 2) == 1)) then
 				{
 					_eventDuration = ((_eventDuration select 3) * 60) + (_eventDuration select 4);
@@ -206,8 +212,19 @@ params ["_playerUid"];
 			
 			["STR_PPS_Main_Notifications_Event_Stopped", _eventName] remoteExecCall ["PPS_fnc_hintLocalized"];
 		};
-		
-		_result = [_isEvent, _eventName, _eventStartTime, _eventStopTime];
+
+		PPS_isEvent = _isEvent;
+		publicVariable "PPS_isEvent";
+		PPS_eventName = _eventName;
+		publicVariable "PPS_eventName";
+		PPS_eventId = _eventId;
+		publicVariable "PPS_eventId";
+		PPS_eventStartTime = +_eventStartTime;
+		publicVariable "PPS_eventStartTime";
+		PPS_eventStopTime = +_eventStopTime;
+		publicVariable "PPS_eventStopTime";
+			
+		_result = true;
 		
 		_answer = _playerUid + "-answerSwitchEvent";
 		missionNamespace setVariable [_answer, _result, false];
@@ -241,198 +258,62 @@ params ["_playerUid"];
 	{
 		if (_playerUid != _requestedPlayerUid) then {_isTrackStatisticsActive = false; _trackStatisticsKey = "";};
 		
-		_dbName = "pps-player-" + _requestedPlayerUid;
-		_dbPlayer = ["new", _dbName] call OO_INIDBI;
-		
-		_globalInformationsSection = "Global Informations";
-		_intervalStatisticsSection = "Interval Statistics";
-		_eventHandlerStatisticsSection = "Event Handler Statistics";
-		_eventsInformationsSection = "Events Informations";
+		_dbName = "pps-statistics-" + _requestedPlayerUid + "-" + _requestedEventId;
+		_dbStatistics = ["new", _dbName] call OO_INIDBI;
 
-		_statisticsSectionsAndKeys =
-		[
-			[_globalInformationsSection, "playerName"], 
-			[_globalInformationsSection, "playerUid"], 
-			[_intervalStatisticsSection, "countUpdates"], 
-			[_intervalStatisticsSection, "timeInEvent"], 
-			[_eventHandlerStatisticsSection, "countProjectilesFired"], 
-			[_eventHandlerStatisticsSection, "countGrenadesThrown"], 
-			[_eventHandlerStatisticsSection, "countSmokeShellsThrown"], 
-			[_eventHandlerStatisticsSection, "countChemlightsThrown"], 
-			[_eventHandlerStatisticsSection, "countUnknownThrown"], 
-			[_eventHandlerStatisticsSection, "countProjectilesHitEnemy"], 
-			[_eventHandlerStatisticsSection, "countProjectilesHitFriendly"], 
-			[_eventHandlerStatisticsSection, "countGrenadesHitEnemy"], 
-			[_eventHandlerStatisticsSection, "countGrenadesHitFriendly"], 
-			[_eventHandlerStatisticsSection, "countProjectilesHitByEnemy"], 
-			[_eventHandlerStatisticsSection, "countProjectilesHitByFriendly"], 
-			[_eventHandlerStatisticsSection, "countGrenadesHitByEnemy"], 
-			[_eventHandlerStatisticsSection, "countGrenadesHitByFriendly"], 
-			[_eventHandlerStatisticsSection, "countPlayerDeaths"], 
-			[_eventHandlerStatisticsSection, "countPlayerKills"], 
-			[_eventHandlerStatisticsSection, "countPlayerSuicides"], 
-			[_eventHandlerStatisticsSection, "countPlayerTeamKills"], 
-			[_eventHandlerStatisticsSection, "countCuratorInterfaceOpened"], 
-			[_eventHandlerStatisticsSection, "countGearInterfaceOpened"], 
-			[_eventHandlerStatisticsSection, "countCompassInterfaceOpened"], 
-			[_eventHandlerStatisticsSection, "countWatchInterfaceOpened"], 
-			[_eventHandlerStatisticsSection, "countBinocularUsed"], 
-			[_eventHandlerStatisticsSection, "countOpticsUsed"], 
-			[_intervalStatisticsSection, "timeOnFoot"], 
-			[_intervalStatisticsSection, "timeStandNoSpeed"], 
-			[_intervalStatisticsSection, "timeCrouchNoSpeed"], 
-			[_intervalStatisticsSection, "timeProneNoSpeed"], 
-			[_intervalStatisticsSection, "timeStandLowSpeed"], 
-			[_intervalStatisticsSection, "timeCrouchLowSpeed"], 
-			[_intervalStatisticsSection, "timeProneLowSpeed"], 
-			[_intervalStatisticsSection, "timeStandMidSpeed"], 
-			[_intervalStatisticsSection, "timeCrouchMidSpeed"], 
-			[_intervalStatisticsSection, "timeProneMidSpeed"], 
-			[_intervalStatisticsSection, "timeStandHighSpeed"], 
-			[_intervalStatisticsSection, "timeCrouchHighSpeed"], 
-			[_intervalStatisticsSection, "timeProneHighSpeed"], 
-			[_intervalStatisticsSection, "timeInVehicle"], 
-			[_intervalStatisticsSection, "timeInVehicleEngineOn"], 
-			[_intervalStatisticsSection, "timeInVehicleMoving"], 
-			[_intervalStatisticsSection, "timeInVehicleFlying"], 
-			[_intervalStatisticsSection, "timeCarDriver"], 
-			[_intervalStatisticsSection, "timeCarGunner"], 
-			[_intervalStatisticsSection, "timeCarCommander"],
-			[_intervalStatisticsSection, "timeCarPassenger"], 
-			[_intervalStatisticsSection, "timeTankDriver"], 
-			[_intervalStatisticsSection, "timeTankGunner"], 
-			[_intervalStatisticsSection, "timeTankCommander"], 
-			[_intervalStatisticsSection, "timeTankPassenger"], 
-			[_intervalStatisticsSection, "timeTruckDriver"], 
-			[_intervalStatisticsSection, "timeTruckGunner"], 
-			[_intervalStatisticsSection, "timeTruckCommander"], 
-			[_intervalStatisticsSection, "timeTruckPassenger"], 
-			[_intervalStatisticsSection, "timeMotorcycleDriver"], 
-			[_intervalStatisticsSection, "timeMotorcycleGunner"], 
-			[_intervalStatisticsSection, "timeMotorcycleCommander"], 
-			[_intervalStatisticsSection, "timeMotorcyclePassenger"], 
-			[_intervalStatisticsSection, "timeHelicopterDriver"], 
-			[_intervalStatisticsSection, "timeHelicopterGunner"], 
-			[_intervalStatisticsSection, "timeHelicopterCommander"], 
-			[_intervalStatisticsSection, "timeHelicopterPassenger"], 
-			[_intervalStatisticsSection, "timePlaneDriver"], 
-			[_intervalStatisticsSection, "timePlaneGunner"], 
-			[_intervalStatisticsSection, "timePlaneCommander"], 
-			[_intervalStatisticsSection, "timePlanePassenger"], 
-			[_intervalStatisticsSection, "timeShipDriver"], 
-			[_intervalStatisticsSection, "timeShipGunner"], 
-			[_intervalStatisticsSection, "timeShipCommander"], 
-			[_intervalStatisticsSection, "timeShipPassenger"], 
-			[_intervalStatisticsSection, "timeBoatDriver"], 
-			[_intervalStatisticsSection, "timeBoatGunner"], 
-			[_intervalStatisticsSection, "timeBoatCommander"], 
-			[_intervalStatisticsSection, "timeBoatPassenger"], 
-			[_intervalStatisticsSection, "timeVehicleLightOn"], 
-			[_intervalStatisticsSection, "timeVehicleLaser"], 
-			[_intervalStatisticsSection, "timeVehicleCollisionLightOn"], 
-			[_intervalStatisticsSection, "timeVehicleRadarOn"], 
-			[_intervalStatisticsSection, "timeMapVisible"], 
-			[_intervalStatisticsSection, "timeGpsVisible"], 
-			[_intervalStatisticsSection, "timeCompassVisible"], 
-			[_intervalStatisticsSection, "timeWatchVisible"], 
-			[_intervalStatisticsSection, "timeVisionModeDay"], 
-			[_intervalStatisticsSection, "timeVisionModeNight"], 
-			[_intervalStatisticsSection, "timeVisionModeThermal"], 
-			[_intervalStatisticsSection, "timeWeaponLowered"], 
-			[_intervalStatisticsSection, "timeOnRoad"], 
-			[_intervalStatisticsSection, "timeIsBleeding"], 
-			[_intervalStatisticsSection, "timeIsBurning"], 
-			[_intervalStatisticsSection, "timeInjuredNone"], 
-			[_intervalStatisticsSection, "timeInjuredLow"], 
-			[_intervalStatisticsSection, "timeInjuredMed"], 
-			[_intervalStatisticsSection, "timeInjuredHigh"], 
-			[_intervalStatisticsSection, "timeInjuredFull"], 
-			[_intervalStatisticsSection, "timeIrLaserOn"], 
-			[_intervalStatisticsSection, "timeFlashlightOn"], 
-			[_intervalStatisticsSection, "timeMagazineFull"], 
-			[_intervalStatisticsSection, "timeMagazineFillHigh"], 
-			[_intervalStatisticsSection, "timeMagazineFillMid"], 
-			[_intervalStatisticsSection, "timeMagazineFillLow"], 
-			[_intervalStatisticsSection, "timeMagazineEmpty"], 
-			[_intervalStatisticsSection, "timeIsMedic"], 
-			[_intervalStatisticsSection, "timeIsEngineer"], 
-			[_intervalStatisticsSection, "timeIsExplosiveSpecialist"], 
-			[_intervalStatisticsSection, "timeIsUavHacker"], 
-			[_eventHandlerStatisticsSection, "countEngineToggle"], 
-			[_eventHandlerStatisticsSection, "countMagazineReloaded"], 
-			[_eventHandlerStatisticsSection, "countBreathHolded"], 
-			[_eventHandlerStatisticsSection, "countZoomUsed"], 
-			[_eventHandlerStatisticsSection, "countLeanLeft"], 
-			[_eventHandlerStatisticsSection, "countLeanRight"], 
-			[_eventHandlerStatisticsSection, "countSalute"], 
-			[_eventHandlerStatisticsSection, "countSitDown"], 
-			[_eventHandlerStatisticsSection, "countGetOver"], 
-			[_intervalStatisticsSection, "timeAddonAceActive"], 
-			[_intervalStatisticsSection, "timeAceIsBleeding"], 
-			[_eventHandlerStatisticsSection, "countAceCargoLoaded"], 
-			[_eventHandlerStatisticsSection, "countAceCargoUnloaded"], 
-			[_eventHandlerStatisticsSection, "countAceInteractMenuOpened"], 
-			[_eventHandlerStatisticsSection, "countAceUnconscious"], 
-			[_intervalStatisticsSection, "timeAddonTfarActive"],
-			[_eventHandlerStatisticsSection, "countTfarIsSpeaking"], 
-			[_eventHandlerStatisticsSection, "countTfarUsesRadio"], 
-			[_intervalStatisticsSection, "timeTfarHasLrRadio"],
-			[_intervalStatisticsSection, "timeTfarHasSwRadio"],
-			[_intervalStatisticsSection, "timeTfarIsSpeaking"],
-			[_intervalStatisticsSection, "timeTfarSpeakVolumeNormal"],
-			[_intervalStatisticsSection, "timeTfarSpeakVolumeYelling"],
-			[_intervalStatisticsSection, "timeTfarSpeakVolumeWhispering"]
-		];
-		
-		_timeInEvent = ["read", [_intervalStatisticsSection, "timeInEvent", 0]] call _dbPlayer;
-		_countProjectilesFired = ["read", [_eventHandlerStatisticsSection, "countProjectilesFired", 0]] call _dbPlayer;
-		_countGrenadesThrown = ["read", [_eventHandlerStatisticsSection, "countGrenadesThrown", 0]] call _dbPlayer;
-		
 		_tmpResult = [];
+		if ("exists" call _dbStatistics) then
 		{
-			_section = _x select 0;
-			_key = _x select 1;
-			_value = ["read", [_section, _key, ""]] call _dbPlayer;
-			_formatType = ["read", [_section, _key + "FormatType", -1]] call _dbPlayer;
-			_formatString = ["read", [_section, _key + "FormatString", ""]] call _dbPlayer;
+			_statistics = "getSections" call _dbStatistics;
 			
-				switch (_formatType) do
-				{
-					case 0:
-					{
-						_tmpResult = _tmpResult + [[format [_formatString, _value], _key]];
-					};
-					case 1:
-					{
-						_roundValue = parseNumber ((_value / 3600) toFixed 2);
-						_roundValuePercent = parseNumber ((100 / _timeInEvent * _value) toFixed 2);
-						_tmpResult = _tmpResult + [[format [_formatString, "%", str _roundValue, str _roundValuePercent], _key]];
-					};
-					case 2:
-					{
-						_roundValuePercent = parseNumber ((100 / _countProjectilesFired * _value) toFixed 2);
-						_tmpResult = _tmpResult + [[format [_formatString, "%", _value, _roundValuePercent], _key]];
-
-					};
-					case 3:
-					{
-						_roundValue = parseNumber ((_value / 3600) toFixed 2);
-						_tmpResult = _tmpResult + [[format [_formatString, str _roundValue], _key]];
-					};
-					case 4:
-					{
-						_roundValuePercent = parseNumber ((100 / _countGrenadesThrown * _value) toFixed 2);
-						_tmpResult = _tmpResult + [[format [_formatString, "%", _value, _roundValuePercent], _key]];
-
-					};
-					case -1:
-					{
-						_tmpResult = _tmpResult + [[format [localize "STR_PPS_Main_Dialog_List_Value_Not_Recorded", _key], _key]];
-
-					};
-				};
+			_timeInEvent = ["read", ["timeInEvent", "value", 0]] call _dbStatistics;
+			_countProjectilesFired = ["read", ["countProjectilesFired", "value", 0]] call _dbStatistics;
+			_countGrenadesThrown = ["read", ["countGrenadesThrown", "value", 0]] call _dbStatistics;
+			
+			{
+				_value = ["read", [_x, "value", ""]] call _dbStatistics;
+				_type = ["read", [_x, "type", ""]] call _dbStatistics;
+				_formatType = ["read", [_x, "formatType", -1]] call _dbStatistics;
+				_formatString = ["read", [_x, "formatString", ""]] call _dbStatistics;
 				
-		} forEach _statisticsSectionsAndKeys;
+					switch (_formatType) do
+					{
+						case 0:
+						{
+							_tmpResult = _tmpResult + [[format [_formatString, _value], _x]];
+						};
+						case 1:
+						{
+							_roundValue = parseNumber ((_value / 3600) toFixed 2);
+							_roundValuePercent = parseNumber ((100 / _timeInEvent * _value) toFixed 2);
+							_tmpResult = _tmpResult + [[format [_formatString, "%", str _roundValue, str _roundValuePercent], _x]];
+						};
+						case 2:
+						{
+							_roundValuePercent = parseNumber ((100 / _countProjectilesFired * _value) toFixed 2);
+							_tmpResult = _tmpResult + [[format [_formatString, "%", _value, _roundValuePercent], _x]];
+
+						};
+						case 3:
+						{
+							_roundValue = parseNumber ((_value / 3600) toFixed 2);
+							_tmpResult = _tmpResult + [[format [_formatString, str _roundValue], _x]];
+						};
+						case 4:
+						{
+							_roundValuePercent = parseNumber ((100 / _countGrenadesThrown * _value) toFixed 2);
+							_tmpResult = _tmpResult + [[format [_formatString, "%", _value, _roundValuePercent], _x]];
+
+						};
+						case -1:
+						{
+							_tmpResult = _tmpResult + [[format [localize "STR_PPS_Main_Dialog_List_Value_Not_Recorded", _key], _key]];
+
+						};
+					};
+					
+			} forEach _statistics;
+		};
 		
 		_resultStatistics = [];	
 		if(_filterStatistics != "") then
@@ -454,9 +335,65 @@ params ["_playerUid"];
 		_answer = _playerUid + "-answerStatisticsFiltered";
 		missionNamespace setVariable [_answer, [_resultStatistics, _isTrackStatisticsActive, _trackStatisticsKey], false];
 		_clientId publicVariableClient _answer;
-		
+				
 		[format ["[%1] PPS Player Request Statistics: (%2)", serverTime, _requestedPlayerUid]] call PPS_fnc_log;
 	};
+};
+
+/* ================================================================================ */
+
+(_playerUid + "-requestEventsFiltered") addPublicVariableEventHandler
+{
+	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
+	
+	_playerUid = _broadcastVariableValue select 0;
+	_clientId = _broadcastVariableValue select 1;
+	_requestedPlayerUid = _broadcastVariableValue select 2;
+	_filterEvents = _broadcastVariableValue select 3;
+
+	/* ---------------------------------------- */
+
+	_dbName = "pps-players";
+	_dbPlayers = ["new", _dbName] call OO_INIDBI;
+	
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _dbPlayers;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _dbPlayers;
+
+	/* ---------------------------------------- */
+
+	if (_requestedPlayerUid != _playerUid && !_isAdmin) exitWith {};
+	
+	_dbName = "pps-events";
+	_dbEvents = ["new", _dbName] call OO_INIDBI;
+	
+	_filteredEvents = [];
+	if ("exists" call _dbEvents) then
+	{
+		_events = "getSections" call _dbEvents;
+		{	
+			_eventPlayerUids = ["read", [_x, "eventPlayerUids", 0]] call _dbEvents;
+			
+			_eventId = ["read", [_x, "eventId", 0]] call _dbEvents;
+			_eventName = ["read", [_x, "eventName", ""]] call _dbEvents;
+			_eventDuration = ["read", [_x, "eventDuration", 0]] call _dbEvents;
+			_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+			
+			if (((_eventPlayerUids find _requestedPlayerUid) > -1) && ((((toLower _eventName) find (toLower _filterEvents)) > -1) || (_filterEvents == ""))) then
+			{
+				_filteredEvents = _filteredEvents + [[_eventId, _eventName, _eventDuration, _eventStartTime]];
+			};
+		} forEach _events;
+	};
+
+	/* ---------------------------------------- */
+
+	_result = [_playerUid, _clientId, _isAdmin, _isAdminLoggedIn, _filteredEvents];
+	
+	_answer = _playerUid + "-answerEventsFiltered";
+	missionNamespace setVariable [_answer, _result, false];
+	_clientId publicVariableClient _answer;
+
+	[format ["[%1] PPS Player Request Events Filtered: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
 };
 
 /* ================================================================================ */
@@ -468,7 +405,6 @@ params ["_playerUid"];
 	_playerUid = _broadcastVariableValue select 0;
 	_clientId = _broadcastVariableValue select 1;
 	_filterPlayers = _broadcastVariableValue select 2;
-	_filterEvents = _broadcastVariableValue select 3;
 	
 	/* ---------------------------------------- */
 	
@@ -496,8 +432,8 @@ params ["_playerUid"];
 	
 	{
 		_tmpPlayerUid = getPlayerUID _x;
-		_isAdmin = ["read", [_tmpPlayerUid, "isAdmin", false]] call _dbPlayers;
-		if (_isAdmin) then {_countAdminsOnline = _countAdminsOnline + 1};
+		_tmpIsAdmin = ["read", [_tmpPlayerUid, "isAdmin", false]] call _dbPlayers;
+		if (_tmpIsAdmin) then {_countAdminsOnline = _countAdminsOnline + 1};
 	} forEach _allActivePlayers;
 	
 	/* ---------------------------------------- */
@@ -507,12 +443,10 @@ params ["_playerUid"];
 	_players = "getSections" call _dbPlayers;
 	_countPlayersTotal = count _players;
 	
-	if (!_isAdmin && !_isAdminLoggedIn) then {_players = [_playerUid];};
+	if (!_isAdminLoggedIn) then {_players = [_playerUid];};
 	
 	_tmpResult = [];
 	{
-		
-	
 		_tmpPlayerName = ["read", [_x, "playerName", ""]] call _dbPlayers;
 		_tmpPlayerUid = ["read", [_x, "playerUid", ""]] call _dbPlayers;
 		_tmpIsAdmin = ["read", [_x, "isAdmin", false]] call _dbPlayers;
@@ -542,48 +476,12 @@ params ["_playerUid"];
 
 	/* ---------------------------------------- */
 
-	_filteredEvents = [];
-	_dbName = "pps-events";
-	_dbEvents = ["new", _dbName] call OO_INIDBI;
-	
-	_events = "getSections" call _dbEvents;
-	_isEvent = false;
-	_activeEventName = "";
-	_activeEventStartTime = [0, 0, 0, 0, 0, 0];
-	_eventStopTime = [0, 0, 0, 0, 0, 0];
-	{
-		_eventName = ["read", [_x, "eventName", ""]] call _dbEvents;
-		_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
-		
-		_eventPlayerUids = ["read", [_x, "eventPlayerUids", 0]] call _dbEvents;
-		if (((_eventPlayerUids find _playerUid) > -1) && ((((toLower _eventName) find (toLower _filterEvents)) > -1) || (_filterEvents == ""))) then
-		{
-			_eventId = ["read", [_x, "eventId", 0]] call _dbEvents;
-			_eventDuration = ["read", [_x, "eventDuration", 0]] call _dbEvents;
-			_filteredEvents = _filteredEvents + [[_eventId, _eventName, _eventDuration, _eventStartTime]];
-		};
-		
-		_eventStopTime = ["read", [_x, "eventStopTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
-		if (_eventStopTime isEqualTo [0, 0, 0, 0, 0, 0]) then
-		{
-			_isEvent = true;
-			_activeEventName = _eventName;
-			_activeEventStartTime = _eventStartTime;
-			
-			//hint format ["_isEvent: %1", _isEvent];
-		}; 
-	} forEach _events;
-
-	/* ---------------------------------------- */
-
 	_result =
 	[
 		_playerUid, _clientId, _isAdmin, _isAdminLoggedIn, 
 		_isInidbi2Installed, 
 		_countPlayersTotal, _countPlayersOnline, _countAdminsTotal, _countAdminsOnline, 
-		_isEvent, _activeEventName, _activeEventStartTime,
-		_filteredPlayers,
-		_filteredEvents
+		_filteredPlayers
 	];
 	
 	_answer = _playerUid + "-answerDialogUpdate";
@@ -598,78 +496,35 @@ params ["_playerUid"];
 (_playerUid + "-updateStatistics") addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
-
-	_dbName = "pps-events";
-	_dbEvents = ["new", _dbName] call OO_INIDBI;
 	
-	_events = "getSections" call _dbEvents;
-	_isEvent = false;
-	_eventStopTime = [0, 0, 0, 0, 0, 0];
-	{
-		_eventStopTime = ["read", [_x, "eventStopTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
-		if (_eventStopTime isEqualTo [0, 0, 0, 0, 0, 0]) exitWith
-		{
-			_isEvent = true;
-		}; 
-	} forEach _events;
-
-	if (_isEvent) then
+	if (PPS_isEvent) then
 	{
 		_playerUid = _broadcastVariableValue select 0;
 		_intervalStatistics = _broadcastVariableValue select 1;
 		
-		_dbName = "pps-player-" + _playerUid;
-		_dbPlayer = ["new", _dbName] call OO_INIDBI;
-		
-		_globalInformationsSection = "Global Informations";
-		_intervalStatisticsSection = "Interval Statistics";
-		_eventHandlerStatisticsSection = "Event Handler Statistics";
-
-		/*
-		if ((count _intervalStatistics) == 1) then
-		{
-			["Einzelwert"] call PPS_fnc_log;
-			[count _intervalStatistics] call PPS_fnc_log;
-			[_intervalStatistics] call PPS_fnc_log;
-			_key = (_intervalStatistics select 0) select 1;
-			_value = (_intervalStatistics select 0) select 2;
-			_str = format ["Key: %1\nValue: %2", _key, _value];
-			_str remoteExec ["hint"];
-		}
-		else
-		{
-			["Mehrfachwertwert"] call PPS_fnc_log;
-			[count _intervalStatistics] call PPS_fnc_log;
-			[_intervalStatistics] call PPS_fnc_log;
-		};
-		*/
+		_dbName = "pps-statistics-" + _playerUid + "-" + PPS_eventId;
+		_dbStatistics = ["new", _dbName] call OO_INIDBI;
 		
 		{
-			_section = _x select 0;
-			_key = _x select 1;
-			_value = _x select 2;
+			_key = _x select 0;
+			_value = _x select 1;
+			_type = _x select 2;
 			_formatType = _x select 3;
 			_formatString = _x select 4;
+			_source = _x select 5;
 			
-			if (_section == _globalInformationsSection) then
+			if (_value > 0) then
 			{
-				["write", [_section, _key, _value]] call _dbPlayer;
-			};
-			if ((_section == _intervalStatisticsSection) || (_section == _eventHandlerStatisticsSection)) then
-			{
-				_valueOld = ["read", [_section, _key, 0]] call _dbPlayer;
+				_valueOld = ["read", [_key, "value", 0]] call _dbStatistics;
 				_value = _valueOld + _value;
-				["write", [_section, _key, _value]] call _dbPlayer;
-			};			
-			["write", [_section, _key + "FormatType", _formatType]] call _dbPlayer;
-			["write", [_section, _key + "FormatString", _formatString]] call _dbPlayer;
+				["write", [_key, "key", _key]] call _dbStatistics;
+				["write", [_key, "value", _value]] call _dbStatistics;
+				["write", [_key, "type", _type]] call _dbStatistics;
+				["write", [_key, "formatType", _formatType]] call _dbStatistics;
+				["write", [_key, "formatString", _formatString]] call _dbStatistics;
+				["write", [_key, "source", _source]] call _dbStatistics;
+			};
 		} forEach _intervalStatistics;
-		
-		_countUpdates = ["read", [_intervalStatisticsSection, "countUpdates", 0]] call _dbPlayer;
-		_countUpdates = _countUpdates + 1;
-		["write", [_intervalStatisticsSection, "countUpdates", _countUpdates]] call _dbPlayer;
-		["write", [_intervalStatisticsSection, "countUpdatesFormatType", 0]] call _dbPlayer;
-		["write", [_intervalStatisticsSection, "countUpdatesFormatString", "Count Updates: %1"]] call _dbPlayer;
 		
 		_dbName = "pps-players";
 		_dbPlayers = ["new", _dbName] call OO_INIDBI;
@@ -680,11 +535,8 @@ params ["_playerUid"];
 		
 		if (_isTrackStatisticsActive) then
 		{
-			_trackStatisticsValue = ["read", [_intervalStatisticsSection, _trackStatisticsKey, "not set"]] call _dbPlayer;
-			if ((str _trackStatisticsValue) == (str "not set")) then
-			{
-				_trackStatisticsValue = ["read", [_eventHandlerStatisticsSection, _trackStatisticsKey, "not set"]] call _dbPlayer;
-			};
+			_trackStatisticsValue = ["read", [_trackStatisticsKey, "value", "not set"]] call _dbStatistics;
+
 			if ((str _trackStatisticsValue) != (str "not set")) then
 			{
 				["STR_PPS_Main_Notifications_Tracking", _trackStatisticsKey, _trackStatisticsValue] remoteExecCall ["PPS_fnc_hintLocalized", _trackStatisticsClientId];
