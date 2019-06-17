@@ -71,7 +71,7 @@ params ["_playerUid"];
 
 	_playerUid = _broadcastVariableValue select 0;
 	_clientId = _broadcastVariableValue select 1;
-	_value = _broadcastVariableValue select 2;
+	_key = _broadcastVariableValue select 2;
 	
 	_dbName = "pps-players";
 	_dbPlayers = ["new", _dbName] call OO_INIDBI;
@@ -87,8 +87,16 @@ params ["_playerUid"];
 	else
 	{
 		["write", [_playerUid, "isTrackStatisticsActive", true]] call _dbPlayers;
-		["write", [_playerUid, "trackStatisticsKey", _value]] call _dbPlayers;
+		["write", [_playerUid, "trackStatisticsKey", _key]] call _dbPlayers;
 		["write", [_playerUid, "trackStatisticsClientId", _clientId]] call _dbPlayers;
+
+		_value = ["read", [_key, "value", "not set"]] call _dbStatistics;
+
+		if ((str _value) != (str "not set")) then
+		{
+			["STR_PPS_Main_Notifications_Tracking", _key, _value] remoteExecCall ["PPS_fnc_hintLocalized", _clientId];
+		};
+
 	};
 
 	_isTrackStatisticsActive = ["read", [_playerUid, "isTrackStatisticsActive", false]] call _dbPlayers;
@@ -116,6 +124,7 @@ params ["_playerUid"];
 
 	_dbName = "pps-players";
 	_dbPlayers = ["new", _dbName] call OO_INIDBI;
+	_players = "getSections" call _dbPlayers;
 	
 	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _dbPlayers;
 	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _dbPlayers;
@@ -148,10 +157,15 @@ params ["_playerUid"];
 				_xPlayerUid = getPlayerUID _x;
 				_allActivePlayersIds = _allActivePlayersIds + [_xPlayerUid];			
 			} forEach _allActivePlayers;
+			
+			_allActiveDbPlayersIds = [];
+			{
+				if ((_players find _x) > -1) then {_allActiveDbPlayersIds = _allActiveDbPlayersIds + [_x];};
+			} forEach _allActivePlayersIds;
 					
 			["write", [_eventId, "eventId", _eventId]] call _dbEvents;
 			["write", [_eventId, "eventName", _eventName]] call _dbEvents;
-			["write", [_eventId, "eventPlayerUids", _allActivePlayersIds]] call _dbEvents;
+			["write", [_eventId, "eventPlayerUids", _allActiveDbPlayersIds]] call _dbEvents;
 			["write", [_eventId, "eventStartTime", _eventStartTime]] call _dbEvents;
 			["write", [_eventId, "eventStopTime", _eventStopTime]] call _dbEvents;
 			
@@ -506,12 +520,6 @@ params ["_playerUid"];
 	_playerUid = _broadcastVariableValue select 0;
 	_clientId = _broadcastVariableValue select 1;
 	_filterPlayers = _broadcastVariableValue select 2;
-	
-	/* ---------------------------------------- */
-	
-	_addons = activatedAddons;
-	_isInidbi2Installed = false;
-	if ((_addons find "inidbi2") > -1) then {_isInidbi2Installed = true};
 
 	/* ---------------------------------------- */
 
@@ -584,8 +592,7 @@ params ["_playerUid"];
 
 	_result =
 	[
-		_playerUid, _clientId, _isAdmin, _isAdminLoggedIn, 
-		_isInidbi2Installed, 
+		_playerUid, _clientId, _isAdmin, _isAdminLoggedIn,  
 		_countPlayersTotal, _countPlayersOnline, _countAdminsTotal, _countAdminsOnline, 
 		_filteredPlayers
 	];

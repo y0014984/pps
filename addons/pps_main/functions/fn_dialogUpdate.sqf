@@ -138,18 +138,18 @@ _answer addPublicVariableEventHandler
 	_clientId = _broadcastVariableValue select 1;	
 	_isAdmin = _broadcastVariableValue select 2;
 	_isAdminLoggedIn = _broadcastVariableValue select 3;
-	_isInidbi2Installed = _broadcastVariableValue select 4;
-	_countPlayersTotal = _broadcastVariableValue select 5;
-	_countPlayersOnline = _broadcastVariableValue select 6;
-	_countAdminsTotal = _broadcastVariableValue select 7;
-	_countAdminsOnline = _broadcastVariableValue select 8;
-	_filteredPlayers = _broadcastVariableValue select 9;
+	_countPlayersTotal = _broadcastVariableValue select 4;
+	_countPlayersOnline = _broadcastVariableValue select 5;
+	_countAdminsTotal = _broadcastVariableValue select 6;
+	_countAdminsOnline = _broadcastVariableValue select 7;
+	_filteredPlayers = _broadcastVariableValue select 8;
 
 	_isEvent = PPS_isEvent;
 	_activeEventName = PPS_eventName;
 	_activeEventStartTime = +PPS_eventStartTime;
 	
-	_isServerReachable =  PPS_ServerStatus;
+	_statusServer =  PPS_statusServer;
+	_statusDatabase =  PPS_statusDatabase;
 
 	_headlineText = (findDisplay 14984) displayCtrl 1000;
 	_serverAndDatabaseStatusText = (findDisplay 14984) displayCtrl 1001;
@@ -170,10 +170,10 @@ _answer addPublicVariableEventHandler
 	_continueButton = (findDisplay 14984) displayCtrl 1606;
 	_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 	
-	if (_isInidbi2Installed) then {_isInidbi2Installed = localize "STR_PPS_Main_Online"} else {_isInidbi2Installed = localize "STR_PPS_Main_Offline"};
-	if (_isServerReachable) then {_isServerReachable = localize "STR_PPS_Main_Online"} else {_isServerReachable = localize "STR_PPS_Main_Offline"};
+	if (_statusServer) then {_statusServer = localize "STR_PPS_Main_Online"} else {_statusServer = localize "STR_PPS_Main_Offline"};
+	if (_statusDatabase) then {_statusDatabase = localize "STR_PPS_Main_Online"} else {_statusDatabase = localize "STR_PPS_Main_Offline"};
 	
-	_serverAndDatabaseStatusText ctrlSetText format [localize "STR_PPS_Main_Dialog_Server_Status",_isServerReachable, _isInidbi2Installed];
+	_serverAndDatabaseStatusText ctrlSetText format [localize "STR_PPS_Main_Dialog_Server_Status", _statusServer, _statusDatabase];
 	_playersAndAdminsCountText ctrlSetText format [localize "STR_PPS_Main_Dialog_Player_Status",_countPlayersTotal , _countPlayersOnline, _countAdminsTotal, _countAdminsOnline];
 
 	if (_isAdminLoggedIn) then
