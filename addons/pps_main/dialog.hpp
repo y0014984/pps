@@ -46,7 +46,7 @@ class PPS_Main_Dialog
 			idc = 1002;
 			text = $STR_PPS_Main_Dialog_Player_Status;
 			x = 0 * GUI_GRID_W + GUI_GRID_X;
-			y = 3 * GUI_GRID_H + GUI_GRID_Y;
+			y = 2.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 40 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			colorBackground[] = {0,0,0,0.25};
@@ -56,8 +56,8 @@ class PPS_Main_Dialog
 			idc = 1400;
 			text = "";
 			x = 0 * GUI_GRID_W + GUI_GRID_X;
-			y = 4.5 * GUI_GRID_H + GUI_GRID_Y;
-			w = 14.5 * GUI_GRID_W;
+			y = 4 * GUI_GRID_H + GUI_GRID_Y;
+			w = 17.5 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			colorBackground[] = {0,0.5,0,0.5};
 		};
@@ -66,8 +66,8 @@ class PPS_Main_Dialog
 			idc = 1401;
 			text = "";
 			x = 0 * GUI_GRID_W + GUI_GRID_X;
-			y = 15.5 * GUI_GRID_H + GUI_GRID_Y;
-			w = 14.5 * GUI_GRID_W;
+			y = 12.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 17.5 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			colorBackground[] = {0,0.5,0,0.5};
 		};
@@ -75,9 +75,9 @@ class PPS_Main_Dialog
 		{
 			idc = 1402;
 			text = "";
-			x = 15 * GUI_GRID_W + GUI_GRID_X;
-			y = 4.5 * GUI_GRID_H + GUI_GRID_Y;
-			w = 25 * GUI_GRID_W;
+			x = 18 * GUI_GRID_W + GUI_GRID_X;
+			y = 4 * GUI_GRID_H + GUI_GRID_Y;
+			w = 22 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			colorBackground[] = {0,0.5,0,0.5};
 		};
@@ -85,25 +85,25 @@ class PPS_Main_Dialog
 		{
 			idc = 1500;
 			x = 0 * GUI_GRID_W + GUI_GRID_X;
-			y = 6 * GUI_GRID_H + GUI_GRID_Y;
-			w = 14.5 * GUI_GRID_W;
-			h = 9 * GUI_GRID_H;
+			y = 5.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 17.5 * GUI_GRID_W;
+			h = 6.5 * GUI_GRID_H;
 		};
 		class PPS_RscListbox_1501: RscListbox
 		{
 			idc = 1501;
 			x = 0 * GUI_GRID_W + GUI_GRID_X;
-			y = 17 * GUI_GRID_H + GUI_GRID_Y;
-			w = 14.5 * GUI_GRID_W;
+			y = 14 * GUI_GRID_H + GUI_GRID_Y;
+			w = 17.5 * GUI_GRID_W;
 			h = 6.5 * GUI_GRID_H;
 		};
 		class PPS_RscListbox_1502: RscListbox
 		{
 			idc = 1502;
-			x = 15 * GUI_GRID_W + GUI_GRID_X;
-			y = 6 * GUI_GRID_H + GUI_GRID_Y;
-			w = 25 * GUI_GRID_W;
-			h = 17.5 * GUI_GRID_H;
+			x = 18 * GUI_GRID_W + GUI_GRID_X;
+			y = 5.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 22 * GUI_GRID_W;
+			h = 15 * GUI_GRID_H;
 		};
 		class PPS_RscButton_1600: RscButton
 		{
@@ -111,7 +111,7 @@ class PPS_Main_Dialog
 			text = $STR_PPS_Main_Dialog_Button_Admin;
 			x = 0 * GUI_GRID_W + GUI_GRID_X;
 			y = 24 * GUI_GRID_H + GUI_GRID_Y;
-			w = 6 * GUI_GRID_W;
+			w = 7 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
 			action = "[] call PPS_fnc_dialogButtonAdminExec;";
@@ -120,9 +120,9 @@ class PPS_Main_Dialog
 		{
 			idc = 1602;
 			text = $STR_PPS_Main_Dialog_Button_Event;
-			x = 6.5 * GUI_GRID_W + GUI_GRID_X;
-			y = 24 * GUI_GRID_H + GUI_GRID_Y;
-			w = 6 * GUI_GRID_W;
+			x = 18 * GUI_GRID_W + GUI_GRID_X;
+			y = 21 * GUI_GRID_H + GUI_GRID_Y;
+			w = 7 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
 			action = "[] call PPS_fnc_dialogButtonEventExec;";
@@ -132,9 +132,9 @@ class PPS_Main_Dialog
 		{
 			idc = 1603;
 			text = "";
-			x = 13 * GUI_GRID_W + GUI_GRID_X;
-			y = 24 * GUI_GRID_H + GUI_GRID_Y;
-			w = 12 * GUI_GRID_W;
+			x = 0 * GUI_GRID_W + GUI_GRID_X;
+			y = 21 * GUI_GRID_H + GUI_GRID_Y;
+			w = 17.5 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			colorBackground[] = {0,0.5,0,0.5};
 		};
@@ -142,9 +142,9 @@ class PPS_Main_Dialog
 		{
 			idc = 1604;
 			text = $STR_PPS_Main_Dialog_Button_Track_Value;
-			x = 25.5 * GUI_GRID_W + GUI_GRID_X;
-			y = 24 * GUI_GRID_H + GUI_GRID_Y;
-			w = 8 * GUI_GRID_W;
+			x = 33 * GUI_GRID_W + GUI_GRID_X;
+			y = 21 * GUI_GRID_H + GUI_GRID_Y;
+			w = 7 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
 			action = "[] call PPS_fnc_dialogButtonTrackStatisticsExec;";
@@ -153,20 +153,20 @@ class PPS_Main_Dialog
 		{
 			idc = 1601;
 			text = $STR_PPS_Main_Dialog_Button_Update;
-			x = 34 * GUI_GRID_W + GUI_GRID_X;
-			y = 24 * GUI_GRID_H + GUI_GRID_Y;
-			w = 6 * GUI_GRID_W;
+			x = 25.5 * GUI_GRID_W + GUI_GRID_X;
+			y = 21 * GUI_GRID_H + GUI_GRID_Y;
+			w = 7 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
 			action = "[] call PPS_fnc_dialogUpdate;";
 		};
 		class PPS_RscButton_1605: RscButton
 		{
-			idc = 1601;
+			idc = 1605;
 			text = $STR_PPS_Main_Dialog_Button_Export;
-			x = 34 * GUI_GRID_W + GUI_GRID_X;
-			y = 26 * GUI_GRID_H + GUI_GRID_Y;
-			w = 6 * GUI_GRID_W;
+			x = 33 * GUI_GRID_W + GUI_GRID_X;
+			y = 22.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 7 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
 			action = "[] call PPS_fnc_dialogButtonExportExec;";
