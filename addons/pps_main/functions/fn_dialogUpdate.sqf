@@ -232,24 +232,13 @@ _answer addPublicVariableEventHandler
 		_dbPlayerIsAdminLoggedIn = _x select 3;
 		_dbPlayerIsTrackStatisticsActive = _x select 4;
 		_dbPlayerTrackStatisticsKey = _x select 5;
+		_dbPlayerStatus = _x select 6;
 		
-		if (_dbPlayerIsAdmin) then
-		{
-			_dbPlayerIsAdmin = localize "STR_PPS_Main_Admin";
-		}
-		else
-		{
-			_dbPlayerIsAdmin = localize "STR_PPS_Main_Player";
-		};
-		
-		if (_dbPlayerIsAdminLoggedIn) then
-		{
-			_dbPlayerIsAdminLoggedIn = " " + (localize "STR_PPS_Main_Logged_In");
-		}
-		else
-		{
-			_dbPlayerIsAdminLoggedIn = "";
-		};
+		if (_dbPlayerIsAdmin) then {_dbPlayerIsAdmin = localize "STR_PPS_Main_Admin";} else {_dbPlayerIsAdmin = localize "STR_PPS_Main_Player";};
+
+		if (_dbPlayerStatus) then {_dbPlayerStatus = " " + (localize "STR_PPS_Main_Online");} else {_dbPlayerStatus = " " + (localize "STR_PPS_Main_Offline");};
+
+		if (_dbPlayerIsAdminLoggedIn) then {_dbPlayerIsAdminLoggedIn = " " + (localize "STR_PPS_Main_Logged_In");} else {_dbPlayerIsAdminLoggedIn = "";};
 		
 		if ((_dbPlayerUid == _playerUid) && _dbPlayerIsTrackStatisticsActive) then
 		{
@@ -260,7 +249,7 @@ _answer addPublicVariableEventHandler
 			_trackStatisticsButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Track_Value_On";
 		};
 		
-		_index = _playersListBox lbAdd format ["%1 (%2%3)",_dbPlayerName, _dbPlayerIsAdmin, _dbPlayerIsAdminLoggedIn];	
+		_index = _playersListBox lbAdd format ["%1 (%2%3%4)",_dbPlayerName, _dbPlayerIsAdmin, _dbPlayerStatus, _dbPlayerIsAdminLoggedIn];	
 		_playersListBox lbSetData [_index, _dbPlayerUid];
 		if(_dbPlayerUid == _playerUid) then
 		{
