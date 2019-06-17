@@ -251,8 +251,8 @@ _answer addPublicVariableEventHandler
 		if ((_dbPlayerUid == _playerUid) && _dbPlayerIsTrackStatisticsActive) then
 		{
 			_trackStatisticsButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Track_Value_Off";
-		}
-		else
+		};
+		if ((_dbPlayerUid == _playerUid) && !_dbPlayerIsTrackStatisticsActive) then
 		{
 			_trackStatisticsButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Track_Value_On";
 		};

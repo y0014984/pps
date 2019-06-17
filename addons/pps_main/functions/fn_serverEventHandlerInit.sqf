@@ -514,9 +514,8 @@ params ["_playerUid"];
 	_players = "getSections" call _dbPlayers;
 	_countPlayersTotal = count _players;
 	
-	if (!_isAdminLoggedIn) then {_players = [_playerUid];};
-	
 	_tmpResult = [];
+	_playerOnly = [];
 	{
 		_tmpPlayerName = ["read", [_x, "playerName", ""]] call _dbPlayers;
 		_tmpPlayerUid = ["read", [_x, "playerUid", ""]] call _dbPlayers;
@@ -528,7 +527,13 @@ params ["_playerUid"];
 		_tmpPlayerTrackStatisticsKey = ["read", [_x, "trackStatisticsKey", ""]] call _dbPlayers;
 		
 		_tmpResult = _tmpResult + [[_tmpPlayerName, _tmpPlayerUid, _tmpIsAdmin, _tmpIsAdminLoggedIn, _tmpPlayerIsTrackStatisticsActive, _tmpPlayerTrackStatisticsKey]];
+		if (_tmpPlayerUid == _playerUid) then
+		{
+			_playerOnly = [[_tmpPlayerName, _tmpPlayerUid, _tmpIsAdmin, _tmpIsAdminLoggedIn, _tmpPlayerIsTrackStatisticsActive, _tmpPlayerTrackStatisticsKey]];
+		};
 	} forEach _players;
+	
+	if (!_isAdminLoggedIn) then {_tmpResult = _playerOnly;};
 	
 	_filteredPlayers = [];
 	if(_filterPlayers != "") then
