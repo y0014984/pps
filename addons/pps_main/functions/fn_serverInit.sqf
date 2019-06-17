@@ -9,13 +9,15 @@ else
 	[format ["[%1] PPS server mod INIDBI2 not activated. Server will not start.", serverTime]] call PPS_fnc_log;
 };
 
+PPS_statusDatabase = _addonInidbi2Activated;
+publicVariable "PPS_statusDatabase";
+
 if (isServer && isMultiplayer && _addonInidbi2Activated) then
 {
 	/* ---------------------------------------- */
 	
-	_serverStatus = "PPS_ServerStatus";
-	missionNamespace setVariable [_serverStatus, true, false];
-	publicVariable _serverStatus;
+	PPS_statusServer = true;
+	publicVariable "PPS_statusServer";
 	
 	_dbName = "pps-players";
 	_dbPlayers = ["new", _dbName] call OO_INIDBI;
@@ -140,4 +142,9 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 	
 	
 	/* ---------------------------------------- */
+}
+else
+{
+	PPS_statusServer = false;
+	publicVariable "PPS_statusServer";
 };
