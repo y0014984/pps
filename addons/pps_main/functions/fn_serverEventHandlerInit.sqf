@@ -539,10 +539,12 @@ params ["_playerUid"];
 	_allActivePlayers = allPlayers - entities "HeadlessClient_F";
 	_countPlayersOnline = count _allActivePlayers;
 	
+	_allActivePlayersIds = [];
 	{
 		_tmpPlayerUid = getPlayerUID _x;
 		_tmpIsAdmin = ["read", [_tmpPlayerUid, "isAdmin", false]] call _dbPlayers;
 		if (_tmpIsAdmin) then {_countAdminsOnline = _countAdminsOnline + 1};
+		_allActivePlayersIds = _allActivePlayersIds + [_tmpPlayerUid];
 	} forEach _allActivePlayers;
 	
 	/* ---------------------------------------- */
@@ -563,11 +565,14 @@ params ["_playerUid"];
 		
 		_tmpPlayerIsTrackStatisticsActive = ["read", [_x, "isTrackStatisticsActive", false]] call _dbPlayers;
 		_tmpPlayerTrackStatisticsKey = ["read", [_x, "trackStatisticsKey", ""]] call _dbPlayers;
+
+		_tmpPlayerStatus = false;
+		if ((_allActivePlayersIds find _tmpPlayerUid) > -1) then {_tmpPlayerStatus = true;};
 		
-		_tmpResult = _tmpResult + [[_tmpPlayerName, _tmpPlayerUid, _tmpIsAdmin, _tmpIsAdminLoggedIn, _tmpPlayerIsTrackStatisticsActive, _tmpPlayerTrackStatisticsKey]];
+		_tmpResult = _tmpResult + [[_tmpPlayerName, _tmpPlayerUid, _tmpIsAdmin, _tmpIsAdminLoggedIn, _tmpPlayerIsTrackStatisticsActive, _tmpPlayerTrackStatisticsKey, _tmpPlayerStatus]];
 		if (_tmpPlayerUid == _playerUid) then
 		{
-			_playerOnly = [[_tmpPlayerName, _tmpPlayerUid, _tmpIsAdmin, _tmpIsAdminLoggedIn, _tmpPlayerIsTrackStatisticsActive, _tmpPlayerTrackStatisticsKey]];
+			_playerOnly = [[_tmpPlayerName, _tmpPlayerUid, _tmpIsAdmin, _tmpIsAdminLoggedIn, _tmpPlayerIsTrackStatisticsActive, _tmpPlayerTrackStatisticsKey, _tmpPlayerStatus]];
 		};
 	} forEach _players;
 	
