@@ -300,10 +300,16 @@ _answer addPublicVariableEventHandler
 	{
 		_dbEventId = _x select 0;
 		_dbEventName = _x select 1;
-		_dbEventDuration = _x select 2;
-		_dbEventStartTime = _x select 3;
+		_dbEventStartTime = _x select 2;
+		_dbEventDuration = _x select 3;
 		
-		_index = _eventsListBox lbAdd format ["%1 (%2 - %3 min.)", _dbEventName, (_dbEventStartTime select 0), _dbEventDuration];	
+		_year = str (_dbEventStartTime select 0);
+		_month = _dbEventStartTime select 1;
+		if (_month < 10) then {format ["0%1", _month];} else {str _month};
+		_day = _dbEventStartTime select 2;
+		if (_day < 10) then {format ["0%1", _day];} else {str _day};
+		
+		_index = _eventsListBox lbAdd format ["%1-%2-%3 %4 (%5 min.)", _year, _month, _day, _dbEventName, _dbEventDuration];	
 		_eventsListBox lbSetData [_index, _dbEventId];
 
 		if(_isEvent &&(_dbEventName == _activeEventName)) then
@@ -331,9 +337,10 @@ _answer addPublicVariableEventHandler
 	lbClear _statisticsListBox;
 	_statisticsListBox lbSetCurSel -1;
 	
+	_playerStatistics sort true;
 	{
-		_formatString = _x select 0;
-		_key = _x select 1;
+		_key = _x select 0;
+		_formatString = _x select 1;
 		_source = _x select 2;
 		_valueOne = _x select 3;
 		_valueTwo = _x select 4;

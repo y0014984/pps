@@ -382,34 +382,34 @@ params ["_playerUid"];
 					{
 						case 0:
 						{
-							_tmpResult = _tmpResult + [[_formatString, _x, _source, _value, "", ""]];
+							_tmpResult = _tmpResult + [[_x, _formatString, _source, _value, "", ""]];
 						};
 						case 1:
 						{
 							_roundValue = parseNumber ((_value / 3600) toFixed 2);
 							_roundValuePercent = parseNumber ((100 / _timeInEvent * _value) toFixed 2);
-							_tmpResult = _tmpResult + [[_formatString, _x, _source, "%", str _roundValue, str _roundValuePercent]];
+							_tmpResult = _tmpResult + [[_x, _formatString, _source, "%", str _roundValue, str _roundValuePercent]];
 						};
 						case 2:
 						{
 							_roundValuePercent = parseNumber ((100 / _countProjectilesFired * _value) toFixed 2);
-							_tmpResult = _tmpResult + [[_formatString, _x, _source, "%", _value, _roundValuePercent]];
+							_tmpResult = _tmpResult + [[_x, _formatString, _source, "%", _value, _roundValuePercent]];
 
 						};
 						case 3:
 						{
 							_roundValue = parseNumber ((_value / 3600) toFixed 2);
-							_tmpResult = _tmpResult + [[_formatString, _x, _source, str _roundValue, "", ""]];
+							_tmpResult = _tmpResult + [[_x, _formatString, _source, str _roundValue, "", ""]];
 						};
 						case 4:
 						{
 							_roundValuePercent = parseNumber ((100 / _countGrenadesThrown * _value) toFixed 2);
-							_tmpResult = _tmpResult + [[_formatString, _x, _source, "%", _value, _roundValuePercent]];
+							_tmpResult = _tmpResult + [[_x, _formatString, _source, "%", _value, _roundValuePercent]];
 
 						};
 						case -1:
 						{
-							_tmpResult = _tmpResult + [[localize "STR_PPS_Main_Dialog_List_Value_Not_Recorded", _x, _source, _value, "", ""]];
+							_tmpResult = _tmpResult + [[_x, localize "STR_PPS_Main_Dialog_List_Value_Not_Recorded", _source, _value, "", ""]];
 						};
 					};
 					
@@ -481,7 +481,7 @@ params ["_playerUid"];
 			
 			if (((_eventPlayerUids find _requestedPlayerUid) > -1) && ((((toLower _eventName) find (toLower _filterEvents)) > -1) || (_filterEvents == ""))) then
 			{
-				_filteredEvents = _filteredEvents + [[_eventId, _eventName, _eventDuration, _eventStartTime]];
+				_filteredEvents = _filteredEvents + [[_eventId, _eventName, _eventStartTime, _eventDuration]];
 			};
 		} forEach _events;
 	};
