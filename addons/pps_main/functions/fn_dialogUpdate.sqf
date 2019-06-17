@@ -167,6 +167,7 @@ _answer addPublicVariableEventHandler
 	_eventButton = (findDisplay 14984) displayCtrl 1602;
 	_eventEditBox = (findDisplay 14984) displayCtrl 1603;
 	_eventEditBox ctrlSetText _activeEventName;
+	_continueButton = (findDisplay 14984) displayCtrl 1606;
 	_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 	
 	if (_isInidbi2Installed) then {_isInidbi2Installed = localize "STR_PPS_Main_Online"} else {_isInidbi2Installed = localize "STR_PPS_Main_Offline"};
@@ -180,12 +181,14 @@ _answer addPublicVariableEventHandler
 		_adminButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Admin_Logout";
 		_eventButton ctrlShow true;
 		_eventEditBox ctrlShow true;
+		_continueButton ctrlShow true;
 	}
 	else
 	{
 		_adminButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Admin_Login";
 		_eventButton ctrlShow false;
 		_eventEditBox ctrlShow false;
+		_continueButton ctrlShow false;
 	};
 
 	_noEvent = localize "STR_PPS_Main_Dialog_No_Event";

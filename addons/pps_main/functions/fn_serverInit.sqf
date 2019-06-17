@@ -80,6 +80,7 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 	_eventName = "";
 	_eventStartTime = [0, 0, 0, 0, 0, 0];
 	_eventStopTime = [0, 0, 0, 0, 0, 0];
+	_eventId = "";
 	
 	if ("exists" call _dbEvents) then
 	{
@@ -91,22 +92,40 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 				_isEvent = true;
 				_eventName = ["read", [_x, "eventName", ""]] call _dbEvents;
 				_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
+				_eventId = ["read", [_x, "eventId", ""]] call _dbEvents;
 			}; 
 		} forEach _events;
 	};
 
-	_eventId = "";
+	if (_isEvent) then
 	{
-		if(_x < 10) then
+		_eventStopTime = "getTimeStamp" call _dbEvents;
+		
+		["write", [_eventId, "eventStopTime", _eventStopTime]] call _dbEvents;
+		
+		if ((_eventStopTime select 0) == (_eventStartTime select 0)) then
 		{
-			_eventId = _eventId + format ["0%1", str _x];
-		}
-		else
-		{
-			_eventId = _eventId + (str _x);
+			_tmpEventStartTime = +_eventStartTime;
+			_tmpEventStartTime set [5, "delete"];
+			_tmpEventStartTime = _tmpEventStartTime - ["delete"];
+			_tmpEventStopTime = +_eventStopTime;
+			_tmpEventStopTime set [5, "delete"];
+			_tmpEventStopTime = _tmpEventStopTime - ["delete"];
+			_eventDuration = (dateToNumber _tmpEventStopTime) - (dateToNumber _tmpEventStartTime);
+			_eventDuration = numberToDate [_tmpEventStopTime select 0, _eventDuration];
+			if (((_eventDuration select 1) == 1) && ((_eventDuration select 2) == 1)) then
+			{
+				_eventDurationOld = ["read", [_eventId, "eventDuration", 0]] call _dbEvents;
+				_eventDuration = _eventDurationOld + (((_eventDuration select 3) * 60) + (_eventDuration select 4));
+				["write", [_eventId, "eventDuration", _eventDuration]] call _dbEvents;
+			};
 		};
-	} forEach _eventStartTime;
-	
+		
+		_isEvent = false;
+		
+		["STR_PPS_Main_Notifications_Event_Stopped", _eventName] remoteExecCall ["PPS_fnc_hintLocalized"];
+	};
+
 	PPS_isEvent = _isEvent;
 	publicVariable "PPS_isEvent";
 	PPS_eventName = _eventName;
@@ -117,6 +136,8 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 	publicVariable "PPS_eventStartTime";
 	PPS_eventStopTime = +_eventStopTime;
 	publicVariable "PPS_eventStopTime";
+	
+	
 	
 	/* ---------------------------------------- */
 };
