@@ -77,12 +77,26 @@ params ["_playerUid"];
 	_dbPlayers = ["new", _dbName] call OO_INIDBI;
 	
 	_isTrackStatisticsActive = ["read", [_playerUid, "isTrackStatisticsActive", false]] call _dbPlayers;
-	
+	_trackStatisticsKey = ["read", [_playerUid, "trackStatisticsKey", ""]] call _dbPlayers;
+
 	if (_isTrackStatisticsActive) then
 	{
-		["write", [_playerUid, "isTrackStatisticsActive", false]] call _dbPlayers;
-		["write", [_playerUid, "trackStatisticsKey", ""]] call _dbPlayers;
-		["write", [_playerUid, "trackStatisticsClientId", ""]] call _dbPlayers;
+		if (_key != _trackStatisticsKey) then
+		{
+			["write", [_playerUid, "trackStatisticsKey", _key]] call _dbPlayers;
+			
+			_value = ["read", [_key, "value", "not set"]] call _dbStatistics;
+			if ((str _value) != (str "not set")) then
+			{
+				["STR_PPS_Main_Notifications_Tracking", _key, _value] remoteExecCall ["PPS_fnc_hintLocalized", _clientId];
+			};
+		}
+		else
+		{
+			["write", [_playerUid, "isTrackStatisticsActive", false]] call _dbPlayers;
+			["write", [_playerUid, "trackStatisticsKey", ""]] call _dbPlayers;
+			["write", [_playerUid, "trackStatisticsClientId", ""]] call _dbPlayers;
+		};
 	}
 	else
 	{
@@ -91,12 +105,10 @@ params ["_playerUid"];
 		["write", [_playerUid, "trackStatisticsClientId", _clientId]] call _dbPlayers;
 
 		_value = ["read", [_key, "value", "not set"]] call _dbStatistics;
-
 		if ((str _value) != (str "not set")) then
 		{
 			["STR_PPS_Main_Notifications_Tracking", _key, _value] remoteExecCall ["PPS_fnc_hintLocalized", _clientId];
 		};
-
 	};
 
 	_isTrackStatisticsActive = ["read", [_playerUid, "isTrackStatisticsActive", false]] call _dbPlayers;
