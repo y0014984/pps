@@ -49,8 +49,8 @@
 				<German>Server Status: %1 - Datenbank Status: %2</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Player_Status">
-				<English>Players Total: %1 - Players Online: %2 - Admins Total: %3 - Admins Online: %4</English>
-				<German>Spieler gesamt: %1 - Spieler online: %2 - Admins gesamt: %3 - Admins online: %4</German>
+				<English>Players in DB: %1 - Players Online: %2 - Admins in DB: %3 - Admins Online: %4</English>
+				<German>Spieler in DB: %1 - Spieler online: %2 - Admins in DB: %3 - Admins online: %4</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Admin">
 				<English>Admin</English>
@@ -67,6 +67,10 @@
 			<Key ID="STR_PPS_Main_Dialog_Button_Event">
 				<English>Event</English>
 				<German>Event</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Continue">
+				<English>Continue</English>
+				<German>fortsetzen</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Event_Start">
 				<English>Start Event</English>
@@ -230,6 +234,10 @@
 				<English>Persistent Player Statistics\n\nEvent started: %1</English>
 				<German>Persistent Player Statistics\n\nEvent wurde gestartet: %1</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Event_Continued">
+				<English>Persistent Player Statistics\n\nEvent Continued: %1</English>
+				<German>Persistent Player Statistics\n\nEvent wurde fortgesetzt: %1</German>
+			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Event_Stopped">
 				<English>Persistent Player Statistics\n\nEvent stopped: %1</English>
 				<German>Persistent Player Statistics\n\nEvent wurde beendet: %1</German>
@@ -241,6 +249,14 @@
 			<Key ID="STR_PPS_Main_Notifications_Statistics_Exported_To_Clipboard">
 				<English>Persistent Player Statistics\n\nStatistics exported to Clipboard.</English>
 				<German>Persistent Player Statistics\n\nStatistiken in die Zwischenablage exportiert.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_No_Event_Selected">
+				<English>Persistent Player Statistics\n\nNo event selected.</English>
+				<German>Persistent Player Statistics\n\nKein Event ausgewählt.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Event_In_Progress">
+				<English>Persistent Player Statistics\n\nEvent in progress. Please stop this event before continue another event.</English>
+				<German>Persistent Player Statistics\n\nEs läuft bereits ein Event. Bitte beende das laufende Event befor du ein anderes Event fortsetzt.</German>
 			</Key>
 		</Container>
 		<Container name="Statistics">

@@ -127,7 +127,17 @@ class PPS_Main_Dialog
 			
 			action = "[] call PPS_fnc_dialogButtonEventExec;";
 		};
-		
+		class PPS_RscButton_1606: RscButton
+		{
+			idc = 1606;
+			text = $STR_PPS_Main_Dialog_Button_Continue;
+			x = 18 * GUI_GRID_W + GUI_GRID_X;
+			y = 22.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 7 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			
+			action = "[] call PPS_fnc_dialogButtonContinueExec;";
+		};		
 		class PPS_RscEdit_1603: RscEdit
 		{
 			idc = 1603;
