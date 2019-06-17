@@ -86,11 +86,11 @@
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Track_Value_On">
 				<English>Track Value On</English>
-				<German>Wertverfolgung an</German>
+				<German>Verfolgung an</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Track_Value_Off">
 				<English>Track Value Off</English>
-				<German>Wertverfolgung aus</German>
+				<German>Verfolgung aus</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Update">
 				<English>Update</English>
