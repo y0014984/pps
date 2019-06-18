@@ -143,7 +143,70 @@ params ["_playerUid"];
 
 /* ================================================================================ */
 
-(_playerUid + "-requestSwitchEvent") addPublicVariableEventHandler
+(_playerUid + "-requestStopEvent") addPublicVariableEventHandler
+{
+	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
+
+	_playerUid = _broadcastVariableValue select 0;
+	_clientId = _broadcastVariableValue select 1;
+
+	_dbName = "pps-players";
+	_dbPlayers = ["new", _dbName] call OO_INIDBI;
+	_players = "getSections" call _dbPlayers;
+	
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _dbPlayers;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _dbPlayers;
+	
+	if (_isAdmin && _isAdminLoggedIn) then
+	{		
+		_dbName = "pps-events";
+		_dbEvents = ["new", _dbName] call OO_INIDBI;
+		
+		if (PPS_isEvent) then
+		{
+			_eventStopTime = "getTimeStamp" call _dbEvents;
+
+			PPS_eventStopTime = +_eventStopTime;
+			publicVariable "PPS_eventStopTime";
+			PPS_isEvent = false;
+			publicVariable "PPS_isEvent";
+			
+			["write", [PPS_eventId, "eventStopTime", PPS_eventStopTime]] call _dbEvents;
+			
+			if ((PPS_eventStopTime select 0) == (PPS_eventStartTime select 0)) then
+			{
+				_tmpEventStartTime = +PPS_eventStartTime;
+				_tmpEventStartTime set [5, "delete"];
+				_tmpEventStartTime = _tmpEventStartTime - ["delete"];
+				_tmpEventStopTime = +PPS_eventStopTime;
+				_tmpEventStopTime set [5, "delete"];
+				_tmpEventStopTime = _tmpEventStopTime - ["delete"];
+				_eventDuration = (dateToNumber _tmpEventStopTime) - (dateToNumber _tmpEventStartTime);
+				_eventDuration = numberToDate [_tmpEventStopTime select 0, _eventDuration];
+				if (((_eventDuration select 1) == 1) && ((_eventDuration select 2) == 1)) then
+				{
+					_eventDurationOld = ["read", [PPS_eventId, "eventDuration", 0]] call _dbEvents;
+					_eventDuration = _eventDurationOld + (((_eventDuration select 3) * 60) + (_eventDuration select 4));
+					["write", [PPS_eventId, "eventDuration", _eventDuration]] call _dbEvents;
+				};
+			};
+			
+			["STR_PPS_Main_Notifications_Event_Stopped", PPS_eventName] remoteExecCall ["PPS_fnc_hintLocalized"];
+		};
+			
+		_result = true;
+		
+		_answer = _playerUid + "-answerStopEvent";
+		missionNamespace setVariable [_answer, _result, false];
+		_clientId publicVariableClient _answer;
+		
+		[format ["[%1] PPS Player Request Stop Event: set %2 (%3)", serverTime, _isEvent, _playerUid]] call PPS_fnc_log;
+	};
+};
+
+/* ================================================================================ */
+
+(_playerUid + "-requestStartEvent") addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
 
@@ -210,47 +273,78 @@ params ["_playerUid"];
 			publicVariable "PPS_eventStopTime";
 			
 			["STR_PPS_Main_Notifications_Event_Started", _eventName] remoteExecCall ["PPS_fnc_hintLocalized"];
-		}
-		else
-		{
-			_eventStopTime = "getTimeStamp" call _dbEvents;
-
-			PPS_eventStopTime = +_eventStopTime;
-			publicVariable "PPS_eventStopTime";
-			PPS_isEvent = false;
-			publicVariable "PPS_isEvent";
-			
-			["write", [PPS_eventId, "eventStopTime", PPS_eventStopTime]] call _dbEvents;
-			
-			if ((PPS_eventStopTime select 0) == (PPS_eventStartTime select 0)) then
-			{
-				_tmpEventStartTime = +PPS_eventStartTime;
-				_tmpEventStartTime set [5, "delete"];
-				_tmpEventStartTime = _tmpEventStartTime - ["delete"];
-				_tmpEventStopTime = +PPS_eventStopTime;
-				_tmpEventStopTime set [5, "delete"];
-				_tmpEventStopTime = _tmpEventStopTime - ["delete"];
-				_eventDuration = (dateToNumber _tmpEventStopTime) - (dateToNumber _tmpEventStartTime);
-				_eventDuration = numberToDate [_tmpEventStopTime select 0, _eventDuration];
-				if (((_eventDuration select 1) == 1) && ((_eventDuration select 2) == 1)) then
-				{
-					_eventDurationOld = ["read", [PPS_eventId, "eventDuration", 0]] call _dbEvents;
-					_eventDuration = _eventDurationOld + (((_eventDuration select 3) * 60) + (_eventDuration select 4));
-					["write", [PPS_eventId, "eventDuration", _eventDuration]] call _dbEvents;
-				};
-			};
-			
-			["STR_PPS_Main_Notifications_Event_Stopped", _eventName] remoteExecCall ["PPS_fnc_hintLocalized"];
 		};
 			
 		_result = true;
 		
-		_answer = _playerUid + "-answerSwitchEvent";
+		_answer = _playerUid + "-answerStartEvent";
 		missionNamespace setVariable [_answer, _result, false];
 		_clientId publicVariableClient _answer;
 		
-		[format ["[%1] PPS Player Request Switch Event Status: set %2 (%3)", serverTime, _isEvent, _playerUid]] call PPS_fnc_log;
+		[format ["[%1] PPS Player Request Start Event: set %2 (%3)", serverTime, _isEvent, _playerUid]] call PPS_fnc_log;
 	};
+};
+
+/* ================================================================================ */
+
+(_playerUid + "-requestDeleteEvent") addPublicVariableEventHandler
+{
+	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
+
+	_playerUid = _broadcastVariableValue select 0;
+	_clientId = _broadcastVariableValue select 1;
+	_eventId = _broadcastVariableValue select 2;
+
+	_dbName = "pps-players";
+	_dbPlayers = ["new", _dbName] call OO_INIDBI;
+	
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _dbPlayers;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _dbPlayers;
+		
+	_dbName = "pps-events";
+	_dbEvents = ["new", _dbName] call OO_INIDBI;
+	
+	if ("exists" call _dbEvents) then
+	{
+		_eventName = ["read", [_eventId, "eventName", ""]] call _dbEvents;
+		_eventPlayerUids = ["read", [_eventId, "eventPlayerUids", ""]] call _dbEvents;
+		
+		if (_isAdmin && _isAdminLoggedIn) then
+		{
+			{
+				_dbName = "pps-statistics-" + _x + "-" + _eventId;
+				_dbStatistics = ["new", _dbName] call OO_INIDBI;
+				
+				if ("exists" call _dbStatistics) then {"delete" call _dbStatistics;};
+			} forEach _eventPlayerUids;
+			
+			["deleteSection", _eventId] call _dbEvents;
+		} 
+		else 
+		{
+			/*this code can't be reached because the delete button is invisible for non admin players*/
+			_dbName = "pps-statistics-" + _playerUid + "-" + _eventId;
+			_dbStatistics = ["new", _dbName] call OO_INIDBI;
+			
+			if ("exists" call _dbStatistics) then {"delete" call _dbStatistics;};
+			
+			_eventPlayerUidsWithoutPlayer = [];
+			{
+				if (_x != _playerUid) then {_eventPlayerUidsWithoutPlayer = _eventPlayerUidsWithoutPlayer + [_x]};
+			} forEach _eventPlayerUids;
+			["write", [_eventId, "eventPlayerUids", _eventPlayerUidsWithoutPlayer]] call _dbEvents;
+		};
+		
+		["STR_PPS_Main_Notifications_Event_Deleted", _eventName] remoteExecCall ["PPS_fnc_hintLocalized"];
+	};
+		
+	_result = true;
+	
+	_answer = _playerUid + "-answerDeleteEvent";
+	missionNamespace setVariable [_answer, _result, false];
+	_clientId publicVariableClient _answer;
+	
+	[format ["[%1] PPS Player Request Delete Event: %2 (%3)", serverTime, _eventName, _playerUid]] call PPS_fnc_log;
 };
 
 /* ================================================================================ */
