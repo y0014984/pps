@@ -1,3 +1,20 @@
+/*
+ * Author: y0014984
+ *
+ * PPS Server Initialization. Sets global vartiables for the first time.
+ *
+ * Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * None. Is started in postInit.
+ *
+ * Public: No
+ */
+
 _activatedAddons = activatedAddons;
 _addonInidbi2Activated = false;
 if ((_activatedAddons find "inidbi2") > -1) then

@@ -1,3 +1,20 @@
+/*
+ * Author: y0014984
+ *
+ * Initializes units and adds several event handlers.
+ *
+ * Arguments:
+ * 0: _unit <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [_unit] spawn PPS_fnc_unitInit;
+ *
+ * Public: No
+ */
+
 params ["_unit"];
 
 //waitUntil {time > 15};

@@ -1,3 +1,20 @@
+/*
+ * Author: y0014984
+ *
+ * Adds communication event handlers serverside for every player. Main serverside logic.
+ *
+ * Arguments:
+ * 0: _playerUid <STRING>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [_playerUid] call PPS_fnc_serverEventHandlerInit;
+ *
+ * Public: No
+ */
+
 params ["_playerUid"];
 
 /* ================================================================================ */

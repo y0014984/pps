@@ -1,3 +1,20 @@
+/*
+ * Author: y0014984
+ *
+ * Handles the PPS Dialog Event Button pressing event.
+ *
+ * Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [] call PPS_fnc_dialogButtonEventExec;
+ *
+ * Public: No
+ */
+
 _playerUid = getPlayerUID player;
 _playerName = name player;
 _clientId = clientOwner;
