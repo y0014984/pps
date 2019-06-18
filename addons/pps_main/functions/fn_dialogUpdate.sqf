@@ -181,7 +181,10 @@ _answer addPublicVariableEventHandler
 	lbClear _statisticsListBox;
 	_statisticsListBox lbSetCurSel -1;
 	_adminButton = (findDisplay 14984) displayCtrl 1600;
-	_eventButton = (findDisplay 14984) displayCtrl 1602;
+	_eventStartButton = (findDisplay 14984) displayCtrl 1602;
+	_eventStopButton = (findDisplay 14984) displayCtrl 1607;
+	_eventContinueButton = (findDisplay 14984) displayCtrl 1606;
+	_eventDeleteButton = (findDisplay 14984) displayCtrl 1608;
 	_eventEditBox = (findDisplay 14984) displayCtrl 1603;
 	_eventEditBox ctrlSetText _activeEventName;
 	_continueButton = (findDisplay 14984) displayCtrl 1606;
@@ -196,14 +199,20 @@ _answer addPublicVariableEventHandler
 	if (_isAdminLoggedIn) then
 	{
 		_adminButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Admin_Logout";
-		_eventButton ctrlShow true;
+		_eventStartButton ctrlShow true;
+		_eventStopButton ctrlShow true;
+		_eventContinueButton ctrlShow true;
+		_eventDeleteButton ctrlShow true;
 		_eventEditBox ctrlShow true;
 		_continueButton ctrlShow true;
 	}
 	else
 	{
 		_adminButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Admin_Login";
-		_eventButton ctrlShow false;
+		_eventStartButton ctrlShow false;
+		_eventStopButton ctrlShow false;
+		_eventContinueButton ctrlShow false;
+		_eventDeleteButton ctrlShow false;
 		_eventEditBox ctrlShow false;
 		_continueButton ctrlShow false;
 	};
@@ -230,13 +239,11 @@ _answer addPublicVariableEventHandler
 		_seconds = _activeEventStartTime select 5;
 		_timeZone = PPS_TimeZone;
 		if (PPS_SummerTime) then {_timeZone = _timeZone + 1;};
-		_eventButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Event_Stop";
 		_headlineText ctrlSetBackgroundColor [0.5, 0, 0, 1];
 		_headlineText ctrlSetText format [localize "STR_PPS_Main_Dialog_Head_Time", _activeEventName, _year, _month, _day, _hours, _minutes, _seconds, _timeZone];
 	}
 	else
 	{
-		_eventButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Event_Start";
 		_headlineText ctrlSetBackgroundColor [0, 0.5, 0, 1];
 		_headlineText ctrlSetText format [localize "STR_PPS_Main_Dialog_Head", _noEvent];
 	};		
@@ -311,9 +318,9 @@ _answer addPublicVariableEventHandler
 		
 		_year = str (_dbEventStartTime select 0);
 		_month = _dbEventStartTime select 1;
-		if (_month < 10) then {format ["0%1", _month];} else {str _month};
+		if (_month < 10) then {_month = format ["0%1", _month];} else {_month = str _month};
 		_day = _dbEventStartTime select 2;
-		if (_day < 10) then {format ["0%1", _day];} else {str _day};
+		if (_day < 10) then {_day = format ["0%1", _day];} else {_day = str _day};
 		
 		_index = _eventsListBox lbAdd format ["%1-%2-%3 %4 (%5 min.)", _year, _month, _day, _dbEventName, _dbEventDuration];	
 		_eventsListBox lbSetData [_index, _dbEventId];
@@ -322,6 +329,8 @@ _answer addPublicVariableEventHandler
 		{
 			_eventsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
 			_eventsListBox lbSetCurSel _index;
+			_text = _eventsListBox lbText _index;
+			_eventsListBox lbSetText [_index, format [localize "STR_PPS_Main_Dialog_List_Event_Active", _text]];
 		};
 	} forEach _filteredEvents;
 	

@@ -1,7 +1,7 @@
 /*
  * Author: y0014984
  *
- * Handles the PPS Dialog Event Button pressing event.
+ * Handles the PPS Dialog Start Event Button pressing event.
  *
  * Arguments:
  * None
@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call PPS_fnc_dialogButtonEventExec;
+ * [] call PPS_fnc_dialogButtonStartExec;
  *
  * Public: No
  */
@@ -19,7 +19,7 @@ _playerUid = getPlayerUID player;
 _playerName = name player;
 _clientId = clientOwner;
 
-_answer = _playerUid + "-answerSwitchEvent";
+_answer = _playerUid + "-answerStartEvent";
 _answer addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
@@ -36,7 +36,7 @@ if (_eventName == "") then
 }
 else
 {
-	_request = _playerUid + "-requestSwitchEvent";
+	_request = _playerUid + "-requestStartEvent";
 	missionNamespace setVariable [_request, [_playerUid, _clientId, _eventName], false];
 	publicVariableServer _request;
 };

@@ -51,13 +51,43 @@ class PPS_Main_Dialog
 			h = 1 * GUI_GRID_H;
 			colorBackground[] = {0,0,0,0.25};
 		};
+		class RscText_1006: RscText
+		{
+			idc = 1006;
+			text = $STR_PPS_Main_Dialog_Players;
+			x = 0 * GUI_GRID_W + GUI_GRID_X;
+			y = 4 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			colorBackground[] = {0,0.5,0,1};
+		};
+		class RscText_1007: RscText
+		{
+			idc = 1007;
+			text = $STR_PPS_Main_Dialog_Events;
+			x = 0 * GUI_GRID_W + GUI_GRID_X;
+			y = 14 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			colorBackground[] = {0,0.5,0,1};
+		};
+		class RscText_1008: RscText
+		{
+			idc = 1008;
+			text = $STR_PPS_Main_Dialog_Statistics;
+			x = 20 * GUI_GRID_W + GUI_GRID_X;
+			y = 4 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			colorBackground[] = {0,0.5,0,1};
+		};
 		class PPS_RscEdit_1400: RscEdit
 		{
 			idc = 1400;
 			text = "";
-			x = 0 * GUI_GRID_W + GUI_GRID_X;
+			x = 6.5 * GUI_GRID_W + GUI_GRID_X;
 			y = 4 * GUI_GRID_H + GUI_GRID_Y;
-			w = 17.5 * GUI_GRID_W;
+			w = 12.5 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			colorBackground[] = {0,0.5,0,0.5};
 		};
@@ -65,9 +95,9 @@ class PPS_Main_Dialog
 		{
 			idc = 1401;
 			text = "";
-			x = 0 * GUI_GRID_W + GUI_GRID_X;
-			y = 12.5 * GUI_GRID_H + GUI_GRID_Y;
-			w = 17.5 * GUI_GRID_W;
+			x = 6.5 * GUI_GRID_W + GUI_GRID_X;
+			y = 14 * GUI_GRID_H + GUI_GRID_Y;
+			w = 12.5 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			colorBackground[] = {0,0.5,0,0.5};
 		};
@@ -75,9 +105,9 @@ class PPS_Main_Dialog
 		{
 			idc = 1402;
 			text = "";
-			x = 18 * GUI_GRID_W + GUI_GRID_X;
+			x = 26.5 * GUI_GRID_W + GUI_GRID_X;
 			y = 4 * GUI_GRID_H + GUI_GRID_Y;
-			w = 22 * GUI_GRID_W;
+			w = 13.5 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			colorBackground[] = {0,0.5,0,0.5};
 		};
@@ -86,32 +116,32 @@ class PPS_Main_Dialog
 			idc = 1500;
 			x = 0 * GUI_GRID_W + GUI_GRID_X;
 			y = 5.5 * GUI_GRID_H + GUI_GRID_Y;
-			w = 17.5 * GUI_GRID_W;
+			w = 19 * GUI_GRID_W;
 			h = 6.5 * GUI_GRID_H;
 		};
 		class PPS_RscListbox_1501: RscListbox
 		{
 			idc = 1501;
 			x = 0 * GUI_GRID_W + GUI_GRID_X;
-			y = 14 * GUI_GRID_H + GUI_GRID_Y;
-			w = 17.5 * GUI_GRID_W;
+			y = 15.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 19 * GUI_GRID_W;
 			h = 6.5 * GUI_GRID_H;
 		};
 		class PPS_RscListbox_1502: RscListbox
 		{
 			idc = 1502;
-			x = 18 * GUI_GRID_W + GUI_GRID_X;
+			x = 20 * GUI_GRID_W + GUI_GRID_X;
 			y = 5.5 * GUI_GRID_H + GUI_GRID_Y;
-			w = 22 * GUI_GRID_W;
-			h = 15 * GUI_GRID_H;
+			w = 20 * GUI_GRID_W;
+			h = 16.5 * GUI_GRID_H;
 		};
 		class PPS_RscButton_1600: RscButton
 		{
 			idc = 1600;
 			text = $STR_PPS_Main_Dialog_Button_Admin;
-			x = 0 * GUI_GRID_W + GUI_GRID_X;
-			y = 24 * GUI_GRID_H + GUI_GRID_Y;
-			w = 7 * GUI_GRID_W;
+			x = 13 * GUI_GRID_W + GUI_GRID_X;
+			y = 12.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
 			action = "[] call PPS_fnc_dialogButtonAdminExec;";
@@ -119,32 +149,54 @@ class PPS_Main_Dialog
 		class PPS_RscButton_1602: RscButton
 		{
 			idc = 1602;
-			text = $STR_PPS_Main_Dialog_Button_Event;
-			x = 18 * GUI_GRID_W + GUI_GRID_X;
-			y = 21 * GUI_GRID_H + GUI_GRID_Y;
-			w = 7 * GUI_GRID_W;
+			text = $STR_PPS_Main_Dialog_Button_Start;
+			x = 13 * GUI_GRID_W + GUI_GRID_X;
+			y = 22.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_dialogButtonEventExec;";
+			action = "[] call PPS_fnc_dialogButtonStartExec;";
 		};
 		class PPS_RscButton_1606: RscButton
 		{
 			idc = 1606;
 			text = $STR_PPS_Main_Dialog_Button_Continue;
-			x = 18 * GUI_GRID_W + GUI_GRID_X;
-			y = 22.5 * GUI_GRID_H + GUI_GRID_Y;
-			w = 7 * GUI_GRID_W;
+			x = 6.5 * GUI_GRID_W + GUI_GRID_X;
+			y = 24 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
 			action = "[] call PPS_fnc_dialogButtonContinueExec;";
+		};	
+		class RscButton_1607: RscButton
+		{
+			idc = 1607;
+			text = $STR_PPS_Main_Dialog_Button_Stop;
+			x = 0 * GUI_GRID_W + GUI_GRID_X;
+			y = 24 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+
+			action = "[] call PPS_fnc_dialogButtonStopExec;";
+		};
+		class RscButton_1608: RscButton
+		{
+			idc = 1608;
+			text = $STR_PPS_Main_Dialog_Button_Delete;
+			x = 13 * GUI_GRID_W + GUI_GRID_X;
+			y = 24 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			
+			action = "[] call PPS_fnc_dialogButtonDeleteExec;";
 		};		
 		class PPS_RscEdit_1603: RscEdit
 		{
 			idc = 1603;
 			text = "";
 			x = 0 * GUI_GRID_W + GUI_GRID_X;
-			y = 21 * GUI_GRID_H + GUI_GRID_Y;
-			w = 17.5 * GUI_GRID_W;
+			y = 22.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 12.5 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			colorBackground[] = {0,0.5,0,0.5};
 		};
@@ -152,20 +204,20 @@ class PPS_Main_Dialog
 		{
 			idc = 1604;
 			text = $STR_PPS_Main_Dialog_Button_Track_Value;
-			x = 33 * GUI_GRID_W + GUI_GRID_X;
-			y = 21 * GUI_GRID_H + GUI_GRID_Y;
-			w = 7 * GUI_GRID_W;
+			x = 27.5 * GUI_GRID_W + GUI_GRID_X;
+			y = 22.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_dialogButtonTrackStatisticsExec;";
+			action = "[] call PPS_fnc_dialogButtonTrackExec;";
 		};
 		class PPS_RscButton_1601: RscButton
 		{
 			idc = 1601;
 			text = $STR_PPS_Main_Dialog_Button_Update;
-			x = 25.5 * GUI_GRID_W + GUI_GRID_X;
-			y = 21 * GUI_GRID_H + GUI_GRID_Y;
-			w = 7 * GUI_GRID_W;
+			x = 34 * GUI_GRID_W + GUI_GRID_X;
+			y = 24 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
 			action = "[] call PPS_fnc_dialogUpdate;";
@@ -174,9 +226,9 @@ class PPS_Main_Dialog
 		{
 			idc = 1605;
 			text = $STR_PPS_Main_Dialog_Button_Export;
-			x = 33 * GUI_GRID_W + GUI_GRID_X;
+			x = 34 * GUI_GRID_W + GUI_GRID_X;
 			y = 22.5 * GUI_GRID_H + GUI_GRID_Y;
-			w = 7 * GUI_GRID_W;
+			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
 			action = "[] call PPS_fnc_dialogButtonExportExec;";

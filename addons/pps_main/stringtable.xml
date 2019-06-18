@@ -33,12 +33,12 @@
 		</Container>
 		<Container name="Dialog">
 			<Key ID="STR_PPS_Main_Dialog_Head">
-				<English>Persistent Player Statistics - Event in Progress: %1</English>
-				<German>Persistent Player Statistics - laufendes Event: %1</German>
+				<English>PERSISTENT PLAYER STATISTICS - Event in Progress: %1</English>
+				<German>PERSISTENT PLAYER STATISTICS - laufendes Event: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Head_Time">
-				<English>Persistent Player Statistics - Event in Progress: %1 (Start Time %2-%3-%4 %5:%6:%7 UTC+%8)</English>
-				<German>Persistent Player Statistics - laufendes Event: %1 (Startzeit %2-%3-%4 %5:%6:%7 UTC+%8)</German>
+				<English>PERSISTENT PLAYER STATISTICS - Event in Progress: %1 (Start Time %2-%3-%4 %5:%6:%7 UTC+%8)</English>
+				<German>PERSISTENT PLAYER STATISTICS - laufendes Event: %1 (Startzeit %2-%3-%4 %5:%6:%7 UTC+%8)</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_No_Event">
 				<English>None</English>
@@ -52,44 +52,56 @@
 				<English>Players in DB: %1 - Players Online: %2 - Admins in DB: %3 - Admins Online: %4</English>
 				<German>Spieler in DB: %1 - Spieler online: %2 - Admins in DB: %3 - Admins online: %4</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Players">
+				<English>Players</English>
+				<German>Spieler</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Events">
+				<English>Events</English>
+				<German>Events</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Statistics">
+				<English>Statistics</English>
+				<German>Statistiken</German>
+			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Admin">
 				<English>Admin</English>
 				<German>Admin</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Admin_Login">
-				<English>Login Admin</English>
-				<German>Admin einloggen</German>
+				<English>Login</English>
+				<German>einloggen</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Admin_Logout">
-				<English>Logout Admin</English>
-				<German>Admin ausloggen</German>
-			</Key>
-			<Key ID="STR_PPS_Main_Dialog_Button_Event">
-				<English>Event</English>
-				<German>Event</German>
+				<English>Logout</English>
+				<German>ausloggen</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Continue">
 				<English>Continue</English>
 				<German>fortsetzen</German>
 			</Key>
-			<Key ID="STR_PPS_Main_Dialog_Button_Event_Start">
-				<English>Start Event</English>
-				<German>Event starten</German>
+			<Key ID="STR_PPS_Main_Dialog_Button_Delete">
+				<English>Delete</English>
+				<German>löschen</German>
 			</Key>
-			<Key ID="STR_PPS_Main_Dialog_Button_Event_Stop">
-				<English>Stop Event</English>
-				<German>Event stoppen</German>
+			<Key ID="STR_PPS_Main_Dialog_Button_Start">
+				<English>Start</English>
+				<German>starten</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Stop">
+				<English>Stop</English>
+				<German>stoppen</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Track_Value">
-				<English>Track Value</English>
-				<German>Wert verfolgen</German>
+				<English>Tracking</English>
+				<German>Verfolgung</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Track_Value_On">
-				<English>Track Value On</English>
+				<English>Tracking On</English>
 				<German>Verfolgung an</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Track_Value_Off">
-				<English>Track Value Off</English>
+				<English>Tracking Off</English>
 				<German>Verfolgung aus</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Update">
@@ -103,6 +115,10 @@
 			<Key ID="STR_PPS_Main_Dialog_List_Tracking_Active">
 				<English>%1 (Tracking active)</English>
 				<German>%1 (Verfolgung aktiv)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_List_Event_Active">
+				<English>%1 (Event active)</English>
+				<German>%1 (Event aktiv)</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_List_Value_Not_Recorded">
 				<English>Value: %1 not recorded yet</English>
@@ -241,6 +257,10 @@
 			<Key ID="STR_PPS_Main_Notifications_Event_Stopped">
 				<English>Persistent Player Statistics\n\nEvent stopped: %1</English>
 				<German>Persistent Player Statistics\n\nEvent wurde beendet: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Event_Deleted">
+				<English>Persistent Player Statistics\n\nEvent deleted: %1</English>
+				<German>Persistent Player Statistics\n\nEvent wurde gelöscht: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Tracking">
 				<English>Persistent Player Statistics\n\nKey: %1\nValue: %2</English>
