@@ -11,7 +11,7 @@ profileNamespace setVariable ["cba_keybinding_registry", []]; saveProfileNamespa
 	"ppsDialogOpen",
 	[localize "STR_PPS_Main_Keybinds_Open_Dialog", localize "STR_PPS_Main_Keybinds_Open_Dialog_Description"],
 	{true;}, 
-	{_this call PPS_fnc_dialogOpen;}, 
+	{[] call PPS_fnc_dialogOpen;}, 
 	[DIK_U, [false, false, false]]
 ] call CBA_fnc_addKeybind;
 

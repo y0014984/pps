@@ -1,7 +1,23 @@
+/*
+ * Author: y0014984
+ *
+ * Initializes player objects, adds event handlers and communicates with server. Local statistics collection.
+ * Runs in infinite loop.
+ *
+ * Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [] call PPS_fnc_playerInit;
+ *
+ * Public: No
+ */
+
 _playerUid = getPlayerUID player;
 _playerName = name player;
-
-//hint "Function initPlayerUnit initialized";
 
 /* ================================================================================ */
 

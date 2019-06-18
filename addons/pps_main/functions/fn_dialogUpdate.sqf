@@ -1,3 +1,20 @@
+/*
+ * Author: y0014984
+ *
+ * Updates the content of the PPS Dialog.
+ *
+ * Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [] call PPS_fnc_dialogUpdate;
+ *
+ * Public: No
+ */
+
 _playerUid = getPlayerUID player;
 _clientId = clientOwner;
 

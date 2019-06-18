@@ -1,3 +1,20 @@
+/*
+ * Author: y0014984
+ *
+ * Adds KeyUp Event Handler to given Dialog
+ *
+ * Arguments:
+ * 1: _ppsDialog <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [_ppsDialog] call PPS_fnc_dialogEventHandlerKeyUpAdd;
+ *
+ * Public: No
+ */
+
 params ["_ppsDialog"];	
 
 _ppsDialog displayAddEventHandler ["KeyUp", 

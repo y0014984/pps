@@ -1,10 +1,27 @@
+/*
+ * Author: y0014984
+ *
+ * Creates the PPS Dialog and adds multiple event handlers to interface elements.
+ *
+ * Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [] call PPS_fnc_dialogOpen;
+ *
+ * Public: No
+ */
+
 if (hasInterface && isMultiplayer) then
 {
 	if (PPS_AllowSendingData) then
 	{
 		_ppsDialog = (findDisplay 46) createDisplay "PPS_Main_Dialog";
 		
-		[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
+		[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyUpAdd;
 		
 		/* ---------------------------------------- */
 		
@@ -21,7 +38,7 @@ if (hasInterface && isMultiplayer) then
 			params ["_control"];
 			
 			_ppsDialog = (findDisplay 14984);
-			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
+			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyUpAdd;
 		}];
 		
 		/* ---------------------------------------- */
@@ -39,7 +56,7 @@ if (hasInterface && isMultiplayer) then
 			params ["_control"];
 			
 			_ppsDialog = (findDisplay 14984);
-			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
+			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyUpAdd;
 		}];
 
 		/* ---------------------------------------- */
@@ -57,7 +74,7 @@ if (hasInterface && isMultiplayer) then
 			params ["_control"];
 			
 			_ppsDialog = (findDisplay 14984);
-			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
+			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyUpAdd;
 		}];
 		
 		/* ---------------------------------------- */
@@ -75,7 +92,7 @@ if (hasInterface && isMultiplayer) then
 			params ["_control"];
 			
 			_ppsDialog = (findDisplay 14984);
-			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyDownAdd;
+			[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyUpAdd;
 		}];
 		
 		/* ---------------------------------------- */
