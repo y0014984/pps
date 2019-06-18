@@ -17,9 +17,14 @@
 
 _activatedAddons = activatedAddons;
 _addonInidbi2Activated = false;
+_versionDatabase = "unknown Version";
 if ((_activatedAddons find "inidbi2") > -1) then
 {
 	_addonInidbi2Activated = true;
+	_dbName = "pps-temp";
+	_db = ["new", _dbName] call OO_INIDBI;
+	_versionDatabase = "getVersion" call _db;
+	if (_versionDatabase != "Inidbi: 2.06 Dll: 2.06") then {_versionDatabase = _versionDatabase + " (Required Version 2.06)";};
 }
 else
 {
@@ -28,6 +33,8 @@ else
 
 PPS_statusDatabase = _addonInidbi2Activated;
 publicVariable "PPS_statusDatabase";
+PPS_versionDatabase = _versionDatabase;
+publicVariable "PPS_versionDatabase";
 
 if (isServer && isMultiplayer && _addonInidbi2Activated) then
 {
@@ -35,6 +42,8 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 	
 	PPS_statusServer = true;
 	publicVariable "PPS_statusServer";
+	PPS_versionServer = "v0.3.2";
+	publicVariable "PPS_versionServer";
 	
 	_dbName = "pps-players";
 	_dbPlayers = ["new", _dbName] call OO_INIDBI;
