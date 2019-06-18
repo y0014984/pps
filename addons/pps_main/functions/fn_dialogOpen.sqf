@@ -19,6 +19,16 @@ if (hasInterface && isMultiplayer) then
 {
 	if (PPS_AllowSendingData) then
 	{
+		_serverAdminStatus = call BIS_fnc_admin;
+		if (_serverAdminStatus == 2) then 
+		{
+			_playerUid = getPlayerUID player;
+			_clientId = clientOwner;
+			_request = _playerUid + "-requestSetServerAdminToPpsAdmin";
+			missionNamespace setVariable [_request, [_playerUid, _clientId], false];
+			publicVariableServer _request;
+		};
+		
 		_ppsDialog = (findDisplay 46) createDisplay "PPS_Main_Dialog";
 		
 		[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyUpAdd;

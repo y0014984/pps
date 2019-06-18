@@ -323,8 +323,12 @@ params ["_playerUid"];
 	
 	_dbName = "pps-players";
 	_dbPlayers = ["new", _dbName] call OO_INIDBI;
+
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _dbPlayers;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _dbPlayers;
 	
-	_players = "getSections" call _dbPlayers;
+	_players = [_playerUid];
+	if (_isAdmin && _isAdminLoggedIn) then {_players = "getSections" call _dbPlayers;};
 	{
 		_currentPlayer = _x;
 		
@@ -538,6 +542,42 @@ params ["_playerUid"];
 	_clientId publicVariableClient _answer;
 
 	[format ["[%1] PPS Player Request Events Filtered: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
+};
+
+/* ================================================================================ */
+
+(_playerUid + "-requestSetServerAdminToPpsAdmin") addPublicVariableEventHandler
+{
+	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
+	
+	_playerUid = _broadcastVariableValue select 0;
+	_clientId = _broadcastVariableValue select 1;
+
+	/* ---------------------------------------- */
+
+	_dbName = "pps-players";
+	_dbPlayers = ["new", _dbName] call OO_INIDBI;
+	
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _dbPlayers;
+	
+	_serverAdminStatus = admin _clientId;
+
+	/* ---------------------------------------- */
+
+	if (!_isAdmin && (_serverAdminStatus == 2)) then
+	{
+		["write", [_playerUid, "isAdmin", true]] call _dbPlayers;
+	};
+
+	/* ---------------------------------------- */
+
+	_result = true;
+	
+	_answer = _playerUid + "-answerSetServerAdminToPpsAdmin";
+	missionNamespace setVariable [_answer, _result, false];
+	_clientId publicVariableClient _answer;
+
+	[format ["[%1] PPS Player Request Server Admin to PPS Admin: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
 };
 
 /* ================================================================================ */
