@@ -107,6 +107,46 @@ if (hasInterface && isMultiplayer) then
 		
 		/* ---------------------------------------- */
 		
+		_eventsListBox = (findDisplay 14984) displayCtrl 1501;
+		_eventsListBox ctrlAddEventHandler ["MouseButtonDblClick",
+		{
+			params ["_control"];
+
+			_playerUid = getPlayerUID player;
+			_clientId = clientOwner;
+			_dataType = "event";
+			
+			_eventsListBox = (findDisplay 14984) displayCtrl 1501;
+			_selectedEventIndex = lbCurSel _eventsListBox;
+			_requestedEventId = _eventsListBox lbData _selectedEventIndex;
+			
+			_request = _playerUid + "-requestDetails";
+			missionNamespace setVariable [_request, [_playerUid, _clientId, _dataType, _requestedEventId], false];
+			publicVariableServer _request;
+		}];
+		
+		/* ---------------------------------------- */
+		
+		_playersListBox = (findDisplay 14984) displayCtrl 1500;
+		_playersListBox ctrlAddEventHandler ["MouseButtonDblClick",
+		{
+			params ["_control"];
+
+			_playerUid = getPlayerUID player;
+			_clientId = clientOwner;
+			_dataType = "player";
+			
+			_playersListBox = (findDisplay 14984) displayCtrl 1500;
+			_selectedPlayerIndex = lbCurSel _playersListBox;
+			_requestedPlayerUid = _playersListBox lbData _selectedPlayerIndex;
+			
+			_request = _playerUid + "-requestDetails";
+			missionNamespace setVariable [_request, [_playerUid, _clientId, _dataType, _requestedPlayerUid], false];
+			publicVariableServer _request;
+		}];
+		
+		/* ---------------------------------------- */
+
 		[] call PPS_fnc_dialogUpdate;
 	}
 	else

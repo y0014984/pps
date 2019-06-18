@@ -266,6 +266,10 @@
 				<English>Persistent Player Statistics\n\nKey: %1\nValue: %2</English>
 				<German>Persistent Player Statistics\n\nSchlüssel: %1\nWert: %2</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Details">
+				<English>Persistent Player Statistics\nDetails\n\n%1</English>
+				<German>Persistent Player Statistics\nDetails\n\n%1</German>
+			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Statistics_Exported_To_Clipboard">
 				<English>Persistent Player Statistics\n\nStatistics exported to Clipboard.</English>
 				<German>Persistent Player Statistics\n\nStatistiken in die Zwischenablage exportiert.</German>
