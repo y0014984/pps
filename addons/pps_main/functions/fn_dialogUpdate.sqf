@@ -166,7 +166,9 @@ _answer addPublicVariableEventHandler
 	_activeEventStartTime = +PPS_eventStartTime;
 	
 	_statusServer =  PPS_statusServer;
+	_versionServer = PPS_versionServer;
 	_statusDatabase =  PPS_statusDatabase;
+	_versionDatabase = PPS_versionDatabase;
 
 	_headlineText = (findDisplay 14984) displayCtrl 1000;
 	_serverAndDatabaseStatusText = (findDisplay 14984) displayCtrl 1001;
@@ -193,7 +195,7 @@ _answer addPublicVariableEventHandler
 	if (_statusServer) then {_statusServer = localize "STR_PPS_Main_Online"} else {_statusServer = localize "STR_PPS_Main_Offline"};
 	if (_statusDatabase) then {_statusDatabase = localize "STR_PPS_Main_Online"} else {_statusDatabase = localize "STR_PPS_Main_Offline"};
 	
-	_serverAndDatabaseStatusText ctrlSetText format [localize "STR_PPS_Main_Dialog_Server_Status", _statusServer, _statusDatabase];
+	_serverAndDatabaseStatusText ctrlSetText format [localize "STR_PPS_Main_Dialog_Server_Status", format ["%1 [%2]", _statusServer, _versionServer],  format ["%1 [%2]", _statusDatabase, _versionDatabase]];
 	_playersAndAdminsCountText ctrlSetText format [localize "STR_PPS_Main_Dialog_Player_Status",_countPlayersTotal , _countPlayersOnline, _countAdminsTotal, _countAdminsOnline];
 
 	if (_isAdminLoggedIn) then
