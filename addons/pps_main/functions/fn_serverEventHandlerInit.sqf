@@ -82,6 +82,41 @@ params ["_playerUid"];
 
 /* ================================================================================ */
 
+(_playerUid + "-requestDetails") addPublicVariableEventHandler
+{
+	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
+
+	_playerUid = _broadcastVariableValue select 0;
+	_clientId = _broadcastVariableValue select 1;
+	_dataType = _broadcastVariableValue select 2;
+	_section = _broadcastVariableValue select 3;
+	
+	_dbName = "";
+	
+	switch (_dataType) do
+	{
+		case "player":{_dbName = "pps-players";};
+		case "event":{_dbName = "pps-events";};
+	};
+	
+	_db = ["new", _dbName] call OO_INIDBI;
+	_keys = ["getKeys", _section] call _db;
+	
+	_details = "";
+	{
+		_key = _x;
+		_value = ["read", [_section, _key, ""]] call _db;
+		
+		_details = _details + _key + ": " + (str _value) + "\n";
+	} forEach _keys;
+
+	["STR_PPS_Main_Notifications_Details", _details] remoteExecCall ["PPS_fnc_hintLocalized", _clientId];
+	
+	[format ["[%1] PPS Player Request Details: %2 (%3)", serverTime, _section, _playerUid]] call PPS_fnc_log;
+};
+
+/* ================================================================================ */
+
 (_playerUid + "-requestSwitchTrackStatistics") addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
@@ -255,11 +290,33 @@ params ["_playerUid"];
 				if ((_players find _x) > -1) then {_allActiveDbPlayersIds = _allActiveDbPlayersIds + [_x];};
 			} forEach _allActivePlayersIds;
 					
+			_serverName = serverName;
+			_serverTime = serverTime;
+			_worldName = worldName;
+			_worldSize = worldSize;
+			_briefingName = briefingName;
+			_missionDate = date;
+			_cloudLevel = overcast;
+			_windStrength = windStr;
+			_windDirection = windDir;
+			_rainLevel = rain;
+			
 			["write", [_eventId, "eventId", _eventId]] call _dbEvents;
 			["write", [_eventId, "eventName", _eventName]] call _dbEvents;
 			["write", [_eventId, "eventPlayerUids", _allActiveDbPlayersIds]] call _dbEvents;
 			["write", [_eventId, "eventStartTime", _eventStartTime]] call _dbEvents;
 			["write", [_eventId, "eventStopTime", _eventStopTime]] call _dbEvents;
+			["write", [_eventId, "serverName", _serverName]] call _dbEvents;
+			["write", [_eventId, "serverTime", _serverTime]] call _dbEvents;
+			["write", [_eventId, "worldName", _worldName]] call _dbEvents;
+			["write", [_eventId, "worldSize", _worldSize]] call _dbEvents;
+			["write", [_eventId, "briefingName", _briefingName]] call _dbEvents;
+			["write", [_eventId, "missionDate", _missionDate]] call _dbEvents;
+			["write", [_eventId, "cloudLevel", _cloudLevel]] call _dbEvents;
+			["write", [_eventId, "windStrength", _windStrength]] call _dbEvents;
+			["write", [_eventId, "windDirection", _windDirection]] call _dbEvents;
+			["write", [_eventId, "rainLevel", _rainLevel]] call _dbEvents;
+			
 			
 			PPS_isEvent = true;
 			publicVariable "PPS_isEvent";
@@ -796,14 +853,23 @@ params ["_playerUid"];
 			
 			if (_value > 0) then
 			{
-				_valueOld = ["read", [_key, "value", 0]] call _dbStatistics;
-				_value = _valueOld + _value;
-				["write", [_key, "key", _key]] call _dbStatistics;
-				["write", [_key, "value", _value]] call _dbStatistics;
-				["write", [_key, "type", _type]] call _dbStatistics;
-				["write", [_key, "formatType", _formatType]] call _dbStatistics;
-				["write", [_key, "formatString", _formatString]] call _dbStatistics;
-				["write", [_key, "source", _source]] call _dbStatistics;
+				_valueOld = ["read", [_key, "value", -1]] call _dbStatistics;
+				if (_valueOld == -1) then
+				{
+					_valueOld = 0;
+					_value = _valueOld + _value;
+					["write", [_key, "key", _key]] call _dbStatistics;
+					["write", [_key, "value", _value]] call _dbStatistics;
+					["write", [_key, "type", _type]] call _dbStatistics;
+					["write", [_key, "formatType", _formatType]] call _dbStatistics;
+					["write", [_key, "formatString", _formatString]] call _dbStatistics;
+					["write", [_key, "source", _source]] call _dbStatistics;
+				}
+				else
+				{
+					_value = _valueOld + _value;
+					["write", [_key, "value", _value]] call _dbStatistics;
+				};
 			};
 		} forEach _intervalStatistics;
 		
