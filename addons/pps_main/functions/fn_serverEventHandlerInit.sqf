@@ -323,8 +323,12 @@ params ["_playerUid"];
 	
 	_dbName = "pps-players";
 	_dbPlayers = ["new", _dbName] call OO_INIDBI;
+
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _dbPlayers;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _dbPlayers;
 	
-	_players = "getSections" call _dbPlayers;
+	_players = [_playerUid];
+	if (_isAdmin && _isAdminLoggedIn) then {_players = "getSections" call _dbPlayers;};
 	{
 		_currentPlayer = _x;
 		
