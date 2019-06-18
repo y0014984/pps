@@ -796,14 +796,23 @@ params ["_playerUid"];
 			
 			if (_value > 0) then
 			{
-				_valueOld = ["read", [_key, "value", 0]] call _dbStatistics;
-				_value = _valueOld + _value;
-				["write", [_key, "key", _key]] call _dbStatistics;
-				["write", [_key, "value", _value]] call _dbStatistics;
-				["write", [_key, "type", _type]] call _dbStatistics;
-				["write", [_key, "formatType", _formatType]] call _dbStatistics;
-				["write", [_key, "formatString", _formatString]] call _dbStatistics;
-				["write", [_key, "source", _source]] call _dbStatistics;
+				_valueOld = ["read", [_key, "value", -1]] call _dbStatistics;
+				if (_valueOld == -1) then
+				{
+					_valueOld = 0;
+					_value = _valueOld + _value;
+					["write", [_key, "key", _key]] call _dbStatistics;
+					["write", [_key, "value", _value]] call _dbStatistics;
+					["write", [_key, "type", _type]] call _dbStatistics;
+					["write", [_key, "formatType", _formatType]] call _dbStatistics;
+					["write", [_key, "formatString", _formatString]] call _dbStatistics;
+					["write", [_key, "source", _source]] call _dbStatistics;
+				}
+				else
+				{
+					_value = _valueOld + _value;
+					["write", [_key, "value", _value]] call _dbStatistics;
+				};
 			};
 		} forEach _intervalStatistics;
 		

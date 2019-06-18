@@ -14,6 +14,8 @@
  *
  * Public: No
  */
+ 
+#include "\x\cba\addons\main\script_macros_common.hpp"
 
 _activatedAddons = activatedAddons;
 _addonInidbi2Activated = false;

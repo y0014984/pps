@@ -1,6 +1,3 @@
-//#include "\a3\editor_f\data\scripts\dikcodes.h"
-//#include "dikcodes.h"
-
 #include "defines.hpp"
 #include "dialog.hpp"
 
