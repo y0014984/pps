@@ -53,8 +53,8 @@
 				<German>Server Status: %1 - Datenbank Status: %2</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Player_Status">
-				<English>Players in DB: %1 - Players Online: %2 - Admins in DB: %3 - Admins Online: %4</English>
-				<German>Spieler in DB: %1 - Spieler online: %2 - Admins in DB: %3 - Admins online: %4</German>
+				<English>Players in DB: %1 - Players Online: %2 - Admins in DB: %3 - Admins Online: %4 - Events in DB: %5</English>
+				<German>Spieler in DB: %1 - Spieler online: %2 - Admins in DB: %3 - Admins online: %4 - Events in DB: %5</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Players">
 				<English>Players</English>

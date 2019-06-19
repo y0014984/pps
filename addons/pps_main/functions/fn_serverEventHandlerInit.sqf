@@ -765,6 +765,7 @@ params ["_playerUid"];
 	_countPlayersOnline = 0;
 	_countAdminsTotal = 0;
 	_countAdminsOnline = 0;
+	_countEventsTotal = 0;
 	
 	_allActivePlayers = allPlayers - entities "HeadlessClient_F";
 	_countPlayersOnline = count _allActivePlayers;
@@ -777,6 +778,13 @@ params ["_playerUid"];
 		_allActivePlayersIds = _allActivePlayersIds + [_tmpPlayerUid];
 	} forEach _allActivePlayers;
 	
+	/* ---------------------------------------- */
+
+	_dbName = "pps-events";
+	_dbEvents = ["new", _dbName] call OO_INIDBI;
+	_events = "getSections" call _dbEvents;
+	_countEventsTotal = count _events;
+
 	/* ---------------------------------------- */
 
 	_players = [];
@@ -828,7 +836,7 @@ params ["_playerUid"];
 	_result =
 	[
 		_playerUid, _clientId, _isAdmin, _isAdminLoggedIn,  
-		_countPlayersTotal, _countPlayersOnline, _countAdminsTotal, _countAdminsOnline, 
+		_countPlayersTotal, _countPlayersOnline, _countAdminsTotal, _countAdminsOnline, _countEventsTotal, 
 		_filteredPlayers
 	];
 	

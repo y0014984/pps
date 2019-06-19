@@ -183,7 +183,8 @@ _answer addPublicVariableEventHandler
 	_countPlayersOnline = _broadcastVariableValue select 5;
 	_countAdminsTotal = _broadcastVariableValue select 6;
 	_countAdminsOnline = _broadcastVariableValue select 7;
-	_filteredPlayers = _broadcastVariableValue select 8;
+	_countEventsTotal = _broadcastVariableValue select 8;
+	_filteredPlayers = _broadcastVariableValue select 9;
 
 	_isEvent = PPS_isEvent;
 	_activeEventName = PPS_eventName;
@@ -224,7 +225,7 @@ _answer addPublicVariableEventHandler
 	if (_statusDatabase) then {_statusDatabase = localize "STR_PPS_Main_Online"} else {_statusDatabase = localize "STR_PPS_Main_Offline"};
 	
 	_serverAndDatabaseStatusText ctrlSetText format [localize "STR_PPS_Main_Dialog_Server_Status", format ["%1 [%2]", _statusServer, _versionServer],  format ["%1 [%2]", _statusDatabase, _versionDatabase]];
-	_playersAndAdminsCountText ctrlSetText format [localize "STR_PPS_Main_Dialog_Player_Status",_countPlayersTotal , _countPlayersOnline, _countAdminsTotal, _countAdminsOnline];
+	_playersAndAdminsCountText ctrlSetText format [localize "STR_PPS_Main_Dialog_Player_Status",_countPlayersTotal , _countPlayersOnline, _countAdminsTotal, _countAdminsOnline, _countEventsTotal];
 
 	if (_isAdminLoggedIn) then
 	{
