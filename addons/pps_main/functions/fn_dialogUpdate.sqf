@@ -186,8 +186,6 @@ _answer addPublicVariableEventHandler
 	_countEventsTotal = _broadcastVariableValue select 8;
 	_filteredPlayers = _broadcastVariableValue select 9;
 
-	_isEvent = PPS_isEvent;
-	_activeEventName = PPS_eventName;
 	_activeEventStartTime = +PPS_eventStartTime;
 	
 	_statusServer = false;
@@ -216,8 +214,6 @@ _answer addPublicVariableEventHandler
 	_eventStopButton = (findDisplay 14984) displayCtrl 1607;
 	_eventContinueButton = (findDisplay 14984) displayCtrl 1606;
 	_eventDeleteButton = (findDisplay 14984) displayCtrl 1608;
-	_eventEditBox = (findDisplay 14984) displayCtrl 1603;
-	_eventEditBox ctrlSetText _activeEventName;
 	_continueButton = (findDisplay 14984) displayCtrl 1606;
 	_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 	_promoteButton = (findDisplay 14984) displayCtrl 1610;
@@ -253,7 +249,7 @@ _answer addPublicVariableEventHandler
 
 	_noEvent = localize "STR_PPS_Main_Dialog_No_Event";
 	
-	if (_isEvent) then
+	if (PPS_isEvent) then
 	{
 		{
 			if(_x < 10) then
@@ -274,7 +270,7 @@ _answer addPublicVariableEventHandler
 		_timeZone = PPS_TimeZone;
 		if (PPS_SummerTime) then {_timeZone = _timeZone + 1;};
 		_headlineText ctrlSetBackgroundColor [0.5, 0, 0, 1];
-		_headlineText ctrlSetText format [localize "STR_PPS_Main_Dialog_Head_Time", _activeEventName, _year, _month, _day, _hours, _minutes, _seconds, _timeZone];
+		_headlineText ctrlSetText format [localize "STR_PPS_Main_Dialog_Head_Time", PPS_eventName, _hours, _minutes, _seconds, _timeZone];
 	}
 	else
 	{
@@ -331,9 +327,6 @@ _answer addPublicVariableEventHandler
 	_isAdmin = _broadcastVariableValue select 2;
 	_isAdminLoggedIn = _broadcastVariableValue select 3;
 	_filteredEvents = _broadcastVariableValue select 4;
-
-	_isEvent = PPS_isEvent;
-	_activeEventName = PPS_eventName;
 	
 	_eventsListBox = (findDisplay 14984) displayCtrl 1501;
 	lbClear _eventsListBox;
@@ -359,7 +352,7 @@ _answer addPublicVariableEventHandler
 		_index = _eventsListBox lbAdd format ["%1-%2-%3 %4 (%5 min.)", _year, _month, _day, _dbEventName, _dbEventDuration];	
 		_eventsListBox lbSetData [_index, _dbEventId];
 
-		if(_isEvent &&(_dbEventName == _activeEventName)) then
+		if(PPS_isEvent &&(_dbEventId == PPS_eventId)) then
 		{
 			_eventsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
 			_eventsListBox lbSetCurSel _index;
