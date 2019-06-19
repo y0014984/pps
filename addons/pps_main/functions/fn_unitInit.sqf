@@ -48,7 +48,7 @@ if (isMultiplayer) then
 						_value = 1;
 						_type = 2;
 						_formatType = 0;
-						_formatString = "[A3] Count Player Deaths: %1";
+						_formatString = "STR_PPS_Main_Statistics_Count_Player_Deaths";
 						
 						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
@@ -64,7 +64,7 @@ if (isMultiplayer) then
 						_value = 1;
 						_type = 2;
 						_formatType = 0;
-						_formatString = "[A3] Count Player Kills: %1";
+						_formatString = "STR_PPS_Main_Statistics_Count_Player_Kills";
 									
 						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
@@ -80,7 +80,7 @@ if (isMultiplayer) then
 						_value = 1;
 						_type = 2;
 						_formatType = 0;
-						_formatString = "[A3] Count Player Suicides: %1";
+						_formatString = "STR_PPS_Main_Statistics_Count_Player_Suicides";
 									
 						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
@@ -96,7 +96,7 @@ if (isMultiplayer) then
 						_value = 1;
 						_type = 2;
 						_formatType = 0;
-						_formatString = "[A3] Count Player Team Kills: %1";
+						_formatString = "STR_PPS_Main_Statistics_Count_Player_Team_Kills";
 									
 						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
@@ -136,13 +136,13 @@ if (isMultiplayer) then
 				{
 					_key = "countGrenadesHitEnemy";
 					_formatType = 4;
-					_formatString = "[A3] Count Grenades Hit Enemy: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Grenades_Hit_Enemy";
 				}
 				else
 				{
 					_key = "countProjectilesHitEnemy";	
 					_formatType = 2;					
-					_formatString = "[A3] Count Projectiles Hit Enemy: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Projectiles_Hit_Enemy";
 				};
 			}
 			else
@@ -151,13 +151,13 @@ if (isMultiplayer) then
 				{
 					_key = "countGrenadesHitFriendly";
 					_formatType = 4;
-					_formatString = "[A3] Count Grenades Hit Friendly: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Grenades_Hit_Friendly";
 				}
 				else
 				{
 					_key = "countProjectilesHitFriendly";
 					_formatType = 2;
-					_formatString = "[A3] Count Projectiles Hit Friendly: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Projectiles_Hit_Friendly";
 				};
 			};
 
@@ -180,13 +180,13 @@ if (isMultiplayer) then
 				{
 					_key = "countGrenadesHitByEnemy";
 					_formatType = 4;
-					_formatString = "[A3] Count Grenades Hit By Enemy: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Grenades_Hit_By_Enemy";
 				}
 				else
 				{
 					_key = "countProjectilesHitByEnemy";	
 					_formatType = 2;					
-					_formatString = "[A3] Count Projectiles Hit By Enemy: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Projectiles_Hit_By_Enemy";
 				};
 			}
 			else
@@ -195,13 +195,13 @@ if (isMultiplayer) then
 				{
 					_key = "countGrenadesHitByFriendly";
 					_formatType = 4;
-					_formatString = "[A3] Count Grenades Hit By Friendly: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Grenades_Hit_By_Friendly";
 				}
 				else
 				{
 					_key = "countProjectilesHitByFriendly";
 					_formatType = 2;
-					_formatString = "[A3] Count Projectiles Hit By Friendly: %2 (%3%1)";
+					_formatString = "";
 				};
 			};
 
