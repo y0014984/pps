@@ -94,6 +94,30 @@ _eventsListBox ctrlAddEventHandler ["LBSelChanged",
 
 /* ================================================================================ */
 
+_statisticsListBox = (findDisplay 14984) displayCtrl 1502;
+_statisticsListBox ctrlAddEventHandler ["LBSelChanged",
+{
+	params ["_control", "_selectedIndex"];
+
+	if (PPS_isTrackStatisticsActive && (_selectedIndex != -1)) then
+	{
+		_statisticsListBox = (findDisplay 14984) displayCtrl 1502;
+		_statisticsKey = _statisticsListBox lbData _selectedIndex;
+		_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
+		
+		if (PPS_trackStatisticsKey == _statisticsKey) then
+		{
+			_trackStatisticsButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Track_Value_Off";
+		}
+		else
+		{
+			_trackStatisticsButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Track_Value_On";
+		};
+	};
+}];
+
+/* ================================================================================ */
+
 _filterEventsEditBox = (findDisplay 14984) displayCtrl 1401;
 _filterEventsEditBox ctrlAddEventHandler ["KeyUp",
 {
@@ -165,10 +189,14 @@ _answer addPublicVariableEventHandler
 	_activeEventName = PPS_eventName;
 	_activeEventStartTime = +PPS_eventStartTime;
 	
-	_statusServer =  PPS_statusServer;
-	_versionServer = PPS_versionServer;
-	_statusDatabase =  PPS_statusDatabase;
-	_versionDatabase = PPS_versionDatabase;
+	_statusServer = false;
+	if (!isNil "PPS_statusServer") then {_statusServer =  PPS_statusServer;};
+	_versionServer = localize "STR_PPS_Main_Unknown";
+	if (!isNil "PPS_versionServer") then {_versionServer = PPS_versionServer;};
+	_statusDatabase = false;
+	if (!isNil "PPS_statusDatabase") then {_statusDatabase =  PPS_statusDatabase;};
+	_versionDatabase = localize "STR_PPS_Main_Unknown";
+	if (!isNil "PPS_versionDatabase") then {_versionDatabase = PPS_versionDatabase;};
 
 	_headlineText = (findDisplay 14984) displayCtrl 1000;
 	_serverAndDatabaseStatusText = (findDisplay 14984) displayCtrl 1001;

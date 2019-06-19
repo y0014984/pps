@@ -30,6 +30,10 @@
 				<English>Error: %1</English>
 				<German>Fehler: %1</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Unknown">
+				<English>Unknown</English>
+				<German>unbekannt</German>
+			</Key>
 		</Container>
 		<Container name="Dialog">
 			<Key ID="STR_PPS_Main_Dialog_Head">

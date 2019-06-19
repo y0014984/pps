@@ -166,6 +166,11 @@ params ["_playerUid"];
 	_isTrackStatisticsActive = ["read", [_playerUid, "isTrackStatisticsActive", false]] call _dbPlayers;
 	_trackStatisticsKey = ["read", [_playerUid, "trackStatisticsKey", ""]] call _dbPlayers;
 	_trackStatisticsClientId = ["read", [_playerUid, "trackStatisticsClientId", ""]] call _dbPlayers;
+	
+	missionNamespace setVariable ["PPS_isTrackStatisticsActive", _isTrackStatisticsActive, false];
+	_clientId publicVariableClient "PPS_isTrackStatisticsActive";
+	missionNamespace setVariable ["PPS_trackStatisticsKey", _trackStatisticsKey, false];
+	_clientId publicVariableClient "PPS_trackStatisticsKey";
 
 	_result = [_isTrackStatisticsActive, _trackStatisticsKey, _trackStatisticsClientId];
 	
@@ -552,6 +557,11 @@ params ["_playerUid"];
 	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _dbPlayers;
 	_isTrackStatisticsActive = ["read", [_playerUid, "isTrackStatisticsActive", false]] call _dbPlayers;
 	_trackStatisticsKey = ["read", [_playerUid, "trackStatisticsKey", ""]] call _dbPlayers;
+	
+	missionNamespace setVariable ["PPS_isTrackStatisticsActive", _isTrackStatisticsActive, false];
+	_clientId publicVariableClient "PPS_isTrackStatisticsActive";
+	missionNamespace setVariable ["PPS_trackStatisticsKey", _trackStatisticsKey, false];
+	_clientId publicVariableClient "PPS_trackStatisticsKey";
 		
 	if ((_playerUid == _requestedPlayerUid) || _isAdmin) then
 	{
