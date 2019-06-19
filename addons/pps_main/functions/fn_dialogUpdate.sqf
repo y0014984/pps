@@ -165,10 +165,14 @@ _answer addPublicVariableEventHandler
 	_activeEventName = PPS_eventName;
 	_activeEventStartTime = +PPS_eventStartTime;
 	
-	_statusServer =  PPS_statusServer;
-	_versionServer = PPS_versionServer;
-	_statusDatabase =  PPS_statusDatabase;
-	_versionDatabase = PPS_versionDatabase;
+	_statusServer = false;
+	if (!isNil "PPS_statusServer") then {_statusServer =  PPS_statusServer;};
+	_versionServer = localize "STR_PPS_Main_Unknown";
+	if (!isNil "PPS_versionServer") then {_versionServer = PPS_versionServer;};
+	_statusDatabase = false;
+	if (!isNil "PPS_statusDatabase") then {_statusDatabase =  PPS_statusDatabase;};
+	_versionDatabase = localize "STR_PPS_Main_Unknown";
+	if (!isNil "PPS_versionDatabase") then {_versionDatabase = PPS_versionDatabase;};
 
 	_headlineText = (findDisplay 14984) displayCtrl 1000;
 	_serverAndDatabaseStatusText = (findDisplay 14984) displayCtrl 1001;
