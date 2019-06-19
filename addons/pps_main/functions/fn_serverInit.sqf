@@ -164,8 +164,17 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 	publicVariable "PPS_eventStartTime";
 	PPS_eventStopTime = +_eventStopTime;
 	publicVariable "PPS_eventStopTime";
+
+	/* ---------------------------------------- */
+
+	_dbName = "pps-players";
+	_dbPlayers = ["new", _dbName] call OO_INIDBI;
 	
-	
+	_players = "getSections" call _dbPlayers;
+	{
+		["write", [_x, "isAdminLoggedIn", false]] call _dbPlayers;
+		["write", [_x, "isTrackStatisticsActive", false]] call _dbPlayers;
+	}forEach _players;
 	
 	/* ---------------------------------------- */
 }
