@@ -32,6 +32,41 @@ if (PPS_AllowSendingData) then
 	//hint "PPS_AllowSendingData enabled";
 
 	/* ---------------------------------------- */
+	
+	_index = player addEventHandler ["Reloaded", 
+	{
+		params ["_entity", "_weapon", "_muzzle", "_newmag", ["_oldmag", ["","","",""]]];
+		
+		/*
+		hint format ["Weapon: %1\nMuzzle: %2\n\n- New Magazine -\nName: %3\nAmmo: %4\nID: %5\nCreator: %6\n\n- Old Magazine -\nName: %7\nAmmo: %8\nID: %9\nCreator: %10", 
+			_weapon, 
+			_muzzle, 
+			_newmag select 0, 
+			_newmag select 1, 
+			(_newmag select 2) - 1e+007, 
+			_newmag select 3,
+			_oldmag select 0, 
+			_oldmag select 1, 
+			if (_oldmag select 2 isEqualType "") then {""} else {(_oldmag select 2) - 1e+007}, 
+			_oldmag select 3
+		];
+		*/
+		
+		_playerUid = getPlayerUID player;
+		_source = "A3";
+		_type = 2;
+		_key = "countMagazineReloaded";
+		_value = 1;
+		_formatType = 0;
+		_formatString = "STR_PPS_Main_Statistics_Count_Magazine_Reloaded";
+
+		_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+		_update = _playerUid + "-updateStatistics";
+		missionNamespace setVariable [_update, _updatedData, false];
+		publicVariableServer _update;
+	}];
+	
+	/* ---------------------------------------- */
 
 	_index = player addEventHandler ["FiredMan",
 	{
@@ -311,20 +346,6 @@ if (PPS_AllowSendingData) then
 			_value = 1;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Optics_Used";
-		};
-		if (inputAction "EngineToggle" > 0) then 
-		{
-			_key = "countEngineToggle";
-			_value = 1;
-			_formatType = 0;
-			_formatString = "STR_PPS_Main_Statistics_Count_Engine_Toggle";
-		};
-		if (inputAction "ReloadMagazine" > 0) then 
-		{
-			_key = "countMagazineReloaded";
-			_value = 1;
-			_formatType = 0;
-			_formatString = "STR_PPS_Main_Statistics_Count_Magazine_Reloaded";
 		};
 		if (inputAction "holdBreath" > 0) then 
 		{

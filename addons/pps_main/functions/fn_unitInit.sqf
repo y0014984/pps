@@ -43,13 +43,14 @@ if (isMultiplayer) then
 					if (_unitUid != "") then
 					{
 						_playerUid = _unitUid;
-						_section = "Event Handler Statistics";
+						_source = "A3";
 						_key = "countPlayerDeaths";
 						_value = 1;
+						_type = 2;
 						_formatType = 0;
 						_formatString = "[A3] Count Player Deaths: %1";
 						
-						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
 						missionNamespace setVariable [_update, _updatedData, false];
 						publicVariableServer _update;
@@ -58,13 +59,14 @@ if (isMultiplayer) then
 					if (_killerUid != "") then
 					{
 						_playerUid = _killerUid;
-						_section = "Event Handler Statistics";
+						_source = "A3";
 						_key = "countPlayerKills";
 						_value = 1;
+						_type = 2;
 						_formatType = 0;
 						_formatString = "[A3] Count Player Kills: %1";
 									
-						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
 						missionNamespace setVariable [_update, _updatedData, false];
 						publicVariableServer _update;				
@@ -73,13 +75,14 @@ if (isMultiplayer) then
 					if (_killerUid == _unitUid) then
 					{
 						_playerUid = _killerUid;
-						_section = "Event Handler Statistics";
+						_source = "A3";
 						_key = "countPlayerSuicides";
 						_value = 1;
+						_type = 2;
 						_formatType = 0;
 						_formatString = "[A3] Count Player Suicides: %1";
 									
-						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
 						missionNamespace setVariable [_update, _updatedData, false];
 						publicVariableServer _update;				
@@ -88,13 +91,14 @@ if (isMultiplayer) then
 					if (_killerUid != _unitUid && _killerUid != "" && ((side group _unit) == (side group _killer))) then
 					{
 						_playerUid = _killerUid;
-						_section = "Event Handler Statistics";
+						_source = "A3";
 						_key = "countPlayerTeamKills";
 						_value = 1;
+						_type = 2;
 						_formatType = 0;
 						_formatString = "[A3] Count Player Team Kills: %1";
 									
-						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
 						missionNamespace setVariable [_update, _updatedData, false];
 						publicVariableServer _update;
@@ -120,6 +124,7 @@ if (isMultiplayer) then
 		
 		_key = "";
 		_value = 1;
+		_type = 2;
 		_formatType = 0;
 		_formatString = "";
 		
@@ -159,9 +164,9 @@ if (isMultiplayer) then
 			//hint format ["Key: %1", _key];
 
 			_playerUid = _shooterUid;
-			_section = "Event Handler Statistics";
+			_source = "A3";
 
-			_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;			
@@ -203,9 +208,9 @@ if (isMultiplayer) then
 			//hint format ["Key: %1", _key];
 
 			_playerUid = _targetUid;
-			_section = "Event Handler Statistics";
+			_source = "A3";
 
-			_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;	

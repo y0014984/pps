@@ -217,6 +217,7 @@ _answer addPublicVariableEventHandler
 	_continueButton = (findDisplay 14984) displayCtrl 1606;
 	_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 	_promoteButton = (findDisplay 14984) displayCtrl 1610;
+	_eventEditBox = (findDisplay 14984) displayCtrl 1603;
 	
 	if (_statusServer) then {_statusServer = localize "STR_PPS_Main_Online"} else {_statusServer = localize "STR_PPS_Main_Offline"};
 	if (_statusDatabase) then {_statusDatabase = localize "STR_PPS_Main_Online"} else {_statusDatabase = localize "STR_PPS_Main_Offline"};

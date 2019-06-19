@@ -740,6 +740,14 @@
 				<English>Count Get Over: %1</English>
 				<German>Anzahl, überstiegen: %1</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Engine_Turned_On">
+				<English>Count Engine Turned On: %1</English>
+				<German>Anzahl, Motor gestartet: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Engine_Turned_Off">
+				<English>Count Engine Turned Off: %1</English>
+				<German>Anzahl, Motor gestoppt: %1</German>
+			</Key>
 		</Container>
 	</Package>
 </Project>
