@@ -240,7 +240,7 @@ params ["_playerUid"];
 		missionNamespace setVariable [_answer, _result, false];
 		_clientId publicVariableClient _answer;
 		
-		[format ["[%1] PPS Player Request Stop Event: set %2 (%3)", serverTime, _isEvent, _playerUid]] call PPS_fnc_log;
+		[format ["[%1] PPS Player Request Stop Event: %2 (%3)", serverTime, PPS_eventName, _playerUid]] call PPS_fnc_log;
 	};
 };
 
@@ -343,7 +343,7 @@ params ["_playerUid"];
 		missionNamespace setVariable [_answer, _result, false];
 		_clientId publicVariableClient _answer;
 		
-		[format ["[%1] PPS Player Request Start Event: set %2 (%3)", serverTime, _isEvent, _playerUid]] call PPS_fnc_log;
+		[format ["[%1] PPS Player Request Start Event: %2 (%3)", serverTime, PPS_eventName, _playerUid]] call PPS_fnc_log;
 	};
 };
 
@@ -406,7 +406,7 @@ params ["_playerUid"];
 	missionNamespace setVariable [_answer, _result, false];
 	_clientId publicVariableClient _answer;
 	
-	[format ["[%1] PPS Player Request Delete Event: %2 (%3)", serverTime, _eventName, _playerUid]] call PPS_fnc_log;
+	[format ["[%1] PPS Player Request Delete Event: %2 (%3)", serverTime, PPS_eventName, _playerUid]] call PPS_fnc_log;
 };
 
 /* ================================================================================ */
@@ -459,7 +459,7 @@ params ["_playerUid"];
 		missionNamespace setVariable [_answer, _result, false];
 		_clientId publicVariableClient _answer;
 		
-		[format ["[%1] PPS Player Request Continue Event: %2 (%3)", serverTime, _eventName, _playerUid]] call PPS_fnc_log;
+		[format ["[%1] PPS Player Request Continue Event: %2 (%3)", serverTime, PPS_eventName, _playerUid]] call PPS_fnc_log;
 	};
 };
 
@@ -645,7 +645,7 @@ params ["_playerUid"];
 		missionNamespace setVariable [_answer, [_resultStatistics, _isTrackStatisticsActive, _trackStatisticsKey], false];
 		_clientId publicVariableClient _answer;
 				
-		[format ["[%1] PPS Player Request Statistics: (%2)", serverTime, _requestedPlayerUid]] call PPS_fnc_log;
+		[format ["[%1] PPS Player Request Statistics Filtered: (%2)", serverTime, _requestedPlayerUid]] call PPS_fnc_log;
 	};
 };
 

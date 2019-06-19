@@ -24,7 +24,9 @@ _answer addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
 
-	[] call PPS_fnc_dialogUpdate;
+	//[] call PPS_fnc_dialogUpdate;
+
+	[] call PPS_fnc_triggerServerDialogUpdate;
 };
 
 _eventsListBox = (findDisplay 14984) displayCtrl 1501;

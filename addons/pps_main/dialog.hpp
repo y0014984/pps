@@ -220,7 +220,7 @@ class PPS_Main_Dialog
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_dialogUpdate;";
+			action = "[] call PPS_fnc_triggerServerDialogUpdate;";
 		};
 		class PPS_RscButton_1605: RscButton
 		{
