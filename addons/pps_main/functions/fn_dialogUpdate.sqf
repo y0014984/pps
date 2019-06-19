@@ -94,6 +94,30 @@ _eventsListBox ctrlAddEventHandler ["LBSelChanged",
 
 /* ================================================================================ */
 
+_statisticsListBox = (findDisplay 14984) displayCtrl 1502;
+_statisticsListBox ctrlAddEventHandler ["LBSelChanged",
+{
+	params ["_control", "_selectedIndex"];
+
+	if (PPS_isTrackStatisticsActive && (_selectedIndex != -1)) then
+	{
+		_statisticsListBox = (findDisplay 14984) displayCtrl 1502;
+		_statisticsKey = _statisticsListBox lbData _selectedIndex;
+		_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
+		
+		if (PPS_trackStatisticsKey == _statisticsKey) then
+		{
+			_trackStatisticsButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Track_Value_Off";
+		}
+		else
+		{
+			_trackStatisticsButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Track_Value_On";
+		};
+	};
+}];
+
+/* ================================================================================ */
+
 _filterEventsEditBox = (findDisplay 14984) displayCtrl 1401;
 _filterEventsEditBox ctrlAddEventHandler ["KeyUp",
 {
