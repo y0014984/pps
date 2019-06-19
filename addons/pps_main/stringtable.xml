@@ -740,6 +740,62 @@
 				<English>Count Get Over: %1</English>
 				<German>Anzahl, überstiegen: %1</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Engine_Turned_On">
+				<English>Count Engine Turned On: %1</English>
+				<German>Anzahl, Motor gestartet: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Engine_Turned_Off">
+				<English>Count Engine Turned Off: %1</English>
+				<German>Anzahl, Motor gestoppt: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Player_Deaths">
+				<English>Count Player Deaths: %1</English>
+				<German>Anzahl Tode des Spielers: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Player_Kills">
+				<English>Count Player Kills: %1</English>
+				<German>Anzahl Abschüsse des Spielers: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Player_Suicides">
+				<English>Count Player Suicides: %1</English>
+				<German>Anzahl Selbstmorde des Spielers: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Player_Team_Kills">
+				<English>Count Player Team Kills: %1</English>
+				<German>Anzahl Eigenbeschüsse des Spielers: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Grenades_Hit_Enemy">
+				<English>Count Grenades Hit Enemy: %2 (%3%1)</English>
+				<German>Anzahl Granatentreffer auf Feinde: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Projectiles_Hit_Enemy">
+				<English>Count Projectiles Hit Enemy: %2 (%3%1)</English>
+				<German>Anzahl Projektiltreffer auf Feinde: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Grenades_Hit_Friendly">
+				<English>Count Grenades Hit Friendly: %2 (%3%1)</English>
+				<German>Anzahl Granatentreffer auf Freunde: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Projectiles_Hit_Friendly">
+				<English>Count Projectiles Hit Friendly: %2 (%3%1)</English>
+				<German>Anzahl Projektiltreffer auf Freunde: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Grenades_Hit_By_Enemy">
+				<English>Count Grenades Hit By Enemy: %2 (%3%1)</English>
+				<German>Anzahl Granatentreffer von Feinden: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Projectiles_Hit_By_Enemy">
+				<English>Count Projectiles Hit By Enemy: %2 (%3%1)</English>
+				<German>Anzahl Projektiltreffer von Feinden: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Grenades_Hit_By_Friendly">
+				<English>Count Grenades Hit By Friendly: %2 (%3%1)</English>
+				<German>Anzahl Granatentreffer von Freunden: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Projectiles_Hit_By_Friendly">
+				<English>[A3] Count Projectiles Hit By Friendly: %2 (%3%1)</English>
+				<German>Anzahl Projektiltreffer von Freunden: %2 (%3%1)</German>
+			</Key>
 		</Container>
 	</Package>
 </Project>

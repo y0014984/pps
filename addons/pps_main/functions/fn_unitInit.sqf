@@ -43,13 +43,14 @@ if (isMultiplayer) then
 					if (_unitUid != "") then
 					{
 						_playerUid = _unitUid;
-						_section = "Event Handler Statistics";
+						_source = "A3";
 						_key = "countPlayerDeaths";
 						_value = 1;
+						_type = 2;
 						_formatType = 0;
-						_formatString = "[A3] Count Player Deaths: %1";
+						_formatString = "STR_PPS_Main_Statistics_Count_Player_Deaths";
 						
-						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
 						missionNamespace setVariable [_update, _updatedData, false];
 						publicVariableServer _update;
@@ -58,13 +59,14 @@ if (isMultiplayer) then
 					if (_killerUid != "") then
 					{
 						_playerUid = _killerUid;
-						_section = "Event Handler Statistics";
+						_source = "A3";
 						_key = "countPlayerKills";
 						_value = 1;
+						_type = 2;
 						_formatType = 0;
-						_formatString = "[A3] Count Player Kills: %1";
+						_formatString = "STR_PPS_Main_Statistics_Count_Player_Kills";
 									
-						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
 						missionNamespace setVariable [_update, _updatedData, false];
 						publicVariableServer _update;				
@@ -73,13 +75,14 @@ if (isMultiplayer) then
 					if (_killerUid == _unitUid) then
 					{
 						_playerUid = _killerUid;
-						_section = "Event Handler Statistics";
+						_source = "A3";
 						_key = "countPlayerSuicides";
 						_value = 1;
+						_type = 2;
 						_formatType = 0;
-						_formatString = "[A3] Count Player Suicides: %1";
+						_formatString = "STR_PPS_Main_Statistics_Count_Player_Suicides";
 									
-						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
 						missionNamespace setVariable [_update, _updatedData, false];
 						publicVariableServer _update;				
@@ -88,13 +91,14 @@ if (isMultiplayer) then
 					if (_killerUid != _unitUid && _killerUid != "" && ((side group _unit) == (side group _killer))) then
 					{
 						_playerUid = _killerUid;
-						_section = "Event Handler Statistics";
+						_source = "A3";
 						_key = "countPlayerTeamKills";
 						_value = 1;
+						_type = 2;
 						_formatType = 0;
-						_formatString = "[A3] Count Player Team Kills: %1";
+						_formatString = "STR_PPS_Main_Statistics_Count_Player_Team_Kills";
 									
-						_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 						_update = _playerUid + "-updateStatistics";
 						missionNamespace setVariable [_update, _updatedData, false];
 						publicVariableServer _update;
@@ -120,6 +124,7 @@ if (isMultiplayer) then
 		
 		_key = "";
 		_value = 1;
+		_type = 2;
 		_formatType = 0;
 		_formatString = "";
 		
@@ -131,13 +136,13 @@ if (isMultiplayer) then
 				{
 					_key = "countGrenadesHitEnemy";
 					_formatType = 4;
-					_formatString = "[A3] Count Grenades Hit Enemy: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Grenades_Hit_Enemy";
 				}
 				else
 				{
 					_key = "countProjectilesHitEnemy";	
 					_formatType = 2;					
-					_formatString = "[A3] Count Projectiles Hit Enemy: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Projectiles_Hit_Enemy";
 				};
 			}
 			else
@@ -146,22 +151,22 @@ if (isMultiplayer) then
 				{
 					_key = "countGrenadesHitFriendly";
 					_formatType = 4;
-					_formatString = "[A3] Count Grenades Hit Friendly: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Grenades_Hit_Friendly";
 				}
 				else
 				{
 					_key = "countProjectilesHitFriendly";
 					_formatType = 2;
-					_formatString = "[A3] Count Projectiles Hit Friendly: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Projectiles_Hit_Friendly";
 				};
 			};
 
 			//hint format ["Key: %1", _key];
 
 			_playerUid = _shooterUid;
-			_section = "Event Handler Statistics";
+			_source = "A3";
 
-			_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;			
@@ -175,13 +180,13 @@ if (isMultiplayer) then
 				{
 					_key = "countGrenadesHitByEnemy";
 					_formatType = 4;
-					_formatString = "[A3] Count Grenades Hit By Enemy: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Grenades_Hit_By_Enemy";
 				}
 				else
 				{
 					_key = "countProjectilesHitByEnemy";	
 					_formatType = 2;					
-					_formatString = "[A3] Count Projectiles Hit By Enemy: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Projectiles_Hit_By_Enemy";
 				};
 			}
 			else
@@ -190,22 +195,22 @@ if (isMultiplayer) then
 				{
 					_key = "countGrenadesHitByFriendly";
 					_formatType = 4;
-					_formatString = "[A3] Count Grenades Hit By Friendly: %2 (%3%1)";
+					_formatString = "STR_PPS_Main_Statistics_Count_Grenades_Hit_By_Friendly";
 				}
 				else
 				{
 					_key = "countProjectilesHitByFriendly";
 					_formatType = 2;
-					_formatString = "[A3] Count Projectiles Hit By Friendly: %2 (%3%1)";
+					_formatString = "";
 				};
 			};
 
 			//hint format ["Key: %1", _key];
 
 			_playerUid = _targetUid;
-			_section = "Event Handler Statistics";
+			_source = "A3";
 
-			_updatedData = [_playerUid, [[_section, _key, _value, _formatType, _formatString]]];
+			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;	
