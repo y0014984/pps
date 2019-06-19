@@ -1,7 +1,7 @@
 /*
  * Author: y0014984
  *
- * Handles the PPS Dialog Continue Button pressing event.
+ * Handles the PPS Dialog Continue Event Button pressing event.
  *
  * Arguments:
  * None
@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call PPS_fnc_dialogButtonContinueExec;
+ * [] call PPS_fnc_dialogButtonEvent ContinueExec;
  *
  * Public: No
  */

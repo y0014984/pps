@@ -109,6 +109,7 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 	_eventStartTime = [0, 0, 0, 0, 0, 0];
 	_eventStopTime = [0, 0, 0, 0, 0, 0];
 	_eventId = "";
+	_eventPlayerUids = [];
 	
 	if ("exists" call _dbEvents) then
 	{
@@ -121,6 +122,7 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 				_eventName = ["read", [_x, "eventName", ""]] call _dbEvents;
 				_eventStartTime = ["read", [_x, "eventStartTime", [0, 0, 0, 0, 0, 0]]] call _dbEvents;
 				_eventId = ["read", [_x, "eventId", ""]] call _dbEvents;
+				_eventPlayerUids = ["read", [_x, "eventPlayerUids", ""]] call _dbEvents;
 			}; 
 		} forEach _events;
 	};
@@ -141,12 +143,22 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 			_tmpEventStopTime = _tmpEventStopTime - ["delete"];
 			_eventDuration = (dateToNumber _tmpEventStopTime) - (dateToNumber _tmpEventStartTime);
 			_eventDuration = numberToDate [_tmpEventStopTime select 0, _eventDuration];
-			if (((_eventDuration select 1) == 1) && ((_eventDuration select 2) == 1)) then
+			_eventDuration = ((_eventDuration select 3) * 60) + (_eventDuration select 4); // in Minutes
+			
+			_eventMaxDuration = 0;
 			{
-				_eventDurationOld = ["read", [_eventId, "eventDuration", 0]] call _dbEvents;
-				_eventDuration = _eventDurationOld + (((_eventDuration select 3) * 60) + (_eventDuration select 4));
-				["write", [_eventId, "eventDuration", _eventDuration]] call _dbEvents;
-			};
+				_dbName = "pps-statistics-" + _x + "-" + _eventId;
+				_dbStatistics = ["new", _dbName] call OO_INIDBI;
+				_timeInEvent = ["read", ["timeInEvent", "value", 0]] call _dbStatistics;
+				_timeInEvent = _timeInEvent / 60;  // In Minutes
+				if (_timeInEvent > _eventMaxDuration) then {_eventMaxDuration = _timeInEvent;};
+			} forEach _eventPlayerUids;
+			
+			if (_eventMaxDuration > 0 && _eventMaxDuration < _eventDuration) then {_eventDuration = _eventMaxDuration};
+			
+			_eventDurationOld = ["read", [_eventId, "eventDuration", 0]] call _dbEvents;
+			_eventDuration = _eventDurationOld + _eventDuration;
+			["write", [_eventId, "eventDuration", _eventDuration]] call _dbEvents;
 		};
 		
 		_isEvent = false;

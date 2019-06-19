@@ -220,6 +220,7 @@ _answer addPublicVariableEventHandler
 	_eventEditBox ctrlSetText _activeEventName;
 	_continueButton = (findDisplay 14984) displayCtrl 1606;
 	_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
+	_promoteButton = (findDisplay 14984) displayCtrl 1610;
 	
 	if (_statusServer) then {_statusServer = localize "STR_PPS_Main_Online"} else {_statusServer = localize "STR_PPS_Main_Offline"};
 	if (_statusDatabase) then {_statusDatabase = localize "STR_PPS_Main_Online"} else {_statusDatabase = localize "STR_PPS_Main_Offline"};
@@ -229,23 +230,25 @@ _answer addPublicVariableEventHandler
 
 	if (_isAdminLoggedIn) then
 	{
-		_adminButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Admin_Logout";
+		_adminButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Logout";
 		_eventStartButton ctrlShow true;
 		_eventStopButton ctrlShow true;
 		_eventContinueButton ctrlShow true;
 		_eventDeleteButton ctrlShow true;
 		_eventEditBox ctrlShow true;
 		_continueButton ctrlShow true;
+		_promoteButton ctrlShow true;
 	}
 	else
 	{
-		_adminButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Admin_Login";
+		_adminButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Login";
 		_eventStartButton ctrlShow false;
 		_eventStopButton ctrlShow false;
 		_eventContinueButton ctrlShow false;
 		_eventDeleteButton ctrlShow false;
 		_eventEditBox ctrlShow false;
 		_continueButton ctrlShow false;
+		_promoteButton ctrlShow false;
 	};
 
 	_noEvent = localize "STR_PPS_Main_Dialog_No_Event";

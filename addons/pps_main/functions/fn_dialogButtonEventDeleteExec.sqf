@@ -1,7 +1,7 @@
 /*
  * Author: y0014984
  *
- * Handles the PPS Dialog Delete Button pressing event.
+ * Handles the PPS Dialog Delete Event Button pressing event.
  *
  * Arguments:
  * None
@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call PPS_fnc_dialogButtonDeleteExec;
+ * [] call PPS_fnc_dialogButtonEventDeleteExec;
  *
  * Public: No
  */
