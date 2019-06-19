@@ -41,8 +41,8 @@
 				<German>PERSISTENT PLAYER STATISTICS - laufendes Event: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Head_Time">
-				<English>PERSISTENT PLAYER STATISTICS - Event in Progress: %1 (Start Time %2-%3-%4 %5:%6:%7 UTC+%8)</English>
-				<German>PERSISTENT PLAYER STATISTICS - laufendes Event: %1 (Startzeit %2-%3-%4 %5:%6:%7 UTC+%8)</German>
+				<English>PERSISTENT PLAYER STATISTICS - Event in Progress: %1 (Start Time %2:%3:%4 UTC+%5)</English>
+				<German>PERSISTENT PLAYER STATISTICS - laufendes Event: %1 (Startzeit %2:%3:%4 UTC+%5)</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_No_Event">
 				<English>None</English>
