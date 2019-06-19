@@ -72,13 +72,21 @@
 				<English>Admin</English>
 				<German>Admin</German>
 			</Key>
-			<Key ID="STR_PPS_Main_Dialog_Button_Admin_Login">
+			<Key ID="STR_PPS_Main_Dialog_Button_Login">
 				<English>Login</English>
 				<German>einloggen</German>
 			</Key>
-			<Key ID="STR_PPS_Main_Dialog_Button_Admin_Logout">
+			<Key ID="STR_PPS_Main_Dialog_Button_Logout">
 				<English>Logout</English>
 				<German>ausloggen</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Promote">
+				<English>Promote</English>
+				<German>befördern</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Dialog_Button_Degrade">
+				<English>Degrade</English>
+				<German>degradieren</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Button_Continue">
 				<English>Continue</English>
@@ -269,6 +277,10 @@
 			<Key ID="STR_PPS_Main_Notifications_Player_Deleted">
 				<English>Persistent Player Statistics\n\nPlayer deleted: %1</English>
 				<German>Persistent Player Statistics\n\nSpieler wurde gelöscht: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Player_Promoted">
+				<English>Persistent Player Statistics\n\nPlayer promoted: %1</English>
+				<German>Persistent Player Statistics\n\nSpieler wurde befördert: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Tracking">
 				<English>Persistent Player Statistics\n\nKey: %1\nValue: %2</English>

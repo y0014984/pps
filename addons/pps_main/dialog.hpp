@@ -138,19 +138,30 @@ class PPS_Main_Dialog
 		class PPS_RscButton_1600: RscButton
 		{
 			idc = 1600;
-			text = $STR_PPS_Main_Dialog_Button_Admin;
+			text = $STR_PPS_Main_Dialog_Button_Login;
 			x = 13 * GUI_GRID_W + GUI_GRID_X;
 			y = 12.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_dialogButtonAdminExec;";
+			action = "[] call PPS_fnc_dialogButtonPlayerLoginExec;";
+		};
+		class PPS_RscButton_1610: RscButton
+		{
+			idc = 1610;
+			text = $STR_PPS_Main_Dialog_Button_Promote;
+			x = 6.5 * GUI_GRID_W + GUI_GRID_X;
+			y = 12.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			
+			action = "[] call PPS_fnc_dialogButtonPlayerPromoteExec;";
 		};
 		class PPS_RscButton_1609: RscButton
 		{
 			idc = 1609;
 			text = $STR_PPS_Main_Dialog_Button_Delete;
-			x = 6.5 * GUI_GRID_W + GUI_GRID_X;
+			x = 0 * GUI_GRID_W + GUI_GRID_X;
 			y = 12.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
@@ -220,7 +231,18 @@ class PPS_Main_Dialog
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_dialogButtonTrackExec;";
+			action = "[] call PPS_fnc_dialogButtonStatisticsTrackExec;";
+		};
+		class PPS_RscButton_1605: RscButton
+		{
+			idc = 1605;
+			text = $STR_PPS_Main_Dialog_Button_Export;
+			x = 34 * GUI_GRID_W + GUI_GRID_X;
+			y = 22.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			
+			action = "[] call PPS_fnc_dialogButtonStatisticsExportExec;";
 		};
 		class PPS_RscButton_1601: RscButton
 		{
@@ -232,17 +254,6 @@ class PPS_Main_Dialog
 			h = 1 * GUI_GRID_H;
 			
 			action = "[] call PPS_fnc_triggerServerDialogUpdate;";
-		};
-		class PPS_RscButton_1605: RscButton
-		{
-			idc = 1605;
-			text = $STR_PPS_Main_Dialog_Button_Export;
-			x = 34 * GUI_GRID_W + GUI_GRID_X;
-			y = 22.5 * GUI_GRID_H + GUI_GRID_Y;
-			w = 6 * GUI_GRID_W;
-			h = 1 * GUI_GRID_H;
-			
-			action = "[] call PPS_fnc_dialogButtonExportExec;";
 		};
 		////////////////////////////////////////////////////////
 		// GUI EDITOR OUTPUT END

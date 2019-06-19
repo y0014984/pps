@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call PPS_fnc_dialogButtonTrackStatisticsExec;
+ * [] call PPS_fnc_dialogButtonStatisticsTrackExec;
  *
  * Public: No
  */

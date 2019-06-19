@@ -349,6 +349,41 @@ params ["_playerUid"];
 
 /* ================================================================================ */
 
+(_playerUid + "-requestPromotePlayer") addPublicVariableEventHandler
+{
+	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
+
+	_playerUid = _broadcastVariableValue select 0;
+	_clientId = _broadcastVariableValue select 1;
+	_requestedPlayerUid = _broadcastVariableValue select 2;
+
+	_dbName = "pps-players";
+	_dbPlayers = ["new", _dbName] call OO_INIDBI;
+	
+	_isAdmin = ["read", [_playerUid, "isAdmin", false]] call _dbPlayers;
+	_isAdminLoggedIn = ["read", [_playerUid, "isAdminLoggedIn", false]] call _dbPlayers;
+	
+	if (_isAdmin && _isAdminLoggedIn) then
+	{
+		_isAdmin = ["read", [_requestedPlayerUid, "isAdmin", false]] call _dbPlayers;
+		if (!_isAdmin) then
+		{
+			["write", [_requestedPlayerUid, "isAdmin", true]] call _dbPlayers;
+			_playerName = ["read", [_requestedPlayerUid, "playerName", false]] call _dbPlayers;
+			["STR_PPS_Main_Notifications_Player_Promoted", _playerName] remoteExecCall ["PPS_fnc_hintLocalized"];
+		};
+	};
+
+	_result = true;
+	
+	_answer = _playerUid + "-answerPromotePlayer";
+	missionNamespace setVariable [_answer, _result, false];
+	_clientId publicVariableClient _answer;
+	
+	[format ["[%1] PPS Player Request Promote Player: %2 (%3)", serverTime, _requestedPlayerUid, _playerUid]] call PPS_fnc_log;
+};
+/* ================================================================================ */
+
 (_playerUid + "-requestDeletePlayer") addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];

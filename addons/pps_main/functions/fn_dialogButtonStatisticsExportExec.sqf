@@ -1,7 +1,7 @@
 /*
  * Author: y0014984
  *
- * Handles the PPS Dialog Export Button pressing event.
+ * Handles the PPS Dialog Statistics Export Button pressing event.
  *
  * Arguments:
  * None
@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call PPS_fnc_dialogButtonExportExec;
+ * [] call PPS_fnc_dialogButtonStatisticsExportExec;
  *
  * Public: No
  */
