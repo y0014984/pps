@@ -428,10 +428,6 @@ while {true} do
 		_timeTruckGunner = 0;
 		_timeTruckCommander = 0;
 		_timeTruckPassenger = 0;
-		_timeMotorcycleDriver = 0;
-		_timeMotorcycleGunner = 0;
-		_timeMotorcycleCommander = 0;
-		_timeMotorcyclePassenger = 0;
 		_timeHelicopterDriver = 0;
 		_timeHelicopterGunner = 0;
 		_timeHelicopterCommander = 0;
@@ -444,10 +440,6 @@ while {true} do
 		_timeShipGunner = 0;
 		_timeShipCommander = 0;
 		_timeShipPassenger = 0;
-		_timeBoatDriver = 0;
-		_timeBoatGunner = 0;
-		_timeBoatCommander = 0;
-		_timeBoatPassenger = 0;
 		
 		_timeVehicleLightOn = 0;
 		_timeVehicleLaser = 0;
@@ -546,22 +538,18 @@ while {true} do
 			
 			switch (true) do
 			{
-				case ((_vehiclePlayer isKindOf "Car") && ((driver _vehiclePlayer) == player)):{_timeCarDriver = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Car") && ((gunner _vehiclePlayer) == player)):{_timeCarGunner = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Car") && ((commander _vehiclePlayer) == player)):{_timeCarCommander = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Car") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeCarPassenger = PPS_UpdateInterval};
 				case ((_vehiclePlayer isKindOf "Tank") && ((driver _vehiclePlayer) == player)):{_timeTankDriver = PPS_UpdateInterval};
 				case ((_vehiclePlayer isKindOf "Tank") && ((gunner _vehiclePlayer) == player)):{_timeTankGunner = PPS_UpdateInterval};
 				case ((_vehiclePlayer isKindOf "Tank") && ((commander _vehiclePlayer) == player)):{_timeTankCommander = PPS_UpdateInterval};
 				case ((_vehiclePlayer isKindOf "Tank") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeTankPassenger = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Truck") && ((driver _vehiclePlayer) == player)):{_timeTruckDriver = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Truck") && ((gunner _vehiclePlayer) == player)):{_timeTruckGunner = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Truck") && ((commander _vehiclePlayer) == player)):{_timeTruckCommander = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Truck") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeTruckPassenger = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Motorcycle") && ((driver _vehiclePlayer) == player)):{_timeMotorcycleDriver = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Motorcycle") && ((gunner _vehiclePlayer) == player)):{_timeMotorcycleGunner = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Motorcycle") && ((commander _vehiclePlayer) == player)):{_timeMotorcycleCommander = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Motorcycle") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeMotorcyclePassenger = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Truck_F") && ((driver _vehiclePlayer) == player)):{_timeTruckDriver = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Truck_F") && ((gunner _vehiclePlayer) == player)):{_timeTruckGunner = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Truck_F") && ((commander _vehiclePlayer) == player)):{_timeTruckCommander = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Truck_F") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeTruckPassenger = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Car") && ((driver _vehiclePlayer) == player)):{_timeCarDriver = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Car") && ((gunner _vehiclePlayer) == player)):{_timeCarGunner = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Car") && ((commander _vehiclePlayer) == player)):{_timeCarCommander = PPS_UpdateInterval};
+				case ((_vehiclePlayer isKindOf "Car") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeCarPassenger = PPS_UpdateInterval};
 				case ((_vehiclePlayer isKindOf "Helicopter") && ((driver _vehiclePlayer) == player)):{_timeHelicopterDriver = PPS_UpdateInterval};
 				case ((_vehiclePlayer isKindOf "Helicopter") && ((gunner _vehiclePlayer) == player)):{_timeHelicopterGunner = PPS_UpdateInterval};
 				case ((_vehiclePlayer isKindOf "Helicopter") && ((commander _vehiclePlayer) == player)):{_timeHelicopterCommander = PPS_UpdateInterval};
@@ -574,10 +562,6 @@ while {true} do
 				case ((_vehiclePlayer isKindOf "Ship") && ((gunner _vehiclePlayer) == player)):{_timeShipGunner = PPS_UpdateInterval};
 				case ((_vehiclePlayer isKindOf "Ship") && ((commander _vehiclePlayer) == player)):{_timeShipCommander = PPS_UpdateInterval};
 				case ((_vehiclePlayer isKindOf "Ship") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeShipPassenger = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Boat") && ((driver _vehiclePlayer) == player)):{_timeBoatDriver = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Boat") && ((gunner _vehiclePlayer) == player)):{_timeBoatGunner = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Boat") && ((commander _vehiclePlayer) == player)):{_timeBoatCommander = PPS_UpdateInterval};
-				case ((_vehiclePlayer isKindOf "Boat") && ((_vehiclePlayer getCargoIndex player) != -1)):{_timeBoatPassenger = PPS_UpdateInterval};
 			};
 			
 			if (isLightOn (vehicle player)) then {_timeVehicleLightOn = PPS_UpdateInterval;};
@@ -692,10 +676,6 @@ while {true} do
 				["timeTruckGunner", _timeTruckGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Truck_Gunner", "A3"],  
 				["timeTruckCommander", _timeTruckCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Truck_Commander", "A3"],  
 				["timeTruckPassenger", _timeTruckPassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Truck_Passenger", "A3"],  
-				["timeMotorcycleDriver", _timeMotorcycleDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Motorcycle_Driver", "A3"],  
-				["timeMotorcycleGunner", _timeMotorcycleGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Motorcycle_Gunner", "A3"],  
-				["timeMotorcycleCommander", _timeMotorcycleCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Motorcycle_Commander", "A3"],  
-				["timeMotorcyclePassenger", _timeMotorcyclePassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Motorcycle_Passenger", "A3"],  
 				["timeHelicopterDriver", _timeHelicopterDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Helicopter_Driver", "A3"],  
 				["timeHelicopterGunner", _timeHelicopterGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Helicopter_Gunner", "A3"],  
 				["timeHelicopterCommander", _timeHelicopterCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Helicopter_Commander", "A3"],  
@@ -708,10 +688,6 @@ while {true} do
 				["timeShipGunner", _timeShipGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Ship_Gunner", "A3"],  
 				["timeShipCommander", _timeShipCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Ship_Commander", "A3"],  
 				["timeShipPassenger", _timeShipPassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Ship_Passenger", "A3"],  
-				["timeBoatDriver", _timeBoatDriver, 1, 1, "STR_PPS_Main_Statistics_Time_Boat_Driver", "A3"],  
-				["timeBoatGunner", _timeBoatGunner, 1, 1, "STR_PPS_Main_Statistics_Time_Boat_Gunner", "A3"],  
-				["timeBoatCommander", _timeBoatCommander, 1, 1, "STR_PPS_Main_Statistics_Time_Boat_Commander", "A3"],  
-				["timeBoatPassenger", _timeBoatPassenger, 1, 1, "STR_PPS_Main_Statistics_Time_Boat_Passenger", "A3"],
 				["timeVehicleLightOn", _timeVehicleLightOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Light_On", "A3"],  
 				["timeVehicleLaser", _timeVehicleLaser, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Laser_On", "A3"],  
 				["timeVehicleCollisionLightOn", _timeVehicleCollisionLightOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Collision_Light_On", "A3"],  

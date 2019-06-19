@@ -428,22 +428,6 @@
 				<English>Time Truck Passenger: %2 hrs (%3%1)</English>
 				<German>Zeit in LKW als Passagier: %2 Std. (%3%1)</German>
 			</Key>
-			<Key ID="STR_PPS_Main_Statistics_Time_Motorcycle_Driver">
-				<English>Time Motorcycle Driver: %2 hrs (%3%1)</English>
-				<German>Zeit in Motorrad als Fahrer: %2 Std. (%3%1)</German>
-			</Key>
-			<Key ID="STR_PPS_Main_Statistics_Time_Motorcycle_Gunner">
-				<English>Time Motorcycle Gunner: %2 hrs (%3%1)</English>
-				<German>Zeit in Motorrad als Schütze: %2 Std. (%3%1)</German>
-			</Key>
-			<Key ID="STR_PPS_Main_Statistics_Time_Motorcycle_Commander">
-				<English>Time Motorcycle Commander: %2 hrs (%3%1)</English>
-				<German>Zeit in Motorrad als Kommandeur: %2 Std. (%3%1)</German>
-			</Key>
-			<Key ID="STR_PPS_Main_Statistics_Time_Motorcycle_Passenger">
-				<English>Time Motorcycle Passenger: %2 hrs (%3%1)</English>
-				<German>Zeit in Motorrad als Passagier: %2 Std. (%3%1)</German>
-			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Time_Helicopter_Driver">
 				<English>Time Helicopter Driver: %2 hrs (%3%1)</English>
 				<German>Zeit in Helikopter als Fahrer: %2 Std. (%3%1)</German>
@@ -491,22 +475,6 @@
 			<Key ID="STR_PPS_Main_Statistics_Time_Ship_Passenger">
 				<English>Time Ship Passenger: %2 hrs (%3%1)</English>
 				<German>Zeit in Schiff als Passagier: %2 Std. (%3%1)</German>
-			</Key>
-			<Key ID="STR_PPS_Main_Statistics_Time_Boat_Driver">
-				<English>Time Boat Driver: %2 hrs (%3%1)</English>
-				<German>Zeit in Boot als Fahrer: %2 Std. (%3%1)</German>
-			</Key>
-			<Key ID="STR_PPS_Main_Statistics_Time_Boat_Gunner">
-				<English>Time Boat Gunner: %2 hrs (%3%1)</English>
-				<German>Zeit in Boot als Schütze: %2 Std. (%3%1)</German>
-			</Key>
-			<Key ID="STR_PPS_Main_Statistics_Time_Boat_Commander">
-				<English>Time Boat Commander: %2 hrs (%3%1)</English>
-				<German>Zeit in Boot als Kommandeur: %2 Std. (%3%1)</German>
-			</Key>
-			<Key ID="STR_PPS_Main_Statistics_Time_Boat_Passenger">
-				<English>Time Boat Passenger: %2 hrs (%3%1)</English>
-				<German>Zeit in Boot als Passagier: %2 Std. (%3%1)</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Time_Vehicle_Light_On">
 				<English>Time Vehicle Light On: %2 hrs (%3%1)</English>
