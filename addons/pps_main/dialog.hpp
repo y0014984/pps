@@ -146,6 +146,17 @@ class PPS_Main_Dialog
 			
 			action = "[] call PPS_fnc_dialogButtonAdminExec;";
 		};
+		class PPS_RscButton_1609: RscButton
+		{
+			idc = 1609;
+			text = $STR_PPS_Main_Dialog_Button_Delete;
+			x = 6.5 * GUI_GRID_W + GUI_GRID_X;
+			y = 12.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			
+			action = "[] call PPS_fnc_dialogButtonPlayerDeleteExec;";
+		};
 		class PPS_RscButton_1602: RscButton
 		{
 			idc = 1602;
@@ -155,7 +166,7 @@ class PPS_Main_Dialog
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_dialogButtonStartExec;";
+			action = "[] call PPS_fnc_dialogButtonEventStartExec;";
 		};
 		class PPS_RscButton_1606: RscButton
 		{
@@ -166,7 +177,7 @@ class PPS_Main_Dialog
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_dialogButtonContinueExec;";
+			action = "[] call PPS_fnc_dialogButtonEventContinueExec;";
 		};	
 		class RscButton_1607: RscButton
 		{
@@ -177,7 +188,7 @@ class PPS_Main_Dialog
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 
-			action = "[] call PPS_fnc_dialogButtonStopExec;";
+			action = "[] call PPS_fnc_dialogButtonEventStopExec;";
 		};
 		class RscButton_1608: RscButton
 		{
@@ -188,7 +199,7 @@ class PPS_Main_Dialog
 			w = 6 * GUI_GRID_W;
 			h = 1 * GUI_GRID_H;
 			
-			action = "[] call PPS_fnc_dialogButtonDeleteExec;";
+			action = "[] call PPS_fnc_dialogButtonEventDeleteExec;";
 		};		
 		class PPS_RscEdit_1603: RscEdit
 		{

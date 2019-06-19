@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call PPS_fnc_dialogButtonStopExec;
+ * [] call PPS_fnc_dialogButtonEventStopExec;
  *
  * Public: No
  */

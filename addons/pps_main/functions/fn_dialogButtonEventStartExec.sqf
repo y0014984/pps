@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call PPS_fnc_dialogButtonStartExec;
+ * [] call PPS_fnc_dialogButtonEventStartExec;
  *
  * Public: No
  */
