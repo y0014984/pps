@@ -29,7 +29,27 @@ if (PPS_AllowSendingData) then
 	ppsServerHelo = [_playerName, _playerUid];
 	publicVariableServer "ppsServerHelo";
 	
-	//hint "PPS_AllowSendingData enabled";
+	/* ---------------------------------------- */
+	
+	_index = player addEventHandler ["Respawn",
+	{
+		params ["_unit", "_corpse"];
+		
+		hint format ["Respawn Event Handler\n\n_unit: %1\n_corpse: %2", _unit, _corpse];
+		
+		_playerUid = getPlayerUID player;
+		_key = "countRespawn";
+		_value = 1;
+		_type = 2;
+		_formatType = 0;
+		_formatString = "STR_PPS_Main_Statistics_Count_Respawn";
+		_source = "A3";
+
+		_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+		_update = _playerUid + "-updateStatistics";
+		missionNamespace setVariable [_update, _updatedData, false];
+		publicVariableServer _update;
+	}];
 
 	/* ---------------------------------------- */
 	
@@ -53,12 +73,12 @@ if (PPS_AllowSendingData) then
 		*/
 		
 		_playerUid = getPlayerUID player;
-		_source = "A3";
-		_type = 2;
 		_key = "countMagazineReloaded";
 		_value = 1;
+		_type = 2;
 		_formatType = 0;
 		_formatString = "STR_PPS_Main_Statistics_Count_Magazine_Reloaded";
+		_source = "A3";
 
 		_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
 		_update = _playerUid + "-updateStatistics";
@@ -487,18 +507,47 @@ while {true} do
 		_timeMagazineFillLow = 0;
 		_timeMagazineEmpty = 0;
 		
+		_timeFuelEmpty = 0;
+		_timeFuelFillLow = 0;
+		_timeFuelFillMid = 0;
+		_timeFuelFillHigh = 0;
+		_timeFuelFull = 0;
+				
 		_timeIsBleeding = 0;
 		_timeIsBurning = 0;
+		
 		_timeInjuredNone = 0;
 		_timeInjuredLow = 0;
 		_timeInjuredMed = 0;
 		_timeInjuredHigh = 0;
 		_timeInjuredFull = 0;
 		
+		_timeDamagedNone = 0;
+		_timeDamagedLow = 0;
+		_timeDamagedMed = 0;
+		_timeDamagedHigh = 0;
+		_timeDamagedFull = 0;
+		
 		_timeIsMedic = 0;
 		_timeIsEngineer = 0;
 		_timeIsExplosiveSpecialist = 0;
 		_timeIsUavHacker = 0;
+		
+		_timeCurrentChannelGlobal = 0;
+		_timeCurrentChannelSide = 0;
+		_timeCurrentChannelCommand = 0;
+		_timeCurrentChannelGroup = 0;
+		_timeCurrentChannelVehicle = 0;
+		_timeCurrentChannelDirect = 0;
+		_timeCurrentChannelCustomRadio = 0;
+		
+		_timeFireModeSingle = 0;
+		_timeFireModeBurst = 0;
+		_timeFireModeFullAuto = 0;
+		
+		_timeZeroingShortRange = 0;
+		_timeZeroingMidRange = 0;
+		_timeZeroingLongRange = 0;
 
 		_timeAddonAceActive = 0;
 		_timeAceIsBleeding = 0;
@@ -552,6 +601,26 @@ while {true} do
 		else
 		{
 			_timeInVehicle = PPS_UpdateInterval;
+			
+			_fuel = fuel _vehiclePlayer;
+			switch (true) do
+			{
+				case (_fuel == 0):{_timeFuelEmpty = PPS_UpdateInterval};
+				case ((_fuel > 0) && (_fuel <= 0.33)):{_timeFuelFillLow = PPS_UpdateInterval};
+				case ((_fuel > 0.33) && (_fuel <= 0.66)):{_timeFuelFillMid = PPS_UpdateInterval};
+				case ((_fuel > 0.66) && (_fuel < 1)):{_timeFuelFillHigh = PPS_UpdateInterval};
+				case (_fuel == 1):{_timeFuelFull = PPS_UpdateInterval};
+			};
+			
+			_damageVehicle = damage _vehiclePlayer;
+			switch (true) do
+			{
+				case (_damageVehicle == 0):{_timeDamagedNone = PPS_UpdateInterval};
+				case ((_damageVehicle > 0) && (_damageVehicle <= 0.33)):{_timeDamagedLow = PPS_UpdateInterval};
+				case ((_damageVehicle > 0.33) && (_damageVehicle <= 0.66)):{_timeDamagedMed = PPS_UpdateInterval};
+				case ((_damageVehicle > 0.66) && (_damageVehicle < 1)):{_timeDamagedHigh = PPS_UpdateInterval};
+				case (_damageVehicle == 1):{_timeDamagedFull = PPS_UpdateInterval};
+			};
 			
 			if(isEngineOn _vehiclePlayer) then {_timeInVehicleEngineOn = PPS_UpdateInterval;};
 			if(_speed > 0) then {_timeInVehicleMoving = PPS_UpdateInterval;};
@@ -609,14 +678,42 @@ while {true} do
 		if (isBleeding player) then {_timeIsBleeding = PPS_UpdateInterval;};
 		if (isBurning player) then {_timeIsBurning = PPS_UpdateInterval;};
 		
-		_damage = damage player;
+		_damagePlayer = damage player;
 		switch (true) do
 		{
-			case (_damage == 0):{_timeInjuredNone = PPS_UpdateInterval};
-			case ((_damage > 0) && (_damage <= 0.33)):{_timeInjuredLow = PPS_UpdateInterval};
-			case ((_damage > 0.33) && (_damage <= 0.66)):{_timeInjuredMed = PPS_UpdateInterval};
-			case ((_damage > 0.66) && (_damage < 1)):{_timeInjuredHigh = PPS_UpdateInterval};
-			case (_damage == 1):{_timeInjuredFull = PPS_UpdateInterval};
+			case (_damagePlayer == 0):{_timeInjuredNone = PPS_UpdateInterval};
+			case ((_damagePlayer > 0) && (_damagePlayer <= 0.33)):{_timeInjuredLow = PPS_UpdateInterval};
+			case ((_damagePlayer > 0.33) && (_damagePlayer <= 0.66)):{_timeInjuredMed = PPS_UpdateInterval};
+			case ((_damagePlayer > 0.66) && (_damagePlayer < 1)):{_timeInjuredHigh = PPS_UpdateInterval};
+			case (_damagePlayer == 1):{_timeInjuredFull = PPS_UpdateInterval};
+		};
+		
+		_currentChannel = currentChannel;
+		switch (true) do
+		{
+			case (_currentChannel == 0):{_timeCurrentChannelGlobal = PPS_UpdateInterval};
+			case (_currentChannel == 1):{_timeCurrentChannelSide = PPS_UpdateInterval};
+			case (_currentChannel == 2):{_timeCurrentChannelCommand = PPS_UpdateInterval};
+			case (_currentChannel == 3):{_timeCurrentChannelGroup = PPS_UpdateInterval};
+			case (_currentChannel == 4):{_timeCurrentChannelVehicle = PPS_UpdateInterval};
+			case (_currentChannel == 5):{_timeCurrentChannelDirect = PPS_UpdateInterval};
+			case (_currentChannel >= 6):{_timeCurrentChannelCustomRadio = PPS_UpdateInterval};
+		};
+		
+		_fireMode = (weaponState player) select 2;
+		switch (_fireMode) do
+		{
+			case "Single":{_timeFireModeSingle = PPS_UpdateInterval};
+			case "Burst":{_timeFireModeBurst = PPS_UpdateInterval};
+			case "FullAuto":{_timeFireModeFullAuto = PPS_UpdateInterval};
+		};
+		
+		_zeroing = currentZeroing player;
+		switch (true) do
+		{
+			case ((_zeroing > 0) && (_zeroing <= 300)):{_timeZeroingShortRange = PPS_UpdateInterval};
+			case ((_zeroing > 300) && (_zeroing <= 600)):{_timeZeroingMidRange = PPS_UpdateInterval};
+			case (_zeroing > 600):{_timeZeroingLongRange = PPS_UpdateInterval};
 		};
 	
 		if (player getUnitTrait "Medic") then {_timeIsMedic = PPS_UpdateInterval;};
@@ -729,6 +826,11 @@ while {true} do
 				["timeInjuredMed", _timeInjuredMed, 1, 1, "STR_PPS_Main_Statistics_Time_Injured_Med", "A3"], 
 				["timeInjuredHigh", _timeInjuredHigh, 1, 1, "STR_PPS_Main_Statistics_Time_Injured_High", "A3"], 
 				["timeInjuredFull", _timeInjuredFull, 1, 1, "STR_PPS_Main_Statistics_Time_Injured_Full", "A3"], 
+				["timeDamagedNone", _timeDamagedNone, 1, 1, "STR_PPS_Main_Statistics_Time_Damaged_None", "A3"], 
+				["timeDamagedLow", _timeDamagedLow, 1, 1, "STR_PPS_Main_Statistics_Time_Damaged_Low", "A3"], 
+				["timeDamagedMed", _timeDamagedMed, 1, 1, "STR_PPS_Main_Statistics_Time_Damaged_Med", "A3"], 
+				["timeDamagedHigh", _timeDamagedHigh, 1, 1, "STR_PPS_Main_Statistics_Time_Damaged_High", "A3"], 
+				["timeDamagedFull", _timeDamagedFull, 1, 1, "STR_PPS_Main_Statistics_Time_Damaged_Full", "A3"], 
 				["timeIrLaserOn", _timeIrLaserOn, 1, 1, "STR_PPS_Main_Statistics_Time_Ir_Laser_On", "A3"], 
 				["timeFlashlightOn", _timeFlashlightOn, 1, 1, "STR_PPS_Main_Statistics_Time_Flashlight_On", "A3"], 
 				["timeMagazineFull", _timeMagazineFull, 1, 1, "STR_PPS_Main_Statistics_Time_Magazine_Full", "A3"], 
@@ -736,6 +838,24 @@ while {true} do
 				["timeMagazineFillMid", _timeMagazineFillMid, 1, 1, "STR_PPS_Main_Statistics_Time_Magazine_Fill_Med", "A3"], 
 				["timeMagazineFillLow", _timeMagazineFillLow, 1, 1, "STR_PPS_Main_Statistics_Time_Magazine_Fill_Low", "A3"], 
 				["timeMagazineEmpty", _timeMagazineEmpty, 1, 1, "STR_PPS_Main_Statistics_Time_Magazine_Empty", "A3"], 
+				["timeFuelEmpty", _timeFuelEmpty, 1, 1, "STR_PPS_Main_Statistics_Time_Fuel_Empty", "A3"], 
+				["timeFuelFillLow", _timeFuelFillLow, 1, 1, "STR_PPS_Main_Statistics_Time_Fuel_Fill_Low", "A3"], 
+				["timeFuelFillMid", _timeFuelFillMid, 1, 1, "STR_PPS_Main_Statistics_Time_Fuel_Fill_Med", "A3"], 
+				["timeFuelFillHigh", _timeFuelFillHigh, 1, 1, "STR_PPS_Main_Statistics_Time_Fuel_Fill_High", "A3"], 
+				["timeFuelFull", _timeFuelFull, 1, 1, "STR_PPS_Main_Statistics_Time_Fuel_Full", "A3"], 			
+				["timeCurrentChannelGlobal", _timeCurrentChannelGlobal, 1, 1, "STR_PPS_Main_Statistics_Time_Current_Channel_Global", "A3"], 
+				["timeCurrentChannelSide", _timeCurrentChannelSide, 1, 1, "STR_PPS_Main_Statistics_Time_Current_Channel_Side", "A3"], 
+				["timeCurrentChannelCommand", _timeCurrentChannelCommand, 1, 1, "STR_PPS_Main_Statistics_Time_Current_Channel_Command", "A3"], 
+				["timeCurrentChannelGroup", _timeCurrentChannelGroup, 1, 1, "STR_PPS_Main_Statistics_Time_Current_Channel_Group", "A3"], 
+				["timeCurrentChannelVehicle", _timeCurrentChannelVehicle, 1, 1, "STR_PPS_Main_Statistics_Time_Current_Channel_Vehicle", "A3"], 
+				["timeCurrentChannelDirect", _timeCurrentChannelDirect, 1, 1, "STR_PPS_Main_Statistics_Time_Current_Channel_Direct", "A3"], 
+				["timeCurrentChannelCustomRadio", _timeCurrentChannelCustomRadio, 1, 1, "STR_PPS_Main_Statistics_Time_Current_Channel_Custom_Radio", "A3"], 			
+				["timeFireModeSingle", _timeFireModeSingle, 1, 1, "STR_PPS_Main_Statistics_Time_Fire_Mode_Single", "A3"], 
+				["timeFireModeBurst", _timeFireModeBurst, 1, 1, "STR_PPS_Main_Statistics_Time_Fire_Mode_Burst", "A3"], 
+				["timeFireModeFullAuto", _timeFireModeFullAuto, 1, 1, "STR_PPS_Main_Statistics_Time_Fire_Mode_Full_Auto", "A3"], 
+				["timeZeroingShortRange", _timeZeroingShortRange, 1, 1, "STR_PPS_Main_Statistics_Time_Zeroing_Short_Range", "A3"], 
+				["timeZeroingMidRange", _timeZeroingMidRange, 1, 1, "STR_PPS_Main_Statistics_Time_Zeroing_Mid_Range", "A3"], 
+				["timeZeroingLongRange", _timeZeroingLongRange, 1, 1, "STR_PPS_Main_Statistics_Time_Zeroing_Long_Range", "A3"], 			
 				["timeIsMedic", _timeIsMedic, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Medic", "A3"], 
 				["timeIsEngineer", _timeIsEngineer, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Engineer", "A3"], 
 				["timeIsExplosiveSpecialist", _timeIsExplosiveSpecialist, 1, 1, "STR_PPS_Main_Statistics_Time_Is_Explosive_Specialist", "A3"], 

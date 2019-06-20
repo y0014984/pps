@@ -555,7 +555,81 @@
 			<Key ID="STR_PPS_Main_Statistics_Time_Injured_Full">
 				<English>Time Injured Full: %2 hrs (%3%1)</English>
 				<German>Zeit, totale Verletzung: %2 Std. (%3%1)</German>
+			</Key>		
+			<Key ID="STR_PPS_Main_Statistics_Time_Damaged_None">
+				<English>Time Damaged None: %2 hrs (%3%1)</English>
+				<German>Zeit, keine Fahrzeugschäden: %2 Std. (%3%1)</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Damaged_Low">
+				<English>Time Damaged Low: %2 hrs (%3%1)</English>
+				<German>Zeit, geringe Fahrzeugschäden: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Damaged_Med">
+				<English>Time Damaged Med: %2 hrs (%3%1)</English>
+				<German>Zeit, mittlere Fahrzeugschäden: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Damaged_High">
+				<English>Time Damaged High: %2 hrs (%3%1)</English>
+				<German>Zeit, starke Fahrzeugschäden: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Damaged_Full">
+				<English>Time Damaged Full: %2 hrs (%3%1)</English>
+				<German>Zeit, Fahrzeugtotalschaden: %2 Std. (%3%1)</German>
+			</Key>
+
+			<Key ID="STR_PPS_Main_Statistics_Time_Current_Channel_Global">
+				<English>Time Current Channel Global: %2 hrs (%3%1)</English>
+				<German>Zeit im Kanal Global: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Current_Channel_Side">
+				<English>Time Current Channel Side: %2 hrs (%3%1)</English>
+				<German>Zeit im Kanal Seite: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Current_Channel_Command">
+				<English>Time Current Channel Command: %2 hrs (%3%1)</English>
+				<German>Zeit im Kanal Befehl: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Current_Channel_Group">
+				<English>Time Current Channel Group: %2 hrs (%3%1)</English>
+				<German>Zeit im Kanal Gruppe: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Current_Channel_Vehicle">
+				<English>Time Current Channel Vehicle: %2 hrs (%3%1)</English>
+				<German>Zeit im Kanal Fahrzeug: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Current_Channel_Direct">
+				<English>Time Current Channel Direct: %2 hrs (%3%1)</English>
+				<German>Zeit im Kanal Direkt: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Current_Channel_Custom_Radio">
+				<English>Time Current Channel Custom Radio: %2 hrs (%3%1)</English>
+				<German>Zeit im Kanal individueller Funk: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Fire_Mode_Single">
+				<English>Time Fire Mode Single: %2 hrs (%3%1)</English>
+				<German>Zeit Feuermodus Einzelschuss: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Fire_Mode_Burst">
+				<English>Time Fire Mode Burst: %2 hrs (%3%1)</English>
+				<German>Zeit Feuermodus Feuerstoß: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Fire_Mode_Full_Auto">
+				<English>Time Fire Mode Full Auto: %2 hrs (%3%1)</English>
+				<German>Zeit Feuermodus Vollautomatik: %2 Std. (%3%1)</German>
+			</Key>
+
+			<Key ID="STR_PPS_Main_Statistics_Time_Zeroing_Short_Range">
+				<English>Time Zeroing Short Range: %2 hrs (%3%1)</English>
+				<German>Zeit Nullung kurze Entfernung: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Zeroing_Mid_Range">
+				<English>Time Zeroing Mid Range: %2 hrs (%3%1)</English>
+				<German>Zeit Nullung mittlere Entfernung: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Zeroing_Long_Range">
+				<English>Time Zeroing Long Range: %2 hrs (%3%1)</English>
+				<German>Zeit Nullung weite Entfernung: %2 Std. (%3%1)</German>
+			</Key>			
 			<Key ID="STR_PPS_Main_Statistics_Time_Ir_Laser_On">
 				<English>Time IR Laser On: %2 hrs (%3%1)</English>
 				<German>Zeit mit aktivem IR Laser: %2 Std. (%3%1)</German>
@@ -583,6 +657,26 @@
 			<Key ID="STR_PPS_Main_Statistics_Time_Magazine_Empty">
 				<English>Time Magazine Empty: %2 hrs (%3%1)</English>
 				<German>Zeit mit leerem Magazin: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Fuel_Full">
+				<English>Time Fuel Full: %2 hrs (%3%1)</English>
+				<German>Zeit mit vollem Tank: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Fuel_Fill_High">
+				<English>Time Fuel Fill High: %2 hrs (%3%1)</English>
+				<German>Zeit mit fast vollem Tank: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Fuel_Fill_Med">
+				<English>Time Fuel Fill Med: %2 hrs (%3%1)</English>
+				<German>Zeit mit halbvollem Tank: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Fuel_Fill_Low">
+				<English>Time Fuel Fill Low: %2 hrs (%3%1)</English>
+				<German>Zeit mit fast leerem Tank: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Fuel_Empty">
+				<English>Time Fuel Empty: %2 hrs (%3%1)</English>
+				<German>Zeit mit leerem Tank: %2 Std. (%3%1)</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Time_Is_Medic">
 				<English>Time Is Medic: %2 hrs (%3%1)</English>
@@ -756,6 +850,10 @@
 				<English>Count Player Kills: %1</English>
 				<German>Anzahl Abschüsse des Spielers: %1</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Player_Animal_Kills">
+				<English>Count Player Animal Kills: %1</English>
+				<German>Anzahl getötete Tiere des Spielers: %1</German>
+			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Count_Player_Suicides">
 				<English>Count Player Suicides: %1</English>
 				<German>Anzahl Selbstmorde des Spielers: %1</German>
@@ -795,6 +893,10 @@
 			<Key ID="STR_PPS_Main_Statistics_Count_Projectiles_Hit_By_Friendly">
 				<English>[A3] Count Projectiles Hit By Friendly: %2 (%3%1)</English>
 				<German>Anzahl Projektiltreffer von Freunden: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Respawn">
+				<English>Count Respawn: %1</English>
+				<German>Anzahl Respawns: %1</German>
 			</Key>
 		</Container>
 	</Package>
