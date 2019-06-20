@@ -150,14 +150,12 @@ if (isServer && isMultiplayer && _addonInidbi2Activated) then
 				_dbName = "pps-statistics-" + _x + "-" + _eventId;
 				_dbStatistics = ["new", _dbName] call OO_INIDBI;
 				_timeInEvent = ["read", ["timeInEvent", "value", 0]] call _dbStatistics;
-				_timeInEvent = _timeInEvent / 60;  // In Minutes
+				_timeInEvent =  parseNumber ((_timeInEvent / 60) toFixed 2);  // In Minutes, 2 decimals
 				if (_timeInEvent > _eventMaxDuration) then {_eventMaxDuration = _timeInEvent;};
 			} forEach _eventPlayerUids;
 			
 			if (_eventMaxDuration > 0 && _eventMaxDuration < _eventDuration) then {_eventDuration = _eventMaxDuration};
-			
-			_eventDurationOld = ["read", [_eventId, "eventDuration", 0]] call _dbEvents;
-			_eventDuration = _eventDurationOld + _eventDuration;
+
 			["write", [_eventId, "eventDuration", _eventDuration]] call _dbEvents;
 		};
 		
