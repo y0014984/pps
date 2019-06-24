@@ -35,7 +35,7 @@ if (PPS_AllowSendingData) then
 	{
 		params ["_unit", "_corpse"];
 		
-		hint format ["Respawn Event Handler\n\n_unit: %1\n_corpse: %2", _unit, _corpse];
+		//hint format ["Respawn Event Handler\n\n_unit: %1\n_corpse: %2", _unit, _corpse];
 		
 		_playerUid = getPlayerUID player;
 		_key = "countRespawn";
@@ -49,6 +49,41 @@ if (PPS_AllowSendingData) then
 		_update = _playerUid + "-updateStatistics";
 		missionNamespace setVariable [_update, _updatedData, false];
 		publicVariableServer _update;
+	}];
+
+	/* ---------------------------------------- */
+
+	_index = player addEventHandler ["InventoryOpened",
+	{
+		params ["_unit", "_container"];
+		
+		//hint format ["InventoryOpened Event Handler\n\n_unit: %1\n_container: %2", _unit, _container];
+	
+		PPS_ehInventoryOpen = true;
+		
+		_playerUid = getPlayerUID player;
+		_key = "countInventoryInterfaceOpened";
+		_value = 1;
+		_type = 2;
+		_formatType = 0;
+		_formatString = "STR_PPS_Main_Statistics_Count_Interface_Gear_Opened";
+		_source = "A3";
+		
+		_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+		_update = _playerUid + "-updateStatistics";
+		missionNamespace setVariable [_update, _updatedData, false];
+		publicVariableServer _update;
+	}];
+	
+	/* ---------------------------------------- */
+
+	_index = player addEventHandler ["InventoryClosed",
+	{
+		params ["_unit", "_container"];
+		
+		hint format ["InventoryClosed Event Handler\n\n_unit: %1\n_container: %2", _unit, _container];
+	
+		PPS_ehInventoryOpen = false;
 	}];
 
 	/* ---------------------------------------- */
@@ -319,16 +354,6 @@ if (PPS_AllowSendingData) then
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Zeus_Opened";
 		};
-
-		if (inputAction "Gear" > 0) then 
-		{
-			_key = "countGearInterfaceOpened";
-			_value = 0.5;
-			_formatType = 0;
-			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Gear_Opened";
-			
-			//hint "Inventory opened";
-		};
 				
 		if (inputAction "Compass" > 0) then 
 		{
@@ -430,6 +455,10 @@ if (PPS_AllowSendingData) then
 
 /* ================================================================================ */
 
+PPS_ehInventoryOpen = false;
+
+/* ================================================================================ */
+
 while {true} do
 {
 	if (PPS_AllowSendingData) then
@@ -487,6 +516,8 @@ while {true} do
 		_timeVehicleCollisionLightOn = 0;
 		_timeVehicleRadarOn = 0;
 		
+		_timeSpectatorModeOn = 0;
+		_timeInventoryVisible = 0;
 		_timeMapVisible = 0;
 		_timeGpsVisible = 0;
 		_timeCompassVisible = 0;
@@ -660,6 +691,8 @@ while {true} do
 			if (isVehicleRadarOn (vehicle player)) then {_timeVehicleRadarOn = PPS_UpdateInterval;};
 		};
 		
+		if (["IsSpectating", [player]] call BIS_fnc_EGSpectator) then {_timeSpectatorModeOn = PPS_UpdateInterval;};
+		if (PPS_ehInventoryOpen) then {_timeInventoryVisible = PPS_UpdateInterval;};
 		if (visibleMap) then {_timeMapVisible = PPS_UpdateInterval;};
 		if (visibleGPS) then {_timeGpsVisible = PPS_UpdateInterval;};
 		if (visibleCompass) then {_timeCompassVisible = PPS_UpdateInterval;};
@@ -810,6 +843,8 @@ while {true} do
 				["timeVehicleLaser", _timeVehicleLaser, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Laser_On", "A3"],  
 				["timeVehicleCollisionLightOn", _timeVehicleCollisionLightOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Collision_Light_On", "A3"],  
 				["timeVehicleRadarOn", _timeVehicleRadarOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Radar_On", "A3"],  
+				["timeSpectatorModeOn", _timeSpectatorModeOn, 1, 1, "STR_PPS_Main_Statistics_Time_Spectator_Mode_On", "A3"],  
+				["timeInventoryVisible", _timeInventoryVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Inventory_Visible", "A3"],  
 				["timeMapVisible", _timeMapVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Map_Visible", "A3"],  
 				["timeGpsVisible", _timeGpsVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Gps_Visible", "A3"],  
 				["timeCompassVisible", _timeCompassVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Compass_Visible", "A3"],  

@@ -492,6 +492,14 @@
 				<English>Time Vehicle Radar On: %2 hrs (%3%1)</English>
 				<German>Zeit in Fahrzeug mit aktivem Radar: %2 Std. (%3%1)</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Spectator_Mode_On">
+				<English>Time Spectator Mode On: %2 hrs (%3%1)</English>
+				<German>Zeit in Zuschaueransicht: %2 Std. (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Time_Inventory_Visible">
+				<English>Time Inventory Visible: %2 hrs (%3%1)</English>
+				<German>Zeit in Inventaransicht: %2 Std. (%3%1)</German>
+			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Time_Map_Visible">
 				<English>Time Map Visible: %2 hrs (%3%1)</English>
 				<German>Zeit in Kartenansicht: %2 Std. (%3%1)</German>
