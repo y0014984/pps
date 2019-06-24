@@ -399,6 +399,7 @@ if (PPS_AllowSendingData) then
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Breath_Holded";
 		};
+		/*
 		if (inputAction "ZoomTemp" > 0) then 
 		{
 			_key = "countZoomUsed";
@@ -406,6 +407,7 @@ if (PPS_AllowSendingData) then
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Zoom_Used";
 		};
+		*/
 		if (inputAction "LeanLeft" > 0) then 
 		{
 			_key = "countLeanLeft";
@@ -516,6 +518,7 @@ while {true} do
 		_timeVehicleCollisionLightOn = 0;
 		_timeVehicleRadarOn = 0;
 		
+		_timeZooming = 0;
 		_timeSpectatorModeOn = 0;
 		_timeInventoryVisible = 0;
 		_timeMapVisible = 0;
@@ -690,8 +693,12 @@ while {true} do
 			if (isCollisionLightOn (vehicle player)) then {_timeVehicleCollisionLightOn = PPS_UpdateInterval;};
 			if (isVehicleRadarOn (vehicle player)) then {_timeVehicleRadarOn = PPS_UpdateInterval;};
 		};
+
+		_playerZoom = (call CBA_fnc_getFOV) select 1;
+		_isSpectating = ["IsSpectating", [player]] call BIS_fnc_EGSpectator;
 		
-		if (["IsSpectating", [player]] call BIS_fnc_EGSpectator) then {_timeSpectatorModeOn = PPS_UpdateInterval;};
+		if (_playerZoom > 1) then {_timeZooming = PPS_UpdateInterval;};		
+		if (_isSpectating) then {_timeSpectatorModeOn = PPS_UpdateInterval;};
 		if (PPS_ehInventoryOpen) then {_timeInventoryVisible = PPS_UpdateInterval;};
 		if (visibleMap) then {_timeMapVisible = PPS_UpdateInterval;};
 		if (visibleGPS) then {_timeGpsVisible = PPS_UpdateInterval;};
@@ -844,6 +851,7 @@ while {true} do
 				["timeVehicleCollisionLightOn", _timeVehicleCollisionLightOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Collision_Light_On", "A3"],  
 				["timeVehicleRadarOn", _timeVehicleRadarOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Radar_On", "A3"],  
 				["timeSpectatorModeOn", _timeSpectatorModeOn, 1, 1, "STR_PPS_Main_Statistics_Time_Spectator_Mode_On", "A3"],  
+				["timeZooming", _timeZooming, 1, 1, "STR_PPS_Main_Statistics_Time_Zooming", "A3"],  
 				["timeInventoryVisible", _timeInventoryVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Inventory_Visible", "A3"],  
 				["timeMapVisible", _timeMapVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Map_Visible", "A3"],  
 				["timeGpsVisible", _timeGpsVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Gps_Visible", "A3"],  
