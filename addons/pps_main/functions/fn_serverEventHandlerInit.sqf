@@ -689,7 +689,11 @@ params ["_playerUid"];
 						};
 						case 2:
 						{
-							_roundValuePercent = parseNumber ((100 / _countProjectilesFired * _value) toFixed 2);
+							_roundValuePercent = 100;
+							if (_countProjectilesFired > 0) then 
+							{
+								_roundValuePercent = parseNumber ((100 / _countProjectilesFired * _value) toFixed 2);
+							};
 							_tmpResult = _tmpResult + [[_x, _formatString, _source, "%", _value, _roundValuePercent]];
 
 						};
@@ -700,7 +704,11 @@ params ["_playerUid"];
 						};
 						case 4:
 						{
-							_roundValuePercent = parseNumber ((100 / _countGrenadesThrown * _value) toFixed 2);
+							_roundValuePercent = 100;
+							if (_countGrenadesThrown > 0) then 
+							{
+								_roundValuePercent = parseNumber ((100 / _countGrenadesThrown * _value) toFixed 2);
+							};
 							_tmpResult = _tmpResult + [[_x, _formatString, _source, "%", _value, _roundValuePercent]];
 
 						};
