@@ -862,6 +862,30 @@
 				<English>Count Player Team Kills: %1</English>
 				<German>Anzahl Eigenbeschüsse des Spielers: %1</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Enemy_Vehicles_Destroyed">
+				<English>Count Enemy Vehicles Destroyed: %1</English>
+				<German>Anzahl zerstörter, feindlicher Fahrzeuge: %1</German>
+			</Key>	
+			<Key ID="STR_PPS_Main_Statistics_Count_Friendly_Vehicles_Destroyed">
+				<English>Count Friendly Vehicles Destroyed: %1</English>
+				<German>Anzahl zerstörter, freundlicher Fahrzeuge: %1</German>
+			</Key>	
+			<Key ID="STR_PPS_Main_Statistics_Count_Grenades_Hit_Enemy_Vehicle">
+				<English>Count Grenades Hit Enemy Vehicle: %2 (%3%1)</English>
+				<German>Anzahl Granatentreffer auf feindl. Fahrzeug: %2 (%3%1)</German>
+			</Key>						
+			<Key ID="STR_PPS_Main_Statistics_Count_Projectiles_Hit_Enemy_Vehicle">
+				<English>Count Projectiles Hit Enemy Vehicle: %2 (%3%1)</English>
+				<German>Anzahl Projektiltreffer auf feindl. Fahrzeug: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Grenades_Hit_Friendly_Vehicle">
+				<English>Count Grenades Hit Friendly Vehicle: %2 (%3%1)</English>
+				<German>Anzahl Granatentreffer auf freundl. Fahrzeug: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Projectiles_Hit_Friendly_Vehicle">
+				<English>Count Projectiles Hit Friendly Vehicle: %2 (%3%1)</English>
+				<German>Anzahl Projektiltreffer auf freundl. Fahrzeug: %2 (%3%1)</German>
+			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Count_Grenades_Hit_Enemy">
 				<English>Count Grenades Hit Enemy: %2 (%3%1)</English>
 				<German>Anzahl Granatentreffer auf Feinde: %2 (%3%1)</German>
