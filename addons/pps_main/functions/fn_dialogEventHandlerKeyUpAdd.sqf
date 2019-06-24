@@ -37,7 +37,8 @@ _ppsDialog displayAddEventHandler ["KeyUp",
 
 		if ((_key == _ppsKey) && (_shift isEqualTo _ppsShift) && (_ctrl isEqualTo _ppsCtrl) && (_alt isEqualTo _ppsAlt)) then	
 		{
-			_ppsDialog closeDisplay 1;
+			//_ppsDialog closeDisplay 1;
+			closeDialog 1;
 		};
 	} forEach _keybinds;
 }];
