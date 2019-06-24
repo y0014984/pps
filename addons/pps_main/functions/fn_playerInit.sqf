@@ -516,6 +516,7 @@ while {true} do
 		_timeVehicleCollisionLightOn = 0;
 		_timeVehicleRadarOn = 0;
 		
+		_timeSpectatorModeOn = 0;
 		_timeInventoryVisible = 0;
 		_timeMapVisible = 0;
 		_timeGpsVisible = 0;
@@ -690,6 +691,7 @@ while {true} do
 			if (isVehicleRadarOn (vehicle player)) then {_timeVehicleRadarOn = PPS_UpdateInterval;};
 		};
 		
+		if (["IsSpectating", [player]] call BIS_fnc_EGSpectator) then {_timeSpectatorModeOn = PPS_UpdateInterval;};
 		if (PPS_ehInventoryOpen) then {_timeInventoryVisible = PPS_UpdateInterval;};
 		if (visibleMap) then {_timeMapVisible = PPS_UpdateInterval;};
 		if (visibleGPS) then {_timeGpsVisible = PPS_UpdateInterval;};
@@ -841,6 +843,7 @@ while {true} do
 				["timeVehicleLaser", _timeVehicleLaser, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Laser_On", "A3"],  
 				["timeVehicleCollisionLightOn", _timeVehicleCollisionLightOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Collision_Light_On", "A3"],  
 				["timeVehicleRadarOn", _timeVehicleRadarOn, 1, 1, "STR_PPS_Main_Statistics_Time_Vehicle_Radar_On", "A3"],  
+				["timeSpectatorModeOn", _timeSpectatorModeOn, 1, 1, "STR_PPS_Main_Statistics_Time_Spectator_Mode_On", "A3"],  
 				["timeInventoryVisible", _timeInventoryVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Inventory_Visible", "A3"],  
 				["timeMapVisible", _timeMapVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Map_Visible", "A3"],  
 				["timeGpsVisible", _timeGpsVisible, 1, 1, "STR_PPS_Main_Statistics_Time_Gps_Visible", "A3"],  
