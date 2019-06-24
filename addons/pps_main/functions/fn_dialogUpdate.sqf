@@ -33,34 +33,15 @@ _playersListBox ctrlAddEventHandler ["LBSelChanged",
 		_clientId = clientOwner;
 		
 		_filterEventsEditBox = (findDisplay 14984) displayCtrl 1401;
+		
+		/*
 		_filterEvents = ctrlText _filterEventsEditBox;
+		*/
+		
+		_filterEvents = "";
 	
 		_request = _playerUid + "-requestEventsFiltered";
 		missionNamespace setVariable [_request, [_playerUid, _clientId, _requestedPlayerUid, _filterEvents], false];
-		publicVariableServer _request;
-	};
-}];
-
-/* ================================================================================ */
-
-_filterPlayersEditBox = (findDisplay 14984) displayCtrl 1400;
-_filterPlayersEditBox ctrlAddEventHandler ["KeyUp",
-{
-	params ["_displayorcontrol", "_key", "_shift", "_ctrl", "_alt"];
-
-	if ((_key == 28) || (_key == 156)) then
-	{
-		_playerUid = getPlayerUID player;
-		_clientId = clientOwner;
-		
-		_filterPlayersEditBox = (findDisplay 14984) displayCtrl 1400;
-		_filterPlayers = ctrlText _filterPlayersEditBox;
-	
-		_filterEventsEditBox = (findDisplay 14984) displayCtrl 1401;
-		_filterEvents = ctrlText _filterEventsEditBox;
-
-		_request = _playerUid + "-requestDialogUpdate";
-		missionNamespace setVariable [_request, [_playerUid, _clientId, _filterPlayers, _filterEvents], false];
 		publicVariableServer _request;
 	};
 }];
@@ -84,7 +65,12 @@ _eventsListBox ctrlAddEventHandler ["LBSelChanged",
 		_clientId = clientOwner;
 		
 		_filterStatisticsEditBox = (findDisplay 14984) displayCtrl 1402;
+		
+		/*
 		_filterStatistics = ctrlText _filterStatisticsEditBox;
+		*/
+		
+		_filterStatistics = "";
 	
 		_request = _playerUid + "-requestStatisticsFiltered";
 		missionNamespace setVariable [_request, [_playerUid, _clientId, _requestedPlayerUid, _requestedEventId, _filterStatistics], false];
@@ -118,6 +104,53 @@ _statisticsListBox ctrlAddEventHandler ["LBSelChanged",
 
 /* ================================================================================ */
 
+_filterPlayersEditBox = (findDisplay 14984) displayCtrl 1400;
+_filterPlayersEditBox ctrlAddEventHandler ["KeyUp",
+{
+	params ["_displayorcontrol", "_key", "_shift", "_ctrl", "_alt"];
+
+	if ((_key == 28) || (_key == 156)) then
+	{
+		_playerUid = getPlayerUID player;
+		_clientId = clientOwner;
+		
+		_filterPlayersEditBox = (findDisplay 14984) displayCtrl 1400;
+		_filterPlayers = ctrlText _filterPlayersEditBox;
+	
+		_filterEventsEditBox = (findDisplay 14984) displayCtrl 1401;
+		_filterEvents = ctrlText _filterEventsEditBox;
+
+		/*
+		_request = _playerUid + "-requestDialogUpdate";
+		missionNamespace setVariable [_request, [_playerUid, _clientId, _filterPlayers, _filterEvents], false];
+		publicVariableServer _request;
+		*/
+		
+		_playersListBox = (findDisplay 14984) displayCtrl 1500;
+		lbClear _playersListBox;
+		_playersListBox lbSetCurSel -1;
+		
+		{
+			_text = _x select 0;
+			_data = _x select 1;
+			
+			if (((toLower _text) find (toLower _filterPlayers)) > -1) then
+			{
+				_index = _playersListBox lbAdd _text;
+				_playersListBox lbSetData [_index, _data];
+				
+				if(_data == _playerUid) then
+				{
+					_playersListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
+					_playersListBox lbSetCurSel _index;
+				};
+			};
+		} forEach PPS_lbPlayersContent;
+	};
+}];
+
+/* ================================================================================ */
+
 _filterEventsEditBox = (findDisplay 14984) displayCtrl 1401;
 _filterEventsEditBox ctrlAddEventHandler ["KeyUp",
 {
@@ -134,9 +167,33 @@ _filterEventsEditBox ctrlAddEventHandler ["KeyUp",
 		_filterEventsEditBox = (findDisplay 14984) displayCtrl 1401;
 		_filterEvents = ctrlText _filterEventsEditBox;
 
+		/*
 		_request = _playerUid + "-requestDialogUpdate";
 		missionNamespace setVariable [_request, [_playerUid, _clientId, _filterPlayers, _filterEvents], false];
 		publicVariableServer _request;
+		*/
+		
+		_eventsListBox = (findDisplay 14984) displayCtrl 1501;
+		lbClear _eventsListBox;
+		_eventsListBox lbSetCurSel -1;
+		
+		{
+			_text = _x select 0;
+			_data = _x select 1;
+			
+			if (((toLower _text) find (toLower _filterEvents)) > -1) then
+			{
+				_index = _eventsListBox lbAdd _text;
+				_eventsListBox lbSetData [_index, _data];
+				
+				if(PPS_isEvent &&(_dbEventId == PPS_eventId)) then
+				{
+					_eventsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
+					_eventsListBox lbSetCurSel _index;
+					_eventsListBox lbSetText [_index, format [localize "STR_PPS_Main_Dialog_List_Event_Active", _text]];
+				};
+			};
+		} forEach PPS_lbEventsContent;
 	};
 }];
 
@@ -148,7 +205,7 @@ _filterStatisticsEditBox ctrlAddEventHandler ["KeyUp",
 	params ["_displayorcontrol", "_key", "_shift", "_ctrl", "_alt"];
 
 	_filterStatisticsEditBox = (findDisplay 14984) displayCtrl 1402;
-	
+
 	_playersListBox = (findDisplay 14984) displayCtrl 1500;
 	_selectedPlayerIndex = lbCurSel _playersListBox;
 	_requestedPlayerUid = _playersListBox lbData _selectedPlayerIndex;
@@ -162,9 +219,32 @@ _filterStatisticsEditBox ctrlAddEventHandler ["KeyUp",
 		_clientId = clientOwner;
 		_filterStatistics = ctrlText _filterStatisticsEditBox;
 		
+		/*
 		_request = _playerUid + "-requestStatisticsFiltered";
 		missionNamespace setVariable [_request, [_playerUid, _clientId, _requestedPlayerUid, _requestedEventId, _filterStatistics], false];
 		publicVariableServer _request;
+		*/
+		
+		_statisticsListBox = (findDisplay 14984) displayCtrl 1502;
+		lbClear _statisticsListBox;
+		_statisticsListBox lbSetCurSel -1;
+		
+		{
+			_text = _x select 0;
+			_data = _x select 1;
+			
+			if (((toLower _text) find (toLower _filterStatistics)) > -1) then
+			{
+				_index = _statisticsListBox lbAdd _text;
+				_statisticsListBox lbSetData [_index, _data];
+				
+				if ((PPS_isTrackStatisticsActive) && (PPS_trackStatisticsKey == _data)) then
+				{
+					_statisticsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
+					_statisticsListBox lbSetCurSel _index;
+				};
+			};
+		} forEach PPS_lbStatisticsContent;
 	};
 }];
 
@@ -218,6 +298,9 @@ _answer addPublicVariableEventHandler
 	_trackStatisticsButton = (findDisplay 14984) displayCtrl 1604;
 	_promoteButton = (findDisplay 14984) displayCtrl 1610;
 	_eventEditBox = (findDisplay 14984) displayCtrl 1603;
+	
+	_filterPlayersEditBox = (findDisplay 14984) displayCtrl 1400;
+	_filterPlayers = ctrlText _filterPlayersEditBox;
 	
 	if (_statusServer) then {_statusServer = localize "STR_PPS_Main_Online"} else {_statusServer = localize "STR_PPS_Main_Offline"};
 	if (_statusDatabase) then {_statusDatabase = localize "STR_PPS_Main_Online"} else {_statusDatabase = localize "STR_PPS_Main_Offline"};
@@ -279,6 +362,8 @@ _answer addPublicVariableEventHandler
 		_headlineText ctrlSetText format [localize "STR_PPS_Main_Dialog_Head", _noEvent];
 	};		
 
+	PPS_lbPlayersContent = [];
+
 	_filteredPlayers sort true;
 	{
 		_dbPlayerName = _x select 0;
@@ -304,13 +389,22 @@ _answer addPublicVariableEventHandler
 			_trackStatisticsButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Track_Value_On";
 		};
 		
-		_index = _playersListBox lbAdd format ["%1 (%2%3%4)",_dbPlayerName, _dbPlayerIsAdmin, _dbPlayerStatus, _dbPlayerIsAdminLoggedIn];	
-		_playersListBox lbSetData [_index, _dbPlayerUid];
-		if(_dbPlayerUid == _playerUid) then
+		_playerText = format ["%1 (%2%3%4)",_dbPlayerName, _dbPlayerIsAdmin, _dbPlayerStatus, _dbPlayerIsAdminLoggedIn];
+
+		if (((toLower _playerText) find (toLower _filterPlayers)) > -1) then
 		{
-			_playersListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
-			_playersListBox lbSetCurSel _index;
+			_index = _playersListBox lbAdd _playerText;	
+			_playersListBox lbSetData [_index, _dbPlayerUid];
+			
+			if(_dbPlayerUid == _playerUid) then
+			{
+				_playersListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
+				_playersListBox lbSetCurSel _index;
+			};
 		};
+		
+		PPS_lbPlayersContent = PPS_lbPlayersContent + [[_playerText, _dbPlayerUid]];
+		
 	} forEach _filteredPlayers;
 	
 	ctrlSetFocus _playersListBox;
@@ -336,6 +430,11 @@ _answer addPublicVariableEventHandler
 	_statisticsListBox = (findDisplay 14984) displayCtrl 1502;
 	lbClear _statisticsListBox;
 	_statisticsListBox lbSetCurSel -1;
+	
+	_filterEventsEditBox = (findDisplay 14984) displayCtrl 1401;
+	_filterEvents = ctrlText _filterEventsEditBox;
+
+	PPS_lbEventsContent = [];
 
 	_filteredEvents sort true;
 	{
@@ -350,16 +449,27 @@ _answer addPublicVariableEventHandler
 		_day = _dbEventStartTime select 2;
 		if (_day < 10) then {_day = format ["0%1", _day];} else {_day = str _day};
 		
-		_index = _eventsListBox lbAdd format ["%1-%2-%3 %4 (%5 min.)", _year, _month, _day, _dbEventName, _dbEventDuration];	
-		_eventsListBox lbSetData [_index, _dbEventId];
-
-		if(PPS_isEvent &&(_dbEventId == PPS_eventId)) then
+		_eventText = format ["%1-%2-%3 %4 (%5 min.)", _year, _month, _day, _dbEventName, _dbEventDuration];
+		
+		if(PPS_isEvent && (_dbEventId == PPS_eventId)) then
 		{
-			_eventsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
-			_eventsListBox lbSetCurSel _index;
-			_text = _eventsListBox lbText _index;
-			_eventsListBox lbSetText [_index, format [localize "STR_PPS_Main_Dialog_List_Event_Active", _text]];
+			_eventText = format [localize "STR_PPS_Main_Dialog_List_Event_Active", _eventText];
 		};
+
+		if (((toLower _eventText) find (toLower _filterEvents)) > -1) then
+		{
+			_index = _eventsListBox lbAdd _eventText;	
+			_eventsListBox lbSetData [_index, _dbEventId];
+
+			if(PPS_isEvent && (_dbEventId == PPS_eventId)) then
+			{
+				_eventsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
+				_eventsListBox lbSetCurSel _index;
+			};
+		};	
+		
+		PPS_lbEventsContent = PPS_lbEventsContent + [[_eventText, _dbEventId]];
+	
 	} forEach _filteredEvents;
 	
 	ctrlSetFocus _eventsListBox;
@@ -380,6 +490,11 @@ _answer addPublicVariableEventHandler
 	lbClear _statisticsListBox;
 	_statisticsListBox lbSetCurSel -1;
 	
+	_filterStatisticsEditBox = (findDisplay 14984) displayCtrl 1402;
+	_filterStatistics = ctrlText _filterStatisticsEditBox;
+	
+	PPS_lbStatisticsContent = [];
+	
 	_playerStatistics sort true;
 	{
 		_key = _x select 0;
@@ -391,19 +506,25 @@ _answer addPublicVariableEventHandler
 		
 		_statisticsText = (format ["[%1]", _source]) + " " + (format [(localize _formatString), _valueOne, _valueTwo, _valueThree]);
 		
-		if ((_isTrackStatisticsActive) && (_trackStatisticsKey == _key)) then
+		if ((PPS_isTrackStatisticsActive) && (PPS_trackStatisticsKey == _key)) then
 		{
-			_index = _statisticsListBox lbAdd (format [localize "STR_PPS_Main_Dialog_List_Tracking_Active", _statisticsText]);
-			_statisticsListBox lbSetData [_index, _key];
-			
-			_statisticsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
-			_statisticsListBox lbSetCurSel _index;
-		}
-		else
+			_statisticsText = format [localize "STR_PPS_Main_Dialog_List_Tracking_Active", _statisticsText];
+		};
+		
+		if (((toLower _statisticsText) find (toLower _filterStatistics)) > -1) then
 		{
 			_index = _statisticsListBox lbAdd _statisticsText;
 			_statisticsListBox lbSetData [_index, _key];
+			
+			if ((PPS_isTrackStatisticsActive) && (PPS_trackStatisticsKey == _key)) then
+			{		
+				_statisticsListBox lbSetColor [_index, [1, 0.5, 0.5, 1]];
+				_statisticsListBox lbSetCurSel _index;
+			};
 		};
+		
+		PPS_lbStatisticsContent = PPS_lbStatisticsContent + [[_statisticsText, _key]];
+		
 	} forEach _playerStatistics;
 };
 

@@ -29,7 +29,10 @@ if (hasInterface && isMultiplayer) then
 			publicVariableServer _request;
 		};
 		
-		_ppsDialog = (findDisplay 46) createDisplay "PPS_Main_Dialog";
+		//_ppsDialog = (findDisplay 46) createDisplay "PPS_Main_Dialog";
+		if (!dialog) then {_ok = createDialog "PPS_Main_Dialog";};
+		
+		_ppsDialog = findDisplay 14984;
 		
 		[_ppsDialog] call PPS_fnc_dialogEventHandlerKeyUpAdd;
 		
