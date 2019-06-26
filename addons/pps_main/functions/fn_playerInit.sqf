@@ -37,18 +37,21 @@ if (PPS_AllowSendingData) then
 		
 		//hint format ["Respawn Event Handler\n\n_unit: %1\n_corpse: %2", _unit, _corpse];
 		
-		_playerUid = getPlayerUID player;
-		_key = "countRespawn";
-		_value = 1;
-		_type = 2;
-		_formatType = 0;
-		_formatString = "STR_PPS_Main_Statistics_Count_Respawn";
-		_source = "A3";
+		if (PPS_sendingGeneralData) then
+		{
+			_playerUid = getPlayerUID player;
+			_key = "countRespawn";
+			_value = 1;
+			_type = 2;
+			_formatType = 0;
+			_formatString = "STR_PPS_Main_Statistics_Count_Respawn";
+			_source = "A3";
 
-		_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-		_update = _playerUid + "-updateStatistics";
-		missionNamespace setVariable [_update, _updatedData, false];
-		publicVariableServer _update;
+			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+			_update = _playerUid + "-updateStatistics";
+			missionNamespace setVariable [_update, _updatedData, false];
+			publicVariableServer _update;
+		};
 	}];
 
 	/* ---------------------------------------- */
@@ -61,18 +64,21 @@ if (PPS_AllowSendingData) then
 	
 		PPS_ehInventoryOpen = true;
 		
-		_playerUid = getPlayerUID player;
-		_key = "countInventoryInterfaceOpened";
-		_value = 1;
-		_type = 2;
-		_formatType = 0;
-		_formatString = "STR_PPS_Main_Statistics_Count_Interface_Gear_Opened";
-		_source = "A3";
-		
-		_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-		_update = _playerUid + "-updateStatistics";
-		missionNamespace setVariable [_update, _updatedData, false];
-		publicVariableServer _update;
+		if (PPS_sendingGeneralData) then
+		{
+			_playerUid = getPlayerUID player;
+			_key = "countInventoryInterfaceOpened";
+			_value = 1;
+			_type = 2;
+			_formatType = 0;
+			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Gear_Opened";
+			_source = "A3";
+			
+			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+			_update = _playerUid + "-updateStatistics";
+			missionNamespace setVariable [_update, _updatedData, false];
+			publicVariableServer _update;
+		};
 	}];
 	
 	/* ---------------------------------------- */
@@ -107,18 +113,21 @@ if (PPS_AllowSendingData) then
 		];
 		*/
 		
-		_playerUid = getPlayerUID player;
-		_key = "countMagazineReloaded";
-		_value = 1;
-		_type = 2;
-		_formatType = 0;
-		_formatString = "STR_PPS_Main_Statistics_Count_Magazine_Reloaded";
-		_source = "A3";
+		if (PPS_sendingInfantryData) then
+		{
+			_playerUid = getPlayerUID player;
+			_key = "countMagazineReloaded";
+			_value = 1;
+			_type = 2;
+			_formatType = 0;
+			_formatString = "STR_PPS_Main_Statistics_Count_Magazine_Reloaded";
+			_source = "A3";
 
-		_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-		_update = _playerUid + "-updateStatistics";
-		missionNamespace setVariable [_update, _updatedData, false];
-		publicVariableServer _update;
+			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+			_update = _playerUid + "-updateStatistics";
+			missionNamespace setVariable [_update, _updatedData, false];
+			publicVariableServer _update;
+		};
 	}];
 	
 	/* ---------------------------------------- */
@@ -129,32 +138,35 @@ if (PPS_AllowSendingData) then
 		
 		//hint format ["Weapon: %1\nMuzzle: %2\nMode: %3\nAmmo: %4\nMagazine: %5", _weapon, _muzzle, _mode, _ammo, _magazine];
 		
-		_playerUid = getPlayerUID player;
-		_source = "A3";
-		_type = 2;
+		if (PPS_sendingInfantryData) then
+		{
+			_playerUid = getPlayerUID player;
+			_source = "A3";
+			_type = 2;
 
-		_key = "";
-		_formatString = "";
-		if (_weapon == "Throw") then
-		{
-			if ((_muzzle find "Grenade") > -1) then {_key = "countGrenadesThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Grenades_Thrown";};
-			if ((_muzzle find "SmokeShell") > -1) then {_key = "countSmokeShellsThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Smoke_Shells_Thrown";};
-			if ((_muzzle find "Chemlight") > -1) then {_key = "countChemlightsThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Chemlights_Thrown";};
-			if (_key == "") then {_key = "countUnknownThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Unknown_Thrown";};
-		}
-		else
-		{
-			_key = "countProjectilesFired";
-			_formatString = "STR_PPS_Main_Statistics_Count_Projectiles_Fired";
+			_key = "";
+			_formatString = "";
+			if (_weapon == "Throw") then
+			{
+				if ((_muzzle find "Grenade") > -1) then {_key = "countGrenadesThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Grenades_Thrown";};
+				if ((_muzzle find "SmokeShell") > -1) then {_key = "countSmokeShellsThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Smoke_Shells_Thrown";};
+				if ((_muzzle find "Chemlight") > -1) then {_key = "countChemlightsThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Chemlights_Thrown";};
+				if (_key == "") then {_key = "countUnknownThrown"; _formatString = "STR_PPS_Main_Statistics_Count_Unknown_Thrown";};
+			}
+			else
+			{
+				_key = "countProjectilesFired";
+				_formatString = "STR_PPS_Main_Statistics_Count_Projectiles_Fired";
+			};
+			
+			_value = 1;
+			_formatType = 0;
+			
+			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+			_update = _playerUid + "-updateStatistics";
+			missionNamespace setVariable [_update, _updatedData, false];
+			publicVariableServer _update;
 		};
-		
-		_value = 1;
-		_formatType = 0;
-		
-		_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-		_update = _playerUid + "-updateStatistics";
-		missionNamespace setVariable [_update, _updatedData, false];
-		publicVariableServer _update;			
 	}];
 	
 	/* ---------------------------------------- */
@@ -166,19 +178,22 @@ if (PPS_AllowSendingData) then
 			{
 				params ["_item", "_vehicle"];
 
-				_playerUid = getPlayerUID player;
-				_source = "ACE";
-				_type = 2;
+				if (PPS_sendingAddonData) then
+				{
+					_playerUid = getPlayerUID player;
+					_source = "ACE";
+					_type = 2;
 
-				_key = "countAceCargoLoaded";
-				_value = 1;
-				_formatType = 0;
-				_formatString = "STR_PPS_Main_Statistics_Count_Cargo_Loaded";		
-				
-				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-				_update = _playerUid + "-updateStatistics";
-				missionNamespace setVariable [_update, _updatedData, false];
-				publicVariableServer _update;	
+					_key = "countAceCargoLoaded";
+					_value = 1;
+					_formatType = 0;
+					_formatString = "STR_PPS_Main_Statistics_Count_Cargo_Loaded";		
+					
+					_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+					_update = _playerUid + "-updateStatistics";
+					missionNamespace setVariable [_update, _updatedData, false];
+					publicVariableServer _update;
+				};
 			}
 		] call CBA_fnc_addEventHandler;
 		
@@ -188,19 +203,22 @@ if (PPS_AllowSendingData) then
 			{
 				params ["_item", "_vehicle"];
 
-				_playerUid = getPlayerUID player;
-				_source = "ACE";
-				_type = 2;
+				if (PPS_sendingAddonData) then
+				{
+					_playerUid = getPlayerUID player;
+					_source = "ACE";
+					_type = 2;
 
-				_key = "countAceCargoUnloaded";
-				_value = 1;
-				_formatType = 0;
-				_formatString = "STR_PPS_Main_Statistics_Count_Cargo_Unloaded";		
-				
-				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-				_update = _playerUid + "-updateStatistics";
-				missionNamespace setVariable [_update, _updatedData, false];
-				publicVariableServer _update;	
+					_key = "countAceCargoUnloaded";
+					_value = 1;
+					_formatType = 0;
+					_formatString = "STR_PPS_Main_Statistics_Count_Cargo_Unloaded";		
+					
+					_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+					_update = _playerUid + "-updateStatistics";
+					missionNamespace setVariable [_update, _updatedData, false];
+					publicVariableServer _update;
+				};
 			}
 		] call CBA_fnc_addEventHandler;
 		
@@ -210,19 +228,22 @@ if (PPS_AllowSendingData) then
 			{
 				params ["_menuType"];
 
-				_playerUid = getPlayerUID player;
-				_source = "ACE";
-				_type = 2;
+				if (PPS_sendingAddonData) then
+				{
+					_playerUid = getPlayerUID player;
+					_source = "ACE";
+					_type = 2;
 
-				_key = "countAceInteractMenuOpened";
-				_value = 1;
-				_formatType = 0;
-				_formatString = "STR_PPS_Main_Statistics_Count_Interact_Menu_Opened";		
-				
-				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-				_update = _playerUid + "-updateStatistics";
-				missionNamespace setVariable [_update, _updatedData, false];
-				publicVariableServer _update;	
+					_key = "countAceInteractMenuOpened";
+					_value = 1;
+					_formatType = 0;
+					_formatString = "STR_PPS_Main_Statistics_Count_Interact_Menu_Opened";		
+					
+					_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+					_update = _playerUid + "-updateStatistics";
+					missionNamespace setVariable [_update, _updatedData, false];
+					publicVariableServer _update;
+				};
 			}
 		] call CBA_fnc_addEventHandler;
 
@@ -232,23 +253,26 @@ if (PPS_AllowSendingData) then
 			{
 				params ["_unit", "_state"];
 
-				_playerUid = getPlayerUID player;
-				_unitUid = getPlayerUID _unit;
-				
-				if (_state && (_playerUid == _unitUid)) then
+				if (PPS_sendingAddonData) then
 				{
-					_source = "ACE";
-					_type = 2;
-
-					_key = "countAceUnconscious";
-					_value = 1;
-					_formatType = 0;
-					_formatString = "STR_PPS_Main_Statistics_Count_Unconscious";		
+					_playerUid = getPlayerUID player;
+					_unitUid = getPlayerUID _unit;
 					
-					_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-					_update = _playerUid + "-updateStatistics";
-					missionNamespace setVariable [_update, _updatedData, false];
-					publicVariableServer _update;
+					if (_state && (_playerUid == _unitUid)) then
+					{
+						_source = "ACE";
+						_type = 2;
+
+						_key = "countAceUnconscious";
+						_value = 1;
+						_formatType = 0;
+						_formatString = "STR_PPS_Main_Statistics_Count_Unconscious";		
+						
+						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+						_update = _playerUid + "-updateStatistics";
+						missionNamespace setVariable [_update, _updatedData, false];
+						publicVariableServer _update;
+					};
 				};
 			}
 		] call CBA_fnc_addEventHandler;
@@ -271,25 +295,27 @@ if (PPS_AllowSendingData) then
 				systemChat format ["%1 is speaking %2", name _unit, _isSpeaking];
 				[format ["%1 is speaking %2", name _unit, _isSpeaking]] call PPS_fnc_log;
 				*/
-				
-				if (_isSpeaking) then
-				{
-					_playerUid = getPlayerUID _unit;
-					
-					_source = "TFAR";
-					_type = 2;
 
-					_key = "countTfarIsSpeaking";
-					_value = 1;
-					_formatType = 0;
-					_formatString = "STR_PPS_Main_Statistics_Count_Is_Speaking";
-					
-					_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-					_update = _playerUid + "-updateStatistics";
-					missionNamespace setVariable [_update, _updatedData, false];
-					publicVariableServer _update;
-				}
-				
+				if (PPS_sendingAddonData) then
+				{
+					if (_isSpeaking) then
+					{
+						_playerUid = getPlayerUID _unit;
+						
+						_source = "TFAR";
+						_type = 2;
+
+						_key = "countTfarIsSpeaking";
+						_value = 1;
+						_formatType = 0;
+						_formatString = "STR_PPS_Main_Statistics_Count_Is_Speaking";
+						
+						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+						_update = _playerUid + "-updateStatistics";
+						missionNamespace setVariable [_update, _updatedData, false];
+						publicVariableServer _update;
+					};
+				};
 			}, player] call TFAR_fnc_addEventHandler;
 			
 			/* -------------------- */
@@ -306,21 +332,23 @@ if (PPS_AllowSendingData) then
 				
 				//_keyDown ist bei mir immer false, daher 0.5 bei _value
 				
-				_playerUid = getPlayerUID _unit;
-				
-				_source = "TFAR";
-				_type = 2;
-
-				_key = "countTfarUsesRadio";
-				_value = 0.5;
-				_formatType = 0;
-				_formatString = "STR_PPS_Main_Statistics_Count_Uses_Radio";	
-				
-				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-				_update = _playerUid + "-updateStatistics";
-				missionNamespace setVariable [_update, _updatedData, false];
-				publicVariableServer _update;
+				if (PPS_sendingAddonData) then
+				{
+					_playerUid = getPlayerUID _unit;
 					
+					_source = "TFAR";
+					_type = 2;
+
+					_key = "countTfarUsesRadio";
+					_value = 0.5;
+					_formatType = 0;
+					_formatString = "STR_PPS_Main_Statistics_Count_Uses_Radio";	
+					
+					_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+					_update = _playerUid + "-updateStatistics";
+					missionNamespace setVariable [_update, _updatedData, false];
+					publicVariableServer _update;
+				};
 			}, player] call TFAR_fnc_addEventHandler;
 		};
 	}
@@ -347,7 +375,7 @@ if (PPS_AllowSendingData) then
 		_formatType = 0;
 		_formatString = "";
 		
-		if (inputAction "CuratorInterface" > 0) then 
+		if ((inputAction "CuratorInterface" > 0) && PPS_sendingGeneralData) then 
 		{
 			_key = "countCuratorInterfaceOpened";
 			_value = 1;
@@ -355,7 +383,7 @@ if (PPS_AllowSendingData) then
 			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Zeus_Opened";
 		};
 				
-		if (inputAction "Compass" > 0) then 
+		if ((inputAction "Compass" > 0) && PPS_sendingGeneralData) then 
 		{
 			_key = "countCompassInterfaceOpened";
 			_value = 1;
@@ -363,7 +391,7 @@ if (PPS_AllowSendingData) then
 			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Compass_Opened";
 		};
 		
-		if (inputAction "Watch" > 0) then 
+		if ((inputAction "Watch" > 0) && PPS_sendingGeneralData) then 
 		{
 			_key = "countWatchInterfaceOpened";
 			_value = 1;
@@ -371,72 +399,63 @@ if (PPS_AllowSendingData) then
 			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Watch_Opened";
 		};
 		
-		if (inputAction "Binocular" > 0) then 
+		if ((inputAction "Binocular" > 0) && PPS_sendingGeneralData) then 
 		{
 			_key = "countBinocularUsed";
 			_value = 0.5;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Binocular_Used";
 		};
-		if (inputAction "Optics" > 0) then 
+		if ((inputAction "Optics" > 0) && PPS_sendingGeneralData) then 
 		{
 			_key = "countOpticsUsed";
 			_value = 0.5;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Optics_Used";
 		};
-		if (inputAction "OpticsTemp" > 0) then 
+		if ((inputAction "OpticsTemp" > 0) && PPS_sendingGeneralData) then 
 		{
 			_key = "countOpticsUsed";
 			_value = 1;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Optics_Used";
 		};
-		if (inputAction "holdBreath" > 0) then 
+		if ((inputAction "holdBreath" > 0) && PPS_sendingInfantryData) then 
 		{
 			_key = "countBreathHolded";
 			_value = 1;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Breath_Holded";
 		};
-		/*
-		if (inputAction "ZoomTemp" > 0) then 
-		{
-			_key = "countZoomUsed";
-			_value = 1;
-			_formatType = 0;
-			_formatString = "STR_PPS_Main_Statistics_Count_Zoom_Used";
-		};
-		*/
-		if (inputAction "LeanLeft" > 0) then 
+		if ((inputAction "LeanLeft" > 0) && PPS_sendingInfantryData) then 
 		{
 			_key = "countLeanLeft";
 			_value = 1;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Lean_Left";
 		};
-		if (inputAction "LeanRight" > 0) then 
+		if ((inputAction "LeanRight" > 0) && PPS_sendingInfantryData) then 
 		{
 			_key = "countLeanRight";
 			_value = 1;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Lean_Right";
 		};
-		if (inputAction "Salute" > 0) then 
+		if ((inputAction "Salute" > 0) && PPS_sendingInfantryData) then 
 		{
 			_key = "countSalute";
 			_value = 0.5;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Salute";
 		};
-		if (inputAction "SitDown" > 0) then 
+		if ((inputAction "SitDown" > 0) && PPS_sendingInfantryData) then 
 		{
 			_key = "countSitDown";
 			_value = 0.5;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Sit_Down";
 		};
-		if (inputAction "GetOver" > 0) then 
+		if ((inputAction "GetOver" > 0) && PPS_sendingInfantryData) then 
 		{
 			_key = "countGetOver";
 			_value = 1;
@@ -467,7 +486,7 @@ while {true} do
 	{
 		//hint format ["Speed: %1", speed player];
 		
-		_timeInEvent = PPS_UpdateInterval;
+		_timeInEvent = 0;
 		
 		_timeOnFoot = 0;
 		_timeStandNoSpeed = 0;
@@ -593,10 +612,72 @@ while {true} do
 		_timeTfarSpeakVolumeYelling = 0;
 		_timeTfarSpeakVolumeWhispering = 0;
 
+		/* ---------------------------------------- */
+
 		_vehiclePlayer = vehicle player;
 		_speed = speed player;
 		
-		if (_vehiclePlayer == player) then 
+		/* ---------------------------------------- */
+
+		if (PPS_sendingGeneralData) then
+		{
+			_timeInEvent = PPS_UpdateInterval;
+			
+			_playerZoom = (call CBA_fnc_getFOV) select 1;
+			_isSpectating = ["IsSpectating", [player]] call BIS_fnc_EGSpectator;
+			
+			if (_playerZoom > 1.1) then {_timeZooming = PPS_UpdateInterval;};		
+			if (_isSpectating) then {_timeSpectatorModeOn = PPS_UpdateInterval;};
+			if (PPS_ehInventoryOpen) then {_timeInventoryVisible = PPS_UpdateInterval;};
+			if (visibleMap) then {_timeMapVisible = PPS_UpdateInterval;};
+			if (visibleGPS) then {_timeGpsVisible = PPS_UpdateInterval;};
+			if (visibleCompass) then {_timeCompassVisible = PPS_UpdateInterval;};
+			if (visibleWatch) then {_timeWatchVisible = PPS_UpdateInterval;};
+			
+			_currentVisionMode = currentVisionMode player;
+			switch (_currentVisionMode) do
+			{
+				case 0:{_timeVisionModeDay = PPS_UpdateInterval;};
+				case 1:{_timeVisionModeNight = PPS_UpdateInterval;};
+				case 2:{_timeVisionModeThermal = PPS_UpdateInterval;};
+			};
+			
+			if (isOnRoad player) then {_timeOnRoad = PPS_UpdateInterval;};
+			
+			if (isBleeding player) then {_timeIsBleeding = PPS_UpdateInterval;};
+			if (isBurning player) then {_timeIsBurning = PPS_UpdateInterval;};
+			
+			_damagePlayer = damage player;
+			switch (true) do
+			{
+				case (_damagePlayer == 0):{_timeInjuredNone = PPS_UpdateInterval};
+				case ((_damagePlayer > 0) && (_damagePlayer <= 0.33)):{_timeInjuredLow = PPS_UpdateInterval};
+				case ((_damagePlayer > 0.33) && (_damagePlayer <= 0.66)):{_timeInjuredMed = PPS_UpdateInterval};
+				case ((_damagePlayer > 0.66) && (_damagePlayer < 1)):{_timeInjuredHigh = PPS_UpdateInterval};
+				case (_damagePlayer == 1):{_timeInjuredFull = PPS_UpdateInterval};
+			};
+			
+			_currentChannel = currentChannel;
+			switch (true) do
+			{
+				case (_currentChannel == 0):{_timeCurrentChannelGlobal = PPS_UpdateInterval};
+				case (_currentChannel == 1):{_timeCurrentChannelSide = PPS_UpdateInterval};
+				case (_currentChannel == 2):{_timeCurrentChannelCommand = PPS_UpdateInterval};
+				case (_currentChannel == 3):{_timeCurrentChannelGroup = PPS_UpdateInterval};
+				case (_currentChannel == 4):{_timeCurrentChannelVehicle = PPS_UpdateInterval};
+				case (_currentChannel == 5):{_timeCurrentChannelDirect = PPS_UpdateInterval};
+				case (_currentChannel >= 6):{_timeCurrentChannelCustomRadio = PPS_UpdateInterval};
+			};
+		
+			if (player getUnitTrait "Medic") then {_timeIsMedic = PPS_UpdateInterval;};
+			if (player getUnitTrait "Engineer") then {_timeIsEngineer = PPS_UpdateInterval;};
+			if (player getUnitTrait "ExplosiveSpecialist") then {_timeIsExplosiveSpecialist = PPS_UpdateInterval;};
+			if (player getUnitTrait "UAVHacker") then {_timeIsUavHacker = PPS_UpdateInterval;};
+		};
+		
+		/* ---------------------------------------- */
+		
+		if ((_vehiclePlayer == player) && PPS_sendingInfantryData) then 
 		{
 			_timeOnFoot = PPS_UpdateInterval;
 			
@@ -631,8 +712,27 @@ while {true} do
 				case ((_needReload > 0.66) && (_needReload < 1)):{_timeMagazineFillLow = PPS_UpdateInterval};
 				case (_needReload == 1):{_timeMagazineEmpty = PPS_UpdateInterval};
 			};
-		}
-		else
+			
+			_fireMode = (weaponState player) select 2;
+			switch (_fireMode) do
+			{
+				case "Single":{_timeFireModeSingle = PPS_UpdateInterval};
+				case "Burst":{_timeFireModeBurst = PPS_UpdateInterval};
+				case "FullAuto":{_timeFireModeFullAuto = PPS_UpdateInterval};
+			};
+			
+			_zeroing = currentZeroing player;
+			switch (true) do
+			{
+				case ((_zeroing > 0) && (_zeroing <= 300)):{_timeZeroingShortRange = PPS_UpdateInterval};
+				case ((_zeroing > 300) && (_zeroing <= 600)):{_timeZeroingMidRange = PPS_UpdateInterval};
+				case (_zeroing > 600):{_timeZeroingLongRange = PPS_UpdateInterval};
+			};
+		};
+		
+		/* ---------------------------------------- */
+		
+		if ((_vehiclePlayer != player) && PPS_sendingVehicleData) then 
 		{
 			_timeInVehicle = PPS_UpdateInterval;
 			
@@ -694,108 +794,49 @@ while {true} do
 			if (isVehicleRadarOn (vehicle player)) then {_timeVehicleRadarOn = PPS_UpdateInterval;};
 		};
 
-		_playerZoom = (call CBA_fnc_getFOV) select 1;
-		_isSpectating = ["IsSpectating", [player]] call BIS_fnc_EGSpectator;
+		/* ---------------------------------------- */
 		
-		if (_playerZoom > 1) then {_timeZooming = PPS_UpdateInterval;};		
-		if (_isSpectating) then {_timeSpectatorModeOn = PPS_UpdateInterval;};
-		if (PPS_ehInventoryOpen) then {_timeInventoryVisible = PPS_UpdateInterval;};
-		if (visibleMap) then {_timeMapVisible = PPS_UpdateInterval;};
-		if (visibleGPS) then {_timeGpsVisible = PPS_UpdateInterval;};
-		if (visibleCompass) then {_timeCompassVisible = PPS_UpdateInterval;};
-		if (visibleWatch) then {_timeWatchVisible = PPS_UpdateInterval;};
-		
-		_currentVisionMode = currentVisionMode player;
-		switch (_currentVisionMode) do
+		if (PPS_sendingGeneralData) then
 		{
-			case 0:{_timeVisionModeDay = PPS_UpdateInterval;};
-			case 1:{_timeVisionModeNight = PPS_UpdateInterval;};
-			case 2:{_timeVisionModeThermal = PPS_UpdateInterval;};
-		};
-		
-		if (isOnRoad player) then {_timeOnRoad = PPS_UpdateInterval;};
-		
-		if (isBleeding player) then {_timeIsBleeding = PPS_UpdateInterval;};
-		if (isBurning player) then {_timeIsBurning = PPS_UpdateInterval;};
-		
-		_damagePlayer = damage player;
-		switch (true) do
-		{
-			case (_damagePlayer == 0):{_timeInjuredNone = PPS_UpdateInterval};
-			case ((_damagePlayer > 0) && (_damagePlayer <= 0.33)):{_timeInjuredLow = PPS_UpdateInterval};
-			case ((_damagePlayer > 0.33) && (_damagePlayer <= 0.66)):{_timeInjuredMed = PPS_UpdateInterval};
-			case ((_damagePlayer > 0.66) && (_damagePlayer < 1)):{_timeInjuredHigh = PPS_UpdateInterval};
-			case (_damagePlayer == 1):{_timeInjuredFull = PPS_UpdateInterval};
-		};
-		
-		_currentChannel = currentChannel;
-		switch (true) do
-		{
-			case (_currentChannel == 0):{_timeCurrentChannelGlobal = PPS_UpdateInterval};
-			case (_currentChannel == 1):{_timeCurrentChannelSide = PPS_UpdateInterval};
-			case (_currentChannel == 2):{_timeCurrentChannelCommand = PPS_UpdateInterval};
-			case (_currentChannel == 3):{_timeCurrentChannelGroup = PPS_UpdateInterval};
-			case (_currentChannel == 4):{_timeCurrentChannelVehicle = PPS_UpdateInterval};
-			case (_currentChannel == 5):{_timeCurrentChannelDirect = PPS_UpdateInterval};
-			case (_currentChannel >= 6):{_timeCurrentChannelCustomRadio = PPS_UpdateInterval};
-		};
-		
-		_fireMode = (weaponState player) select 2;
-		switch (_fireMode) do
-		{
-			case "Single":{_timeFireModeSingle = PPS_UpdateInterval};
-			case "Burst":{_timeFireModeBurst = PPS_UpdateInterval};
-			case "FullAuto":{_timeFireModeFullAuto = PPS_UpdateInterval};
-		};
-		
-		_zeroing = currentZeroing player;
-		switch (true) do
-		{
-			case ((_zeroing > 0) && (_zeroing <= 300)):{_timeZeroingShortRange = PPS_UpdateInterval};
-			case ((_zeroing > 300) && (_zeroing <= 600)):{_timeZeroingMidRange = PPS_UpdateInterval};
-			case (_zeroing > 600):{_timeZeroingLongRange = PPS_UpdateInterval};
-		};
-	
-		if (player getUnitTrait "Medic") then {_timeIsMedic = PPS_UpdateInterval;};
-		if (player getUnitTrait "Engineer") then {_timeIsEngineer = PPS_UpdateInterval;};
-		if (player getUnitTrait "ExplosiveSpecialist") then {_timeIsExplosiveSpecialist = PPS_UpdateInterval;};
-		if (player getUnitTrait "UAVHacker") then {_timeIsUavHacker = PPS_UpdateInterval;};
-		
-		_addons = activatedAddons;
-		/*
-		_addons = activatedAddons;
-		thirdPartyAddons = [];
-		{if (([_x, 0, 2] call BIS_fnc_trimString) != "a3_") then {thirdPartyAddons = thirdPartyAddons + [_x];};} forEach _addons;
-		thirdPartyAddons;
-		["curatoronly_air_f_beta_heli_attack_01","curatoronly_air_f_beta_heli_attack_02","curatoronly_air_f_gamma_uav_01","curatoronly_armor_f_amv","curatoronly_armor_f_beta_apc_tracked_02","curatoronly_armor_f_marid","curatoronly_armor_f_panther","curatoronly_armor_f_slammer","curatoronly_armor_f_t100k","curatoronly_boat_f_boat_armed_01","curatoronly_characters_f_blufor","curatoronly_characters_f_common","curatoronly_characters_f_opfor","curatoronly_modules_f_curator_animals","curatoronly_modules_f_curator_chemlights","curatoronly_modules_f_curator_effects","curatoronly_modules_f_curator_environment","curatoronly_modules_f_curator_flares","curatoronly_modules_f_curator_lightning","curatoronly_modules_f_curator_mines","curatoronly_modules_f_curator_objectives","curatoronly_modules_f_curator_ordnance","curatoronly_modules_f_curator_smokeshells","curatoronly_signs_f","curatoronly_soft_f_crusher_ugv","curatoronly_soft_f_mrap_01","curatoronly_soft_f_mrap_02","curatoronly_soft_f_quadbike","curatoronly_static_f_gamma","curatoronly_static_f_mortar_01","curatoronly_structures_f_civ_ancient","curatoronly_structures_f_civ_camping","curatoronly_structures_f_civ_garbage","curatoronly_structures_f_epa_civ_constructions","curatoronly_structures_f_epb_civ_dead","curatoronly_structures_f_ind_cargo","curatoronly_structures_f_ind_crane","curatoronly_structures_f_ind_reservoirtank","curatoronly_structures_f_ind_transmitter_tower","curatoronly_structures_f_items_vessels","curatoronly_structures_f_mil_bagbunker","curatoronly_structures_f_mil_bagfence","curatoronly_structures_f_mil_cargo","curatoronly_structures_f_mil_fortification","curatoronly_structures_f_mil_radar","curatoronly_structures_f_mil_shelters","curatoronly_structures_f_research","curatoronly_structures_f_walls","curatoronly_structures_f_wrecks","map_vr","3den","ace_optionsmenu","ace_winddeflection","core","a3data","tfar_intercomdummy","cba_common","cba_events","cba_hashes","cba_jam","cba_jr_prep","cba_keybinding","cba_modules","cba_music","cba_network","cba_settings","cba_statemachine","cba_strings","cba_vectors","cba_xeh","cba_extended_eventhandlers","cba_ee","extended_eventhandlers","cba_xeh_a3","cba_accessory","mrt_accfncs","cba_ai","cba_arrays","cba_diagnostic","cba_disposable","cba_help","cba_jr","asdg_jointmuzzles","asdg_jointrails","cba_optics","cba_ui","cba_ui_helper","cba_versioning","ace_main","ace_medical_blood","ace_modules","cba_main","cba_main_a3","ace_apl","ace_common","ace_cookoff","ace_disposable","ace_finger","ace_flashsuppressors","ace_fonts","ace_frag","ace_gforces","ace_goggles","ace_grenades","ace_hitreactions","ace_huntir","ace_huntir_sub","ace_interact_menu","ace_interaction","ace_inventory","ace_laser","ace_laserpointer","ace_logistics_uavbattery","ace_logistics_wirecutter","ace_magazinerepack","ace_map","ace_map_gestures","ace_maptools","ace_markers","ace_medical","ace_medical_ai","ace_medical_menu","ace_microdagr","ace_missileguidance","ace_missionmodules","ace_mk6mortar","ace_movement","ace_mx2a","ace_nametags","ace_nightvision","ace_nlaw","ace_noidle","ace_noradio","ace_norearm","ace_optics","ace_overheating","ace_overpressure","ace_parachute","ace_pylons","ace_quickmount","ace_realisticnames","ace_realisticweights","ace_rearm","ace_recoil","ace_refuel","ace_reload","ace_reloadlaunchers","ace_repair","ace_respawn","ace_safemode","ace_sandbag","ace_scopes","ace_slideshow","ace_smallarms","ace_spectator","ace_spottingscope","ace_switchunits","ace_tacticalladder","ace_tagging","ace_thermals","ace_trenches","ace_tripod","ace_ui","ace_vector","ace_vehiclelock","ace_vehicles","ace_viewdistance","ace_weaponselect","ace_weather","ace_yardage450","tfar_core","task_force_radio","task_force_radio_items","tfar_static_radios","pps_main","ace_advanced_fatigue","ace_advanced_throwing","ace_ai","ace_aircraft","ace_arsenal","ace_attach","ace_backpacks","ace_ballistics","ace_captives","ace_cargo","ace_chemlights","ace_concertina_wire","ace_dagr","ace_disarming","ace_dogtags","ace_dragging","ace_explosives","ace_fastroping","ace_fcs","ace_flashlights","ace_gestures","ace_gunbag","ace_hearing","ace_hellfire","ace_hot","ace_javelin","ace_kestrel4500","ace_maverick","ace_minedetector","ace_zeus","ace_zeus_captives","ace_zeus_medical","ace_zeus_cargo","ace_zeus_repair","ace_zeus_cargoandrepair","ace_zeus_fastroping","ace_zeus_pylons","ace_zeus_arsenal","tfar_ai_hearing","tfar_antennas","tfar_backpacks","tfar_handhelds","ace_advanced_ballistics","ace_atragmx","ace_rangecard"]
-		*/
-		if ((_addons find "ace_main") > -1) then
-		{
-			_timeAddonAceActive = PPS_UpdateInterval;
+			_addons = activatedAddons;
 			
-			if([player] call ace_medical_blood_fnc_isBleeding) then {_timeAceIsBleeding = PPS_UpdateInterval;};
-		};
-		if ((_addons find "tfar_core") > -1) then 
-		{
-			_timeAddonTfarActive = PPS_UpdateInterval;
-			try
+			/*
+			_addons = activatedAddons;
+			thirdPartyAddons = [];
+			{if (([_x, 0, 2] call BIS_fnc_trimString) != "a3_") then {thirdPartyAddons = thirdPartyAddons + [_x];};} forEach _addons;
+			thirdPartyAddons;
+			["curatoronly_air_f_beta_heli_attack_01","curatoronly_air_f_beta_heli_attack_02","curatoronly_air_f_gamma_uav_01","curatoronly_armor_f_amv","curatoronly_armor_f_beta_apc_tracked_02","curatoronly_armor_f_marid","curatoronly_armor_f_panther","curatoronly_armor_f_slammer","curatoronly_armor_f_t100k","curatoronly_boat_f_boat_armed_01","curatoronly_characters_f_blufor","curatoronly_characters_f_common","curatoronly_characters_f_opfor","curatoronly_modules_f_curator_animals","curatoronly_modules_f_curator_chemlights","curatoronly_modules_f_curator_effects","curatoronly_modules_f_curator_environment","curatoronly_modules_f_curator_flares","curatoronly_modules_f_curator_lightning","curatoronly_modules_f_curator_mines","curatoronly_modules_f_curator_objectives","curatoronly_modules_f_curator_ordnance","curatoronly_modules_f_curator_smokeshells","curatoronly_signs_f","curatoronly_soft_f_crusher_ugv","curatoronly_soft_f_mrap_01","curatoronly_soft_f_mrap_02","curatoronly_soft_f_quadbike","curatoronly_static_f_gamma","curatoronly_static_f_mortar_01","curatoronly_structures_f_civ_ancient","curatoronly_structures_f_civ_camping","curatoronly_structures_f_civ_garbage","curatoronly_structures_f_epa_civ_constructions","curatoronly_structures_f_epb_civ_dead","curatoronly_structures_f_ind_cargo","curatoronly_structures_f_ind_crane","curatoronly_structures_f_ind_reservoirtank","curatoronly_structures_f_ind_transmitter_tower","curatoronly_structures_f_items_vessels","curatoronly_structures_f_mil_bagbunker","curatoronly_structures_f_mil_bagfence","curatoronly_structures_f_mil_cargo","curatoronly_structures_f_mil_fortification","curatoronly_structures_f_mil_radar","curatoronly_structures_f_mil_shelters","curatoronly_structures_f_research","curatoronly_structures_f_walls","curatoronly_structures_f_wrecks","map_vr","3den","ace_optionsmenu","ace_winddeflection","core","a3data","tfar_intercomdummy","cba_common","cba_events","cba_hashes","cba_jam","cba_jr_prep","cba_keybinding","cba_modules","cba_music","cba_network","cba_settings","cba_statemachine","cba_strings","cba_vectors","cba_xeh","cba_extended_eventhandlers","cba_ee","extended_eventhandlers","cba_xeh_a3","cba_accessory","mrt_accfncs","cba_ai","cba_arrays","cba_diagnostic","cba_disposable","cba_help","cba_jr","asdg_jointmuzzles","asdg_jointrails","cba_optics","cba_ui","cba_ui_helper","cba_versioning","ace_main","ace_medical_blood","ace_modules","cba_main","cba_main_a3","ace_apl","ace_common","ace_cookoff","ace_disposable","ace_finger","ace_flashsuppressors","ace_fonts","ace_frag","ace_gforces","ace_goggles","ace_grenades","ace_hitreactions","ace_huntir","ace_huntir_sub","ace_interact_menu","ace_interaction","ace_inventory","ace_laser","ace_laserpointer","ace_logistics_uavbattery","ace_logistics_wirecutter","ace_magazinerepack","ace_map","ace_map_gestures","ace_maptools","ace_markers","ace_medical","ace_medical_ai","ace_medical_menu","ace_microdagr","ace_missileguidance","ace_missionmodules","ace_mk6mortar","ace_movement","ace_mx2a","ace_nametags","ace_nightvision","ace_nlaw","ace_noidle","ace_noradio","ace_norearm","ace_optics","ace_overheating","ace_overpressure","ace_parachute","ace_pylons","ace_quickmount","ace_realisticnames","ace_realisticweights","ace_rearm","ace_recoil","ace_refuel","ace_reload","ace_reloadlaunchers","ace_repair","ace_respawn","ace_safemode","ace_sandbag","ace_scopes","ace_slideshow","ace_smallarms","ace_spectator","ace_spottingscope","ace_switchunits","ace_tacticalladder","ace_tagging","ace_thermals","ace_trenches","ace_tripod","ace_ui","ace_vector","ace_vehiclelock","ace_vehicles","ace_viewdistance","ace_weaponselect","ace_weather","ace_yardage450","tfar_core","task_force_radio","task_force_radio_items","tfar_static_radios","pps_main","ace_advanced_fatigue","ace_advanced_throwing","ace_ai","ace_aircraft","ace_arsenal","ace_attach","ace_backpacks","ace_ballistics","ace_captives","ace_cargo","ace_chemlights","ace_concertina_wire","ace_dagr","ace_disarming","ace_dogtags","ace_dragging","ace_explosives","ace_fastroping","ace_fcs","ace_flashlights","ace_gestures","ace_gunbag","ace_hearing","ace_hellfire","ace_hot","ace_javelin","ace_kestrel4500","ace_maverick","ace_minedetector","ace_zeus","ace_zeus_captives","ace_zeus_medical","ace_zeus_cargo","ace_zeus_repair","ace_zeus_cargoandrepair","ace_zeus_fastroping","ace_zeus_pylons","ace_zeus_arsenal","tfar_ai_hearing","tfar_antennas","tfar_backpacks","tfar_handhelds","ace_advanced_ballistics","ace_atragmx","ace_rangecard"]
+			*/
+			if ((_addons find "ace_main") > -1) then
 			{
-				_activeLrRadio = player call TFAR_fnc_backpackLR;
-				if (!isNil "_activeLrRadio") then {_timeTfarHasLrRadio = PPS_UpdateInterval;};
-				if (call TFAR_fnc_haveSWRadio) then {_timeTfarHasSwRadio = PPS_UpdateInterval;};
-				if (player call TFAR_fnc_isSpeaking) then {_timeTfarIsSpeaking = PPS_UpdateInterval;};
-				switch (TF_speak_volume_level) do
+				_timeAddonAceActive = PPS_UpdateInterval;
+				
+				if([player] call ace_medical_blood_fnc_isBleeding) then {_timeAceIsBleeding = PPS_UpdateInterval;};
+			};
+			if ((_addons find "tfar_core") > -1) then 
+			{
+				_timeAddonTfarActive = PPS_UpdateInterval;
+				try
 				{
-					case "normal":{_timeTfarSpeakVolumeNormal = PPS_UpdateInterval;};
-					case "yelling":{_timeTfarSpeakVolumeYelling = PPS_UpdateInterval;};
-					case "whispering":{_timeTfarSpeakVolumeWhispering = PPS_UpdateInterval;};
+					_activeLrRadio = player call TFAR_fnc_backpackLR;
+					if (!isNil "_activeLrRadio") then {_timeTfarHasLrRadio = PPS_UpdateInterval;};
+					if (call TFAR_fnc_haveSWRadio) then {_timeTfarHasSwRadio = PPS_UpdateInterval;};
+					if (player call TFAR_fnc_isSpeaking) then {_timeTfarIsSpeaking = PPS_UpdateInterval;};
+					switch (TF_speak_volume_level) do
+					{
+						case "normal":{_timeTfarSpeakVolumeNormal = PPS_UpdateInterval;};
+						case "yelling":{_timeTfarSpeakVolumeYelling = PPS_UpdateInterval;};
+						case "whispering":{_timeTfarSpeakVolumeWhispering = PPS_UpdateInterval;};
+					};
+				}
+				catch
+				{
+					hint format [localize "STR_PPS_Main_Error", str _exception];
 				};
-			}
-			catch
-			{
-				hint format [localize "STR_PPS_Main_Error", str _exception];
 			};
 		};
+		
+		/* ---------------------------------------- */
 		
 		_filter = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÜüÖöÄä[]-_.:#*(){}%$§&<>+-,;'~?= ";
 		_playerName = [_playerName, _filter] call BIS_fnc_filterString;

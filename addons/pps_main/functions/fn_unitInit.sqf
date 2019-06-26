@@ -38,7 +38,7 @@ if (isMultiplayer) then
 			
 			if (local _unit) then
 			{
-				if (getClientState == "BRIEFING READ") then
+				if (getClientState == "BRIEFING READ" && PPS_sendingInfantryData) then
 				{
 					if (_unitUid != "") then
 					{
@@ -128,7 +128,7 @@ if (isMultiplayer) then
 		_formatType = 0;
 		_formatString = "";
 		
-		if ((local _shooter) && (_shooterUid != "")) then
+		if ((local _shooter) && (_shooterUid != "") && PPS_sendingInfantryData) then
 		{
 			if ((side group _shooter) != (side group _target)) then
 			{
@@ -172,7 +172,7 @@ if (isMultiplayer) then
 			publicVariableServer _update;			
 		};
 		
-		if ((local _target) && (_targetUid != "")) then
+		if ((local _target) && (_targetUid != "") && PPS_sendingInfantryData) then
 		{
 			if ((side group _shooter) != (side group _target)) then
 			{

@@ -31,6 +31,54 @@
 ] call cba_settings_fnc_init;
 
 [
+	"PPS_sendingGeneralData",
+	"Checkbox",
+	[localize "STR_PPS_Main_Settings_Sending_General_Data", localize "STR_PPS_Main_Settings_Sending_General_Data_Description"],
+	localize "STR_PPS_Main_Settings_Category_Client_Settings",
+	true,
+    nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {  
+        params ["_value"];
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call cba_settings_fnc_init;
+
+[
+	"PPS_sendingInfantryData",
+	"Checkbox",
+	[localize "STR_PPS_Main_Settings_Sending_Infantry_Data", localize "STR_PPS_Main_Settings_Sending_Infantry_Data_Description"],
+	localize "STR_PPS_Main_Settings_Category_Client_Settings",
+	true,
+    nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {  
+        params ["_value"];
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call cba_settings_fnc_init;
+
+[
+	"PPS_sendingVehicleData",
+	"Checkbox",
+	[localize "STR_PPS_Main_Settings_Sending_Vehicle_Data", localize "STR_PPS_Main_Settings_Sending_Vehicle_Data_Description"],
+	localize "STR_PPS_Main_Settings_Category_Client_Settings",
+	true,
+    nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {  
+        params ["_value"];
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call cba_settings_fnc_init;
+
+[
+	"PPS_sendingAddonData",
+	"Checkbox",
+	[localize "STR_PPS_Main_Settings_Sending_Addon_Data", localize "STR_PPS_Main_Settings_Sending_Addon_Data_Description"],
+	localize "STR_PPS_Main_Settings_Category_Client_Settings",
+	true,
+    nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {  
+        params ["_value"];
+    } // function that will be executed once on mission start and every time the setting is changed.
+] call cba_settings_fnc_init;
+
+[
 	"PPS_TimeZone",
 	"LIST",
 	[localize "STR_PPS_Main_Settings_Timezone", localize "STR_PPS_Main_Settings_Timezone_Description"],
