@@ -1,7 +1,10 @@
 #include "defines.hpp"
 #include "dialog.hpp"
 
-enableDebugConsole = 0;
+enableDebugConsole = 1;
+// 0 - Default behavior, available only in editor
+// 1 - Available in SP and for hosts / logged in admins in MP
+// 2 - Available for everyone
 
 class CfgPatches
 {

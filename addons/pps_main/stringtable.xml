@@ -36,6 +36,10 @@
 			</Key>
 		</Container>
 		<Container name="Dialog">
+			<Key ID="STR_PPS_Export_Dialog_Head">
+				<English>PERSISTENT PLAYER STATISTICS - Export</English>
+				<German>PERSISTENT PLAYER STATISTICS - Export</German>
+			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Head">
 				<English>PERSISTENT PLAYER STATISTICS - Event in Progress: %1</English>
 				<German>PERSISTENT PLAYER STATISTICS - laufendes Event: %1</German>
@@ -123,6 +127,10 @@
 			<Key ID="STR_PPS_Main_Dialog_Button_Export">
 				<English>Export</English>
 				<German>exportieren</German>
+			</Key>
+			<Key ID="STR_PPS_Export_Dialog_Button_Close">
+				<English>Close</English>
+				<German>schließen</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_List_Tracking_Active">
 				<English>%1 (Tracking active)</English>

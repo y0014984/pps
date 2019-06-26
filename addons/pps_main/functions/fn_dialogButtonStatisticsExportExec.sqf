@@ -24,6 +24,14 @@ _answer addPublicVariableEventHandler
 {
 	params ["_broadcastVariableName", "_broadcastVariableValue", "_broadcastVariableTarget"];
 	
+	if (dialog) then {closeDialog 1;};
+	_ok = createDialog "PPS_Export_Dialog";
+
+	_ppsExportDialog = findDisplay 14985;
+		
+	_exportEditBox = _ppsExportDialog displayCtrl 2500;
+	_exportEditBox ctrlSetText _broadcastVariableValue;
+	
 	copyToClipboard _broadcastVariableValue;
 	
 	hint localize "STR_PPS_Main_Notifications_Statistics_Exported_To_Clipboard";

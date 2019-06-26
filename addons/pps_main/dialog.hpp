@@ -260,3 +260,47 @@ class PPS_Main_Dialog
 		////////////////////////////////////////////////////////
 	};
 };
+
+class PPS_Export_Dialog
+{
+	idd = 14985;
+	movingEnable = true;
+	enableSimulation = true;
+	class controls
+	{
+		class PPS_RscText_2000: RscText
+		{
+			idc = 2000;
+			text = $STR_PPS_Export_Dialog_Head;
+			x = 0 * GUI_GRID_W + GUI_GRID_X;
+			y = 0 * GUI_GRID_H + GUI_GRID_Y;
+			w = 40 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			colorBackground[] = {0,0.5,0,1};
+		};
+		class PPS_RscEdit_2500: RscEdit
+		{
+			idc = 2500;
+			text = "";
+			x = 0 * GUI_GRID_W + GUI_GRID_X;
+			y = 1.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 40 * GUI_GRID_W;
+			h = 22 * GUI_GRID_H;
+			
+			style = ST_MULTI;		
+			lineSpacing = 1;
+			colorBackground[] = {0,0,0,0.25};
+		};
+		class PPS_RscButton_2600: RscButton
+		{
+			idc = 2600;
+			text = $STR_PPS_Export_Dialog_Button_Close;
+			x = 34 * GUI_GRID_W + GUI_GRID_X;
+			y = 24 * GUI_GRID_H + GUI_GRID_Y;
+			w = 6 * GUI_GRID_W;
+			h = 1 * GUI_GRID_H;
+			
+			action = "closeDialog 1;";
+		};
+	};
+};

@@ -8,3 +8,5 @@
 #define GUI_GRID_HAbs	(1)
 
 //For Base Classes Export in GUI Editor press STRG+P
+
+#define ST_MULTI	0x10
