@@ -318,6 +318,10 @@
 				<English>Persistent Player Statistics\n\nPlayer promoted: %1</English>
 				<German>Persistent Player Statistics\n\nSpieler wurde befördert: %1</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Player_Degraded">
+				<English>Persistent Player Statistics\n\nPlayer degraded: %1</English>
+				<German>Persistent Player Statistics\n\nSpieler wurde degradiert: %1</German>
+			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Tracking">
 				<English>Persistent Player Statistics\n\nKey: %1\nValue: %2</English>
 				<German>Persistent Player Statistics\n\nSchlüssel: %1\nWert: %2</German>
