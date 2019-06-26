@@ -208,6 +208,38 @@
 				<English>Data is only send to server if this option is checked.</English>
 				<German>Nur wenn diese Einstellung aktiv ist werden Daten an den Server gesendet.</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Settings_Sending_General_Data">
+				<English>sending general data</English>
+				<German>Allgemeine Daten senden</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Sending_General_Data_Description">
+				<English>General data is all data that does not fit in another category.</English>
+				<German>Allgemeine Daten sind ebenjene, die in keine andere Kategorie passen.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Sending_Infantry_Data">
+				<English>sending infantry data</English>
+				<German>Infantriedaten senden</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Sending_Infantry_Data_Description">
+				<English>Infantry data is all infantry based data.</English>
+				<German>Infantriedaten sind alle infatriebezogenen Daten.</German>
+			</Key>	
+			<Key ID="STR_PPS_Main_Settings_Sending_Vehicle_Data">
+				<English>sending vehicle data</English>
+				<German>Fahrzeugdaten senden</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Sending_Vehicle_Data_Description">
+				<English>Vehicle data is all vehicle based data.</English>
+				<German>Fahrzeugdaten sind alle fahrzeugbezogenen Daten.</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Sending_Addon_Data">
+				<English>sending addon data</English>
+				<German>Addon-Daten senden</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Settings_Sending_Addon_Data_Description">
+				<English>Vehicle data is all data data collected by optional addons.</English>
+				<German>Addon-Daten sind alle Daten die durch optionale Addons gesammelt wurden.</German>
+			</Key>		
 			<Key ID="STR_PPS_Main_Settings_Timezone">
 				<English>timezone</English>
 				<German>Zeitzone</German>
@@ -285,6 +317,10 @@
 			<Key ID="STR_PPS_Main_Notifications_Player_Promoted">
 				<English>Persistent Player Statistics\n\nPlayer promoted: %1</English>
 				<German>Persistent Player Statistics\n\nSpieler wurde befördert: %1</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Player_Degraded">
+				<English>Persistent Player Statistics\n\nPlayer degraded: %1</English>
+				<German>Persistent Player Statistics\n\nSpieler wurde degradiert: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Tracking">
 				<English>Persistent Player Statistics\n\nKey: %1\nValue: %2</English>

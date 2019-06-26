@@ -28,6 +28,9 @@ _playersListBox ctrlAddEventHandler ["LBSelChanged",
 	if (_selectedIndex != -1) then
 	{
 		_requestedPlayerUid = _control lbData _selectedIndex;
+		_text = _control lbText _selectedIndex;
+		
+		_promoteButton = (findDisplay 14984) displayCtrl 1610;
 		
 		_playerUid = getPlayerUID player;
 		_clientId = clientOwner;
@@ -40,6 +43,15 @@ _playersListBox ctrlAddEventHandler ["LBSelChanged",
 		
 		_filterEvents = "";
 	
+		if ((_text find (localize "STR_PPS_Main_Admin")) > -1) then
+		{
+			_promoteButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Degrade";
+		}
+		else
+		{
+			_promoteButton ctrlSetText localize "STR_PPS_Main_Dialog_Button_Promote";
+		};
+		
 		_request = _playerUid + "-requestEventsFiltered";
 		missionNamespace setVariable [_request, [_playerUid, _clientId, _requestedPlayerUid, _filterEvents], false];
 		publicVariableServer _request;

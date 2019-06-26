@@ -28,7 +28,7 @@ if (isMultiplayer && ((allUnits find _vehicle) == -1)) then
 		//hint format ["Engine Event Handler\n\nVehicle: %1\nengineState: %2", _vehicle, _engineState];
 		
 		_driver = driver _vehicle;
-		if (local _driver) then
+		if (local _driver && PPS_AllowSendingData && PPS_SendingVehicleData) then
 		{	
 			_playerUid = getPlayerUID _driver;
 			
@@ -79,30 +79,33 @@ if (isMultiplayer && ((allUnits find _vehicle) == -1)) then
 		_shooterUid = getPlayerUID _shooter;
 		
 		if ((local _shooter) && (_shooterUid != "") && (_damage == 1)) then
-		{	
-			_source = "A3";
-			_key = "countFriendlyVehiclesDestroyed";
-			_value = 1;
-			_type = 2;
-			_formatType = 0;
-			_formatString = "STR_PPS_Main_Statistics_Count_Friendly_Vehicles_Destroyed";
-			
-			if ((side group _shooter) != (side group _unit)) then
+		{
+			if (PPS_AllowSendingData && PPS_SendingVehicleData) then
 			{
 				_source = "A3";
-				_key = "countEnemyVehiclesDestroyed";
+				_key = "countFriendlyVehiclesDestroyed";
 				_value = 1;
 				_type = 2;
 				_formatType = 0;
-				_formatString = "STR_PPS_Main_Statistics_Count_Enemy_Vehicles_Destroyed";
-			};
+				_formatString = "STR_PPS_Main_Statistics_Count_Friendly_Vehicles_Destroyed";
+				
+				if ((side group _shooter) != (side group _unit)) then
+				{
+					_source = "A3";
+					_key = "countEnemyVehiclesDestroyed";
+					_value = 1;
+					_type = 2;
+					_formatType = 0;
+					_formatString = "STR_PPS_Main_Statistics_Count_Enemy_Vehicles_Destroyed";
+				};
 
-			_playerUid = _shooterUid;
-			
-			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-			_update = _playerUid + "-updateStatistics";
-			missionNamespace setVariable [_update, _updatedData, false];
-			publicVariableServer _update;
+				_playerUid = _shooterUid;
+				
+				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+				_update = _playerUid + "-updateStatistics";
+				missionNamespace setVariable [_update, _updatedData, false];
+				publicVariableServer _update;
+			};
 
 			_unit removeAllEventHandlers "HitPart";
 			_unit removeAllEventHandlers "Dammaged";
@@ -127,7 +130,7 @@ if (isMultiplayer && ((allUnits find _vehicle) == -1)) then
 		_formatType = 0;
 		_formatString = "";
 		
-		if ((local _shooter) && (_shooterUid != "")) then
+		if ((local _shooter) && (_shooterUid != "") && PPS_AllowSendingData && PPS_SendingVehicleData) then
 		{
 			if ((side group _shooter) != (side group _target)) then
 			{
