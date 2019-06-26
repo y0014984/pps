@@ -35,7 +35,7 @@ if (isMultiplayer) then
 			
 			_killerUid = getPlayerUID _killer;
 				
-			if (_killerUid != "") then
+			if (_killerUid != "" && PPS_AllowSendingData && PPS_SendingInfantryData) then
 			{
 				_playerUid = _killerUid;
 				_source = "A3";

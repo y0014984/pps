@@ -29,81 +29,59 @@ if (isMultiplayer) then
 	{
 		params ["_unit", "_killer", "_instigator", "_useEffects"];
 
-		if (local _unit) then
-		{
-			_unit removeAllEventHandlers "HitPart";
+		_unit removeAllEventHandlers "HitPart";
+		
+		_unitUid = getPlayerUID _unit;
+		_killerUid = getPlayerUID _killer;
+		
+		if (getClientState == "BRIEFING READ" && PPS_AllowSendingData && PPS_SendingInfantryData) then
+		{				
+			_source = "A3";
+			_value = 1;
+			_type = 2;
+			_formatType = 0;
 			
-			_unitUid = getPlayerUID _unit;
-			_killerUid = getPlayerUID _killer;
+			_playerUid = "";
+			_key = "";
+			_formatString = "";
 			
-			if (local _unit) then
+			if (_killerUid == _unitUid) then
 			{
-				if (getClientState == "BRIEFING READ" && PPS_AllowSendingData && PPS_SendingInfantryData) then
+				_playerUid = _killerUid;
+				_key = "countPlayerSuicides";
+				_formatString = "STR_PPS_Main_Statistics_Count_Player_Suicides";			
+			}
+			else
+			{
+				switch (true) do
 				{
-					if (_unitUid != "") then
+					case (_unitUid != ""):
 					{
 						_playerUid = _unitUid;
-						_source = "A3";
 						_key = "countPlayerDeaths";
-						_value = 1;
-						_type = 2;
-						_formatType = 0;
 						_formatString = "STR_PPS_Main_Statistics_Count_Player_Deaths";
-						
-						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-						_update = _playerUid + "-updateStatistics";
-						missionNamespace setVariable [_update, _updatedData, false];
-						publicVariableServer _update;
 					};
-					
-					if (_killerUid != "") then
+					case ((_unitUid == "") && (_killerUid != "") && ((side group _unit) != (side group _killer))):
 					{
 						_playerUid = _killerUid;
-						_source = "A3";
 						_key = "countPlayerKills";
-						_value = 1;
-						_type = 2;
-						_formatType = 0;
-						_formatString = "STR_PPS_Main_Statistics_Count_Player_Kills";
-									
-						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-						_update = _playerUid + "-updateStatistics";
-						missionNamespace setVariable [_update, _updatedData, false];
-						publicVariableServer _update;				
+						_formatString = "STR_PPS_Main_Statistics_Count_Player_Kills";	
 					};
-					
-					if (_killerUid == _unitUid) then
+					case ((_killerUid != "") && ((side group _unit) == (side group _killer))):
 					{
 						_playerUid = _killerUid;
-						_source = "A3";
-						_key = "countPlayerSuicides";
-						_value = 1;
-						_type = 2;
-						_formatType = 0;
-						_formatString = "STR_PPS_Main_Statistics_Count_Player_Suicides";
-									
-						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-						_update = _playerUid + "-updateStatistics";
-						missionNamespace setVariable [_update, _updatedData, false];
-						publicVariableServer _update;				
-					};
-
-					if (_killerUid != _unitUid && _killerUid != "" && ((side group _unit) == (side group _killer))) then
-					{
-						_playerUid = _killerUid;
-						_source = "A3";
 						_key = "countPlayerTeamKills";
-						_value = 1;
-						_type = 2;
-						_formatType = 0;
 						_formatString = "STR_PPS_Main_Statistics_Count_Player_Team_Kills";
-									
-						_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-						_update = _playerUid + "-updateStatistics";
-						missionNamespace setVariable [_update, _updatedData, false];
-						publicVariableServer _update;
 					};
 				};
+			};
+			
+			if (_playerUid != "") then
+			{
+				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+				_update = _playerUid + "-updateStatistics";
+				missionNamespace setVariable [_update, _updatedData, false];
+				publicVariableServer _update;
 			};
 		};
 	}];
