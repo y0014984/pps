@@ -37,7 +37,7 @@ if (PPS_AllowSendingData) then
 		
 		//hint format ["Respawn Event Handler\n\n_unit: %1\n_corpse: %2", _unit, _corpse];
 		
-		if (PPS_sendingGeneralData) then
+		if (PPS_AllowSendingData && PPS_SendingGeneralData) then
 		{
 			_playerUid = getPlayerUID player;
 			_key = "countRespawn";
@@ -64,7 +64,7 @@ if (PPS_AllowSendingData) then
 	
 		PPS_ehInventoryOpen = true;
 		
-		if (PPS_sendingGeneralData) then
+		if (PPS_AllowSendingData && PPS_SendingGeneralData) then
 		{
 			_playerUid = getPlayerUID player;
 			_key = "countInventoryInterfaceOpened";
@@ -113,7 +113,7 @@ if (PPS_AllowSendingData) then
 		];
 		*/
 		
-		if (PPS_sendingInfantryData) then
+		if (PPS_AllowSendingData && PPS_SendingInfantryData) then
 		{
 			_playerUid = getPlayerUID player;
 			_key = "countMagazineReloaded";
@@ -138,7 +138,7 @@ if (PPS_AllowSendingData) then
 		
 		//hint format ["Weapon: %1\nMuzzle: %2\nMode: %3\nAmmo: %4\nMagazine: %5", _weapon, _muzzle, _mode, _ammo, _magazine];
 		
-		if (PPS_sendingInfantryData) then
+		if (PPS_AllowSendingData && PPS_SendingInfantryData) then
 		{
 			_playerUid = getPlayerUID player;
 			_source = "A3";
@@ -178,7 +178,7 @@ if (PPS_AllowSendingData) then
 			{
 				params ["_item", "_vehicle"];
 
-				if (PPS_sendingAddonData) then
+				if (PPS_AllowSendingData && PPS_SendingAddonData) then
 				{
 					_playerUid = getPlayerUID player;
 					_source = "ACE";
@@ -203,7 +203,7 @@ if (PPS_AllowSendingData) then
 			{
 				params ["_item", "_vehicle"];
 
-				if (PPS_sendingAddonData) then
+				if (PPS_AllowSendingData && PPS_SendingAddonData) then
 				{
 					_playerUid = getPlayerUID player;
 					_source = "ACE";
@@ -228,7 +228,7 @@ if (PPS_AllowSendingData) then
 			{
 				params ["_menuType"];
 
-				if (PPS_sendingAddonData) then
+				if (PPS_AllowSendingData && PPS_SendingAddonData) then
 				{
 					_playerUid = getPlayerUID player;
 					_source = "ACE";
@@ -253,7 +253,7 @@ if (PPS_AllowSendingData) then
 			{
 				params ["_unit", "_state"];
 
-				if (PPS_sendingAddonData) then
+				if (PPS_AllowSendingData && PPS_SendingAddonData) then
 				{
 					_playerUid = getPlayerUID player;
 					_unitUid = getPlayerUID _unit;
@@ -296,7 +296,7 @@ if (PPS_AllowSendingData) then
 				[format ["%1 is speaking %2", name _unit, _isSpeaking]] call PPS_fnc_log;
 				*/
 
-				if (PPS_sendingAddonData) then
+				if (PPS_AllowSendingData && PPS_SendingAddonData) then
 				{
 					if (_isSpeaking) then
 					{
@@ -332,7 +332,7 @@ if (PPS_AllowSendingData) then
 				
 				//_keyDown ist bei mir immer false, daher 0.5 bei _value
 				
-				if (PPS_sendingAddonData) then
+				if (PPS_AllowSendingData && PPS_SendingAddonData) then
 				{
 					_playerUid = getPlayerUID _unit;
 					
@@ -375,7 +375,7 @@ if (PPS_AllowSendingData) then
 		_formatType = 0;
 		_formatString = "";
 		
-		if ((inputAction "CuratorInterface" > 0) && PPS_sendingGeneralData) then 
+		if ((inputAction "CuratorInterface" > 0) && PPS_AllowSendingData && PPS_SendingGeneralData) then 
 		{
 			_key = "countCuratorInterfaceOpened";
 			_value = 1;
@@ -383,7 +383,7 @@ if (PPS_AllowSendingData) then
 			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Zeus_Opened";
 		};
 				
-		if ((inputAction "Compass" > 0) && PPS_sendingGeneralData) then 
+		if ((inputAction "Compass" > 0) && PPS_AllowSendingData && PPS_SendingGeneralData) then 
 		{
 			_key = "countCompassInterfaceOpened";
 			_value = 1;
@@ -391,7 +391,7 @@ if (PPS_AllowSendingData) then
 			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Compass_Opened";
 		};
 		
-		if ((inputAction "Watch" > 0) && PPS_sendingGeneralData) then 
+		if ((inputAction "Watch" > 0) && PPS_AllowSendingData && PPS_SendingGeneralData) then 
 		{
 			_key = "countWatchInterfaceOpened";
 			_value = 1;
@@ -399,63 +399,63 @@ if (PPS_AllowSendingData) then
 			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Watch_Opened";
 		};
 		
-		if ((inputAction "Binocular" > 0) && PPS_sendingGeneralData) then 
+		if ((inputAction "Binocular" > 0) && PPS_AllowSendingData && PPS_SendingGeneralData) then 
 		{
 			_key = "countBinocularUsed";
 			_value = 0.5;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Binocular_Used";
 		};
-		if ((inputAction "Optics" > 0) && PPS_sendingGeneralData) then 
+		if ((inputAction "Optics" > 0) && PPS_AllowSendingData && PPS_SendingGeneralData) then 
 		{
 			_key = "countOpticsUsed";
 			_value = 0.5;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Optics_Used";
 		};
-		if ((inputAction "OpticsTemp" > 0) && PPS_sendingGeneralData) then 
+		if ((inputAction "OpticsTemp" > 0) && PPS_AllowSendingData && PPS_SendingGeneralData) then 
 		{
 			_key = "countOpticsUsed";
 			_value = 1;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Optics_Used";
 		};
-		if ((inputAction "holdBreath" > 0) && PPS_sendingInfantryData) then 
+		if ((inputAction "holdBreath" > 0) && PPS_AllowSendingData && PPS_SendingInfantryData) then 
 		{
 			_key = "countBreathHolded";
 			_value = 1;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Breath_Holded";
 		};
-		if ((inputAction "LeanLeft" > 0) && PPS_sendingInfantryData) then 
+		if ((inputAction "LeanLeft" > 0) && PPS_AllowSendingData && PPS_SendingInfantryData) then 
 		{
 			_key = "countLeanLeft";
 			_value = 1;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Lean_Left";
 		};
-		if ((inputAction "LeanRight" > 0) && PPS_sendingInfantryData) then 
+		if ((inputAction "LeanRight" > 0) && PPS_AllowSendingData && PPS_SendingInfantryData) then 
 		{
 			_key = "countLeanRight";
 			_value = 1;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Lean_Right";
 		};
-		if ((inputAction "Salute" > 0) && PPS_sendingInfantryData) then 
+		if ((inputAction "Salute" > 0) && PPS_AllowSendingData && PPS_SendingInfantryData) then 
 		{
 			_key = "countSalute";
 			_value = 0.5;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Salute";
 		};
-		if ((inputAction "SitDown" > 0) && PPS_sendingInfantryData) then 
+		if ((inputAction "SitDown" > 0) && PPS_AllowSendingData && PPS_SendingInfantryData) then 
 		{
 			_key = "countSitDown";
 			_value = 0.5;
 			_formatType = 0;
 			_formatString = "STR_PPS_Main_Statistics_Count_Sit_Down";
 		};
-		if ((inputAction "GetOver" > 0) && PPS_sendingInfantryData) then 
+		if ((inputAction "GetOver" > 0) && PPS_AllowSendingData && PPS_SendingInfantryData) then 
 		{
 			_key = "countGetOver";
 			_value = 1;
@@ -619,7 +619,7 @@ while {true} do
 		
 		/* ---------------------------------------- */
 
-		if (PPS_sendingGeneralData) then
+		if (PPS_SendingGeneralData) then
 		{
 			_timeInEvent = PPS_UpdateInterval;
 			
@@ -677,7 +677,7 @@ while {true} do
 		
 		/* ---------------------------------------- */
 		
-		if ((_vehiclePlayer == player) && PPS_sendingInfantryData) then 
+		if ((_vehiclePlayer == player) && PPS_SendingInfantryData) then 
 		{
 			_timeOnFoot = PPS_UpdateInterval;
 			
@@ -732,7 +732,7 @@ while {true} do
 		
 		/* ---------------------------------------- */
 		
-		if ((_vehiclePlayer != player) && PPS_sendingVehicleData) then 
+		if ((_vehiclePlayer != player) && PPS_SendingVehicleData) then 
 		{
 			_timeInVehicle = PPS_UpdateInterval;
 			
@@ -796,7 +796,7 @@ while {true} do
 
 		/* ---------------------------------------- */
 		
-		if (PPS_sendingGeneralData) then
+		if (PPS_SendingGeneralData) then
 		{
 			_addons = activatedAddons;
 			

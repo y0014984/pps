@@ -31,7 +31,7 @@
 ] call cba_settings_fnc_init;
 
 [
-	"PPS_sendingGeneralData",
+	"PPS_SendingGeneralData",
 	"Checkbox",
 	[localize "STR_PPS_Main_Settings_Sending_General_Data", localize "STR_PPS_Main_Settings_Sending_General_Data_Description"],
 	localize "STR_PPS_Main_Settings_Category_Client_Settings",
@@ -43,7 +43,7 @@
 ] call cba_settings_fnc_init;
 
 [
-	"PPS_sendingInfantryData",
+	"PPS_SendingInfantryData",
 	"Checkbox",
 	[localize "STR_PPS_Main_Settings_Sending_Infantry_Data", localize "STR_PPS_Main_Settings_Sending_Infantry_Data_Description"],
 	localize "STR_PPS_Main_Settings_Category_Client_Settings",
@@ -55,7 +55,7 @@
 ] call cba_settings_fnc_init;
 
 [
-	"PPS_sendingVehicleData",
+	"PPS_SendingVehicleData",
 	"Checkbox",
 	[localize "STR_PPS_Main_Settings_Sending_Vehicle_Data", localize "STR_PPS_Main_Settings_Sending_Vehicle_Data_Description"],
 	localize "STR_PPS_Main_Settings_Category_Client_Settings",
@@ -67,7 +67,7 @@
 ] call cba_settings_fnc_init;
 
 [
-	"PPS_sendingAddonData",
+	"PPS_SendingAddonData",
 	"Checkbox",
 	[localize "STR_PPS_Main_Settings_Sending_Addon_Data", localize "STR_PPS_Main_Settings_Sending_Addon_Data_Description"],
 	localize "STR_PPS_Main_Settings_Category_Client_Settings",

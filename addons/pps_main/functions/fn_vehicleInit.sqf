@@ -28,7 +28,7 @@ if (isMultiplayer && ((allUnits find _vehicle) == -1)) then
 		//hint format ["Engine Event Handler\n\nVehicle: %1\nengineState: %2", _vehicle, _engineState];
 		
 		_driver = driver _vehicle;
-		if (local _driver && PPS_sendingVehicleData) then
+		if (local _driver && PPS_AllowSendingData && PPS_SendingVehicleData) then
 		{	
 			_playerUid = getPlayerUID _driver;
 			
@@ -80,7 +80,7 @@ if (isMultiplayer && ((allUnits find _vehicle) == -1)) then
 		
 		if ((local _shooter) && (_shooterUid != "") && (_damage == 1)) then
 		{
-			if (PPS_sendingVehicleData) then
+			if (PPS_AllowSendingData && PPS_SendingVehicleData) then
 			{
 				_source = "A3";
 				_key = "countFriendlyVehiclesDestroyed";
@@ -130,7 +130,7 @@ if (isMultiplayer && ((allUnits find _vehicle) == -1)) then
 		_formatType = 0;
 		_formatString = "";
 		
-		if ((local _shooter) && (_shooterUid != "") && PPS_sendingVehicleData) then
+		if ((local _shooter) && (_shooterUid != "") && PPS_AllowSendingData && PPS_SendingVehicleData) then
 		{
 			if ((side group _shooter) != (side group _target)) then
 			{
