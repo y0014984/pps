@@ -16,7 +16,7 @@
     Use of <a href="https://github.com/acemod/ACE3/releases">ACE3</a> and <a href="https://github.com/michail-nikolaev/task-force-arma-3-radio/releases">TFAR</a> is optional. </strong></sup>
 </p>
 
-**PPS** my fist attempt of creating a mod for Arma 3. The main goal is to collect player statistics on client side and to send these statistics to the server side for persistent storage. The statistics are only collected in case of a running event, startet bei PPS admin in PPS interface, and if the client activated sending data in addon settings. A normal player can only see his own statistics whereas the admin can see the statistics of all players.
+**PPS** my fist attempt of creating a mod for Arma 3. The main goal is to collect player statistics on client side and to send these statistics to the server side for persistent storage. The statistics are only collected in case of a running event, startet by PPS admin in PPS interface, and if the client activated sending data in addon settings. A normal player can only see his own statistics whereas the admin can see the statistics of all players.
 
 The project is entirely **open-source** and all contributions are welcome. Feel free to maintain your own custom version, so long as the changes you make are open to the public in accordance with the ([APL-SA](https://www.bistudio.com/community/licenses/arma-public-license-share-alike)).
 
@@ -25,9 +25,19 @@ The project is entirely **open-source** and all contributions are welcome. Feel 
 - Unified interface, for admins and players. Simply press `U` in game. It's a CBA keybind.
 - CBA mod settings for server and client available.
 - Persistent data storage with serverside INIDBI2 mod.
-- Starting and stopping events for recording statistics.
-- Player must allow sending data in mod settings.
+- Start, stop, continue and delete events for recording statistics.
+- Promote or degrade PPS admins.
+- Delete players.
+- Players must allow sending data in mod settings. Players can choose different recording categories.
 - Statistics tracking for individual values, permanently showing as a hint.
+- Statistics export in Pivot friendly format.
+- Statistics are saved on a per event basis.
+- Filter players, events and statistics.
+- Support for other mods like ACE3 and TFAR.
+- Localization available. For now in english and german.
+- Over 100 different statistics and counting.
+- Additional informations for players and clients on double click.
+- Support for multiplayer games on hosted and dedicated servers (no singleplayer support).
 
 ## Installation
 
@@ -36,7 +46,8 @@ Simply launch Arma 3 with `-mod=@CBA_A3;@PPS` and Arma 3 server mith `-mod=@CBA_
 
 ## Known Issues
 
-* There are a lot of known issues, to many to list here.
+* Some statistics don't work as aspected. This is still under development.
+* Latest version of INIDBI2 (v2.06) on clients is blocked by BattlEye. On dedicated server there is no problem.
 
 ## License
 
