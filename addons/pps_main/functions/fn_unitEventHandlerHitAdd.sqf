@@ -52,13 +52,13 @@ if (local _unit) then
 				if (_instigatorSide != _unitSide) then
 				{
 					_key = "countHitsByEnemy";	
-					_formatType = 2;					
+					_formatType = 0;				
 					_formatString = "STR_PPS_Main_Statistics_Count_Hits_By_Enemy";
 				}
 				else
 				{
 					_key = "countHitsByFriendly";
-					_formatType = 2;
+					_formatType = 0;
 					_formatString = "STR_PPS_Main_Statistics_Count_Hits_By_Friendly";
 				};
 

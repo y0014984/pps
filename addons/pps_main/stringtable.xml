@@ -354,6 +354,10 @@
 				<English>Persistent Player Statistics\n\nEvent in progress. Please stop this event before continue another event.</English>
 				<German>Persistent Player Statistics\n\nEs läuft bereits ein Event. Bitte beende das laufende Event befor du ein anderes Event fortsetzt.</German>
 			</Key>
+			<Key ID="STR_PPS_Main_Notifications_Singleplayer_Not_Supported">
+				<English>Persistent Player Statistics\n\nSingleplayer mode is not supported.</English>
+				<German>Persistent Player Statistics\n\nDer Einzelspielermodus wird nicht unterstützt.</German>
+			</Key>
 		</Container>
 		<Container name="Statistics">
 			<Key ID="STR_PPS_Main_Statistics_Time_In_Event">
@@ -636,7 +640,6 @@
 				<English>Time Damaged Full: %2 hrs (%3%1)</English>
 				<German>Zeit, Fahrzeugtotalschaden: %2 Std. (%3%1)</German>
 			</Key>
-
 			<Key ID="STR_PPS_Main_Statistics_Time_Current_Channel_Global">
 				<English>Time Current Channel Global: %2 hrs (%3%1)</English>
 				<German>Zeit im Kanal Global: %2 Std. (%3%1)</German>
@@ -677,7 +680,6 @@
 				<English>Time Fire Mode Full Auto: %2 hrs (%3%1)</English>
 				<German>Zeit Feuermodus Vollautomatik: %2 Std. (%3%1)</German>
 			</Key>
-
 			<Key ID="STR_PPS_Main_Statistics_Time_Zeroing_Short_Range">
 				<English>Time Zeroing Short Range: %2 hrs (%3%1)</English>
 				<German>Zeit Nullung kurze Entfernung: %2 Std. (%3%1)</German>
@@ -987,12 +989,12 @@
 				<German>Anzahl Treffer auf Freunde: %2 (%3%1)</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Count_Hits_By_Enemy">
-				<English>Count Hits By Enemy: %2 (%3%1)</English>
-				<German>Anzahl Treffer von Feinden: %2 (%3%1)</German>
+				<English>Count Hits By Enemy: %1</English>
+				<German>Anzahl Treffer von Feinden: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Count_Hits_By_Friendly">
-				<English>Count Hits By Friendly: %2 (%3%1)</English>
-				<German>Anzahl Treffer von Freunden: %2 (%3%1)</German>
+				<English>Count Hits By Friendly: %1</English>
+				<German>Anzahl Treffer von Freunden: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Count_Respawn">
 				<English>Count Respawn: %1</English>

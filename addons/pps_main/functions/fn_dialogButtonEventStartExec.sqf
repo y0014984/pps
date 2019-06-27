@@ -31,6 +31,8 @@ _answer addPublicVariableEventHandler
 
 _eventEditBox = (findDisplay 14984) displayCtrl 1603;
 _eventName = ctrlText _eventEditBox;
+_filter = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÜüÖöÄä[]-_.:#*(){}%$§&<>+-,;'~?= ";
+_eventName = [_eventName, _filter] call BIS_fnc_filterString;
 
 if (_eventName == "") then
 {

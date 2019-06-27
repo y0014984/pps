@@ -294,12 +294,17 @@ params ["_playerUid"];
 			{
 				if ((_players find _x) > -1) then {_allActiveDbPlayersIds = _allActiveDbPlayersIds + [_x];};
 			} forEach _allActivePlayersIds;
-					
+			
+			_filter = "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÜüÖöÄä[]-_.:#*(){}%$§&<>+-,;'~?= ";
+			
 			_serverName = serverName;
+			_serverName = [_serverName, _filter] call BIS_fnc_filterString;
 			_serverTime = serverTime;
 			_worldName = worldName;
+			_worldName = [_worldName, _filter] call BIS_fnc_filterString;
 			_worldSize = worldSize;
 			_briefingName = briefingName;
+			_briefingName = [_briefingName, _filter] call BIS_fnc_filterString;
 			_missionDate = date;
 			_cloudLevel = overcast;
 			_windStrength = windStr;
