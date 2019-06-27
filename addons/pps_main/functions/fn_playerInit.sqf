@@ -387,7 +387,7 @@ if (PPS_AllowSendingData) then
 	}
 	catch
 	{
-		hint format ["Error: %1", str _exception];
+		hint format [localize "STR_PPS_Main_Error", str _exception];
 	};
 
 	/* ---------------------------------------- */

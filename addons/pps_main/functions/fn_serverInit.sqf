@@ -44,7 +44,7 @@ if (isServer && isMultiplayer) then
 		
 		PPS_statusServer = true;
 		publicVariable "PPS_statusServer";
-		PPS_versionServer = "v0.3.2";
+		PPS_versionServer = "v0.4.2";
 		publicVariable "PPS_versionServer";
 		
 		_dbName = "pps-players";

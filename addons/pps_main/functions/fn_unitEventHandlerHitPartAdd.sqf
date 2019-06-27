@@ -45,9 +45,10 @@ if (local _unit) then
 			_playerUid = _shooterUid;
 			_source = "A3";
 			
-			_eventHandlerInformation = format ["Event Handler 'HitPart' fired for local _shooter.\n\n_target: %1 (%2 - %3)\n_shooter: %4 (%5 - %6)\n\nclientId: %7", _target, _targetUid, _targetSide, _shooter, _shooterUid, _shooterSide, _clientId];
-			hint _eventHandlerInformation;
-			[_eventHandlerInformation] call PPS_fnc_log;
+			// _eventHandlerInformation = format ["Event Handler 'HitPart' fired for local _shooter.\n\n_target: %1 (%2 - %3)\n_shooter: %4 (%5 - %6)\n\nclientId: %7", _target, _targetUid, _targetSide, _shooter, _shooterUid, _shooterSide, _clientId];
+			// hint _eventHandlerInformation;
+			// [_eventHandlerInformation] call PPS_fnc_log;
+			
 			if ((side group _shooter) != (side group _target)) then
 			{
 				if (((_ammo select 4) find "Grenade") > -1) then
@@ -90,9 +91,10 @@ if (local _unit) then
 			_playerUid = _targetUid;
 			_source = "A3";
 			
-			_eventHandlerInformation = format ["Event Handler 'HitPart' fired for local _target.\n\n_target: %1 (%2 - %3)\n_shooter: %4 (%5 - %6)\n\nclientId: %7", _target, _targetUid, _targetSide, _shooter, _shooterUid, _shooterSide, _clientId];
-			hint _eventHandlerInformation;
-			[_eventHandlerInformation] call PPS_fnc_log;
+			// _eventHandlerInformation = format ["Event Handler 'HitPart' fired for local _target.\n\n_target: %1 (%2 - %3)\n_shooter: %4 (%5 - %6)\n\nclientId: %7", _target, _targetUid, _targetSide, _shooter, _shooterUid, _shooterSide, _clientId];
+			// hint _eventHandlerInformation;
+			// [_eventHandlerInformation] call PPS_fnc_log;
+			
 			if ((side group _shooter) != (side group _target)) then
 			{
 				if (((_ammo select 4) find "Grenade") > -1) then

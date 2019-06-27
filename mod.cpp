@@ -1,8 +1,8 @@
-name = "Persistent Player Statistics v0.3.2";
+name = "Persistent Player Statistics v0.4.2";
 picture = "logo_pps_ca.paa";
 actionName = "GitHub";
 action = "https://github.com/y0014984/pps";
-description = "Persistent Player Statistics v0.3.2";
+description = "Persistent Player Statistics v0.4.2";
 logo = "logo_pps_ca.paa";
 logoOver = "logo_pps_ca.paa";
 tooltip = "Persistent Player Statistics";

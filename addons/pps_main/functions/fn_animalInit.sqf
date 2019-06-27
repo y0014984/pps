@@ -27,7 +27,7 @@ if (isMultiplayer) then
 	{
 		params ["_unit", "_killer", "_instigator", "_useEffects"];
 		
-		hint format ["MPKilled Event Handler\n\n_unit: %1\n_killer: %2", _unit, _killer];
+		// hint format ["MPKilled Event Handler\n\n_unit: %1\n_killer: %2", _unit, _killer];
 
 		if (local _unit) then
 		{

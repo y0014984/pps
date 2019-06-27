@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://github.com/y0014984/pps/releases/latest">
-        <img src="https://img.shields.io/badge/Version-0.2.3-blue.svg?style=flat-square" alt="PPS Version">
+        <img src="https://img.shields.io/badge/Version-0.4.2-blue.svg?style=flat-square" alt="PPS Version">
     </a>
     <a href="https://www.bistudio.com/community/licenses/arma-public-license-share-alike">
         <img src="https://img.shields.io/badge/License-APL%20SA-red.svg?style=flat-square" alt="PPS License">

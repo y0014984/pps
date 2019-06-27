@@ -1,7 +1,7 @@
 #include "defines.hpp"
 #include "dialog.hpp"
 
-enableDebugConsole = 1;
+enableDebugConsole = 0;
 // 0 - Default behavior, available only in editor
 // 1 - Available in SP and for hosts / logged in admins in MP
 // 2 - Available for everyone
@@ -24,9 +24,9 @@ class CfgPatches
 		units[] = {};
 		// List of weapons (CfgWeapons classes) contained in the addon.
 		weapons[] = {};
-		version = 0.2.3;
-		versionStr = "0.2.3";
-		versionAr[] = {0,2,3};
+		version = 0.4.2;
+		versionStr = "0.4.2";
+		versionAr[] = {0,4,2};
 	};
 };
 
