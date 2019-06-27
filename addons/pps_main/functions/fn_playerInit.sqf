@@ -37,7 +37,7 @@ if (PPS_AllowSendingData) then
 		
 		//hint format ["Respawn Event Handler\n\n_unit: %1\n_corpse: %2", _unit, _corpse];
 		
-		if (PPS_AllowSendingData && PPS_SendingGeneralData) then
+		if ((local _unit) && PPS_AllowSendingData && PPS_SendingGeneralData) then
 		{
 			_playerUid = getPlayerUID player;
 			_key = "countRespawn";
@@ -52,7 +52,12 @@ if (PPS_AllowSendingData) then
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;
 		};
+		
+		//[] call PPS_fnc_unitEventHandlerHitPartAdd;
+		[] call PPS_fnc_unitEventHandlerHitAdd;
 	}];
+	
+	[format ["[%1] PPS Event Handler 'Respawn' added to Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
 
 	/* ---------------------------------------- */
 
@@ -62,24 +67,29 @@ if (PPS_AllowSendingData) then
 		
 		//hint format ["InventoryOpened Event Handler\n\n_unit: %1\n_container: %2", _unit, _container];
 	
-		PPS_ehInventoryOpen = true;
-		
-		if (PPS_AllowSendingData && PPS_SendingGeneralData) then
+		if (local _unit) then
 		{
-			_playerUid = getPlayerUID player;
-			_key = "countInventoryInterfaceOpened";
-			_value = 1;
-			_type = 2;
-			_formatType = 0;
-			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Gear_Opened";
-			_source = "A3";
+			PPS_ehInventoryOpen = true;
 			
-			_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
-			_update = _playerUid + "-updateStatistics";
-			missionNamespace setVariable [_update, _updatedData, false];
-			publicVariableServer _update;
+			if (PPS_AllowSendingData && PPS_SendingGeneralData) then
+			{
+				_playerUid = getPlayerUID player;
+				_key = "countInventoryInterfaceOpened";
+				_value = 1;
+				_type = 2;
+				_formatType = 0;
+				_formatString = "STR_PPS_Main_Statistics_Count_Interface_Gear_Opened";
+				_source = "A3";
+				
+				_updatedData = [_playerUid, [[_key, _value, _type, _formatType, _formatString, _source]]];
+				_update = _playerUid + "-updateStatistics";
+				missionNamespace setVariable [_update, _updatedData, false];
+				publicVariableServer _update;
+			};
 		};
 	}];
+	
+	[format ["[%1] PPS Event Handler 'InventoryOpened' added to Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
 	
 	/* ---------------------------------------- */
 
@@ -87,16 +97,21 @@ if (PPS_AllowSendingData) then
 	{
 		params ["_unit", "_container"];
 		
-		hint format ["InventoryClosed Event Handler\n\n_unit: %1\n_container: %2", _unit, _container];
+		//hint format ["InventoryClosed Event Handler\n\n_unit: %1\n_container: %2", _unit, _container];
 	
-		PPS_ehInventoryOpen = false;
+		if (local _unit) then
+		{
+			PPS_ehInventoryOpen = false;
+		};
 	}];
+	
+	[format ["[%1] PPS Event Handler 'InventoryClosed' added to Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
 
 	/* ---------------------------------------- */
 	
 	_index = player addEventHandler ["Reloaded", 
 	{
-		params ["_entity", "_weapon", "_muzzle", "_newmag", ["_oldmag", ["","","",""]]];
+		params ["_unit", "_weapon", "_muzzle", "_newmag", ["_oldmag", ["","","",""]]];
 		
 		/*
 		hint format ["Weapon: %1\nMuzzle: %2\n\n- New Magazine -\nName: %3\nAmmo: %4\nID: %5\nCreator: %6\n\n- Old Magazine -\nName: %7\nAmmo: %8\nID: %9\nCreator: %10", 
@@ -113,9 +128,9 @@ if (PPS_AllowSendingData) then
 		];
 		*/
 		
-		if (PPS_AllowSendingData && PPS_SendingInfantryData) then
+		if ((local _unit) && PPS_AllowSendingData && PPS_SendingInfantryData) then
 		{
-			_playerUid = getPlayerUID player;
+			_playerUid = getPlayerUID _unit;
 			_key = "countMagazineReloaded";
 			_value = 1;
 			_type = 2;
@@ -127,8 +142,12 @@ if (PPS_AllowSendingData) then
 			_update = _playerUid + "-updateStatistics";
 			missionNamespace setVariable [_update, _updatedData, false];
 			publicVariableServer _update;
+			
+			[format ["[%1] PPS Event Handler 'Reloaded' fired: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
 		};
 	}];
+	
+	[format ["[%1] PPS Event Handler 'Reloaded' added to Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
 	
 	/* ---------------------------------------- */
 
@@ -138,7 +157,7 @@ if (PPS_AllowSendingData) then
 		
 		//hint format ["Weapon: %1\nMuzzle: %2\nMode: %3\nAmmo: %4\nMagazine: %5", _weapon, _muzzle, _mode, _ammo, _magazine];
 		
-		if (PPS_AllowSendingData && PPS_SendingInfantryData) then
+		if ((local _unit) && PPS_AllowSendingData && PPS_SendingInfantryData) then
 		{
 			_playerUid = getPlayerUID player;
 			_source = "A3";
@@ -169,11 +188,16 @@ if (PPS_AllowSendingData) then
 		};
 	}];
 	
+	[format ["[%1] PPS Event Handler 'FiredMan' added to Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
+	
 	/* ---------------------------------------- */
 	
 	_addons = activatedAddons;
 	if ((_addons find "ace_main") > -1) then 
 	{
+		/*
+			Cargo Load/Unload Event Handler are not unit specific but event/mission specific. So they can't be used.
+		/*
 		["ace_cargoLoaded", 
 			{
 				params ["_item", "_vehicle"];
@@ -196,9 +220,11 @@ if (PPS_AllowSendingData) then
 				};
 			}
 		] call CBA_fnc_addEventHandler;
+		*/
 		
 		/* -------------------- */
 		
+		/*
 		["ace_cargoUnloaded", 
 			{
 				params ["_item", "_vehicle"];
@@ -221,6 +247,7 @@ if (PPS_AllowSendingData) then
 				};
 			}
 		] call CBA_fnc_addEventHandler;
+		*/
 		
 		/* -------------------- */
 		
@@ -258,7 +285,7 @@ if (PPS_AllowSendingData) then
 					_playerUid = getPlayerUID player;
 					_unitUid = getPlayerUID _unit;
 					
-					if (_state && (_playerUid == _unitUid)) then
+					if ((local _unit) && _state && (_playerUid == _unitUid)) then
 					{
 						_source = "ACE";
 						_type = 2;
@@ -286,6 +313,8 @@ if (PPS_AllowSendingData) then
 		{
 			waitUntil {time > 15};
 			
+			_playerUid = getPlayerUID player;
+			
 			_tfarOnSpeakEh = ["ppsIsSpeaking", "OnSpeak", 
 			{
 				params ["_unit", "_isSpeaking"];
@@ -296,7 +325,7 @@ if (PPS_AllowSendingData) then
 				[format ["%1 is speaking %2", name _unit, _isSpeaking]] call PPS_fnc_log;
 				*/
 
-				if (PPS_AllowSendingData && PPS_SendingAddonData) then
+				if ((local _unit) && PPS_AllowSendingData && PPS_SendingAddonData) then
 				{
 					if (_isSpeaking) then
 					{
@@ -318,6 +347,8 @@ if (PPS_AllowSendingData) then
 				};
 			}, player] call TFAR_fnc_addEventHandler;
 			
+			[format ["[%1] PPS Event Handler 'OnSpeak' added to Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
+			
 			/* -------------------- */
 			
 			_tfarOnTangetEh = ["ppsUsesRadio", "OnTangent", 
@@ -332,7 +363,7 @@ if (PPS_AllowSendingData) then
 				
 				//_keyDown ist bei mir immer false, daher 0.5 bei _value
 				
-				if (PPS_AllowSendingData && PPS_SendingAddonData) then
+				if ((local _unit) && PPS_AllowSendingData && PPS_SendingAddonData) then
 				{
 					_playerUid = getPlayerUID _unit;
 					
@@ -350,11 +381,13 @@ if (PPS_AllowSendingData) then
 					publicVariableServer _update;
 				};
 			}, player] call TFAR_fnc_addEventHandler;
+			
+			[format ["[%1] PPS Event Handler 'OnTangent' added to Player: (%2)", serverTime, _playerUid]] call PPS_fnc_log;
 		};
 	}
 	catch
 	{
-		hint format ["Fehler: %1", str _exception];
+		hint format ["Error: %1", str _exception];
 	};
 
 	/* ---------------------------------------- */
@@ -377,10 +410,16 @@ if (PPS_AllowSendingData) then
 		
 		if ((inputAction "CuratorInterface" > 0) && PPS_AllowSendingData && PPS_SendingGeneralData) then 
 		{
-			_key = "countCuratorInterfaceOpened";
-			_value = 1;
-			_formatType = 0;
-			_formatString = "STR_PPS_Main_Statistics_Count_Interface_Zeus_Opened";
+			_playerUid = getPlayerUID player;
+			{
+				if (getPlayerUID getAssignedCuratorUnit _x == _playerUid) then
+				{
+					_key = "countCuratorInterfaceOpened";
+					_value = 1;
+					_formatType = 0;
+					_formatString = "STR_PPS_Main_Statistics_Count_Interface_Zeus_Opened";
+				};
+			} forEach allCurators;
 		};
 				
 		if ((inputAction "Compass" > 0) && PPS_AllowSendingData && PPS_SendingGeneralData) then 

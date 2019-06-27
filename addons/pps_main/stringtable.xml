@@ -975,8 +975,24 @@
 				<German>Anzahl Granatentreffer von Freunden: %2 (%3%1)</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Count_Projectiles_Hit_By_Friendly">
-				<English>[A3] Count Projectiles Hit By Friendly: %2 (%3%1)</English>
+				<English>Count Projectiles Hit By Friendly: %2 (%3%1)</English>
 				<German>Anzahl Projektiltreffer von Freunden: %2 (%3%1)</German>
+			</Key>	
+			<Key ID="STR_PPS_Main_Statistics_Count_Hits_To_Enemy">
+				<English>Count Hits To Enemy: %2 (%3%1)</English>
+				<German>Anzahl Treffer auf Feinde: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Hits_To_Friendly">
+				<English>Count Hits To Friendly: %2 (%3%1)</English>
+				<German>Anzahl Treffer auf Freunde: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Hits_By_Enemy">
+				<English>Count Hits By Enemy: %2 (%3%1)</English>
+				<German>Anzahl Treffer von Feinden: %2 (%3%1)</German>
+			</Key>
+			<Key ID="STR_PPS_Main_Statistics_Count_Hits_By_Friendly">
+				<English>Count Hits By Friendly: %2 (%3%1)</English>
+				<German>Anzahl Treffer von Freunden: %2 (%3%1)</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Statistics_Count_Respawn">
 				<English>Count Respawn: %1</English>

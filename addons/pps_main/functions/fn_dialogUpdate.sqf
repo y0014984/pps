@@ -448,7 +448,7 @@ _answer addPublicVariableEventHandler
 
 	PPS_lbEventsContent = [];
 
-	_filteredEvents sort true;
+	_filteredEvents sort false;
 	{
 		_dbEventId = _x select 0;
 		_dbEventName = _x select 1;
