@@ -47,7 +47,6 @@ Simply launch Arma 3 with `-mod=@CBA_A3;@PPS` and Arma 3 server mith `-mod=@CBA_
 ## Known Issues
 
 * Some statistics don't work as aspected. This is still under development.
-* Latest version of INIDBI2 (v2.06) on clients is blocked by BattlEye. On dedicated server there is no problem.
 
 ## License
 
