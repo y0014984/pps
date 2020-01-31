@@ -23,7 +23,7 @@
 	"Checkbox",
 	[localize "STR_PPS_Main_Settings_Allow_Sending_Data", localize "STR_PPS_Main_Settings_Allow_Sending_Data_Description"],
 	localize "STR_PPS_Main_Settings_Category_Client_Settings",
-	false,
+	true,
     nil, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
     {  
         params ["_value"];
