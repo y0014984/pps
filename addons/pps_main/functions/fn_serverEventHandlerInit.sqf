@@ -603,6 +603,7 @@ params ["_playerUid"];
 	_clientId = _broadcastVariableValue select 1;
 
 	_tab = "	";
+	_comma = ",";
 	_crlf = "
 ";
 	_result = "Player" + _tab + "Event" + _tab + "Statistics Key" + _tab + "Statistics Value" + _crlf;;
@@ -650,7 +651,7 @@ params ["_playerUid"];
 							_key = ["read", [_currentStatistics, "key", ""]] call _dbStatistics;
 							_value = ["read", [_currentStatistics, "value", ""]] call _dbStatistics;
 							
-							_result = _result + _playerName + _tab + _eventName + _tab + _key + _tab + (str _value) + _crlf;
+							_result = _result + _playerUid + _comma + _eventName + _comma + _key + _comma + (str _value) + _crlf;
 								
 						} forEach _statistics;
 					};

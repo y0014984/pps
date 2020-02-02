@@ -78,7 +78,7 @@ class CfgSettings
 
 class Extended_PreInit_EventHandlers
 {
-	PPS_PreInit = call compile preprocessFileLineNumbers "y\pps\addons\pps_main\XEH_preInit.sqf";
+	PPS_PreInit = call compile preprocessFileLineNumbers "UNISTATS\addons\pps_main\XEH_preInit.sqf";
 	
 	class PPS_PreInits
 	{
@@ -89,7 +89,7 @@ class Extended_PreInit_EventHandlers
         serverInit = "";
 
         // This snippet runs once and only on client machines
-        clientInit = call compile preprocessFileLineNumbers "y\pps\addons\pps_main\XEH_clientInit.sqf";
+        clientInit = call compile preprocessFileLineNumbers "UNISTATS\addons\pps_main\XEH_clientInit.sqf";
 	};
 };
 

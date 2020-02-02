@@ -6,7 +6,7 @@ class CfgFunctions
 		class ppsFunctions
 		{
 			requiredAddons[] = {}; //Optional requirements of CfgPatches classes. When some addons are missing, functions won't be compiled.
-			file = "y\pps\addons\pps_main\functions";
+			file = "UNISTATS\addons\pps_main\functions";
 
 			class serverInit
 			{

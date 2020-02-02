@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project name="Persistent Player Statistics">
+<Project name="UNISTATS">
 	<Package name="Main">
 		<Container name="General">
 			<Key ID="STR_PPS_Main_Missing_Stringtable_Key">
@@ -37,16 +37,16 @@
 		</Container>
 		<Container name="Dialog">
 			<Key ID="STR_PPS_Export_Dialog_Head">
-				<English>PERSISTENT PLAYER STATISTICS - Export</English>
-				<German>PERSISTENT PLAYER STATISTICS - Export</German>
+				<English>UNISTATS - Export</English>
+				<German>UNISTATS - Export</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Head">
-				<English>PERSISTENT PLAYER STATISTICS - Event in Progress: %1</English>
-				<German>PERSISTENT PLAYER STATISTICS - laufendes Event: %1</German>
+				<English>UNISTATS - Event in Progress: %1</English>
+				<German>UNISTATS - laufendes Event: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_Head_Time">
-				<English>PERSISTENT PLAYER STATISTICS - Event in Progress: %1 (Start Time %2:%3:%4 UTC+%5)</English>
-				<German>PERSISTENT PLAYER STATISTICS - laufendes Event: %1 (Startzeit %2:%3:%4 UTC+%5)</German>
+				<English>UNISTATS - Event in Progress: %1 (Start Time %2:%3:%4 UTC+%5)</English>
+				<German>UNISTATS - laufendes Event: %1 (Startzeit %2:%3:%4 UTC+%5)</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Dialog_No_Event">
 				<English>None</English>
@@ -169,11 +169,11 @@
 		</Container>
 		<Container name="Settings">
 			<Key ID="STR_PPS_Main_Settings_Category_Client_Settings">
-				<English>PPS client settings</English>
+				<English>UNISTATS Client Settings</English>
 				<German>PPS Client Einstellungen</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Settings_Category_Server_Settings">
-				<English>PPS server settings</English>
+				<English>UNISTATS Server Settings</English>
 				<German>PPS Server Einstellungen</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Settings_Update_Interval">
@@ -283,80 +283,80 @@
 		</Container>
 		<Container name="Notifications">
 			<Key ID="STR_PPS_Main_Notifications_Missing_Event_Name">
-				<English>Persistent Player Statistics\n\nMissing event name.</English>
-				<German>Persistent Player Statistics\n\nEvent-Name fehlt.</German>
+				<English>UNISTATS\n\nMissing event name.</English>
+				<German>UNISTATS\n\nEvent-Name fehlt.</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_No_Tracking_Value_Selected">
-				<English>Persistent Player Statistics\n\nNo value for tracking selected.</English>
-				<German>Persistent Player Statistics\n\nKein Wert zur Verfolgung ausgewählt.</German>
+				<English>UNISTATS\n\nNo value for tracking selected.</English>
+				<German>UNISTATS\n\nKein Wert zur Verfolgung ausgewählt.</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Sending_Data_Not_Allowed">
-				<English>Persistent Player Statistics\n\nSending data not allowed. See mod settings.</English>
-				<German>Persistent Player Statistics\n\nDas Senden von Daten ist deaktiviert. Schau in die Mod-Einstellungen.</German>
+				<English>UNISTATS\n\nSending data not allowed. See mod settings.</English>
+				<German>UNISTATS\n\nDas Senden von Daten ist deaktiviert. Schau in die Mod-Einstellungen.</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Login_Denied_Too_Many_Admins">
-				<English>Persistent Player Statistics\n\nAdmin login denied. There ist another admin logged in.</English>
-				<German>Persistent Player Statistics\n\nAdmin Login verweigert. Es ist bereits ein Admin eingeloggt.</German>
+				<English>UNISTATS\n\nAdmin login denied. There ist another admin logged in.</English>
+				<German>UNISTATS\n\nAdmin Login verweigert. Es ist bereits ein Admin eingeloggt.</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Login_Denied_Missing_Permission">
-				<English>Persistent Player Statistics\n\nAdmin login denied. You have no admin permissions. Ask your server admin.</English>
-				<German>Persistent Player Statistics\n\nAdmin Login verweigert. Du hast keine Admin-Berechtigung. Frag deinen Server-Administrator.</German>
+				<English>UNISTATS\n\nAdmin login denied. You have no admin permissions. Ask your server admin.</English>
+				<German>UNISTATS\n\nAdmin Login verweigert. Du hast keine Admin-Berechtigung. Frag deinen Server-Administrator.</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Event_Started">
-				<English>Persistent Player Statistics\n\nEvent started: %1</English>
-				<German>Persistent Player Statistics\n\nEvent wurde gestartet: %1</German>
+				<English>UNISTATS\n\nEvent started: %1</English>
+				<German>UNISTATS\n\nEvent wurde gestartet: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Event_Continued">
-				<English>Persistent Player Statistics\n\nEvent Continued: %1</English>
-				<German>Persistent Player Statistics\n\nEvent wurde fortgesetzt: %1</German>
+				<English>UNISTATS\n\nEvent Continued: %1</English>
+				<German>UNISTATS\n\nEvent wurde fortgesetzt: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Event_Stopped">
-				<English>Persistent Player Statistics\n\nEvent stopped: %1</English>
-				<German>Persistent Player Statistics\n\nEvent wurde beendet: %1</German>
+				<English>UNISTATS\n\nEvent stopped: %1</English>
+				<German>UNISTATS\n\nEvent wurde beendet: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Event_Deleted">
-				<English>Persistent Player Statistics\n\nEvent deleted: %1</English>
-				<German>Persistent Player Statistics\n\nEvent wurde gelöscht: %1</German>
+				<English>UNISTATS\n\nEvent deleted: %1</English>
+				<German>UNISTATS\n\nEvent wurde gelöscht: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Player_Deleted">
-				<English>Persistent Player Statistics\n\nPlayer deleted: %1</English>
-				<German>Persistent Player Statistics\n\nSpieler wurde gelöscht: %1</German>
+				<English>UNISTATS\n\nPlayer deleted: %1</English>
+				<German>UNISTATS\n\nSpieler wurde gelöscht: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Player_Promoted">
-				<English>Persistent Player Statistics\n\nPlayer promoted: %1</English>
-				<German>Persistent Player Statistics\n\nSpieler wurde befördert: %1</German>
+				<English>UNISTATS\n\nPlayer promoted: %1</English>
+				<German>UNISTATS\n\nSpieler wurde befördert: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Player_Degraded">
-				<English>Persistent Player Statistics\n\nPlayer degraded: %1</English>
-				<German>Persistent Player Statistics\n\nSpieler wurde degradiert: %1</German>
+				<English>UNISTATS\n\nPlayer degraded: %1</English>
+				<German>UNISTATS\n\nSpieler wurde degradiert: %1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Tracking">
-				<English>Persistent Player Statistics\n\nKey: %1\nValue: %2</English>
-				<German>Persistent Player Statistics\n\nSchlüssel: %1\nWert: %2</German>
+				<English>UNISTATS\n\nKey: %1\nValue: %2</English>
+				<German>UNISTATS\n\nSchlüssel: %1\nWert: %2</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Details">
-				<English>Persistent Player Statistics\nDetails\n\n%1</English>
-				<German>Persistent Player Statistics\nDetails\n\n%1</German>
+				<English>UNISTATS\nDetails\n\n%1</English>
+				<German>UNISTATS\nDetails\n\n%1</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Statistics_Exported_To_Clipboard">
-				<English>Persistent Player Statistics\n\nStatistics exported to Clipboard.</English>
-				<German>Persistent Player Statistics\n\nStatistiken in die Zwischenablage exportiert.</German>
+				<English>UNISTATS\n\nStatistics exported to Clipboard.</English>
+				<German>UNISTATS\n\nStatistiken in die Zwischenablage exportiert.</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_No_Event_Selected">
-				<English>Persistent Player Statistics\n\nNo event selected.</English>
-				<German>Persistent Player Statistics\n\nKein Event ausgewählt.</German>
+				<English>UNISTATS\n\nNo event selected.</English>
+				<German>UNISTATS\n\nKein Event ausgewählt.</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_No_Player_Selected">
-				<English>Persistent Player Statistics\n\nNo player selected.</English>
-				<German>Persistent Player Statistics\n\nKein Spieler ausgewählt.</German>
+				<English>UNISTATS\n\nNo player selected.</English>
+				<German>UNISTATS\n\nKein Spieler ausgewählt.</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Event_In_Progress">
-				<English>Persistent Player Statistics\n\nEvent in progress. Please stop this event before continue another event.</English>
-				<German>Persistent Player Statistics\n\nEs läuft bereits ein Event. Bitte beende das laufende Event befor du ein anderes Event fortsetzt.</German>
+				<English>UNISTATS\n\nEvent in progress. Please stop this event before continue another event.</English>
+				<German>UNISTATS\n\nEs läuft bereits ein Event. Bitte beende das laufende Event befor du ein anderes Event fortsetzt.</German>
 			</Key>
 			<Key ID="STR_PPS_Main_Notifications_Singleplayer_Not_Supported">
-				<English>Persistent Player Statistics\n\nSingleplayer mode is not supported.</English>
-				<German>Persistent Player Statistics\n\nDer Einzelspielermodus wird nicht unterstützt.</German>
+				<English>UNISTATS\n\nSingleplayer mode is not supported.</English>
+				<German>UNISTATS\n\nDer Einzelspielermodus wird nicht unterstützt.</German>
 			</Key>
 		</Container>
 		<Container name="Statistics">
