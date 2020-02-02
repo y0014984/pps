@@ -651,7 +651,7 @@ params ["_playerUid"];
 							_key = ["read", [_currentStatistics, "key", ""]] call _dbStatistics;
 							_value = ["read", [_currentStatistics, "value", ""]] call _dbStatistics;
 							
-							_result = _result + _playerUid + _comma + _eventName + _comma + _key + _comma + (str _value) + _crlf;
+							_result = _result + _currentPlayer + _comma + _eventName + _comma + _key + _comma + (str _value) + _crlf;
 								
 						} forEach _statistics;
 					};
