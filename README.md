@@ -16,7 +16,7 @@
     Use of <a href="https://github.com/acemod/ACE3/releases">ACE3</a> and <a href="https://github.com/michail-nikolaev/task-force-arma-3-radio/releases">TFAR</a> is optional. </strong></sup>
 </p>
 
-<p align="center">
+<p align="center" style="color:red">
     <strong>PROJECT DISCONTINUED</strong>
 </p>
 
