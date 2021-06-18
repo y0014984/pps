@@ -16,8 +16,12 @@
     Use of <a href="https://github.com/acemod/ACE3/releases">ACE3</a> and <a href="https://github.com/michail-nikolaev/task-force-arma-3-radio/releases">TFAR</a> is optional. </strong></sup>
 </p>
 
-<p align="center";style="color:red">
+<p align="center">
+    <strong>========================================</strong>
+    <br/>
     <strong>PROJECT DISCONTINUED</strong>
+    <br/>
+    <strong>========================================</strong>
 </p>
 
 **PPS** my fist attempt of creating a mod for Arma 3. The main goal is to collect player statistics on client side and to send these statistics to the server side for persistent storage. The statistics are only collected in case of a running event, startet by PPS admin in PPS interface, and if the client activated sending data in addon settings. A normal player can only see his own statistics whereas the admin can see the statistics of all players.
